@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <!-- LOAD CSS -->
+        <!-- VENDOR CSS -->
+
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <link href="css/bootstrap-dialog.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="css/jquery.mobile.custom.theme.min.css" />
+        <link rel="stylesheet" href="css/jquery.mobile.custom.structure.min.css" />
+        
+        <!-- APPLICATION CSS -->
+        <link rel="stylesheet" href="css/transitions.css" />
+        <link rel="stylesheet" href="css/style.css" />
+
+        <meta charset="UTF-8" />
+
+        <!-- LIBRARIES (load with bower) -->
+        <script type="text/javascript" src="js/vendors/jquery.js"></script>
+        <script type="text/javascript" src="js/vendors/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/vendors/fastclick.js"></script>
+        <script type="text/javascript" src="js/vendors/iscroll.js"></script>
+        <script type="text/javascript" src="js/vendors/hammer.min.js"></script>
+        <script type="text/javascript" src="js/vendors/bootstrap-dialog.js"></script>
+        <script type="text/javascript" src="js/vendors/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="js/vendors/jquery.mobile.custom.min.js"></script>
+        
+        <script type="text/javascript" src="cordova.js"></script>
+
+        <!-- LOAD JAVASCRIPT -->
+        <!-- CONTROLLERS -->
+        <script type="text/javascript" src="js/controllers/HomeController.js"></script>
+
+        <!-- Application -->
+        <script type="text/javascript" src="js/App.js"></script>
+        <script type="text/javascript" src="js/Navigator.js"></script>
+        <script type="text/javascript" src="js/Transition.js"></script>
+        <script type="text/javascript" src="js/PageLoad.js"></script>
+        <script type="text/javascript" src="js/Commons.js"></script>
+
+        <script type="text/javascript" charset="utf-8">
+        function onLoad() { document.addEventListener("deviceready", App.init(), false); }
+        </script>
+        
+
+        <!-- VIEWPORT -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>App</title>
+
+    </head>
+    <body onload="onLoad()">
+        <!-- BOX CONTENT LOAD PAGES WITH AJAX-->
+        
+        <header id="app-bar" class="color-bg-dark-blue" style="display: none;">
+            <!-- Cabeçalho default do aplicativo -->
+            <div class="container-fluid" id="default-bar">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table>
+                            <tr class="item-row" style="height: 40px;">
+                                <td id="app-bar-menu"><img style="width: 35px;" src="img/menu-button.png"/></td>
+                                <td id="app-bar-title" class="item-text text-center"><!-- page title --></td>
+                            </tr>
+                        </table>
+                        <!--<div class="item-table">
+                            <div class="item-row" style="height: 40px; padding: 0 20px;">
+                                <a id="app-bar-menu" class="item-cell"><img style="width: 30px;" src="img/menu-button.png"/></a>
+                                <div id="app-bar-title" class="item-cell text-center"></div>
+                                <a id="app-bar-back" class="item-cell color-white">&lt; <span id="string-back-btn"></span></a>
+                                <div id="app-bar-title-adjust" class="item-cell" style="width: 100px; height: 40px; display: none;"></div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div id="page">
+            <!-- MENU -->
+            <menu id="menu">
+                <div id="menu-content" class="wrapper">
+                    <div id="menu-scroller" class="scroller">
+                        <div class="item-table">
+                            <a class="item-row menu-row color-bg-menu-item botoes-app" data-url="home.html" >
+                                <div class="item-cell menu-icon"><img src="img/sidebar/home.png"/></div>
+                                <div id="string-menu-home" class="item-cell menu-item color-grey"></div>
+                            </a>
+                            <!-- <a class="item-row menu-row botoes-app" data-url="config.html" >
+                                <div class="item-cell menu-icon"><img src="img/sidebar/config.png"/></div>
+                                <div id="string-menu-config" class="item-cell menu-item color-grey"></div>
+                            </a> -->
+                            <a id="btn-sync" class="item-row menu-row">
+                                <div class="item-cell menu-icon"><img src="img/sidebar/home.png"/></div>
+                                <div id="string-menu-sync" class="item-cell menu-item color-grey"></div>
+                            </a>
+                            <a class="item-row menu-row color-bg-menu-item botoes-app" data-url="help.html" >
+                                <div class="item-cell menu-icon"><img src="img/sidebar/home.png"/></div>
+                                <div id="string-menu-help" class="item-cell menu-item color-grey"></div>
+                            </a>
+                            <a id="btn-logout" class="item-row menu-row">
+                                <div class="item-cell menu-icon"><img src="img/sidebar/home.png"/></div>
+                                <div id="string-menu-logout" class="item-cell menu-item color-grey"></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </menu>
+
+            <!-- DYNAMIC CONTENT -->
+            <div id="content">
+
+                <div id="page-wrapper" class="wrapper">
+                    <div id="page-scroller" class="scroller">
+                    </div>
+                    <div id="block-content" class="block-content-alpha hidden"></div>
+                </div>
+                
+            </div>
+        </div>
+
+    </body>
+</html>
