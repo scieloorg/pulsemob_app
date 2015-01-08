@@ -1,0 +1,296 @@
+/* <editor-fold desc="GLOBAL SETTINGS"> */
+
+*{  
+    margin:0;
+    padding:0;
+    list-style:none;
+
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+    -webkit-tap-highlight-color: transparent; /* For some Androids */ 	
+    -webkit-user-select: auto!important;   
+}
+body {
+    width:100%;
+    padding: 0;
+    color: #000;
+    overflow: hidden;
+    font-family: OpenSans;
+}
+
+
+
+/* </editor-fold> */
+
+/* <editor-fold desc="MODAL"> */
+
+.modal{
+    outline: 0 !important;
+}
+.modal-dialog{
+    height: 100%;
+}
+.modal-body{
+    text-align: center;
+    background-color: #3D445F;
+}
+.modal-content{
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -moz-transform:translateY(-50%);
+}
+.modal-header{
+    text-align: center;
+    display: block !important;
+    background-color: #2B2937;
+    border: 0;
+}
+.modal-footer{
+    padding: 10px;
+    border: none;
+    margin-top: 5px;
+    text-align: center;
+    background-color: #3D445F;
+    margin: 0px;
+}
+
+.bootstrap-dialog-close-button{
+	display: none !important;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="BOX LOAD PAGES"> */
+
+#page {
+    position:fixed;
+    width:100%;
+    height:100%;
+    -webkit-transition: translate3d(0,0,0);
+    transform: translate3d(0, 0, 0);
+    overflow: hidden;
+}
+.wrapper {
+        position: relative;
+        z-index: 1;
+	left: 0;
+	width: 100%;
+        height: 100%;
+	overflow: hidden;
+}
+.scroller {
+    position:relative; 
+    min-height: 100%;
+    z-index: 1;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    width: 100%;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    -o-text-size-adjust: none;
+    text-size-adjust: none;
+}
+#content {
+    width:100%;
+    position: absolute;
+    left:0px;
+    height:100%;
+    overflow: hidden;
+}
+.page-content{
+    height: 100%;
+}
+#content, #page {
+    -webkit-overflow-scrolling:touch;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="APP BAR"> */
+
+#app-bar{
+    position: absolute;
+    min-height: 40px;
+    width: 100%;
+    border: none;
+    background-color: #000;
+    color: #ffffff;
+    z-index: 1001;
+}
+#app-bar-menu{
+    padding: 0 40px 0 20px;
+    width: 100px;
+}
+#app-bar-title{
+    height: 35px;
+    margin: 0px;
+    font-size: 14px;
+    font-family: OpenSans-Bold;
+}
+#app-bar-title img {
+    height: 30px;
+}
+#app-bar-back{
+    text-decoration: none;
+    width: 100px;
+    padding-right: 20px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="MENU APP STYLES"> */
+
+menu {
+    position: absolute;
+    top:0;
+    left:0;
+    min-width: 160px;
+    width:50%;
+    max-width: 500px;
+    height: 100%;
+    z-index: 1001;
+}
+#menu-content{
+    position:relative;
+    height: 100%;
+    width: 100%;
+    border-color: transparent;
+    color: #1c1e41;
+    background-color: #10161B;
+    padding: 0px;
+}
+
+.menu-item-header{
+    color: #ffffff;
+}
+.menu-row{
+    height: 60px;
+    line-height: 60px;
+}
+.menu-icon {
+    padding: 0 10px 3px 40px;
+    width: 25px;
+    height: 20px;
+}
+.menu-icon img{
+    width: 20px;
+}
+.menu-item{
+    padding-left: 5px;
+    font-size: 20px;
+    font-family: OpenSans-light;
+}
+.color-bg-menu-title{
+    background-color: #1A3549;
+}
+.color-bg-menu-item{
+    background-color: #161E24;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="COLOR STYLES"> */
+
+.color-white{
+    color: #ffffff!important;
+}
+
+.color-black{
+    color: #000!important;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="COMMON STYLES"> */
+
+table{
+    width: 100%;
+}
+
+.item-row {
+    height: 60px;
+    text-decoration: none!important;
+}
+
+.item-input{
+    padding: 10px 16px !important;
+    margin-bottom: 10px;
+    background-color: #000 !important;
+    opacity: 0.5 !important;
+    border-radius: 4px;
+    border: none;  
+    width: 100%;
+    height: 40px !important;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-family: OpenSans-Bold;
+    background-color: #071d2e;
+}
+.item-btn{
+    height: 50px;
+    line-height: 50px;
+    padding: 0;
+    border: 0px;
+    text-align: center;
+    font-size: 16px;
+    width: 100%;
+}
+.item-btn img{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+select.item-input{
+    padding: 0 55px 0 10px !important;
+    background: #fff url('../img/icon_select.png') no-repeat 100% center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+input.item-input:focus{
+    background-color: #fff!important;
+    color: #000!important;
+}
+
+input[type=number]::-webkit-outer-spin-button { margin: 0; }
+.vertical-line{
+  width: 1px;
+  height: 100%;
+}
+.invalid-input{
+    background-color: lightcoral !important;
+    border: #fff 1px solid;
+    color: #f0f0f0;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+input[type="checkbox"] + label span.cb-img {
+    display:inline-block;
+    margin:-1px 8px 0 0;
+    vertical-align:middle;
+    cursor:pointer;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="HOME STYLES"> */
+
+/* </editor-fold> */
