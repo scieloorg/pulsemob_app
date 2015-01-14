@@ -9,7 +9,6 @@ menu {
 .transitionMenuAppStart {
     -webkit-transform: translateX(0px);
     -webkit-transform: translate3d(0px,0,0);
-    box-shadow: 3px 0px 5px #222222;
     
 }
 #header-app,#content {
@@ -38,4 +37,17 @@ menu {
 }
 .transitionApp6 {
 	-webkit-transform: translateY(100%);
+}
+
+/* CONTEXT MENU TRANSITIONS */
+.pop-menu {
+    -webkit-transition: translate3d(0,0,0);
+    transform: translate3d(0, 0, 0);
+    -webkit-transition:all 0.4s ease;
+    -webkit-transform: translateY(-100%);
+}
+
+.pop-menu.context-menu-show {
+    -webkit-transform: translateY(0);
+    
 }

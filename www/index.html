@@ -19,7 +19,7 @@
         <script type="text/javascript" src="js/vendors/jquery.js"></script>
         <script type="text/javascript" src="js/vendors/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/vendors/fastclick.js"></script>
-        <script type="text/javascript" src="js/vendors/iscroll.js"></script>
+        <script type="text/javascript" src="js/vendors/iscroll-infinite.js"></script>
         <script type="text/javascript" src="js/vendors/hammer.min.js"></script>
         <script type="text/javascript" src="js/vendors/bootstrap-dialog.js"></script>
         <script type="text/javascript" src="js/vendors/jquery-ui.min.js"></script>
@@ -30,6 +30,7 @@
         <!-- LOAD JAVASCRIPT -->
         <!-- CONTROLLERS -->
         <script type="text/javascript" src="js/controllers/HomeController.js"></script>
+        <script type="text/javascript" src="js/controllers/PreferencesController.js"></script>
 
         <!-- Application -->
         <script type="text/javascript" src="js/App.js"></script>
@@ -37,6 +38,8 @@
         <script type="text/javascript" src="js/Transition.js"></script>
         <script type="text/javascript" src="js/PageLoad.js"></script>
         <script type="text/javascript" src="js/Commons.js"></script>
+        <script type="text/javascript" src="js/ContextMenu.js"></script>
+        <script type="text/javascript" src="js/localization.js"></script>
 
         <script type="text/javascript" charset="utf-8">
         function onLoad() { document.addEventListener("deviceready", App.init(), false); }
@@ -58,18 +61,14 @@
                     <div class="col-xs-12">
                         <table>
                             <tr class="item-row" style="height: 40px;">
-                                <td id="app-bar-menu"><img style="width: 35px;" src="img/menu-button.png"/></td>
-                                <td id="app-bar-title" class="item-text text-center"><!-- page title --></td>
+                                <td id="app-bar-menu"><img style="width: 20px;" src="img/menu-button.png"/></td>
+                                <td id="app-bar-icon" class="botoes-app" data-url="home.html"><img src="img/icon.png"/></td>
+                                <td id="app-bar-title" class="botoes-app" data-url="home.html">SciELO</td>
+                                <td id="app-bar-search-input" style="display: none;"><input type="text"/></td>
+                                <td id="app-bar-search"><img src="img/search.png"/></td>
+                                <td id="app-bar-context-menu"><img src="img/context_menu/menu_icon.png"/></td>
                             </tr>
                         </table>
-                        <!--<div class="item-table">
-                            <div class="item-row" style="height: 40px; padding: 0 20px;">
-                                <a id="app-bar-menu" class="item-cell"><img style="width: 30px;" src="img/menu-button.png"/></a>
-                                <div id="app-bar-title" class="item-cell text-center"></div>
-                                <a id="app-bar-back" class="item-cell color-white">&lt; <span id="string-back-btn"></span></a>
-                                <div id="app-bar-title-adjust" class="item-cell" style="width: 100px; height: 40px; display: none;"></div>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -80,31 +79,78 @@
             <menu id="menu">
                 <div id="menu-content" class="wrapper">
                     <div id="menu-scroller" class="scroller">
-                        <div class="item-table">
-                            <a class="item-row menu-row color-bg-menu-item botoes-app" data-url="home.html" >
-                                <div class="item-cell menu-icon"><img src="img/sidebar/home.png"/></div>
-                                <div id="string-menu-home" class="item-cell menu-item color-grey"></div>
-                            </a>
-                            <!-- <a class="item-row menu-row botoes-app" data-url="config.html" >
-                                <div class="item-cell menu-icon"><img src="img/sidebar/config.png"/></div>
-                                <div id="string-menu-config" class="item-cell menu-item color-grey"></div>
-                            </a> -->
-                            <a id="btn-sync" class="item-row menu-row">
-                                <div class="item-cell menu-icon"><img src="img/sidebar/home.png"/></div>
-                                <div id="string-menu-sync" class="item-cell menu-item color-grey"></div>
-                            </a>
-                            <a class="item-row menu-row color-bg-menu-item botoes-app" data-url="help.html" >
-                                <div class="item-cell menu-icon"><img src="img/sidebar/home.png"/></div>
-                                <div id="string-menu-help" class="item-cell menu-item color-grey"></div>
-                            </a>
-                            <a id="btn-logout" class="item-row menu-row">
-                                <div class="item-cell menu-icon"><img src="img/sidebar/home.png"/></div>
-                                <div id="string-menu-logout" class="item-cell menu-item color-grey"></div>
-                            </a>
-                        </div>
+                        <table>
+                            <tr class="menu-row">
+                                <td class="menu-checkbox" data-category="todas"><img src="img/sidebar/unchecked.png"/></td>
+                                <td class="menu-text"><div>Todas</div></td>
+                            </tr>
+                            <tr class="menu-row">
+                                <td class="menu-checkbox" data-category="scielo"><img src="img/sidebar/unchecked.png"/></td>
+                                <td class="menu-text"><div>SciELO em perspectiva</div></td>
+                            </tr>
+                            <tr class="menu-row">
+                                <td class="menu-checkbox" data-category="agrarias"><img src="img/sidebar/unchecked.png"/></td>
+                                <td class="menu-text"><div>Agrárias</div></td>
+                            </tr>
+                            <tr class="menu-row">
+                                <td class="menu-checkbox" data-category="agrarias"><img src="img/sidebar/unchecked.png"/></td>
+                                <td class="menu-text"><div>Biológicas</div></td>
+                            </tr>
+                            <tr class="menu-row">
+                                <td class="menu-checkbox" data-category="agrarias"><img src="img/sidebar/unchecked.png"/></td>
+                                <td class="menu-text"><div>Engenharias</div></td>
+                            </tr>
+                            <tr class="menu-row">
+                                <td class="menu-checkbox" data-category="agrarias"><img src="img/sidebar/unchecked.png"/></td>
+                                <td class="menu-text"><div>Exatas e da Terra</div></td>
+                            </tr>
+                            <tr class="menu-row">
+                                <td class="menu-checkbox" data-category="agrarias"><img src="img/sidebar/unchecked.png"/></td>
+                                <td class="menu-text"><div>Humanas</div></td>
+                            </tr>
+                            <tr class="menu-row">
+                                <td class="menu-checkbox" data-category="agrarias"><img src="img/sidebar/unchecked.png"/></td>
+                                <td class="menu-text"><div>Saúde</div></td>
+                            </tr>
+                            <tr class="menu-row">
+                                <td class="menu-checkbox" data-category="agrarias"><img src="img/sidebar/unchecked.png"/></td>
+                                <td class="menu-text"><div>Sociais Aplicadas</div></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </menu>
+            
+            <div id="context-menu" class="pop-menu">
+                <div id="context-menu-content" class="pop-menu-content">
+                    <table>
+                        <tr id="cm-refresh" class="context-menu-row" >
+                            <td class="context-menu-icon"><img src="img/context_menu/refresh.png"/></td>
+                            <td class="item-text context-menu-text"><div id="string-refresh"></div></td>
+                        </tr>
+                        <tr id="cm-favorite" class="context-menu-row">
+                            <td class="context-menu-icon"><img src="img/context_menu/fav.png"/></td>
+                            <td class="item-text context-menu-text"><div id="string-favorite"></div></td>
+                        </tr>
+                        <tr id="cm-preferences" class="context-menu-row">
+                            <td class="context-menu-icon"><img src="img/context_menu/pref.png"/></td>
+                            <td class="item-text context-menu-text"><div id="string-preferences"></div></td>
+                        </tr>
+                        <tr id="cm-welcome" class="context-menu-row">
+                            <td class="context-menu-icon"><img src="img/context_menu/welcome.png"/></td>
+                            <td class="item-text context-menu-text"><div id="string-welcome"></div></td>
+                        </tr>
+                        <tr id="cm-feedback" class="context-menu-row">
+                            <td class="context-menu-icon"><img src="img/context_menu/feedback.png"/></td>
+                            <td class="item-text context-menu-text"><div id="string-feedback"></div></td>
+                        </tr>
+                        <tr id="cm-politics" class="context-menu-row">
+                            <td class="context-menu-icon"><img src="img/context_menu/politics.png"/></td>
+                            <td class="item-text context-menu-text"><div id="string-politics"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
 
             <!-- DYNAMIC CONTENT -->
             <div id="content">
