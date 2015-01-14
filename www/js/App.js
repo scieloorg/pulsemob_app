@@ -32,6 +32,7 @@
             App.addEventListeners();
             App.definitions();
             App.isInitialized = true;
+            Localization.refreshAppLocale();
                         
             $.ajaxSetup({
                 statusCode: {
@@ -91,7 +92,11 @@
     App.addEventListeners = function() {
     	//load internal pages
         App.$headerApp.on('tap', "#app-bar-menu", Transition.toggleMenu);
-        $("#page").on('tap', '.botoes-app', Navigator.loadPage);
+        App.$headerApp.on('tap', "#app-bar-search", App.search);
+        App.$headerApp.on('tap', '.botoes-app', Navigator.loadPage);
+        $("#app-bar-search-input input").focusout(App.searchFocusOut);
+        App.$menu.on('tap', ".menu-checkbox", App.menuCheckbox);
+        App.$page.on('tap', '.botoes-app', Navigator.loadPage);
         
         document.addEventListener("backbutton", Navigator.backEvent, true);
         
@@ -101,8 +106,8 @@
         
         //listener swipe events
         Hammer(document).on("swipeleft", Transition.swipeleftMenu);
-        Hammer(document).on("swiperight", Transition.swiperightMenu);
         
+        ContextMenu.init();
         
         //scroll
         App.$contentWrapper.height("100%");
@@ -116,6 +121,51 @@
             focusObj.blur();
         });
         
+    };
+    
+    App.searchFocusOut = function() {
+        if($(this).val() === ""){
+            $("#app-bar-search-input").fadeOut(300,function(){
+                $("#app-bar-title").fadeIn(300);
+            });
+        }
+    };
+    
+    App.search = function(){
+        var $appSearchInput = $("#app-bar-search-input");
+        if($appSearchInput.is(":visible")){
+            if($appSearchInput.children("input").val() !== ""){
+                alert("pesquisa");
+            }
+        }else{
+            $("#app-bar-title").fadeOut(300,function(){
+                $appSearchInput.fadeIn(300,function(){
+                    $appSearchInput.children("input").focus();
+                });
+            });
+        }
+    };
+    
+    App.menuCheckbox = function(){
+        var value = true;
+        
+        if($(this).children("img").attr("src") === "img/sidebar/unchecked.png"){
+            $(this).children("img").attr("src","img/sidebar/checked.png");
+        }else{
+            $(this).children("img").attr("src","img/sidebar/unchecked.png");
+            value = false;
+        }
+        
+        var data = {category: $(this).data("category"), value: value};
+        
+        /*$.when(
+                SciELO.category(data) 
+        ).then( 
+             function(json){
+                 
+             }, 
+             function(err){}
+        ); */
     };
     
     App.refreshScroll = function(goTop){

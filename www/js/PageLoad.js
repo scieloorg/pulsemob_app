@@ -30,10 +30,15 @@
             case 'home.html':
                 App.currentController = new HomeController();
                 break;
+            case 'preferences.html':
+                App.currentController = new PreferencesController();
+                break;
             default:
                 alert('No controller found.');
                 break;
         }
+
+        PageLoad.loadLocalizationPage(App.currentController, Navigator.currentPage);
 
         // once new controller created, initialize it
         if (App.currentController !== null) {
@@ -41,6 +46,18 @@
         }
 
         App.$content.removeClass(Transition.class);
+    };
+    
+    PageLoad.loadLocalizationPage = function(controller, pageName) {
+        var stringFile = null;
+
+        if (controller.getLocalizationFile) {
+            stringFile = controller.getLocalizationFile();
+        } else {
+            stringFile = pageName.replace("html", "json");
+        }
+
+        Localization.loadLocaleFile(stringFile);
     };
 
 
