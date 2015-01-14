@@ -42,7 +42,7 @@
                 }
             });
             
-            Navigator.loadPage('home.html');
+            Navigator.loadFullPage('login.html');
         }
     };
     

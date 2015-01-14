@@ -12,19 +12,22 @@ HomeController.prototype = {
         var category2 = {id: "agrarias", name: "Ciências Agrárias"};
         HomeController.addCategory(category2);
         
-        
-        App.$page.on('tap', '.article-link', function(){ alert('Art: '+$(this).data("articleid"));});
-        
-        App.$page.on('tap', ".category-menu-btn", HomeController.toggleCategoryMenu);
-        App.$page.on('tap', ".refresh-category", HomeController.categoryRefresh);
-        App.$page.on('tap', ".share-category", HomeController.categoryShare);
-        App.$page.on('tap', ".config-category", HomeController.categoryConfig);
-        App.$page.on('tap', ".favorite-category", HomeController.categoryFavorite);
-        App.$page.on('tap', ".remove-category", HomeController.categoryRemove);
+        HomeController.initListeners();
     },
     destroy: function() {
         PageLoad.ajxHandle = null;
     }
+};
+
+HomeController.initListeners = function () {
+    App.$page.on('tap', '.article-link', function(){ alert('Art: '+$(this).data("articleid"));});
+        
+    App.$page.on('tap', ".category-menu-btn", HomeController.toggleCategoryMenu);
+    App.$page.on('tap', ".refresh-category", HomeController.categoryRefresh);
+    App.$page.on('tap', ".share-category", HomeController.categoryShare);
+    App.$page.on('tap', ".config-category", HomeController.categoryConfig);
+    App.$page.on('tap', ".favorite-category", HomeController.categoryFavorite);
+    App.$page.on('tap', ".remove-category", HomeController.categoryRemove);
 };
 
 HomeController.toggleCategoryMenu = function () {
