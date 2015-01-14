@@ -27,6 +27,9 @@
 
         // create new controller
         switch (Navigator.currentPage) {
+            case 'login.html':
+                App.currentController = new LoginController();
+                break;
             case 'home.html':
                 App.currentController = new HomeController();
                 break;

@@ -367,6 +367,45 @@ input:focus {
 
 /* </editor-fold> */
 
+/* <editor-fold desc="LOGIN STYLES"> */
+
+.login-icon{
+    padding: 60px 0;
+    width: 30%;
+    max-width: 120px;
+    margin: auto auto;
+}
+.login-btn-container{
+    text-align: center;
+    width: 70%;
+    max-width: 320px;
+    margin: auto auto;
+}
+.login-btn{
+    border-radius: 3px;
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+.login-btn tr{
+    height: 45px;
+}
+.login-btn-icon{
+    width: 45px;
+    border-right: 2px rgba(0,0,0,0.2) solid;
+}
+.login-btn-icon img{
+    width: 25px;
+}
+.login-btn.facebook{
+    background-color: #3C558D;
+}
+.login-btn.google{
+    background-color: #D9321D;
+}
+
+/* </editor-fold> */
+
 /* <editor-fold desc="HOME STYLES"> */
 
 .category{
