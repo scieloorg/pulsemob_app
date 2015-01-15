@@ -67,8 +67,10 @@
     
     //show panel menu
     Transition.showMenu = function() {
+        $(".context-menu-show").removeClass("context-menu-show");
         App.scrollMenu.scrollTo(0,0);
         App.$menu.addClass("transitionMenuAppStart");
+        
         //App.$content.addClass("transitionContentAppStart");
         App.$blockDiv.removeClass("hidden");
     };

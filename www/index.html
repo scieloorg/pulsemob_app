@@ -41,6 +41,7 @@
         <script type="text/javascript" src="js/Commons.js"></script>
         <script type="text/javascript" src="js/ContextMenu.js"></script>
         <script type="text/javascript" src="js/localization.js"></script>
+        <script type="text/javascript" src="js/Introduction.js"></script>
 
         <script type="text/javascript" charset="utf-8">
         function onLoad() { document.addEventListener("deviceready", App.init(), false); }
@@ -122,6 +123,7 @@
                 </div>
             </menu>
             
+            <!-- CONTEXT MENU -->
             <div id="context-menu" class="pop-menu">
                 <div id="context-menu-content" class="pop-menu-content">
                     <table>
@@ -162,6 +164,47 @@
                     <div id="block-content" class="block-content-alpha hidden"></div>
                 </div>
                 
+            </div>
+            
+            <!-- ITRODUCTION -->
+            <div id="intro-container" style="display: none;">
+                <div id="close-btn">
+                    <img src="img/home/close.png" />
+                </div>
+                <div id="intro-wrapper" class="wrapper">
+                    <div id="intro-scroller" class="scroller">
+                        <div class="intro-content">
+                            <div id="scielo-video">
+                                <img class="img-responsive" src="img/home/scielo_video.png"/>
+                            </div>
+                            <div class="login-icon intro">
+                                <img class="img-responsive" src="img/login/icon.png" />
+                            </div>
+                            <div id="string-intro-welcome" class="intro-welcome"></div>
+                            <div style="width: 80%; max-width: 280px; margin: auto auto; text-align: center;">
+                                <div id="info-carousel" class="carousel slide">
+                                    <!-- Carousel items -->
+                                    <div class="carousel-inner">
+                                        <div class="active item"><div id="string-intro-item1" class="carousel-content-item"></div></div>
+                                        <div class="item"><div id="string-intro-item2" class="carousel-content-item"></div></div>
+                                        <div class="item"><div id="string-intro-item3" class="carousel-content-item"></div></div>
+                                        <div class="item"><div id="string-intro-item4" class="carousel-content-item"></div></div>
+                                        <div class="item"><div id="string-intro-item5" class="carousel-content-item"></div></div>
+                                    </div>
+
+                                    <!-- Carousel indicators -->
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#info-carousel" data-slide-to="0" class="active"></li>
+                                        <li data-target="#info-carousel" data-slide-to="1"></li>
+                                        <li data-target="#info-carousel" data-slide-to="2"></li>
+                                        <li data-target="#info-carousel" data-slide-to="3"></li>
+                                        <li data-target="#info-carousel" data-slide-to="4"></li>
+                                    </ol> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

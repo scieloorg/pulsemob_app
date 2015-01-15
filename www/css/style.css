@@ -409,8 +409,11 @@ input:focus {
 /* <editor-fold desc="HOME STYLES"> */
 
 .category{
-    position: relative;
     margin-bottom: 10px;
+}
+.category-content{
+    position: relative;
+    padding-top: 10px;
     overflow-y: hidden;
 }
 .category-bar{
@@ -418,7 +421,6 @@ input:focus {
     background-color: #C2C2C2;
     border-bottom: 2px #000 solid;
     height: 45px;
-    margin-bottom: 10px;
     font-family: TerminalDosis-Bold;
 }
 
@@ -438,11 +440,6 @@ input:focus {
 .category-menu-btn img{
     height: 20px;
 }
-
-.category-context-menu{
-    right: 60px;
-}
-
 .cat-scroller {
     width: 1600px;
 }
@@ -491,6 +488,58 @@ input:focus {
     border-top: none;
     font-size: 12px;
     padding: 5px 5px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="INTRODUCTION STYLES"> */
+
+#intro-container{
+    width: 90%;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    background: #fff;
+    box-shadow: 0px 0px 10px #222222;
+    z-index: 1001;
+}
+.intro-content{
+    padding: 40px 0 20px 0;
+}
+#close-btn{
+    position: absolute;
+    top: -20px;
+    right: -15px;
+    z-index: 1001;
+}
+#close-btn img{
+    width: 50px;
+}
+#scielo-video{
+    width: 70%;
+    max-width: 350px;
+    margin: auto auto;
+}
+.login-icon.intro{
+    padding-top: 20px;
+    padding-bottom: 10px;
+    width: 20%;
+}
+.intro-welcome{
+    text-align: center;
+    font-size: 24px;
+}
+.carousel-content-item{
+    padding: 10px;
+    font-size: 16px;
+}
+#info-carousel .carousel-indicators li{
+    background-color: #C3C3C3 !important;
+    border: none;
+}
+#info-carousel .carousel-indicators li.active{
+    background-color: #393A3C !important;
+    border: none;
 }
 
 /* </editor-fold> */
