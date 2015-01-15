@@ -2,9 +2,11 @@ var HomeController = function() {
 };
 
 HomeController.scroll = {};
+HomeController.$categories = null;
 
 HomeController.prototype = {
     initialize: function() {
+        HomeController.$categories = $("#categories");
         
         var category1 = {id: "scielo", name: "SciELO em Perspectiva"};
         HomeController.addCategory(category1);
@@ -13,6 +15,7 @@ HomeController.prototype = {
         HomeController.addCategory(category2);
         
         HomeController.initListeners();
+        Introduction.show();
     },
     destroy: function() {
         PageLoad.ajxHandle = null;
@@ -20,14 +23,13 @@ HomeController.prototype = {
 };
 
 HomeController.initListeners = function () {
-    App.$page.on('tap', '.article-link', function(){ alert('Art: '+$(this).data("articleid"));});
+    HomeController.$categories.on('tap', '.article-link', function(){ alert('Art: '+$(this).data("articleid"));});
         
-    App.$page.on('tap', ".category-menu-btn", HomeController.toggleCategoryMenu);
-    App.$page.on('tap', ".refresh-category", HomeController.categoryRefresh);
-    App.$page.on('tap', ".share-category", HomeController.categoryShare);
-    App.$page.on('tap', ".config-category", HomeController.categoryConfig);
-    App.$page.on('tap', ".favorite-category", HomeController.categoryFavorite);
-    App.$page.on('tap', ".remove-category", HomeController.categoryRemove);
+    HomeController.$categories.on('tap', ".category-menu-btn", HomeController.toggleCategoryMenu);
+    HomeController.$categories.on('tap', ".refresh-category", HomeController.categoryRefresh);
+    HomeController.$categories.on('tap', ".share-category", HomeController.categoryShare);
+    HomeController.$categories.on('tap', ".config-category", HomeController.categoryConfig);
+    HomeController.$categories.on('tap', ".remove-category", HomeController.categoryRemove);
 };
 
 HomeController.toggleCategoryMenu = function () {
@@ -37,38 +39,37 @@ HomeController.toggleCategoryMenu = function () {
     if ($menu.hasClass("context-menu-show")) {
         $menu.removeClass("context-menu-show");
     } else {
+        $(".context-menu-show").removeClass("context-menu-show");
         $menu.addClass("context-menu-show");
     }
 };
 
 HomeController.categoryRefresh = function () {
-    var category = $(this).data("category");
+    var catId = $(this).data("category");
+    $("#category-menu-"+catId).removeClass("context-menu-show");
     
-    alert("refresh "+category);
+    alert("refresh "+catId);
 };
 
 HomeController.categoryShare = function () {
-    var category = $(this).data("category");
+    var catId = $(this).data("category");
+    $("#category-menu-"+catId).removeClass("context-menu-show");
     
-    alert("share "+category);
+    alert("share "+catId);
 };
 
 HomeController.categoryConfig = function () {
-    var category = $(this).data("category");
+    var catId = $(this).data("category");
+    $("#category-menu-"+catId).removeClass("context-menu-show");
     
-    alert("config "+category);
-};
-
-HomeController.categoryFavorite = function () {
-    var category = $(this).data("category");
-    
-    alert("favorite "+category);
+    alert("config "+catId);
 };
 
 HomeController.categoryRemove = function () {
-    var category = $(this).data("category");
+    var catId = $(this).data("category");
+    $("#category-menu-"+catId).removeClass("context-menu-show");
     
-    alert("remove "+category);
+    alert("remove "+catId);
 };
 
 HomeController.addCategory = function (categoryData) {
@@ -81,8 +82,8 @@ HomeController.addCategory = function (categoryData) {
                             '</tr>' +
                         '</table>' +
                     '</div>' +
-                    
-                    '<div id="category-menu-'+categoryData.id+'" class="pop-menu category-context-menu">' +
+                    '<div class="category-content">' +
+                    '<div id="category-menu-'+categoryData.id+'" class="pop-menu">' +
                         '<div class="pop-menu-content">' +
                             '<table>' +
                                 '<tr class="context-menu-row refresh-category" data-category="'+categoryData.id+'" >' +
@@ -96,10 +97,6 @@ HomeController.addCategory = function (categoryData) {
                                 '<tr class="context-menu-row config-category" data-category="'+categoryData.id+'" >' +
                                     '<td class="context-menu-icon"><img src="img/category/config.png"/></td>' +
                                     '<td class="item-text context-menu-text"><div>'+Localization.getValue('config')+'</div></td>' +
-                                '</tr>' +
-                                '<tr class="context-menu-row favorite-category" data-category="'+categoryData.id+'" >' +
-                                    '<td class="context-menu-icon"><img src="img/category/fav.png"/></td>' +
-                                    '<td class="item-text context-menu-text"><div>'+Localization.getValue('favorite')+'</div></td>' +
                                 '</tr>' +
                                 '<tr class="context-menu-row remove-category" data-category="'+categoryData.id+'" >' +
                                     '<td class="context-menu-icon"><img src="img/category/remove.png"/></td>' +
@@ -125,9 +122,10 @@ HomeController.addCategory = function (categoryData) {
                             '</ul>' +
                         '</div>' +
                     '</div>' +
+                    '</div>' +
                 '</div>';
     
-    $("#categories").append(html);
+    HomeController.$categories.append(html);
     
     HomeController.scroll[categoryData.id] = new IScroll('#cat-wrapper-'+categoryData.id, { 
         scrollX: true,

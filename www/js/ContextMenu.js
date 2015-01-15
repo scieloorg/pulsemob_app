@@ -19,42 +19,45 @@ ContextMenu.init = function() {
 //toggleMenu
 ContextMenu.toggleMenu = function() {
     if (ContextMenu.$menu.hasClass("context-menu-show")) {
-        ContextMenu.$menu.removeClass("context-menu-show");
+        ContextMenu.hide();
     } else {
+        $(".context-menu-show").removeClass("context-menu-show");
+        Transition.hideMenu();
         ContextMenu.$menu.addClass("context-menu-show");
     }
 };
 
+ContextMenu.hide = function() {
+    ContextMenu.$menu.removeClass("context-menu-show");
+};
+
 ContextMenu.refreshAction = function() {
+    ContextMenu.hide();
     alert('refresh');
-    ContextMenu.endAction();
 };
 
 ContextMenu.favoriteAction = function() {
+    ContextMenu.hide();
     alert('favorite');
-    ContextMenu.endAction();
+    
 };
 
 ContextMenu.preferencesAction = function() {
+    ContextMenu.hide();
     Navigator.loadPage('preferences.html');
-    ContextMenu.endAction();
 };
 
 ContextMenu.welcomeAction = function() {
-    alert('welcome');
-    ContextMenu.endAction();
+    ContextMenu.hide();
+    Introduction.show();
 };
 
 ContextMenu.feedbackAction = function() {
+    ContextMenu.hide();
     alert('feedback');
-    ContextMenu.endAction();
 };
 
 ContextMenu.politicsAction = function() {
+    ContextMenu.hide();
     alert('politics');
-    ContextMenu.endAction();
-};
-
-ContextMenu.endAction = function(){
-    ContextMenu.toggleMenu();
 };

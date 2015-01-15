@@ -2,11 +2,12 @@
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="br.com.scielo" version="1.0.0">
     <name>SciELO</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Scientific Eletronic Library Online
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="marcellus.batista@infobase.com.br" href="http://www.infobase.com.br">
+        Infobase Vix Team
     </author>
     <content src="index.html"/>
     <access origin="*"/>
+    <preference name="Orientation" value="portrait"/>
 </widget>
