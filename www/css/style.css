@@ -35,6 +35,11 @@ body {
     src: url(../fonts/terminal-dosis.bold.ttf);
 }
 
+@font-face {
+    font-family: TerminalDosis-ExtraLight;
+    src: url(../fonts/terminal-dosis.extralight.ttf);
+}
+
 /* </editor-fold> */
 
 /* <editor-fold desc="MODAL"> */
@@ -47,7 +52,6 @@ body {
 }
 .modal-body{
     text-align: center;
-    background-color: #3D445F;
 }
 .modal-content{
     top: 50%;
@@ -60,20 +64,28 @@ body {
 .modal-header{
     text-align: center;
     display: block !important;
-    background-color: #2B2937;
+    background-color: #FF4533;
     border: 0;
 }
+.bootstrap-dialog-title{
+    color: #fff!important;
+}
+
 .modal-footer{
     padding: 10px;
     border: none;
     margin-top: 5px;
     text-align: center;
-    background-color: #3D445F;
     margin: 0px;
 }
 
 .bootstrap-dialog-close-button{
 	display: none !important;
+}
+
+.btn-ok{
+    background-color: #bbb;
+    color: #fff;
 }
 
 /* </editor-fold> */
@@ -160,6 +172,10 @@ body {
     z-index: 1001;
 }
 #app-bar-menu{
+    padding: 0 10px 0 10px;
+    width: 35px;
+}
+#app-bar-back{
     padding: 0 10px 0 10px;
     width: 35px;
 }
@@ -471,13 +487,13 @@ input:focus {
     width: 100%;
 }
 .article-name{
-/*    background: linear-gradient(rgba(200,200,200,0.3), rgba(0,0,0,0.7));*/
-    background: -webkit-linear-gradient(rgba(150,150,150,0.3), rgba(0,0,0,0.7));
+    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1));
+    background: -webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1));
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 20px 5px 10px 5px;
+    padding: 25px 5px 10px 5px;
     color: #fff;
     font-size: 14px;
 }
@@ -488,6 +504,7 @@ input:focus {
     border-top: none;
     font-size: 12px;
     padding: 5px 5px;
+    font-family: TerminalDosis-ExtraLight;
 }
 
 /* </editor-fold> */
@@ -544,6 +561,71 @@ input:focus {
 
 /* </editor-fold> */
 
+/* <editor-fold desc="ABSTRACT STYLES"> */
+
+.abstract-bg{
+    background-color: #fff;
+}
+.abstract-header{
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    background: url(../img/glogo1.jpeg) no-repeat center top #fff;
+    /*background-size: 100%;*/
+}
+
+.abstract-desc-container{
+    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1));
+    background: -webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1));
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: #fff;
+    font-size: 14px;
+    padding: 30px 10px 10px 10px;
+}
+
+.abstract-desc-title{
+    font-size: 18px;
+}
+.abstract-desc-author{
+    margin-bottom: 5px;
+}
+.abstract-desc-details{
+    font-family: TerminalDosis-ExtraLight;
+}
+.abstract-img{
+    width: 40px;
+    text-align: center;
+}
+.abstract-img img{
+    width: 22px;
+}
+.abstract-content{
+    text-align: center;
+    padding: 10px 0;
+}
+.abstract-web-btn{
+    background-color: #DEDEDE;
+    border-radius: 3px;
+    margin: 15px 0;
+}
+.abstract-web-btn img{
+    width: 22px;
+    margin-right: 3px;
+}
+.abstract-content-text{
+    text-align: left;
+    padding: 10px 20px;
+}
+.abstract-content-tags{
+    text-align: left;
+    font-family: TerminalDosis-Bold;
+    padding: 10px 20px;
+}
+/* </editor-fold> */
+
 /* <editor-fold desc="PREFERENCES STYLES"> */
 
 .pref-bg{
@@ -598,3 +680,13 @@ input:focus {
 }
 
 /* </editor-fold> */
+
+/* <editor-fold desc="POLITICS STYLES"> */
+
+#string-politics-content{
+    font-size: 14px;
+    color: #bbb;
+}
+
+/* </editor-fold> */
+

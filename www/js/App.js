@@ -92,6 +92,7 @@
     App.addEventListeners = function() {
     	//load internal pages
         App.$headerApp.on('tap', "#app-bar-menu", Transition.toggleMenu);
+        App.$headerApp.on('tap', "#app-bar-back", Navigator.backEvent);
         App.$headerApp.on('tap', "#app-bar-search", App.search);
         App.$headerApp.on('tap', '.botoes-app', Navigator.loadPage);
         $("#app-bar-search-input input").focusout(App.searchFocusOut);
@@ -135,7 +136,9 @@
         var $appSearchInput = $("#app-bar-search-input");
         if($appSearchInput.is(":visible")){
             if($appSearchInput.children("input").val() !== ""){
-                alert("pesquisa");
+                
+                HomeController.searchText = $appSearchInput.children("input").val();
+                Navigator.loadPage("home.html");
             }
         }else{
             $("#app-bar-title").fadeOut(300,function(){
@@ -187,13 +190,13 @@
     };
     
     App.showBackButton = function(){
-        $("#app-bar-title-adjust").hide();
+        $("#app-bar-menu").hide();
         $("#app-bar-back").show();
     };
     
     App.hideBackButton = function(){
         $("#app-bar-back").hide();
-        $("#app-bar-title-adjust").show();
+        $("#app-bar-menu").show();
     };
     
     App.showFullPage = function(){

@@ -3,6 +3,7 @@ var HomeController = function() {
 
 HomeController.scroll = {};
 HomeController.$categories = null;
+HomeController.searchText = null;
 
 HomeController.prototype = {
     initialize: function() {
@@ -23,13 +24,18 @@ HomeController.prototype = {
 };
 
 HomeController.initListeners = function () {
-    HomeController.$categories.on('tap', '.article-link', function(){ alert('Art: '+$(this).data("articleid"));});
+    HomeController.$categories.on('tap', '.article-link', HomeController.openArticle);
         
     HomeController.$categories.on('tap', ".category-menu-btn", HomeController.toggleCategoryMenu);
     HomeController.$categories.on('tap', ".refresh-category", HomeController.categoryRefresh);
     HomeController.$categories.on('tap', ".share-category", HomeController.categoryShare);
     HomeController.$categories.on('tap', ".config-category", HomeController.categoryConfig);
     HomeController.$categories.on('tap', ".remove-category", HomeController.categoryRemove);
+};
+
+HomeController.openArticle = function () {
+    var articleId = $(this).data("articleid");
+    Navigator.loadPage("abstract.html");
 };
 
 HomeController.toggleCategoryMenu = function () {
@@ -69,11 +75,15 @@ HomeController.categoryRemove = function () {
     var catId = $(this).data("category");
     $("#category-menu-"+catId).removeClass("context-menu-show");
     
-    alert("remove "+catId);
+    $("#category-"+catId).fadeOut(800, function(){
+        $("#category-"+catId).remove();
+    });
+    
+    App.refreshScroll(false);
 };
 
 HomeController.addCategory = function (categoryData) {
-    var html = '<div class="category">' +
+    var html = '<div id="category-'+categoryData.id+'" class="category">' +
                     '<div class="category-bar">' +
                         '<table>' +
                             '<tr>' +

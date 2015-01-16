@@ -54,10 +54,10 @@ ContextMenu.welcomeAction = function() {
 
 ContextMenu.feedbackAction = function() {
     ContextMenu.hide();
-    alert('feedback');
+    App.openLink("http://www.scielo.org/php/contact.php?lang="+App.locale);
 };
 
 ContextMenu.politicsAction = function() {
     ContextMenu.hide();
-    alert('politics');
+    Navigator.loadPage("politics.html");
 };
