@@ -33,8 +33,14 @@
             case 'home.html':
                 App.currentController = new HomeController();
                 break;
+            case 'abstract.html':
+                App.currentController = new AbstractController();
+                break;
             case 'preferences.html':
                 App.currentController = new PreferencesController();
+                break;
+            case 'politics.html':
+                App.currentController = new PoliticsController();
                 break;
             default:
                 alert('No controller found.');
