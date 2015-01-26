@@ -475,6 +475,13 @@ input:focus {
     background-color: #fff;
     border-right: 10px #EDECED solid;
 }
+
+.article .loading-img{
+    width: 60px;
+    margin-left: 45px;
+    margin-top: 55px;
+}
+
 .article-principal{
     width: 100%;
     height: 160px;
@@ -496,6 +503,7 @@ input:focus {
     padding: 25px 5px 10px 5px;
     color: #fff;
     font-size: 14px;
+    max-height: 145px;
 }
 .article-legend{
     width: 100%;
@@ -506,7 +514,10 @@ input:focus {
     padding: 5px 5px;
     font-family: TerminalDosis-ExtraLight;
 }
-
+.article-journal{
+    max-height: 15px;
+    overflow: hidden;
+}
 /* </editor-fold> */
 
 /* <editor-fold desc="INTRODUCTION STYLES"> */
@@ -570,7 +581,6 @@ input:focus {
     position: relative;
     height: 200px;
     overflow: hidden;
-    background: url(../img/glogo1.jpeg) no-repeat center top #fff;
     /*background-size: 100%;*/
 }
 
@@ -690,3 +700,19 @@ input:focus {
 
 /* </editor-fold> */
 
+/* <editor-fold desc="CATEGORY CONFIG STYLES"> */
+
+.category-magazine-row{
+    height: 40px;
+    vertical-align: bottom;
+}
+
+.magazine-checkbox {
+    width: 35px;
+}
+.magazine-checkbox img{
+    width: 35px;
+    padding: 10px 5px;
+}
+
+/* </editor-fold> */

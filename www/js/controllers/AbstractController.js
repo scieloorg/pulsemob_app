@@ -1,10 +1,14 @@
 var AbstractController = function() {
 };
 
+AbstractController.articleData = null;
+
+
 AbstractController.prototype = {
     initialize: function() {
         App.$page.addClass("abstract-bg");
         AbstractController.initListeners();
+        AbstractController.populate();
         App.showBackButton();
     },
     destroy: function() {
@@ -20,6 +24,30 @@ AbstractController.initListeners = function(){
     $("#abs-content").on('tap', ".abstract-web-btn", AbstractController.openWebArticle);
 };
 
+AbstractController.populate = function(){
+    $(".abstract-header").css("background","url("+AbstractController.articleData.imgUrl+") no-repeat center top #fff");
+    
+    $("#article-title").html(AbstractController.articleData.title);
+    $("#article-author").html(Localization.getValue("by")+" "+AbstractController.articleData.author);
+    
+    $("#article-category-journal").html(AbstractController.articleData.category + " - " +AbstractController.articleData.journal);
+    $("#article-date").html(AbstractController.articleData.date);
+    
+    if(AbstractController.articleData.abstract){
+        $("#article-abstract").html(AbstractController.articleData.abstract);
+    }else{
+        $("#btn-article-web2").hide();
+    }
+    
+    $("#article-abstract").html(AbstractController.articleData.abstract);
+    
+    if(AbstractController.articleData.keywords && AbstractController.articleData.keywords !== "undefined"){
+        $("#article-tags").html(Localization.getValue("tags")+": "+AbstractController.articleData.keywords);
+    }
+    
+    
+};
+
 AbstractController.addFavorite = function(){
     alert("add fav");
 };
@@ -29,5 +57,6 @@ AbstractController.share = function(){
 };
 
 AbstractController.openWebArticle = function(){
-    App.openLink("http://www.scielo.org.za/scielo.php?script=sci_arttext&pid=S0256-95742014000100032&lng="+App.locale+"&nrm=iso");
+    var domain = AbstractController.articleData.imgUrl.split("/")[2];
+    App.openLink("http://"+domain+"/scielo.php?script=sci_arttext&pid="+AbstractController.articleData.id+"&lng="+App.locale+"&nrm=iso");
 };

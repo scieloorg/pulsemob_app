@@ -33,6 +33,7 @@
             App.definitions();
             App.isInitialized = true;
             Localization.refreshAppLocale();
+            FeedsAndPublications.loadMap();
                         
             $.ajaxSetup({
                 statusCode: {
@@ -42,7 +43,7 @@
                 }
             });
             
-            Navigator.loadFullPage('login.html');
+            Navigator.loadPage('home.html');
         }
     };
     
