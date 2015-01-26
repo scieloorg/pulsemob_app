@@ -1,7 +1,9 @@
 var SciELO = function(){};
 
 SciELO.sessionCache = new Array();
-SciELO.serverURL = "http://localhost:8080/scielo/ws/";
+//SciELO.serverURL = "http://localhost:8080/scielo/ws/";
+//SciELO.serverURL = "http://192.168.0.27:8000/";
+SciELO.serverURL = "http://192.168.0.2/";
 
 
 SciELO.loginUser = function(userInfo){
@@ -10,6 +12,22 @@ SciELO.loginUser = function(userInfo){
 
 SciELO.category = function(data){
     return SciELO.callWebServiceFunctionPOST("category", data);
+};
+
+SciELO.search = function(params){
+    return SciELO.callWebServiceFunction("search", params);
+};
+
+SciELO.feed = function(params){
+    return SciELO.callWebServiceFunction("feed", params);
+};
+
+SciELO.home = function(){
+    return SciELO.callWebServiceFunction("home", {});
+};
+
+SciELO.feedsAndPublications = function(){
+    return SciELO.callWebServiceFunction("feed/publications/list", {});
 };
 
 /**
@@ -106,26 +124,15 @@ SciELO.getCache = function(key, isSessionCache){
 
 SciELO.getCacheData = function(key, isSessionCache){
     var cache = SciELO.getCache(key, isSessionCache);
-    return cache.cachedData;
+    if(cache) return cache.cachedData;
+    else return null;
 };
 
 SciELO.removeCache = function(key){
     window.localStorage.removeItem(key);
 };
 
-SciELO.callWebServiceFunction = function(webServiceFunction){
-    var callURL = SciELO.serverURL  + webServiceFunction;
-
-    return $.ajax({
-        url: callURL,
-        dataType: 'json',
-        timeout: 15000,
-        crossDomain: true,
-        type: 'GET'
-    });
-};
-
-SciELO.callWebServiceFunctionWithParams = function(webServiceFunction, params){
+SciELO.callWebServiceFunction = function(webServiceFunction, params){
     var callURL = SciELO.serverURL  + webServiceFunction;
 
     return $.ajax({
@@ -137,7 +144,6 @@ SciELO.callWebServiceFunctionWithParams = function(webServiceFunction, params){
         data: params
     });
 };
-
 
 SciELO.callWebServiceFunctionPOST = function(webServiceFunction, params){
     var callURL = SciELO.serverURL  + webServiceFunction;

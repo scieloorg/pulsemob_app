@@ -39,6 +39,9 @@
             case 'preferences.html':
                 App.currentController = new PreferencesController();
                 break;
+            case 'categoryConfig.html':
+                App.currentController = new CategoryConfigController();
+                break;
             case 'politics.html':
                 App.currentController = new PoliticsController();
                 break;

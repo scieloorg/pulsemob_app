@@ -62,7 +62,7 @@
              newPage = $(this).data("url");
         }
         
-        if(Navigator.currentPage === newPage) {
+        if(Navigator.currentPage === newPage && Navigator.currentPage !== "home.html") {
             Transition.hideMenu();
             return;
         }
@@ -91,6 +91,7 @@
     };
     
     Navigator.load = function(url){
+        $(".context-menu-show").removeClass("context-menu-show");
         Transition.hideMenu();
         Transition.control = true;
         Navigator.currentPage = url;
