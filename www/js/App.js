@@ -16,6 +16,7 @@
         $loadingDiv: null,
         $blockDiv: null,
         $page: null,
+        $appSearchInput: null,
         currentUser: null,
         constants:{
             APP_VERSION: "1.0.0"
@@ -34,6 +35,8 @@
             App.isInitialized = true;
             Localization.refreshAppLocale();
             FeedsAndPublications.loadMap();
+            ContextMenu.init();
+            App.initCategoryMenu();
                         
             $.ajaxSetup({
                 statusCode: {
@@ -77,6 +80,7 @@
         App.$blockDiv = $('#block-content');
         App.$contentWrapper = $("#page-wrapper");
         App.$page = $("#page");
+        App.$appSearchInput = $("#app-bar-search-input");
     };
     
     //set definitions project
@@ -100,6 +104,13 @@
         App.$menu.on('tap', ".menu-checkbox", App.menuCheckbox);
         App.$page.on('tap', '.botoes-app', Navigator.loadPage);
         
+        
+        $("#app-bar-search-input input").keypress(function(e) {
+            if(e.which === 13) {
+                $("#app-bar-search").trigger("tap");
+            }
+        });
+        
         document.addEventListener("backbutton", Navigator.backEvent, true);
         
         //listener end transition
@@ -109,7 +120,6 @@
         //listener swipe events
         Hammer(document).on("swipeleft", Transition.swipeleftMenu);
         
-        ContextMenu.init();
         
         //scroll
         App.$contentWrapper.height("100%");
@@ -134,20 +144,38 @@
     };
     
     App.search = function(){
-        var $appSearchInput = $("#app-bar-search-input");
-        if($appSearchInput.is(":visible")){
-            if($appSearchInput.children("input").val() !== ""){
-                
-                HomeController.searchText = $appSearchInput.children("input").val();
+        if(App.$appSearchInput.is(":visible")){
+            if(App.$appSearchInput.children("input").val() !== ""){
                 Navigator.loadPage("home.html");
             }
         }else{
             $("#app-bar-title").fadeOut(300,function(){
-                $appSearchInput.fadeIn(300,function(){
-                    $appSearchInput.children("input").focus();
+                App.$appSearchInput.fadeIn(300,function(){
+                    App.$appSearchInput.children("input").focus();
                 });
             });
         }
+    };
+    
+    App.initCategoryMenu = function(){
+        var $categoryMenu = $("#categories-menu");
+        
+        var allCategories = FeedsAndPublications.getAllCategories();
+        var categoriesRemoved = [3,6]; //TODO: pegar do usuario
+        
+        for(var i in allCategories){
+            var cat = parseInt(allCategories[i]);
+            
+            var img = (categoriesRemoved.indexOf(cat) < 0) ? 'checked' : 'unchecked';
+            
+            var html = '<tr class="menu-row">' +
+                            '<td class="menu-checkbox" data-category="'+cat+'"><img src="img/sidebar/'+img+'.png"/></td>' +
+                            '<td class="menu-text">'+FeedsAndPublications.getCategoryName(cat)+'</td>' +
+                        '</tr>';
+                
+            $categoryMenu.append(html);
+        }
+        
     };
     
     App.menuCheckbox = function(){
@@ -159,6 +187,9 @@
             $(this).children("img").attr("src","img/sidebar/unchecked.png");
             value = false;
         }
+        
+        // alterando a config de categorias a home eh diferente
+        SciELO.homeCleanCache();
         
         var data = {category: $(this).data("category"), value: value};
         
