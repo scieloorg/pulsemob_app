@@ -1456,7 +1456,7 @@ IScroll.prototype = {
 	reorderInfinite: function () {
 		var offset = this.options.scrollY ? -this.y : -this.x;
 
-		var minorPhase = Math.max(Math.floor(offset / this.infiniteElementSize) - this.infiniteUpperBufferSize, 0),
+		var minorPhase = Math.max(Math.floor(offset / this.infiniteElementSize) - Math.abs(this.infiniteUpperBufferSize), 0),
 			majorPhase = Math.floor(minorPhase / this.infiniteLength),
 			phase = minorPhase - majorPhase * this.infiniteLength;
 
@@ -1465,7 +1465,7 @@ IScroll.prototype = {
 		var update = [];
 
 		//var cachePhase = Math.floor((minorPhase + this.infiniteLength / 2) / this.infiniteCacheBuffer);
-		var cachePhase = Math.floor(minorPhase / this.infiniteCacheBuffer);
+		var cachePhase = (this.infiniteCacheBuffer > 0) ? Math.floor(minorPhase / this.infiniteCacheBuffer) : 0;
 
 		while ( i < this.infiniteLength ) {
 			position = i * this.infiniteElementSize + majorPhase * this.infiniteSize;

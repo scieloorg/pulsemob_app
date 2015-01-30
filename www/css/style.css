@@ -151,6 +151,16 @@ body {
     opacity: .60;
     z-index: 2;
 }
+#block-content-glass{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    float: left;
+    height: 100%;
+    z-index: 2;
+}
 .page-content{
     height: 100%;
 }
@@ -294,6 +304,7 @@ menu {
 }
 .menu-checkbox {
     width: 35px;
+    vertical-align: middle;
 }
 .menu-checkbox img{
     width: 35px;
@@ -303,8 +314,9 @@ menu {
     padding-left: 5px;
     font-size: 20px;
 }
-.menu-text div{
-    padding-bottom: 10px;
+.menu-text{
+    padding: 5px 0;
+    vertical-align: middle;
 }
 
 
@@ -518,6 +530,30 @@ input:focus {
     max-height: 15px;
     overflow: hidden;
 }
+#home-search-box{
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.home-search-row{
+    height: 30px;
+}
+#string-result-of{
+    color: #989898;
+    font-family: TerminalDosis-ExtraLight;
+    width: 110px;
+}
+#home-search-text input{
+    width: 100%;
+    background-color: rgba(0,0,0,0);
+    border: none;
+}
+#home-search-btn{
+    text-align: center;
+    width: 60px;
+}
+#home-search-btn img{
+    width: 25px;
+}
 /* </editor-fold> */
 
 /* <editor-fold desc="INTRODUCTION STYLES"> */
@@ -709,6 +745,7 @@ input:focus {
 
 .magazine-checkbox {
     width: 35px;
+    vertical-align: middle;
 }
 .magazine-checkbox img{
     width: 35px;

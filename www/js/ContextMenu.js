@@ -2,9 +2,11 @@ var ContextMenu = function() {
 };
 
 ContextMenu.$menu = null;
+ContextMenu.showFavorites = false;
 
 ContextMenu.init = function() {
     App.$headerApp.on('tap', "#app-bar-context-menu", ContextMenu.toggleMenu);
+    App.$page.on('tap', '#block-content-glass', ContextMenu.hide);
     
     ContextMenu.$menu = $("#context-menu");
     
@@ -21,25 +23,40 @@ ContextMenu.toggleMenu = function() {
     if (ContextMenu.$menu.hasClass("context-menu-show")) {
         ContextMenu.hide();
     } else {
-        $(".context-menu-show").removeClass("context-menu-show");
-        Transition.hideMenu();
-        ContextMenu.$menu.addClass("context-menu-show");
+        ContextMenu.show();
     }
+};
+
+ContextMenu.show = function() {
+    $(".context-menu-show").removeClass("context-menu-show");
+    Transition.hideMenu();
+    $("#block-content-glass").show();
+    ContextMenu.$menu.addClass("context-menu-show");
 };
 
 ContextMenu.hide = function() {
     ContextMenu.$menu.removeClass("context-menu-show");
+    // timeout para o evento do 'tap' no menu nao passar para pagina de baixo
+    setTimeout(function(){ $("#block-content-glass").hide(); },300);
 };
 
 ContextMenu.refreshAction = function() {
     ContextMenu.hide();
-    alert('refresh');
+    
+    if(Navigator.currentPage === "home.html" ){
+        App.currentController.refresh();
+    }
 };
 
 ContextMenu.favoriteAction = function() {
     ContextMenu.hide();
-    alert('favorite');
+    // Se tiver algo na busca, deve ser removido
+    App.$appSearchInput.children("input").val("");
+    App.$appSearchInput.children("input").blur();
     
+    ContextMenu.showFavorites = true;
+    
+    Navigator.loadPage('home.html');
 };
 
 ContextMenu.preferencesAction = function() {

@@ -42,14 +42,18 @@ FeedsAndPublications.checkVersion = function(version) {
     }
 };
 
+FeedsAndPublications.getAllCategories = function() {
+    return Object.keys(FeedsAndPublications.map.feeds);  // returns ["person", "age"]
+};
+
 FeedsAndPublications.getCategoryName = function(categoryId) {
     return FeedsAndPublications.map.feeds[categoryId]["feed_name_"+App.locale];
 };
 
-FeedsAndPublications.getAllJournalsIds = function(categoryId) {
-    return FeedsAndPublications.map.feed_publication_relations[categoryId];
+FeedsAndPublications.getAllMagazinesIds = function(categoryId) {
+    return FeedsAndPublications.map.feeds[categoryId].publications;
 };
 
-FeedsAndPublications.getJournalName = function(journalId) {
+FeedsAndPublications.getMagazineName = function(journalId) {
     return FeedsAndPublications.map.publications[journalId].publication_name;
 };
