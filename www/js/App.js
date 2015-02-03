@@ -169,12 +169,14 @@
             var img = (categoriesRemoved.indexOf(cat) < 0) ? 'checked' : 'unchecked';
             
             var html = '<tr class="menu-row">' +
-                            '<td class="menu-checkbox" data-category="'+cat+'"><img src="img/sidebar/'+img+'.png"/></td>' +
+                            '<td id="menu-checkbox-'+cat+'" class="menu-checkbox" data-category="'+cat+'"><img src="img/sidebar/'+img+'.png"/></td>' +
                             '<td class="menu-text">'+FeedsAndPublications.getCategoryName(cat)+'</td>' +
                         '</tr>';
                 
             $categoryMenu.append(html);
         }
+        
+        App.scrollMenu.refresh();
         
     };
     

@@ -1,0 +1,168 @@
+/* <editor-fold desc="GLOBAL SETTINGS"> */
+
+body.font-large {
+    font-size: 20px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="MODAL"> */
+
+.font-large .bootstrap-dialog-title{
+    font-size: 20px!important;
+}
+.font-large .bootstrap-dialog-message{
+    font-size: 18px!important;
+}
+.font-large .btn-ok{
+    font-size: 18px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="APP BAR"> */
+
+.font-large #app-bar-search-input input{
+    font-size: 22px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="MENU APP STYLES"> */
+
+.font-large .menu-row{
+    height: 50px;
+}
+.font-large .menu-checkbox {
+    width: 45px;
+}
+.font-large .menu-checkbox img{
+    width: 45px;
+}
+.font-large .menu-text{
+    font-size: 20px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="LOGIN STYLES"> */
+
+.font-large .login-btn{
+    font-size: 22px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="HOME STYLES"> */
+
+.font-large .cat-scroller ul{
+    height: 244px;
+}
+.font-large .article{
+    width: 180px;
+    height: 240px;
+}
+.font-large .article .loading-img{
+    width: 60px;
+    margin-left: 60px;
+    margin-top: 75px;
+}
+.font-large .article-principal{
+    height: 190px;
+}
+.font-large .article-name{
+    font-size: 18px;
+}
+.font-large .article-legend{
+    height: 50px;
+    font-size: 16px;
+}
+.font-large .article-journal{
+    max-height: 20px;
+}
+.font-large #home-search-box{
+    font-size: 22px;
+}
+.font-large #string-result-of{
+    width: 125px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="INTRODUCTION STYLES"> */
+
+.font-large .intro-welcome{
+    font-size: 28px;
+}
+.font-large .carousel-content-item{
+    font-size: 20px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="ABSTRACT STYLES"> */
+
+.font-large .abstract-header{
+    height: 240px;
+}
+.font-large .abstract-desc-container{
+    font-size: 18px;
+}
+.font-large .abstract-desc-title{
+    font-size: 22px;
+}
+.font-large .abstract-img img{
+    width: 28px;
+}
+.font-large .abstract-web-btn{
+    font-size: 18px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="PREFERENCES STYLES"> */
+
+.font-large .pref-content{
+    font-size: 22px;
+}
+.font-large .radio-img{
+    width: 40px;
+}
+.font-large .radio-img img{
+    width: 30px;
+}
+.font-large .radio-option{
+    height: 45px;
+}
+.font-large .general-subtitle{
+    font-size: 16px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="POLITICS STYLES"> */
+
+.font-large #string-politics-content{
+    font-size: 18px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="CATEGORY CONFIG STYLES"> */
+
+.font-large #category-name{
+    font-size: 18px;
+}
+
+.font-large .category-magazine-row{
+    height: 50px;
+}
+
+.font-large .magazine-checkbox {
+    width: 45px;
+}
+.font-large .magazine-checkbox img{
+    width: 45px;
+}
+
+/* </editor-fold> */

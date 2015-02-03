@@ -10,16 +10,22 @@
     };
     //load page
     Navigator.backEvent = function(){
+        
+        if(ContextMenu.$menu.hasClass("context-menu-show")){
+            ContextMenu.hide();
+            return;
+        }
+        
+        if(App.$menu.hasClass("transitionMenuAppStart")){
+            Transition.hideMenu();
+            return;
+        }
+        
         $(".context-menu-show").removeClass("context-menu-show");
         
         if(Navigator.currentModal !== null){
             Navigator.currentModal.close();
             Navigator.currentModal = null;
-            return;
-        }
-        
-        if(App.$content.hasClass('transitionContentAppStart')){
-            Transition.hideMenu();
             return;
         }
         

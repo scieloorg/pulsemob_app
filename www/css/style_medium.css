@@ -1,0 +1,168 @@
+/* <editor-fold desc="GLOBAL SETTINGS"> */
+
+body.font-medium {
+    font-size: 18px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="MODAL"> */
+
+.font-medium .bootstrap-dialog-title{
+    font-size: 18px!important;
+}
+.font-medium .bootstrap-dialog-message{
+    font-size: 16px!important;
+}
+.font-medium .btn-ok{
+    font-size: 16px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="APP BAR"> */
+
+.font-medium #app-bar-search-input input{
+    font-size: 20px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="MENU APP STYLES"> */
+
+.font-medium .menu-row{
+    height: 45px;
+}
+.font-medium .menu-checkbox {
+    width: 40px;
+}
+.font-medium .menu-checkbox img{
+    width: 40px;
+}
+.font-medium .menu-text{
+    font-size: 18px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="LOGIN STYLES"> */
+
+.font-medium .login-btn{
+    font-size: 20px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="HOME STYLES"> */
+
+.font-medium .cat-scroller ul{
+    height: 224px;
+}
+.font-medium .article{
+    width: 165px;
+    height: 220px;
+}
+.font-medium .article .loading-img{
+    width: 60px;
+    margin-left: 52px;
+    margin-top: 65px;
+}
+.font-medium .article-principal{
+    height: 175px;
+}
+.font-medium .article-name{
+    font-size: 16px;
+}
+.font-medium .article-legend{
+    height: 45px;
+    font-size: 14px;
+}
+.font-medium .article-journal{
+    max-height: 18px;
+}
+.font-medium #home-search-box{
+    font-size: 20px;
+}
+.font-medium #string-result-of{
+    width: 120px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="INTRODUCTION STYLES"> */
+
+.font-medium .intro-welcome{
+    font-size: 26px;
+}
+.font-medium .carousel-content-item{
+    font-size: 18px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="ABSTRACT STYLES"> */
+
+.font-medium .abstract-header{
+    height: 220px;
+}
+.font-medium .abstract-desc-container{
+    font-size: 16px;
+}
+.font-medium .abstract-desc-title{
+    font-size: 20px;
+}
+.font-medium .abstract-img img{
+    width: 25px;
+}
+.font-medium .abstract-web-btn{
+    font-size: 16px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="PREFERENCES STYLES"> */
+
+.font-medium .pref-content{
+    font-size: 20px;
+}
+.font-medium .radio-img{
+    width: 35px;
+}
+.font-medium .radio-img img{
+    width: 25px;
+}
+.font-medium .radio-option{
+    height: 40px;
+}
+.font-medium .general-subtitle{
+    font-size: 14px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="POLITICS STYLES"> */
+
+.font-medium #string-politics-content{
+    font-size: 16px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="CATEGORY CONFIG STYLES"> */
+
+.font-medium #category-name{
+    font-size: 16px;
+}
+
+.font-medium .category-magazine-row{
+    height: 45px;
+}
+
+.font-medium .magazine-checkbox {
+    width: 40px;
+}
+.font-medium .magazine-checkbox img{
+    width: 40px;
+}
+
+/* </editor-fold> */

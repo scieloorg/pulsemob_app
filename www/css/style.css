@@ -184,10 +184,12 @@ body {
 #app-bar-menu{
     padding: 0 10px 0 10px;
     width: 35px;
+    font-size: 14px;
 }
 #app-bar-back{
     padding: 0 10px 0 10px;
     width: 35px;
+    font-size: 14px;
 }
 #app-bar-title{
     height: 40px;
@@ -210,6 +212,8 @@ body {
 
 #app-bar-search{
     width: 30px;
+    font-size: 14px;
+    text-align: center;
 }
 #app-bar-search img{
     width: 22px;
@@ -229,6 +233,7 @@ body {
 #app-bar-context-menu{
     text-align: center;
     width: 60px;
+    font-size: 14px;
 }
 #app-bar-context-menu img{
     height: 20px;
@@ -264,6 +269,7 @@ body {
 
 .context-menu-icon {
     width: 40px;
+    font-size: 14px;
 }
 .context-menu-icon img{
     width: 40px;
@@ -293,30 +299,19 @@ menu {
     font-size: 16px;
     padding: 5px 10px;
 }
-
-.menu-item-header{
-    color: #ffffff;
-}
 .menu-row{
     height: 40px;
-    vertical-align: bottom;
     border-bottom: 1px #ccc solid;
 }
 .menu-checkbox {
     width: 35px;
-    vertical-align: middle;
 }
 .menu-checkbox img{
     width: 35px;
     padding: 10px 5px;
 }
-.menu-item{
-    padding-left: 5px;
-    font-size: 20px;
-}
 .menu-text{
     padding: 5px 0;
-    vertical-align: middle;
 }
 
 
@@ -328,65 +323,16 @@ table{
     width: 100%;
 }
 
-.item-row {
-    height: 60px;
-    text-decoration: none!important;
-}
-
-.item-input{
-    padding: 10px 16px !important;
-    margin-bottom: 10px;
-    background-color: #000 !important;
-    opacity: 0.5 !important;
-    border-radius: 4px;
-    border: none;  
-    width: 100%;
-    height: 40px !important;
-    color: #FFFFFF;
-    font-size: 14px;
-    background-color: #071d2e;
-}
-.item-btn{
-    height: 50px;
-    line-height: 50px;
-    padding: 0;
-    border: 0px;
-    text-align: center;
-    font-size: 16px;
-    width: 100%;
-}
-.item-btn img{
-    margin-top: auto;
-    margin-bottom: auto;
-}
-select.item-input{
-    padding: 0 55px 0 10px !important;
-    background: #fff url('../img/icon_select.png') no-repeat 100% center;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-}
-
-input.item-input:focus{
-    background-color: #fff!important;
-    color: #000!important;
+td{
+    vertical-align: middle;
 }
 
 input[type=number]::-webkit-outer-spin-button { margin: 0; }
-.vertical-line{
-  width: 1px;
-  height: 100%;
-}
-.invalid-input{
-    background-color: lightcoral !important;
-    border: #fff 1px solid;
-    color: #f0f0f0;
-}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-
 input:hover,
 input:focus {
     box-shadow: none;
@@ -463,13 +409,11 @@ input:focus {
 .category-menu-btn{
     text-align: center;
     width: 60px;
+    font-size: 14px;
 }
 
 .category-menu-btn img{
     height: 20px;
-}
-.cat-scroller {
-    width: 1600px;
 }
 
 .cat-scroller ul{
@@ -541,6 +485,8 @@ input:focus {
     color: #989898;
     font-family: TerminalDosis-ExtraLight;
     width: 110px;
+    text-align: right;
+    padding-right: 5px;
 }
 #home-search-text input{
     width: 100%;
@@ -697,9 +643,6 @@ input:focus {
 .radio-img img{
     width: 22px;
 }
-.radio-label{
-    
-}
 .radio-option{
     height: 35px;
 }
@@ -714,17 +657,6 @@ input:focus {
     margin: 5px 0;
 }
 
-#rate-container{
-    width: 150px;
-}
-.rate-star{
-    width: 30px;
-    text-align: center;
-}
-.rate-star img{
-    width: 25px;
-}
-
 /* </editor-fold> */
 
 /* <editor-fold desc="POLITICS STYLES"> */
@@ -737,6 +669,14 @@ input:focus {
 /* </editor-fold> */
 
 /* <editor-fold desc="CATEGORY CONFIG STYLES"> */
+
+#category-name{
+    color: #bbb;
+    border-bottom: 1px #bbb solid;
+    padding: 10px 5px;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
 
 .category-magazine-row{
     height: 40px;
