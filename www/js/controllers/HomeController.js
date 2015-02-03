@@ -26,7 +26,7 @@ HomeController.prototype = {
         }
         
         $.ajaxSetup({
-            headers: { facebookId: "1374407149535012", token: "CAALA0Tnry2IBADU6x3aKZAXjvSrFCVaMaEgHZCFZCwyDA6mAZBVBAMu4C7QgVZCx4tJqijE0JZBQ4q115ODksMEv4koLjPDv6EMVIHPXGoL4NDcXgr3ZCOZAu9JZCXzOqZCBBNMKRd4PtPrBfZBYFucXwIyfHr2cIaQK5h52MllpJYcyzmZCoxV8fy8oNX027G6dNjez6jUgd1cZBjnzyYlmKZAxdjIZCBEjNmFirYZD" }
+            headers: { facebookId: "1374407149535012", token: "CAALA0Tnry2IBAKAEn0SiZA0P4pfFRNz3HQ60CRCjQDfwPchQIUBZCUlMgqV4HQcuX8LEpsNN5hc9nF6VfV7qVM1F0QgZCKdoOZCR5Fz78EgGYZBN4YLJpMrfBfa01hvrnNZC31EJ9ogIvVDMX2Foc1EQWiICBbeMPBAM5eyhAeNJKe35CPXzvYbL4z4N8ZAuvLTs53b8SdeRSkGYiMGOUpMxAaHBAsPnzAZD" }
         });
         
         if(HomeController.searchText){
@@ -55,14 +55,16 @@ HomeController.prototype = {
         return data;
     },
     refresh: function(){
+        
+        HomeController.cleanData();
+        HomeController.$categories.html("");
+        
         if(HomeController.searchText){
-            // todo
+            HomeController.doSearch();
         }else if(HomeController.isFavoritePage){
-            // todo
+            HomeController.showFavorites();
         }else{
             SciELO.homeCleanCache();
-            HomeController.cleanData();
-            HomeController.$categories.html("");
             HomeController.showDefaultHome();
         }
     }
@@ -226,14 +228,36 @@ HomeController.categoryRefresh = function () {
     var catId = $(this).data("category");
     $("#category-menu-"+catId).removeClass("context-menu-show");
     
-    HomeController.scroll[catId].scrollTo(0,0);
+    
+    var query = "subject_areas_ids:"+catId;
+        
+//        var journalsExcluded = User.getJournalsExecluded(category);
+//        for(var i=0; i<journalsExcluded ;i++){
+//            query += " -journal_title_id:"+journalsExcluded[i];
+//        }
+        
+    var params = {q: query, start: 0, rows: HomeController.firstData[catId].length};
+
+    $.when(
+            SciELO.feed(params) 
+    ).then( 
+        function(json){
+            console.log(json);
+            HomeController.firstData[catId] = json.response.docs;
+            HomeController.scroll[catId].updateCache(0, json.response.docs);
+            
+            HomeController.scroll[catId].scrollTo(0,0);
+            HomeController.scroll[catId].refresh();
+        }, 
+        function(err){}
+    );
 };
 
 HomeController.categoryShare = function () {
     var catId = $(this).data("category");
     $("#category-menu-"+catId).removeClass("context-menu-show");
     
-    alert("share "+catId);
+    window.plugins.socialsharing.share(FeedsAndPublications.getCategoryName(catId)+" -", "SciELO Mobile", null, "http://www.scielo.org/applications/scielo-org/php/secondLevel.php?xml=secondLevelForSubjectByLetter&xsl=secondLevelForSubjectByLetter&subject=Health%20Sciences");
 };
 
 HomeController.categoryConfig = function () {
@@ -254,7 +278,12 @@ HomeController.categoryRemove = function () {
         App.refreshScroll(false);
     });
     
-    //User.removeCategory
+    if(HomeController.searchText === "" && !HomeController.isFavoritePage){
+        //User.removeCategory
+        
+        $("#menu-checkbox-"+catId+" img").attr("src","img/sidebar/unchecked.png");
+        SciELO.homeCleanCache();
+    }
     
     App.refreshScroll(false);
 };
@@ -272,12 +301,16 @@ HomeController.addCategory = function (categoryData) {
                     '<div class="category-content">' +
                     '<div id="category-menu-'+categoryData.id+'" class="pop-menu">' +
                         '<div class="pop-menu-content">' +
-                            '<table>' +
-                                '<tr class="context-menu-row refresh-category" data-category="'+categoryData.id+'" >' +
-                                    '<td class="context-menu-icon"><img src="img/category/refresh.png"/></td>' +
-                                    '<td class="item-text context-menu-text"><div>'+Localization.getValue('refresh')+'</div></td>' +
-                                '</tr>' +
-                                '<tr class="context-menu-row share-category" data-category="'+categoryData.id+'" >' +
+                            '<table>';
+    
+    if(HomeController.searchText === "" && !HomeController.isFavoritePage){
+        html += '<tr class="context-menu-row refresh-category" data-category="'+categoryData.id+'" >' +
+                    '<td class="context-menu-icon"><img src="img/category/refresh.png"/></td>' +
+                    '<td class="item-text context-menu-text"><div>'+Localization.getValue('refresh')+'</div></td>' +
+                '</tr>';
+    }
+                                
+    html +=                     '<tr class="context-menu-row share-category" data-category="'+categoryData.id+'" >' +
                                     '<td class="context-menu-icon"><img src="img/category/share.png"/></td>' +
                                     '<td class="item-text context-menu-text"><div>'+Localization.getValue('share')+'</div></td>' +
                                 '</tr>' +
@@ -333,7 +366,7 @@ HomeController.requestData = function (start, count) {
             }
         },500);
         
-    } else if(HomeController.searchText === null){
+    } else if(HomeController.searchText === "" && !HomeController.isFavoritePage){
         
         var query = "subject_areas_ids:"+category;
         
@@ -343,7 +376,7 @@ HomeController.requestData = function (start, count) {
 //        }
         
         var params = {q: query, start: start, rows: count};
-    
+        
         $.when(
                 SciELO.feed(params) 
         ).then( 
@@ -364,7 +397,7 @@ HomeController.updateContent = function (el, data) {
         
         var keywords = (data["keywords_"+App.locale]) ? data["keywords_"+App.locale].join(", ") : "";
         
-        var html = '<div class="article-link" data-articleid="'+data.publisher_id+'" data-abstract="'+btoa(unescape(encodeURIComponent(abstract)))+'" data-author="'+btoa(unescape(encodeURIComponent(data.first_author)))+'" data-keywords="'+btoa(unescape(encodeURIComponent(keywords)))+'" data-journal="'+btoa(unescape(encodeURIComponent(data.journal_title)))+'">'+
+        var html = '<div class="article-link" data-articleid="'+data.id+'" data-abstract="'+btoa(unescape(encodeURIComponent(abstract)))+'" data-author="'+btoa(unescape(encodeURIComponent(data.first_author)))+'" data-keywords="'+btoa(unescape(encodeURIComponent(keywords)))+'" data-journal="'+btoa(unescape(encodeURIComponent(data.journal_title)))+'">'+
                         '<div class="article-principal">' +
                             '<img src="http://'+data.scielo_domain+'/img/revistas/'+data.journal_acronym+'/glogo.gif" />' +
                             '<div class="article-name">' +
