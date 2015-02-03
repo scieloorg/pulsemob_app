@@ -10,6 +10,8 @@
     };
     //load page
     Navigator.backEvent = function(){
+        $(".context-menu-show").removeClass("context-menu-show");
+        
         if(Navigator.currentModal !== null){
             Navigator.currentModal.close();
             Navigator.currentModal = null;
