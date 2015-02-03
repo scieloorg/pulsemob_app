@@ -43,7 +43,8 @@
                 }
             });
             
-            Navigator.loadPage('home.html');
+            LoginController.autoLogin();
+//            Navigator.loadFullPage('login.html');
         }
     };
     
