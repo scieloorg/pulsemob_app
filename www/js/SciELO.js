@@ -5,30 +5,37 @@ SciELO.sessionCache = new Array();
 SciELO.serverURL = "http://192.168.0.27:8000/";
 //SciELO.serverURL = "http://http://infobase.cloudns.org:8001/";
 //SciELO.serverURL = "http://192.168.0.2/";
+SciELO.serverURL = "http://infobase.cloudns.org:8001/";
 
 
 SciELO.loginUser = function(userInfo){
-    return SciELO.callWebServiceFunctionPOST("login",userInfo);
+    return SciELO.callWebServiceFunctionPOST("webservices/login",userInfo);
 };
 
 SciELO.category = function(data){
-    return SciELO.callWebServiceFunctionPOST("category", data);
+    return SciELO.callWebServiceFunctionPOST("webservices/category", data);
 };
 
 SciELO.search = function(params){
+    //chamada solr n tem /webservices
     return SciELO.callWebServiceFunction("search", params);
 };
 
 SciELO.feed = function(params){
+    //chamada solr n tem /webservices
     return SciELO.callWebServiceFunction("feed", params);
 };
 
 SciELO.home = function(){
-    return SciELO.callWebServiceFunction("home", {});
+    return SciELO.cachedCall("webservices/home", {}, true, 60 * 60); // uma hora para expirar
+};
+
+SciELO.homeCleanCache = function(){
+    SciELO.removeCache("webservices/home", true);
 };
 
 SciELO.feedsAndPublications = function(){
-    return SciELO.callWebServiceFunction("feed/publications/list", {});
+    return SciELO.callWebServiceFunction("webservices/feed/publications/list", {});
 };
 
 SciELO.favorite = function(idArticle){
@@ -74,10 +81,10 @@ SciELO.changeFontSize = function (fontSize){
  * @param {type} expirationTime Tempo em segundos de expiração do cache
  * @returns {jqXHR} Promise da função
  */
-SciELO.cachedCall = function(webServiceFunction, isSessionCache, expirationTime){
+SciELO.cachedCall = function(webServiceFunction, params, isSessionCache, expirationTime){
     var deferred = $.Deferred();
     
-    var key = webServiceFunction.hashCode(); // storage key
+    var key = webServiceFunction; // storage key
     
     if(SciELO.hasCache(key,isSessionCache)){
         
@@ -90,7 +97,7 @@ SciELO.cachedCall = function(webServiceFunction, isSessionCache, expirationTime)
         if(diffDateSeconds > expirationTime){ // data do cache ja foi expirada
             //call ajax
             $.when(
-                SciELO.callWebServiceFunction(webServiceFunction)
+                SciELO.callWebServiceFunction(webServiceFunction, params)
             ).then(
                  function(jsonObj){ // success
                      //guarda no cache
@@ -110,7 +117,7 @@ SciELO.cachedCall = function(webServiceFunction, isSessionCache, expirationTime)
         
     }else{
         $.when(
-            SciELO.callWebServiceFunction(webServiceFunction)
+            SciELO.callWebServiceFunction(webServiceFunction, params)
         ).then(
              function(jsonObj){ // success
                  //guarda no cache
@@ -165,8 +172,12 @@ SciELO.getCacheData = function(key, isSessionCache){
     else return null;
 };
 
-SciELO.removeCache = function(key){
-    window.localStorage.removeItem(key);
+SciELO.removeCache = function(key, isSessionCache){
+    if(isSessionCache){
+        delete SciELO.sessionCache[key];
+    }else{
+        window.localStorage.removeItem(key);
+    }
 };
 
 SciELO.callWebServiceFunction = function(webServiceFunction, params){

@@ -5,27 +5,38 @@ HomeController.firstData = {};
 HomeController.scroll = {};
 HomeController.$categories = null;
 HomeController.searchText = null;
+HomeController.isFavoritePage = false;
 
 HomeController.prototype = {
     initialize: function() {
         HomeController.$categories = $("#categories");
         
-//        $.ajaxSetup({
-//            headers: { facebookId: "1374407149535012", token: "CAALA0Tnry2IBALIWxl8KzPpOZBCBGDVz3JzmDe1CUTbOl6k2EkiJ1lAAzZBHSgBLtKJ17gWQ5hfZALEo59DnbPDqhhbb7DEyhZBNfMtWrBSRefnlRZAMQbb4lyei75gS8VWCRi8ZBgKZBzuj6uNJ8UzXn8lv2B8oP7fe0JrEYfcyunokcZCkHvcMbRhAh8r6buiLESASHkxjViZBCxGjCqxEQAjFqZAGQcYq0ZD" }
-//        });
+        HomeController.searchText = App.$appSearchInput.children("input").val();
         
-        if(HomeController.searchText !== null){
-            HomeController.doSearch();
+        if(Navigator.currentPageScreenData){
+            HomeController.searchText = Navigator.currentPageScreenData.searchText;
+            HomeController.isFavoritePage = Navigator.currentPageScreenData.isFavoritePage;
         }else{
+            HomeController.searchText = App.$appSearchInput.children("input").val();
+            App.$appSearchInput.children("input").val("");
+            App.$appSearchInput.children("input").blur();
             
-//            $.when(
-//                SciELO.home() 
-//            ).then( 
-//                 function(json){
-//                     HomeController.showDefaultHome(json);
-//                 }, 
-//                 function(err){}
-//            );
+            HomeController.isFavoritePage = ContextMenu.showFavorites;
+            ContextMenu.showFavorites = false;
+        }
+        
+        $.ajaxSetup({
+            headers: { facebookId: "1374407149535012", token: "CAALA0Tnry2IBADU6x3aKZAXjvSrFCVaMaEgHZCFZCwyDA6mAZBVBAMu4C7QgVZCx4tJqijE0JZBQ4q115ODksMEv4koLjPDv6EMVIHPXGoL4NDcXgr3ZCOZAu9JZCXzOqZCBBNMKRd4PtPrBfZBYFucXwIyfHr2cIaQK5h52MllpJYcyzmZCoxV8fy8oNX027G6dNjez6jUgd1cZBjnzyYlmKZAxdjIZCBEjNmFirYZD" }
+        });
+        
+        if(HomeController.searchText){
+            $("#home-search-text input").val(HomeController.searchText);
+            $("#home-search-box").show();
+            HomeController.doSearch();
+        }else if(HomeController.isFavoritePage){
+            HomeController.showFavorites();
+        }else{
+            HomeController.showDefaultHome();
         }
         
         HomeController.initListeners();
@@ -33,21 +44,87 @@ HomeController.prototype = {
     },
     destroy: function() {
         PageLoad.ajxHandle = null;
+        HomeController.cleanData();
+        
+    },
+    getScreenData: function () {
+        var data = {};
+        data.searchText = HomeController.searchText;
+        data.isFavoritePage = HomeController.isFavoritePage;
+
+        return data;
+    },
+    refresh: function(){
+        if(HomeController.searchText){
+            // todo
+        }else if(HomeController.isFavoritePage){
+            // todo
+        }else{
+            SciELO.homeCleanCache();
+            HomeController.cleanData();
+            HomeController.$categories.html("");
+            HomeController.showDefaultHome();
+        }
     }
 };
 
-HomeController.showDefaultHome = function (json) {
-    for(var i=0; i<json.length ;i++){
-        var cat = json[i];
-        
-        HomeController.firstData[cat.id] = cat.data.docs;
-        
-        var limitScroll = (cat.data.numFound > 500) ? 500 : cat.data.numFound;
-        var cacheSize = (cat.data.numFound > 50) ? 50 : cat.data.numFound;
-        var minElements = (cat.data.numFound > 10) ? 10 : cat.data.numFound;
-        
-        HomeController.addCategory({id: cat.id, name: FeedsAndPublications.getCategoryName(cat.id), minElements: minElements,limit: limitScroll, cacheSize: cacheSize});
-    }
+
+HomeController.cleanData = function(){
+    HomeController.firstData = {};
+    HomeController.scroll = {};
+    HomeController.searchText = null;
+    HomeController.isFavoritePage = false;
+};
+
+
+HomeController.showDefaultHome = function () {
+    $.when(
+        SciELO.home()
+    ).then(
+        function (json) {
+            for (var i = 0; i < json.length; i++) {
+                var cat = json[i];
+
+                HomeController.firstData[cat.feed_id] = cat.response.docs;
+
+                var limitScroll = (cat.response.numFound > 500) ? 500 : cat.response.numFound;
+                var cacheSize = (cat.response.numFound > 50) ? 50 : cat.response.numFound;
+                var minElements = (cat.response.numFound > 10) ? 10 : cat.response.numFound;
+
+                HomeController.addCategory({id: cat.feed_id, name: FeedsAndPublications.getCategoryName(cat.feed_id), minElements: minElements, limit: limitScroll, cacheSize: cacheSize});
+            }
+
+            App.refreshScroll(true);
+        },
+        function (err) {
+        }
+    );
+    
+};
+
+HomeController.showFavorites = function () {
+    $.when(
+        SciELO.home()
+    ).then(
+        function (json) {
+            for (var i = 0; i < json.length; i++) {
+                var cat = json[i];
+
+                HomeController.firstData[cat.feed_id] = cat.response.docs;
+
+                var limitScroll = (cat.response.numFound > 500) ? 500 : cat.response.numFound;
+                var cacheSize = (cat.response.numFound > 50) ? 50 : cat.response.numFound;
+                var minElements = (cat.response.numFound > 10) ? 10 : cat.response.numFound;
+
+                HomeController.addCategory({id: cat.feed_id, name: FeedsAndPublications.getCategoryName(cat.feed_id) + " Fav", minElements: minElements, limit: limitScroll, cacheSize: cacheSize});
+            }
+
+            App.refreshScroll(true);
+        },
+        function (err) {
+        }
+    );
+    
 };
 
 HomeController.doSearch = function () {
@@ -80,9 +157,7 @@ HomeController.doSearch = function () {
                 
                 var numDocs = HomeController.firstData[catId].length;
                 
-                var minElements = (numDocs > 10) ? 10 : numDocs;
-                
-                HomeController.addCategory({id: catId, name: FeedsAndPublications.getCategoryName(catId), minElements: minElements, limit: numDocs, cacheSize: numDocs});
+                HomeController.addCategory({id: catId, name: FeedsAndPublications.getCategoryName(catId), minElements: numDocs, limit: numDocs, cacheSize: numDocs});
             }
 
             App.refreshScroll(true);
@@ -103,6 +178,36 @@ HomeController.initListeners = function () {
     HomeController.$categories.on('tap', ".share-category", HomeController.categoryShare);
     HomeController.$categories.on('tap', ".config-category", HomeController.categoryConfig);
     HomeController.$categories.on('tap', ".remove-category", HomeController.categoryRemove);
+    
+    $("#home-search-box").on('tap', "#home-search-btn", HomeController.editAndSearch);
+    
+    $("#home-search-text input").keypress(function(e) {
+        if(e.which === 13) {
+            $("#home-search-btn").trigger("tap");
+        }
+    });
+    
+};
+
+
+HomeController.editAndSearch = function(){
+    if($(this).children("img").attr("src") === "img/home/edit_search.png"){
+        $(this).children("img").attr("src","img/home/search.png");
+        $("#home-search-text input").removeAttr('disabled');
+        $("#home-search-text input").focus();
+    }else{
+        $("#home-search-text input").attr('disabled','disabled');
+        $(this).children("img").attr("src","img/home/edit_search.png");
+        
+        if(HomeController.searchText !== $("#home-search-text input").val()){
+            HomeController.cleanData();
+            HomeController.$categories.html("");
+            HomeController.searchText = $("#home-search-text input").val();
+
+            HomeController.doSearch();
+        }
+    }
+    
 };
 
 HomeController.toggleCategoryMenu = function () {
@@ -121,7 +226,7 @@ HomeController.categoryRefresh = function () {
     var catId = $(this).data("category");
     $("#category-menu-"+catId).removeClass("context-menu-show");
     
-    alert("refresh "+catId);
+    HomeController.scroll[catId].scrollTo(0,0);
 };
 
 HomeController.categoryShare = function () {
@@ -135,6 +240,8 @@ HomeController.categoryConfig = function () {
     var catId = $(this).data("category");
     $("#category-menu-"+catId).removeClass("context-menu-show");
     
+    CategoryConfigController.categoryId = catId;
+    
     Navigator.loadPage("categoryConfig.html");
 };
 
@@ -144,7 +251,10 @@ HomeController.categoryRemove = function () {
     
     $("#category-"+catId).fadeOut(800, function(){
         $("#category-"+catId).remove();
+        App.refreshScroll(false);
     });
+    
+    //User.removeCategory
     
     App.refreshScroll(false);
 };
@@ -223,7 +333,7 @@ HomeController.requestData = function (start, count) {
             }
         },500);
         
-    }else{
+    } else if(HomeController.searchText === null){
         
         var query = "subject_areas_ids:"+category;
         
@@ -271,6 +381,7 @@ HomeController.updateContent = function (el, data) {
         el.innerHTML = html;
     }else{
         console.log('DEU RUIM: '+JSON.stringify(data));
+        console.log(HomeController.scroll);
     }
 };
 
