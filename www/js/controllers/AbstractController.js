@@ -9,6 +9,7 @@ AbstractController.prototype = {
         App.$page.addClass("abstract-bg");
         AbstractController.initListeners();
         AbstractController.populate();
+        AbstractController.checkIfIsFavorite();
         App.showBackButton();
     },
     destroy: function() {
@@ -19,7 +20,7 @@ AbstractController.prototype = {
 };
 
 AbstractController.initListeners = function(){
-    $("#abstract-details").on('tap', "#add-fav-btn", AbstractController.addFavorite);
+    $("#abstract-details").on('tap', "#add-fav-btn", AbstractController.favorite);
     $("#abstract-details").on('tap', "#share-btn", AbstractController.share);
     $("#abs-content").on('tap', ".abstract-web-btn", AbstractController.openWebArticle);
 };
@@ -48,15 +49,33 @@ AbstractController.populate = function(){
     
 };
 
-AbstractController.addFavorite = function(){
-    alert("add fav");
+AbstractController.checkIfIsFavorite = function(){
+    var allFavorites = ["S1984-63982014000400018scl", "S0044-59672015000100001scl"]; // TODO: get from user
+    if(allFavorites.indexOf(AbstractController.articleData.id) >= 0){
+        $("#add-fav-btn").children("img").attr("src","img/abstract/fav_selected.png");
+    }
+};
+
+AbstractController.favorite = function(){
+    var allFavorites = ["S1984-63982014000400018scl", "S0044-59672015000100001scl"]; // TODO: get from user
+    if(allFavorites.indexOf(AbstractController.articleData.id) < 0){
+        $(this).children("img").attr("src","img/abstract/fav_selected.png");
+    }else{
+        $(this).children("img").attr("src","img/abstract/fav.png");
+    }
+    console.log("add fav: "+AbstractController.articleData.id);
 };
 
 AbstractController.share = function(){
-    alert("share");  
+    var domain = AbstractController.articleData.imgUrl.split("/")[2];
+    var pid = AbstractController.articleData.id.substring(0, AbstractController.articleData.id.length-3 );
+    
+    window.plugins.socialsharing.share(AbstractController.articleData.title+" -", "SciELO Mobile", null, "http://"+domain+"/scielo.php?script=sci_arttext&pid="+pid+"&lng="+App.locale+"&nrm=iso");
 };
 
 AbstractController.openWebArticle = function(){
     var domain = AbstractController.articleData.imgUrl.split("/")[2];
-    App.openLink("http://"+domain+"/scielo.php?script=sci_arttext&pid="+AbstractController.articleData.id+"&lng="+App.locale+"&nrm=iso");
+    var pid = AbstractController.articleData.id.substring(0, AbstractController.articleData.id.length-3 );
+    
+    App.openLink("http://"+domain+"/scielo.php?script=sci_arttext&pid="+pid+"&lng="+App.locale+"&nrm=iso");
 };

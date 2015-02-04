@@ -192,13 +192,17 @@
             var img = (categoriesRemoved.indexOf(cat) < 0) ? 'checked' : 'unchecked';
 
             var html = '<tr class="menu-row">' +
+                            '<td id="menu-checkbox-'+cat+'" class="menu-checkbox" data-category="'+cat+'"><img src="img/sidebar/'+img+'.png"/></td>' +
                     '<td class="menu-checkbox" data-category="' + cat + '"><img src="img/sidebar/' + img + '.png"/></td>' +
+                            '<td class="menu-text">'+FeedsAndPublications.getCategoryName(cat)+'</td>' +
                     '<td class="menu-text">' + FeedsAndPublications.getCategoryName(cat) + '</td>' +
-                    '</tr>';
-
+                        '</tr>';
+                
             $categoryMenu.append(html);
         }
 
+        App.scrollMenu.refresh();
+        
     };
 
     App.menuCheckbox = function () {
