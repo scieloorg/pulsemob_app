@@ -7,11 +7,29 @@
 var Service = function () {
 };
 
+Service.login = function (userData, callback) {
+    console.log("Trying Service.login.");
+    $.when(
+            SciELO.loginUser(userData)
+            ).then(
+            function (response) {
+                callback(response);
+            },
+            function (err) {
+                callback(false);
+                console.log("Server request failed.");
+                return false;
+            }
+    );
+};
+
 Service.favoriteArticle = function (idArticle) {
     $.when(
             SciELO.favorite(idArticle)
             ).then(
             function (response) {
+                var cachedUser = User(SciELO.getCacheData(LoginController.USER_KEY, false));
+                cachedUser.favoriteArticle(idArticle);
                 return response;
             },
             function (err) {
@@ -26,6 +44,8 @@ Service.unfavoriteArticle = function (idArticle) {
             SciELO.unfavorite(idArticle)
             ).then(
             function (response) {
+                var cachedUser = User(SciELO.getCacheData(LoginController.USER_KEY, false));
+                cachedUser.unfavoriteArticle(idArticle);
                 return response;
             },
             function (err) {
@@ -49,7 +69,7 @@ Service.listFavoriteArticles = function () {
     );
 };
 
-Service.getHomeArticles = function(){
+Service.getHomeArticles = function () {
     $.when(
             SciELO.home()
             ).then(
@@ -63,11 +83,13 @@ Service.getHomeArticles = function(){
     );
 };
 
-Service.uncheckFeed = function (idFeed){
-     $.when(
+Service.uncheckFeed = function (idFeed) {
+    $.when(
             Scielo.uncheckFeed(idFeed)
             ).then(
             function (response) {
+                var cachedUser = User(SciELO.getCacheData(LoginController.USER_KEY, false));
+                cachedUser.uncheckFeed(idFeed);
                 return response;
             },
             function (err) {
@@ -77,11 +99,13 @@ Service.uncheckFeed = function (idFeed){
     );
 };
 
-Service.checkFeed = function (idFeed){
-     $.when(
+Service.checkFeed = function (idFeed) {
+    $.when(
             Scielo.checkFeed(idFeed)
             ).then(
             function (response) {
+                var cachedUser = User(SciELO.getCacheData(LoginController.USER_KEY, false));
+                cachedUser.checkFeed(idFeed);
                 return response;
             },
             function (err) {
@@ -91,11 +115,13 @@ Service.checkFeed = function (idFeed){
     );
 };
 
-Service.uncheckPublication = function (idPublication, idFeed){
+Service.uncheckPublication = function (idPublication, idFeed) {
     $.when(
             Scielo.uncheckPublication(idPublication, idFeed)
             ).then(
             function (response) {
+                var cachedUser = User(SciELO.getCacheData(LoginController.USER_KEY, false));
+                cachedUser.uncheckPublication(idPublication, idFeed);
                 return response;
             },
             function (err) {
@@ -105,11 +131,13 @@ Service.uncheckPublication = function (idPublication, idFeed){
     );
 };
 
-Service.checkPublication = function (idPublication, idFeed){
+Service.checkPublication = function (idPublication, idFeed) {
     $.when(
             Scielo.checkPublication(idPublication, idFeed)
             ).then(
             function (response) {
+                var cachedUser = User(SciELO.getCacheData(LoginController.USER_KEY, false));
+                cachedUser.checkPublication(idPublication, idFeed);
                 return response;
             },
             function (err) {
@@ -119,11 +147,13 @@ Service.checkPublication = function (idPublication, idFeed){
     );
 };
 
-Service.changeLanguage = function (language){
+Service.changeLanguage = function (language) {
     $.when(
             Scielo.changeLanguage(language)
             ).then(
             function (response) {
+                var cachedUser = User(SciELO.getCacheData(LoginController.USER_KEY, false));
+                cachedUser.changeLanguage(language);
                 return response;
             },
             function (err) {
@@ -133,11 +163,13 @@ Service.changeLanguage = function (language){
     );
 };
 
-Service.changeFontSize = function (fontSize){
+Service.changeFontSize = function (fontSize) {
     $.when(
             Scielo.changeFontSize(fontSize)
             ).then(
             function (response) {
+                var cachedUser = User(SciELO.getCacheData(LoginController.USER_KEY, false));
+                cachedUser.changeFontSize(fontSize);
                 return response;
             },
             function (err) {
