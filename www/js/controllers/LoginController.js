@@ -1,152 +1,144 @@
-var LoginController = function() {
+var LoginController = function () {
 };
 
-LoginController.USER_KEY = "SCIELO_USER";
+LoginController.USER_TYPE_KEY = "SCIELO_USER_TYPE";
+LoginController.FACEBOOK = "FACEBOOK";
+LoginController.GOOGLE = "GOOGLE";
 LoginController.IOS_API_KEY = "903038984767-9ngq0ut4esd5247kd3oog8jimnab1n9e.apps.googleusercontent.com";
 
 LoginController.prototype = {
-    initialize: function() {
+    initialize: function () {
         LoginController.initListeners();
     },
-    destroy: function() {
+    destroy: function () {
         PageLoad.ajxHandle = null;
     }
 };
 
-LoginController.initListeners = function(){
-    document.getElementById('btn-login-facebook').addEventListener('tap',LoginController.loginFacebook, false);
-    document.getElementById('btn-login-google').addEventListener('tap',LoginController.loginGoogle, false);
+LoginController.initListeners = function () {
+    document.getElementById('btn-login-facebook').addEventListener('tap', LoginController.loginFacebook, false);
+    document.getElementById('btn-login-google').addEventListener('tap', LoginController.loginGoogle, false);
 };
 
-LoginController.loginFacebook = function(){
+LoginController.loginFacebook = function () {
 
-    facebookConnectPlugin.login(["public_profile"], 
-        function(response){
-            var facebookid = response.authResponse.userID;
-            var token = response.authResponse.accessToken;
+    facebookConnectPlugin.login(["public_profile", "email"],
+            function (response) {
+                var facebookid = response.authResponse.userID;
+                var token = response.authResponse.accessToken;
 
-            facebookConnectPlugin.api(facebookid + "/?fields=email, name", ["public_profile"],
-                function(responseAPI){
-                    var name = responseAPI.name;
-                    var email = responseAPI.email;
+                facebookConnectPlugin.api(facebookid + "/?fields=email, name", ["public_profile"],
+                        function (responseAPI) {
+                            $.ajaxSetup({
+                                headers: {facebookid: facebookid, googleid: undefined, token: token}
+                            });
 
-                    $.ajaxSetup({
-                        headers: { facebookid: facebookid, googleid: undefined, token: token }
-                    });
+                            var userData = {name: responseAPI.name, email: responseAPI.email, language: App.locale, font_size: "S"};
 
-                    var user = new User();
-                    
-                    user.name = name;
-                    user.email = email;
-                    user.language = "EN";
-                    user.font_size = "M";
-                    user.facebook_id = facebookid;
-                    user.token = token;
-                    
-                    var userData = {name: user.name, email: user.email, language: user.language, font_size: user.font_size};
+                            $.when(
+                                    Service.login(userData)
+                                    ).then(
+                                    function (data) {
+                                        SciELO.saveCache(LoginController.USER_TYPE_KEY, LoginController.FACEBOOK, false);
+                                        Navigator.loadPage("home.html");
+                                    },
+                                    function () {
+                                        App.showCommonDialog("ERROR", "Error on server login.", false);
+                                        Navigator.loadFullPage("login.html");
+                                    }
+                            );
+                        },
+                        function (err) {
+                            App.showCommonDialog("ERROR", "Error getting information.", false);
+                            Navigator.loadFullPage("login.html");
+                        });
+            }, function (err) {
+        App.showCommonDialog("ERROR", "Login error.", false);
+        Navigator.loadFullPage("login.html");
+    });
+};
 
-                    Service.login(userData, function(data){
-                        if (data !== false){
-                            user.updateFromLoginData(data);
-                            
-                            SciELO.saveCache(LoginController.USER_KEY, user, false);
-                            Navigator.loadPage("home.html");
-                        }else{
-                            alert ("Error on server request.");
-                        }
-                    });
-                },
-                function(err){
-                    // Error getting information.
-                    alert('Error getting information.');
-                });
-        }, function(err){
-            alert('Login error.');
+LoginController.loginGoogle = function () {
+    window.plugins.googleplus.login(
+            {
+                iOSApiKey: LoginController.IOS_API_KEY
+            },
+    function (obj) {
+        var google_id = obj.userId;
+        var token = obj.idToken === undefined ? obj.oauthToken : obj.idToken;
+        
+        $.ajaxSetup({
+            headers: {googleid: google_id, facebookid: undefined, token: token}
         });
+
+        var userData = {name: obj.displayName, email: obj.email, language: App.locale, font_size: "S"};
+
+        $.when(
+                Service.login(userData)
+                ).then(
+                function (data) {
+                    SciELO.saveCache(LoginController.USER_TYPE_KEY, LoginController.GOOGLE, false);
+                    Navigator.loadPage("home.html");
+                },
+                function () {
+                    SciELO.removeCache(LoginController.USER_TYPE_KEY);
+                    App.showCommonDialog("ERROR", "Error on server login.", false);
+                    Navigator.loadFullPage("login.html");
+                }
+        );
+    },
+            function (msg) {
+                App.hideLoadingScreen();
+                App.showCommonDialog("ERROR", "Login failed. (" + msg + ")", false);
+                Navigator.loadFullPage("login.html");
+            }
+    );
 };
 
-LoginController.autoLogin = function(){
-    if (SciELO.hasCache(LoginController.USER_KEY, false)){
-        var cachedUser = User(SciELO.getCacheData(LoginController.USER_KEY, false));
-        if (cachedUser.facebook_id !== null){
-            LoginController.autoLoginFacebook(cachedUser);
-        }else if (cachedUser.google_id !== null){
-            LoginController.autoLoginGoogle(cachedUser);
-        }else{
-            SciELO.removeCache(LoginController.USER_KEY);
+LoginController.autoLogin = function () {
+    if (SciELO.hasCache(LoginController.USER_TYPE_KEY, false)) {
+        var loginType = SciELO.getCacheData(LoginController.USER_TYPE_KEY, false);
+        if (loginType === LoginController.FACEBOOK) {
+            LoginController.autoLoginFacebook();
+        } else if (loginType === LoginController.GOOGLE) {
+            LoginController.autoLoginGoogle();
+        } else {
+            SciELO.removeCache(LoginController.USER_TYPE_KEY);
             Navigator.loadFullPage("login.html");
         }
-    }else{
+    } else {
         Navigator.loadFullPage("login.html");
     }
 };
 
-LoginController.autoLoginFacebook = function(cachedUser){
+LoginController.autoLoginFacebook = function () {
     facebookConnectPlugin.getLoginStatus(
             function (response) {
-                if (response.status === "connected" && cachedUser.facebook_id === response.authResponse.userID) {
-                    var userData = {name: cachedUser.name, email: cachedUser.email, language: cachedUser.language, font_size: cachedUser.font_size};
-                    
+                if (response.status === "connected") {
                     $.ajaxSetup({
-                        headers: { facebookid: cachedUser.facebook_id, googleid: undefined, token: cachedUser.token }
+                        headers: {facebookid: response.authResponse.userID, googleid: undefined, token: response.authResponse.accessToken}
                     });
-                    
-                    Service.login(userData, function (data) {
-                        if (data !== false) {
-                            cachedUser.updateFromLoginData(data);
-                            Navigator.loadPage("home.html");
-                        } else {
-                            Navigator.loadFullPage("login.html");
-                        }
-                    });
+                    $.when(
+                            Service.login({})
+                            ).then(
+                            function (data) {
+                                // It worked
+                                Navigator.loadPage("home.html");
+                            },
+                            function () {
+                                SciELO.removeCache(LoginController.USER_TYPE_KEY);
+                                App.showCommonDialog("ERROR", "Error on server login.", false);
+                                Navigator.loadFullPage("login.html");
+                            }
+                    );
                 } else {
-                    Navigator.loadFullPage("login.html");
+
                 }
             },
             function (err) {
-                SciELO.removeCache(LoginController.USER_KEY);
+                SciELO.removeCache(LoginController.USER_TYPE_KEY);
                 Navigator.loadFullPage("login.html");
             });
-};
-
-LoginController.loginGoogle = function(){
-    window.plugins.googleplus.login(
-        {
-          iOSApiKey: LoginController.IOS_API_KEY
-        },
-        function (obj) {
-            var user = new User();
-            
-            user.name = obj.displayName;
-            user.email = obj.email;
-            user.google_id = obj.userId;
-            user.token = obj.idToken;
-            user.language = "EN";
-            user.font_size = "M";
-            
-            $.ajaxSetup({
-                headers: { googleid: user.google_id, facebookid: undefined, token: user.token }
-            });
-            
-            var userData = {name: user.name, email: user.email, language: user.language, font_size: user.font_size};
-
-            Service.login(userData, function(data){
-                if (data !== false){
-                    SciELO.saveCache(LoginController.USER_KEY, user, false);
-                    user.updateFromLoginData(data);
-                    Navigator.loadPage("home.html");
-                }else{
-                    App.showCommonDialog("ERROR", "Error on server request.", false);
-                    Navigator.loadFullPage("login.html");
-                }
-            });
-        },
-        function (msg) {
-            App.hideLoadingScreen();
-            App.showCommonDialog("ERROR", "Login failed. (" + msg + ")", false);
-            Navigator.loadFullPage("login.html");
-        }
-    );
 };
 
 LoginController.autoLoginGoogle = function (cachedUser) {
@@ -155,28 +147,29 @@ LoginController.autoLoginGoogle = function (cachedUser) {
                 iOSApiKey: LoginController.IOS_API_KEY
             },
     function (obj) {
-        if (obj.userId === cachedUser.google_id) {
-            var userData = {name: cachedUser.name, email: cachedUser.email, language: cachedUser.language, font_size: cachedUser.font_size};
-            
-            $.ajaxSetup({
-                headers: { googleid: cachedUser.google_id, facebookid: undefined, token: cachedUser.token }
-            });
-            
-            Service.login(userData, function (data) {
-                if (data !== false) {
-                    cachedUser.updateFromLoginData(data);
+        var google_id = obj.userId;
+        var token = obj.idToken === undefined ? obj.oauthToken : obj.idToken;
+        
+        $.ajaxSetup({
+            headers: {googleid: google_id, facebookid: undefined, token: token}
+        });
+
+        $.when(
+                Service.login({})
+                ).then(
+                function (data) {
+                    SciELO.saveCache(LoginController.USER_TYPE_KEY, LoginController.GOOGLE, false);
                     Navigator.loadPage("home.html");
-                } else {
-                    App.showCommonDialog("ERROR", "Error on server request.", false);
+                },
+                function (err) {
+                    SciELO.removeCache(LoginController.USER_TYPE_KEY);
+                    App.showCommonDialog("ERROR", "Error on server login.", false);
                     Navigator.loadFullPage("login.html");
                 }
-            });
-        }else{
-            Navigator.loadFullPage("login.html");
-        }
+        );
     },
             function (msg) {
-                SciELO.removeCache(LoginController.USER_KEY);
+                SciELO.removeCache(LoginController.USER_TYPE_KEY);
                 Navigator.loadFullPage("login.html");
             }
     );

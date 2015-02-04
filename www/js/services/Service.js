@@ -7,174 +7,180 @@
 var Service = function () {
 };
 
-Service.login = function (userData, callback) {
-    console.log("Trying Service.login.");
+Service.login = function (userData) {
+    var deferred = $.Deferred();
     $.when(
             SciELO.loginUser(userData)
             ).then(
             function (response) {
-                callback(response);
+                // Init user
+                var user = new User();
+                user.updateFromLoginData(response);
+                App.currentUser = user;
+                
+                deferred.resolve(response);
             },
             function (err) {
-                callback(false);
-                console.log("Server request failed.");
-                return false;
+                deferred.reject("Server request failed.");
             }
     );
+    return deferred.promise();
 };
 
 Service.favoriteArticle = function (idArticle) {
+    var deferred = $.Deferred();
     $.when(
             SciELO.favorite(idArticle)
             ).then(
             function (response) {
-                var cachedUser = User(SciELO.getCacheData(LoginController.USER_KEY, false));
-                cachedUser.favoriteArticle(idArticle);
-                return response;
+                App.currentUser.favoriteArticle(idArticle);
+                deferred.resolve(response);
             },
             function (err) {
-                console.log("Server request failed.");
-                return false;
+                deferred.reject("Server request failed.");
             }
     );
+    return deferred.promise();
 };
 
 Service.unfavoriteArticle = function (idArticle) {
+    var deferred = $.Deferred();
     $.when(
             SciELO.unfavorite(idArticle)
             ).then(
             function (response) {
-                var cachedUser = User(SciELO.getCacheData(LoginController.USER_KEY, false));
-                cachedUser.unfavoriteArticle(idArticle);
-                return response;
+                App.currentUser.unfavoriteArticle(idArticle);
+                deferred.resolve(response);
             },
             function (err) {
-                console.log("Server request failed.");
-                return false;
+                deferred.reject("Server request failed.");
             }
     );
+    return deferred.promise();
 };
 
 Service.listFavoriteArticles = function () {
+    var deferred = $.Deferred();
     $.when(
             Scielo.listFavorites()
             ).then(
             function (response) {
-                return response;
+                deferred.resolve(response);
             },
             function (err) {
-                console.log("Server request failed.");
-                return false;
+                deferred.reject("Server request failed.");
             }
     );
+    return deferred.promise();
 };
 
 Service.getHomeArticles = function () {
+    var deferred = $.Deferred();
     $.when(
             SciELO.home()
             ).then(
             function (response) {
-                return response;
+                deferred.resolve(response);
             },
             function (err) {
-                console.log("Server request failed.");
-                return false;
+                deferred.reject("Server request failed.");
             }
     );
+    return deferred.promise();
 };
 
 Service.uncheckFeed = function (idFeed) {
+    var deferred = $.Deferred();
     $.when(
             Scielo.uncheckFeed(idFeed)
             ).then(
             function (response) {
-                var cachedUser = User(SciELO.getCacheData(LoginController.USER_KEY, false));
-                cachedUser.uncheckFeed(idFeed);
-                return response;
+                App.currentUser.uncheckFeed(idFeed);
+                deferred.resolve(response);
             },
             function (err) {
-                console.log("Server request failed.");
-                return false;
+                deferred.reject("Server request failed.");
             }
     );
+    return deferred.promise();
 };
 
 Service.checkFeed = function (idFeed) {
+    var deferred = $.Deferred();
     $.when(
             Scielo.checkFeed(idFeed)
             ).then(
             function (response) {
-                var cachedUser = User(SciELO.getCacheData(LoginController.USER_KEY, false));
-                cachedUser.checkFeed(idFeed);
-                return response;
+                App.currentUser.checkFeed(idFeed);
+                deferred.resolve(response);
             },
             function (err) {
-                console.log("Server request failed.");
-                return false;
+                deferred.reject("Server request failed.");
             }
     );
+    return deferred.promise();
 };
 
 Service.uncheckPublication = function (idPublication, idFeed) {
+    var deferred = $.Deferred();
     $.when(
             Scielo.uncheckPublication(idPublication, idFeed)
             ).then(
             function (response) {
-                var cachedUser = User(SciELO.getCacheData(LoginController.USER_KEY, false));
-                cachedUser.uncheckPublication(idPublication, idFeed);
-                return response;
+                App.currentUser.uncheckPublication(idPublication, idFeed);
+                deferred.resolve(response);
             },
             function (err) {
-                console.log("Server request failed.");
-                return false;
+                deferred.reject("Server request failed.");
             }
     );
+    return deferred.promise();
 };
 
 Service.checkPublication = function (idPublication, idFeed) {
+    var deferred = $.Deferred();
     $.when(
             Scielo.checkPublication(idPublication, idFeed)
             ).then(
             function (response) {
-                var cachedUser = User(SciELO.getCacheData(LoginController.USER_KEY, false));
-                cachedUser.checkPublication(idPublication, idFeed);
-                return response;
+                App.currentUser.checkPublication(idPublication, idFeed);
+                deferred.resolve(response);
             },
             function (err) {
-                console.log("Server request failed.");
-                return false;
+                deferred.reject("Server request failed.");
             }
     );
+    return deferred.promise();
 };
 
 Service.changeLanguage = function (language) {
+    var deferred = $.Deferred();
     $.when(
             Scielo.changeLanguage(language)
             ).then(
             function (response) {
-                var cachedUser = User(SciELO.getCacheData(LoginController.USER_KEY, false));
-                cachedUser.changeLanguage(language);
-                return response;
+                App.currentUser.changeLanguage(language);
+                deferred.resolve(response);
             },
             function (err) {
-                console.log("Server request failed.");
-                return false;
+                deferred.reject("Server request failed.");
             }
     );
+    return deferred.promise();
 };
 
 Service.changeFontSize = function (fontSize) {
+    var deferred = $.Deferred();
     $.when(
             Scielo.changeFontSize(fontSize)
             ).then(
             function (response) {
-                var cachedUser = User(SciELO.getCacheData(LoginController.USER_KEY, false));
-                cachedUser.changeFontSize(fontSize);
-                return response;
+                App.currentUser.changeFontSize(fontSize);
+                deferred.resolve(response);
             },
             function (err) {
-                console.log("Server request failed.");
-                return false;
+                deferred.reject("Server request failed.");
             }
     );
+    return deferred.promise();
 };

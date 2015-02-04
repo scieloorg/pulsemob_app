@@ -14,7 +14,6 @@ var User = function () {
     this.google_id = null;
     this.language = null;
     this.font_size = null;
-    this.token = null;
     this.favorites = [];
     this.feed_exclusions = {};
     this.publication_feed_exclusions = [];
@@ -46,22 +45,18 @@ var User = function () {
 //}
 
 User.prototype.updateFromLoginData = function (loginData) {
-//    this.feed_exclusions = [];
     this.feed_exclusions = loginData.feed_exclusions;
-//    for (var i = 0; i < feedExclusions.length; i++){
-//        this.feed_exclusions.push(feedExclusions[i]);
-//    }
-
     this.publication_feed_exclusions = loginData.publication_feed_exclusions;
-//    var publicationFeedExclusions = loginData.publication_feed_exclusions;
-//    for (var key in publicationFeedExclusions){
-//        if(this.publication_feed_exclusions[key] === undefined){
-//            this.publication_feed_exclusions[key] = [];
-//        }
-//        this.publication_feed_exclusions[key].push(publicationFeedExclusions[key]);
-//    }
-
     this.favorites = loginData.favorites;
+    this.name = loginData.user.name;
+    this.language = loginData.user.language;
+    this.update_time = loginData.user.update_time;
+    this.create_time = loginData.user.create_time;
+    this.font_size = loginData.user.font_size;
+    this.google_id = loginData.user.google_id;
+    this.facebook_id = loginData.user.facebook_id;
+    this.id = loginData.user.id;
+    this.email = loginData.user.email;
 };
 
 User.prototype.favoriteArticle = function (idArticle) {

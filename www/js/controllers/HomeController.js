@@ -25,10 +25,6 @@ HomeController.prototype = {
             ContextMenu.showFavorites = false;
         }
         
-        $.ajaxSetup({
-            headers: { facebookId: "1374407149535012", token: "CAALA0Tnry2IBADU6x3aKZAXjvSrFCVaMaEgHZCFZCwyDA6mAZBVBAMu4C7QgVZCx4tJqijE0JZBQ4q115ODksMEv4koLjPDv6EMVIHPXGoL4NDcXgr3ZCOZAu9JZCXzOqZCBBNMKRd4PtPrBfZBYFucXwIyfHr2cIaQK5h52MllpJYcyzmZCoxV8fy8oNX027G6dNjez6jUgd1cZBjnzyYlmKZAxdjIZCBEjNmFirYZD" }
-        });
-        
         if(HomeController.searchText){
             $("#home-search-text input").val(HomeController.searchText);
             $("#home-search-box").show();
