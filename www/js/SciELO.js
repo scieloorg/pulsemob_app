@@ -2,7 +2,7 @@ var SciELO = function(){};
 
 SciELO.sessionCache = new Array();
 //SciELO.serverURL = "http://localhost:8080/scielo/ws/";
-SciELO.serverURL = "http://192.168.0.27:8000/";
+//SciELO.serverURL = "http://192.168.0.27:8000/";
 //SciELO.serverURL = "http://http://infobase.cloudns.org:8001/";
 //SciELO.serverURL = "http://192.168.0.2/";
 SciELO.serverURL = "http://infobase.cloudns.org:8001/";
