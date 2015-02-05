@@ -80,16 +80,25 @@ HomeController.showDefaultHome = function () {
         SciELO.home()
     ).then(
         function (json) {
-            for (var i = 0; i < json.length; i++) {
-                var cat = json[i];
+            
+            var categoriesOrder = FeedsAndPublications.getCategoriesOrder();
+            
+            for (var i = 0; i < categoriesOrder.length; i++) {
+                var catId = categoriesOrder[i];
+                
+                if(json[catId]){
+                    var cat = json[catId];
 
-                HomeController.firstData[cat.feed_id] = cat.response.docs;
+                    HomeController.firstData[catId] = cat.docs;
 
-                var limitScroll = (cat.response.numFound > 500) ? 500 : cat.response.numFound;
-                var cacheSize = (cat.response.numFound > 50) ? 50 : cat.response.numFound;
-                var minElements = (cat.response.numFound > 10) ? 10 : cat.response.numFound;
+                    var limitScroll = (cat.numFound > 1000) ? 1000 : cat.numFound;
+                    var cacheSize = cat.docs.length;
+                    var minElements = (cat.docs.length > 10) ? 10 : cat.docs.length;
 
-                HomeController.addCategory({id: cat.feed_id, name: FeedsAndPublications.getCategoryName(cat.feed_id), minElements: minElements, limit: limitScroll, cacheSize: cacheSize});
+
+
+                    HomeController.addCategory({id: catId, name: FeedsAndPublications.getCategoryName(catId), minElements: minElements, limit: limitScroll, cacheSize: cacheSize});
+                }
             }
 
             App.refreshScroll(true);
@@ -102,19 +111,34 @@ HomeController.showDefaultHome = function () {
 
 HomeController.showFavorites = function () {
     $.when(
-        SciELO.home()
+        Service.listFavoriteArticles()
     ).then(
         function (json) {
-            for (var i = 0; i < json.length; i++) {
-                var cat = json[i];
+            var categoriesUsed = [];
+            
+            for (var i = 0; i < json.docs.length; i++) {
+                var doc = json.docs[i];
+                
+                for (var j = 0; j < doc.subject_areas_ids.length; j++) {
+                    var catId = doc.subject_areas_ids[j];
+                    if (!HomeController.firstData[catId]) {
+                        HomeController.firstData[catId] = [];
+                        categoriesUsed.push(catId);
+                    }
 
-                HomeController.firstData[cat.feed_id] = cat.response.docs;
-
-                var limitScroll = (cat.response.numFound > 500) ? 500 : cat.response.numFound;
-                var cacheSize = (cat.response.numFound > 50) ? 50 : cat.response.numFound;
-                var minElements = (cat.response.numFound > 10) ? 10 : cat.response.numFound;
-
-                HomeController.addCategory({id: cat.feed_id, name: FeedsAndPublications.getCategoryName(cat.feed_id) + " Fav", minElements: minElements, limit: limitScroll, cacheSize: cacheSize});
+                    HomeController.firstData[catId].push(doc);
+                }
+            }
+            
+            var categoriesOrder = FeedsAndPublications.getCategoriesOrder();
+            
+            for (var i = 0; i < categoriesOrder.length; i++) {
+                var catId = categoriesOrder[i];
+                if(categoriesUsed.indexOf(catId) >= 0){
+                    var numDocs = HomeController.firstData[catId].length;
+                
+                    HomeController.addCategory({id: catId, name: FeedsAndPublications.getCategoryName(catId), minElements: numDocs, limit: numDocs, cacheSize: numDocs});
+                }
             }
 
             App.refreshScroll(true);
@@ -148,19 +172,19 @@ HomeController.doSearch = function () {
                     HomeController.firstData[catId].push(doc);
                 }
             }
-
-
-            for (var i = 0; i < categoriesUsed.length; i++) {
-                var catId = categoriesUsed[i];
+            
+            var categoriesOrder = FeedsAndPublications.getCategoriesOrder();
+            
+            for (var i = 0; i < categoriesOrder.length; i++) {
+                var catId = categoriesOrder[i];
+                if(categoriesUsed.indexOf(catId) >= 0){
+                    var numDocs = HomeController.firstData[catId].length;
                 
-                var numDocs = HomeController.firstData[catId].length;
-                
-                HomeController.addCategory({id: catId, name: FeedsAndPublications.getCategoryName(catId), minElements: numDocs, limit: numDocs, cacheSize: numDocs});
+                    HomeController.addCategory({id: catId, name: FeedsAndPublications.getCategoryName(catId), minElements: numDocs, limit: numDocs, cacheSize: numDocs});
+                }
             }
 
             App.refreshScroll(true);
-
-            //console.log(JSON.stringify(HomeController.firstData));
         },
         function (err) {
         }
@@ -227,10 +251,10 @@ HomeController.categoryRefresh = function () {
     
     var query = "subject_areas_ids:"+catId;
         
-//        var journalsExcluded = User.getJournalsExecluded(category);
-//        for(var i=0; i<journalsExcluded ;i++){
-//            query += " -journal_title_id:"+journalsExcluded[i];
-//        }
+    var magazinesExcluded = App.currentUser.getAllPublicationsExclusionsByFeed(catId);
+    for(var i=0; i<magazinesExcluded.length ;i++){
+        query += " -journal_title_id:"+magazinesExcluded[i];
+    }
         
     var params = {q: query, start: 0, rows: HomeController.firstData[catId].length};
 
@@ -238,12 +262,23 @@ HomeController.categoryRefresh = function () {
             SciELO.feed(params) 
     ).then( 
         function(json){
-            console.log(json);
             HomeController.firstData[catId] = json.response.docs;
-            HomeController.scroll[catId].updateCache(0, json.response.docs);
+            HomeController.scroll[catId].destroy();
             
-            HomeController.scroll[catId].scrollTo(0,0);
-            HomeController.scroll[catId].refresh();
+            var limitScroll = (json.response.numFound > 1000) ? 1000 : json.response.numFound;
+            var cacheSize = json.response.docs.length;
+            
+            HomeController.scroll[catId] = new IScroll('#cat-wrapper-'+catId, { 
+                scrollX: true,
+                scrollY: false,
+                mouseWheel: false,
+                infiniteElements: '#cat-scroller-'+catId+' .article',
+                infiniteLimit: limitScroll,
+                dataset: HomeController.requestData,
+                dataFiller: HomeController.updateContent,
+                cacheSize: cacheSize,
+                category: catId
+            });
         }, 
         function(err){}
     );
@@ -275,7 +310,8 @@ HomeController.categoryRemove = function () {
     });
     
     if(HomeController.searchText === "" && !HomeController.isFavoritePage){
-        //User.removeCategory
+        // Nao faz loading, o processamento vai ser em background
+        Service.uncheckFeed(catId);
         
         $("#menu-checkbox-"+catId+" img").attr("src","img/sidebar/unchecked.png");
         SciELO.homeCleanCache();
@@ -365,11 +401,11 @@ HomeController.requestData = function (start, count) {
     } else if(HomeController.searchText === "" && !HomeController.isFavoritePage){
         
         var query = "subject_areas_ids:"+category;
-        
-//        var journalsExcluded = User.getJournalsExecluded(category);
-//        for(var i=0; i<journalsExcluded ;i++){
-//            query += " -journal_title_id:"+journalsExcluded[i];
-//        }
+
+        var magazinesExcluded = App.currentUser.getAllPublicationsExclusionsByFeed(category);
+        for(var i=0; i<magazinesExcluded.length ;i++){
+            query += " -journal_title_id:"+magazinesExcluded[i];
+        }
         
         var params = {q: query, start: start, rows: count};
         

@@ -29,8 +29,11 @@ LoginController.loginFacebook = function () {
 
                 facebookConnectPlugin.api(facebookid + "/?fields=email, name", ["public_profile"],
                         function (responseAPI) {
+                            
+                            if($.ajaxSettings.headers && $.ajaxSettings.headers["googleid"]) delete $.ajaxSettings.headers["googleid"];
+                            
                             $.ajaxSetup({
-                                headers: {facebookid: facebookid, googleid: undefined, token: token}
+                                headers: {facebookid: facebookid, token: token}
                             });
 
                             var userData = {name: responseAPI.name, email: responseAPI.email, language: App.locale, font_size: "S"};
@@ -67,8 +70,10 @@ LoginController.loginGoogle = function () {
         var google_id = obj.userId;
         var token = obj.idToken === undefined ? obj.oauthToken : obj.idToken;
         
+        if($.ajaxSettings.headers && $.ajaxSettings.headers["facebookid"]) delete $.ajaxSettings.headers["facebookid"];
+        
         $.ajaxSetup({
-            headers: {googleid: google_id, facebookid: undefined, token: token}
+            headers: {googleid: google_id, token: token}
         });
 
         var userData = {name: obj.displayName, email: obj.email, language: App.locale, font_size: "S"};
@@ -115,8 +120,11 @@ LoginController.autoLoginFacebook = function () {
     facebookConnectPlugin.getLoginStatus(
             function (response) {
                 if (response.status === "connected") {
+                    
+                    if($.ajaxSettings.headers && $.ajaxSettings.headers["googleid"]) delete $.ajaxSettings.headers["googleid"];
+                    
                     $.ajaxSetup({
-                        headers: {facebookid: response.authResponse.userID, googleid: undefined, token: response.authResponse.accessToken}
+                        headers: {facebookid: response.authResponse.userID, token: response.authResponse.accessToken}
                     });
                     $.when(
                             Service.login({})
@@ -150,8 +158,10 @@ LoginController.autoLoginGoogle = function (cachedUser) {
         var google_id = obj.userId;
         var token = obj.idToken === undefined ? obj.oauthToken : obj.idToken;
         
+        if($.ajaxSettings.headers && $.ajaxSettings.headers["facebookid"]) delete $.ajaxSettings.headers["facebookid"];
+        
         $.ajaxSetup({
-            headers: {googleid: google_id, facebookid: undefined, token: token}
+            headers: {googleid: google_id, token: token}
         });
 
         $.when(

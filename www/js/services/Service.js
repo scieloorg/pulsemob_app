@@ -17,6 +17,10 @@ Service.login = function (userData) {
                 var user = new User();
                 user.updateFromLoginData(response);
                 App.currentUser = user;
+                App.setLocale(user.language);
+                App.setFontSize(user.font_size);
+                FeedsAndPublications.checkVersion(response.solr_version);
+                App.initCategoryMenu();
                 
                 deferred.resolve(response);
             },
@@ -62,7 +66,7 @@ Service.unfavoriteArticle = function (idArticle) {
 Service.listFavoriteArticles = function () {
     var deferred = $.Deferred();
     $.when(
-            Scielo.listFavorites()
+            SciELO.listFavorites()
             ).then(
             function (response) {
                 deferred.resolve(response);
@@ -92,7 +96,7 @@ Service.getHomeArticles = function () {
 Service.uncheckFeed = function (idFeed) {
     var deferred = $.Deferred();
     $.when(
-            Scielo.uncheckFeed(idFeed)
+            SciELO.uncheckFeed(idFeed)
             ).then(
             function (response) {
                 App.currentUser.uncheckFeed(idFeed);
@@ -108,7 +112,7 @@ Service.uncheckFeed = function (idFeed) {
 Service.checkFeed = function (idFeed) {
     var deferred = $.Deferred();
     $.when(
-            Scielo.checkFeed(idFeed)
+            SciELO.checkFeed(idFeed)
             ).then(
             function (response) {
                 App.currentUser.checkFeed(idFeed);
@@ -121,13 +125,13 @@ Service.checkFeed = function (idFeed) {
     return deferred.promise();
 };
 
-Service.uncheckPublication = function (idPublication, idFeed) {
+Service.uncheckPublication = function (idFeed, idPublication) {
     var deferred = $.Deferred();
     $.when(
-            Scielo.uncheckPublication(idPublication, idFeed)
+            SciELO.uncheckPublication(idFeed, idPublication)
             ).then(
             function (response) {
-                App.currentUser.uncheckPublication(idPublication, idFeed);
+                App.currentUser.uncheckPublication(idFeed, idPublication);
                 deferred.resolve(response);
             },
             function (err) {
@@ -137,13 +141,13 @@ Service.uncheckPublication = function (idPublication, idFeed) {
     return deferred.promise();
 };
 
-Service.checkPublication = function (idPublication, idFeed) {
+Service.checkPublication = function (idFeed, idPublication) {
     var deferred = $.Deferred();
     $.when(
-            Scielo.checkPublication(idPublication, idFeed)
+            SciELO.checkPublication(idFeed, idPublication)
             ).then(
             function (response) {
-                App.currentUser.checkPublication(idPublication, idFeed);
+                App.currentUser.checkPublication(idFeed, idPublication);
                 deferred.resolve(response);
             },
             function (err) {
@@ -156,7 +160,7 @@ Service.checkPublication = function (idPublication, idFeed) {
 Service.changeLanguage = function (language) {
     var deferred = $.Deferred();
     $.when(
-            Scielo.changeLanguage(language)
+            SciELO.changeLanguage(language)
             ).then(
             function (response) {
                 App.currentUser.changeLanguage(language);
@@ -172,7 +176,7 @@ Service.changeLanguage = function (language) {
 Service.changeFontSize = function (fontSize) {
     var deferred = $.Deferred();
     $.when(
-            Scielo.changeFontSize(fontSize)
+            SciELO.changeFontSize(fontSize)
             ).then(
             function (response) {
                 App.currentUser.changeFontSize(fontSize);

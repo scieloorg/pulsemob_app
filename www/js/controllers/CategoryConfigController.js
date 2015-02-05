@@ -29,7 +29,7 @@ CategoryConfigController.startPage = function(){
     var $magazinesTable = $("#magazines-table");
     
     var allMagazinesIds = FeedsAndPublications.getAllMagazinesIds(CategoryConfigController.categoryId);
-    var magazinesRemoved = [7,19]; //TODO: pegar do usuario
+    var magazinesRemoved = App.currentUser.getAllPublicationsExclusionsByFeed(CategoryConfigController.categoryId);
     
     for(var i in allMagazinesIds){
         var magazineId = allMagazinesIds[i];
@@ -46,17 +46,42 @@ CategoryConfigController.startPage = function(){
 };
 
 CategoryConfigController.magazineCheckbox = function(){
-    var value = true;
+    App.showLoadingScreen();
+        
+    var magazineId = $(this).data("magazine");
+    var $obj = $(this).children("img");
 
-    if($(this).children("img").attr("src") === "img/category/unchecked.png"){
-        $(this).children("img").attr("src","img/category/checked.png");
-    }else{
-        $(this).children("img").attr("src","img/category/unchecked.png");
-        value = false;
+    if ($obj.attr("src") === "img/category/unchecked.png") {
+
+        $.when(
+            Service.checkPublication(CategoryConfigController.categoryId, magazineId)
+        ).then(
+            function(){
+                $obj.attr("src", "img/category/checked.png");
+                App.hideLoadingScreen();
+            },
+            function (err) {
+                App.hideLoadingScreen();
+                App.showCommonInternetErrorDialog();
+            }
+        );
+    } else {
+
+
+        $.when(
+            Service.uncheckPublication(CategoryConfigController.categoryId, magazineId)
+        ).then(
+            function(){
+                $obj.attr("src", "img/category/unchecked.png");
+                App.hideLoadingScreen();
+            },
+            function (err) {
+                App.hideLoadingScreen();
+                App.showCommonInternetErrorDialog();
+            }
+        );
     }
     
     // alterando a config de revistas a home eh diferente
     SciELO.homeCleanCache();
-    
-    var data = {category: $(this).data("magazine"), value: value};
 };

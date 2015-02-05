@@ -39,39 +39,39 @@ SciELO.feedsAndPublications = function(){
 };
 
 SciELO.favorite = function(idArticle){
-    return SciELO.callWebServiceFunctionPOST("favorite/create", {article_id: idArticle});
+    return SciELO.callWebServiceFunctionPOST("webservices/favorite/create", {article_id: idArticle});
 };
 
 SciELO.listFavorites = function(){
-    return SciELO.callWebServiceFunction("favorite/read");
+    return SciELO.callWebServiceFunction("webservices/favorite/read");
 };
 
 SciELO.unfavorite = function(idArticle){
-    return SciELO.callWebServiceFunctionPOST("favorite/delete", {article_id: idArticle});
+    return SciELO.callWebServiceFunctionPOST("webservices/favorite/delete", {article_id: idArticle});
 };
 
 SciELO.uncheckFeed = function (idFeed){
-    return SciELO.callWebServiceFunctionPOST("preferences/feed/exclusion/create", {feed_id: idFeed});
+    return SciELO.callWebServiceFunctionPOST("webservices/preferences/feed/exclusion/create", {feed_id: idFeed});
 };
 
 SciELO.checkFeed = function (idFeed){
-    return SciELO.callWebServiceFunctionPOST("preferences/feed/exclusion/delete", {feed_id: idFeed});
+    return SciELO.callWebServiceFunctionPOST("webservices/preferences/feed/exclusion/delete", {feed_id: idFeed});
 };
 
-SciELO.uncheckPublication = function (idPublication, idFeed){
-    return SciELO.callWebServiceFunctionPOST("preferences/feed/publication/exclusion/create", {feed_id: idFeed, publication_id: idPublication});
+SciELO.uncheckPublication = function (idFeed, idPublication){
+    return SciELO.callWebServiceFunctionPOST("webservices/preferences/feed/publication/exclusion/create", {feed_id: idFeed, publication_id: idPublication});
 };
 
-SciELO.checkPublication = function (idPublication, idFeed){
-    return SciELO.callWebServiceFunctionPOST("preferences/feed/publication/exclusion/delete", {feed_id: idFeed, publication_id: idPublication});
+SciELO.checkPublication = function (idFeed, idPublication){
+    return SciELO.callWebServiceFunctionPOST("webservices/preferences/feed/publication/exclusion/delete", {feed_id: idFeed, publication_id: idPublication});
 };
 
 SciELO.changeLanguage = function (language){
-    return SciELO.callWebServiceFunctionPOST("user/language", {language: language});
+    return SciELO.callWebServiceFunctionPOST("webservices/user/language", {language: language});
 };
 
 SciELO.changeFontSize = function (fontSize){
-    return SciELO.callWebServiceFunctionPOST("user/language", {font_size: fontSize});
+    return SciELO.callWebServiceFunctionPOST("webservices/user/font", {font_size: fontSize});
 };
 
 /**

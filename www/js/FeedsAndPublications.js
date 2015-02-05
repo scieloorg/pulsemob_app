@@ -57,3 +57,7 @@ FeedsAndPublications.getAllMagazinesIds = function(categoryId) {
 FeedsAndPublications.getMagazineName = function(journalId) {
     return FeedsAndPublications.map.publications[journalId].publication_name;
 };
+
+FeedsAndPublications.getCategoriesOrder = function() {
+    return FeedsAndPublications.map["order_"+App.locale];
+};
