@@ -50,20 +50,44 @@ AbstractController.populate = function(){
 };
 
 AbstractController.checkIfIsFavorite = function(){
-    var allFavorites = ["S1984-63982014000400018scl", "S0044-59672015000100001scl"]; // TODO: get from user
+    var allFavorites = App.currentUser.getAllFavorites();
     if(allFavorites.indexOf(AbstractController.articleData.id) >= 0){
         $("#add-fav-btn").children("img").attr("src","img/abstract/fav_selected.png");
     }
 };
 
 AbstractController.favorite = function(){
-    var allFavorites = ["S1984-63982014000400018scl", "S0044-59672015000100001scl"]; // TODO: get from user
+    App.showLoadingScreen();
+    var allFavorites = App.currentUser.getAllFavorites();
+    var $obj = $(this).children("img");
+    
     if(allFavorites.indexOf(AbstractController.articleData.id) < 0){
-        $(this).children("img").attr("src","img/abstract/fav_selected.png");
+        $.when(
+            Service.favoriteArticle(AbstractController.articleData.id)
+        ).then(
+            function(){
+                $obj.attr("src", "img/abstract/fav_selected.png");
+                App.hideLoadingScreen();
+            },
+            function (err) {
+                App.hideLoadingScreen();
+                App.showCommonInternetErrorDialog();
+            }
+        );
     }else{
-        $(this).children("img").attr("src","img/abstract/fav.png");
+        $.when(
+            Service.unfavoriteArticle(AbstractController.articleData.id)
+        ).then(
+            function(){
+                $obj.attr("src","img/abstract/fav.png");
+                App.hideLoadingScreen();
+            },
+            function (err) {
+                App.hideLoadingScreen();
+                App.showCommonInternetErrorDialog();
+            }
+        );
     }
-    console.log("add fav: "+AbstractController.articleData.id);
 };
 
 AbstractController.share = function(){

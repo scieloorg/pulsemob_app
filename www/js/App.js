@@ -6,7 +6,8 @@
         scrollApp: null,
         scrollMenu: null,
         currentController: null,
-        locale: "PT",
+        locale: "pt",
+        fontSize: "S",
         $contentLoad: null,
         $menu: null,
         $content: null,
@@ -36,7 +37,6 @@
             Localization.refreshAppLocale();
             FeedsAndPublications.loadMap();
             ContextMenu.init();
-            App.initCategoryMenu();
 
             $.ajaxSetup({
                 statusCode: {
@@ -49,27 +49,7 @@
             App.startLocale();
             
             LoginController.autoLogin();
-//            Navigator.loadFullPage('login.html');
         }
-    };
-
-    App.showMsgErroInternet = function (callback) {
-        App.hideLoadingScreen();
-        Navigator.currentModal = new BootstrapDialog({
-            message: 'Confira sua conexão com a internet e clique em OK para tentar novamente.',
-            buttons: [{
-                    label: 'OK',
-                    cssClass: 'btn-default btn-ok',
-                    action: function (dialog) {
-                        dialog.close();
-                        Navigator.currentModal = null;
-                        callback();
-                    }
-                }]
-        });
-        Navigator.currentModal.realize();
-        Navigator.currentModal.open();
-
     };
 
     //set Application elements
@@ -137,25 +117,44 @@
         });
 
     };
+    
+    App.setLocale = function(locale){
+        App.locale = locale;
+        Localization.refreshAppLocale();
+    };
 
     App.startLocale = function () {
         try {
             navigator.globalization.getLocaleName(
-                        function (loc) {
-                            App.setLocale(loc.value.substr(0, 2).toUpperCase());
-                            return Localization.refreshAppLocale();
-                        },
-                        function () {
-                            App.setLocale("PT");
-                            return Localization.refreshAppLocale();
-                        }
-                );
+                    function (loc) {
+                        App.setLocale(loc.value.substr(0, 2));
+                    },
+                    function () {
+                        App.setLocale("pt");
+                    }
+            );
         } catch (error) {
-            // not supported - load default
-            App.setLocale("PT");
-            return Localization.refreshAppLocale();
+            App.setLocale("pt");
         }
 
+    };
+    
+    App.setFontSize = function(size){
+        if(size === "L"){
+            $("body").removeClass("font-medium");
+            $("body").addClass("font-large");
+        }else if(size === "M"){
+            $("body").removeClass("font-large");
+            $("body").addClass("font-medium");
+        }else{
+            $("body").removeClass("font-large");
+            $("body").removeClass("font-medium");
+        }
+
+        App.fontSize = size;
+
+        App.scrollMenu.refresh();
+        App.refreshScroll(false);
     };
 
     App.searchFocusOut = function () {
@@ -182,9 +181,10 @@
 
     App.initCategoryMenu = function () {
         var $categoryMenu = $("#categories-menu");
+        $categoryMenu.html("");
 
-        var allCategories = FeedsAndPublications.getAllCategories();
-        var categoriesRemoved = [3, 6]; //TODO: pegar do usuario
+        var allCategories = FeedsAndPublications.getCategoriesOrder();
+        var categoriesRemoved = App.currentUser.getAllFeedsExclusions();
 
         for (var i in allCategories) {
             var cat = parseInt(allCategories[i]);
@@ -193,9 +193,7 @@
 
             var html = '<tr class="menu-row">' +
                             '<td id="menu-checkbox-'+cat+'" class="menu-checkbox" data-category="'+cat+'"><img src="img/sidebar/'+img+'.png"/></td>' +
-                    '<td class="menu-checkbox" data-category="' + cat + '"><img src="img/sidebar/' + img + '.png"/></td>' +
                             '<td class="menu-text">'+FeedsAndPublications.getCategoryName(cat)+'</td>' +
-                    '<td class="menu-text">' + FeedsAndPublications.getCategoryName(cat) + '</td>' +
                         '</tr>';
                 
             $categoryMenu.append(html);
@@ -206,28 +204,44 @@
     };
 
     App.menuCheckbox = function () {
-        var value = true;
+        App.showLoadingScreen();
+        
+        var catId = $(this).data("category");
+        var $obj = $(this).children("img");
 
-        if ($(this).children("img").attr("src") === "img/sidebar/unchecked.png") {
-            $(this).children("img").attr("src", "img/sidebar/checked.png");
+        if ($obj.attr("src") === "img/sidebar/unchecked.png") {
+            
+            $.when(
+                Service.checkFeed(catId)
+            ).then(
+                function(){
+                    $obj.attr("src", "img/sidebar/checked.png");
+                    App.hideLoadingScreen();
+                },
+                function (err) {
+                    App.hideLoadingScreen();
+                    App.showCommonInternetErrorDialog();
+                }
+            );
         } else {
-            $(this).children("img").attr("src", "img/sidebar/unchecked.png");
-            value = false;
+            
+            
+            $.when(
+                Service.uncheckFeed(catId)
+            ).then(
+                function(){
+                    $obj.attr("src", "img/sidebar/unchecked.png");
+                    App.hideLoadingScreen();
+                },
+                function (err) {
+                    App.hideLoadingScreen();
+                    App.showCommonInternetErrorDialog();
+                }
+            );
         }
 
         // alterando a config de categorias a home eh diferente
         SciELO.homeCleanCache();
-
-        var data = {category: $(this).data("category"), value: value};
-
-        /*$.when(
-         SciELO.category(data) 
-         ).then( 
-         function(json){
-         
-         }, 
-         function(err){}
-         ); */
     };
 
     App.refreshScroll = function (goTop) {
@@ -268,6 +282,25 @@
         App.$page.css('top', App.$headerApp.height());
         App.$contentWrapper.height(window.innerHeight - App.$headerApp.height());
         App.$headerApp.fadeIn(1000);
+    };
+    
+    App.showCommonInternetErrorDialog = function () {
+        App.hideLoadingScreen();
+        Navigator.currentModal = new BootstrapDialog({
+            message: "Por favor verifique a conexão com internet e tente realizar a operação novamente.",
+            title: "SciELO",
+            buttons: [{
+                    label: 'OK',
+                    cssClass: 'btn-default btn-ok',
+                    action: function (dialog) {
+                        dialog.close();
+                        Navigator.currentModal = null;
+                    }
+                }]
+        });
+
+        Navigator.currentModal.realize();
+        Navigator.currentModal.open();
     };
 
     App.showCommonDialog = function (title, msg, cb) {

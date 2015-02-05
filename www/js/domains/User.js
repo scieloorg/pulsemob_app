@@ -19,31 +19,6 @@ var User = function () {
     this.publication_feed_exclusions = [];
 };
 
-//{
-//    "publication_feed_exclusions": [],
-//    "solr_version": 63511,
-//    "feed_exclusions": [],
-//    
-//    "user": {
-//        "language": "EN",
-//        "update_time": "2015-02-02 21:14:15.261000+00:00",
-//        "create_time": "2015-01-30 20:46:44.443000+00:00",
-//        "font_size": "M",
-//        "name": "Carlos Eduardo Correa Braga",
-//        "google_id": "101226822208699460825",
-//        "facebook_id": "1058694040823178",
-//        "id": 3,
-//        "email": "caducbraga@gmail.com"
-//    }
-//}
-
-//var myStringArray = ["Hello","World"];
-//var arrayLength = myStringArray.length;
-//for (var i = 0; i < arrayLength; i++) {
-//    alert(myStringArray[i]);
-//    //Do something
-//}
-
 User.prototype.updateFromLoginData = function (loginData) {
     this.feed_exclusions = loginData.feed_exclusions;
     this.publication_feed_exclusions = loginData.publication_feed_exclusions;
@@ -59,6 +34,10 @@ User.prototype.updateFromLoginData = function (loginData) {
     this.email = loginData.user.email;
 };
 
+User.prototype.getAllFavorites = function () {
+    return this.favorites;
+};
+
 User.prototype.favoriteArticle = function (idArticle) {
     if (this.favorites.indexOf(idArticle) === -1) {
         this.favorites.push(idArticle);
@@ -68,45 +47,53 @@ User.prototype.favoriteArticle = function (idArticle) {
 User.prototype.unfavoriteArticle = function (idArticle) {
     var index = this.favorites.indexOf(idArticle);
     if (index > -1) {
-        this.favorites.slice(index, 1);
+        this.favorites.splice(index, 1);
     }
+};
+
+User.prototype.getAllFeedsExclusions = function () {
+    return this.feed_exclusions;
 };
 
 User.prototype.uncheckFeed = function (feedId) {
     var index = this.feed_exclusions.indexOf(feedId);
     if (index === -1) {
-        this.feed_exclusions.push(idArticle);
+        this.feed_exclusions.push(feedId);
     }
 };
 
 User.prototype.checkFeed = function (feedId) {
     var index = this.feed_exclusions.indexOf(feedId);
     if (index > -1) {
-        this.feed_exclusions.slice(index, 1);
+        this.feed_exclusions.splice(index, 1);
+    }
+};
+
+User.prototype.getAllPublicationsExclusionsByFeed = function (feedId) {
+    if(feedId in this.publication_feed_exclusions){
+        return this.publication_feed_exclusions[feedId];
+    }else{
+        return [];
     }
 };
 
 User.prototype.uncheckPublication = function (feedId, publicationId) {
     if (feedId in this.publication_feed_exclusions) {
-        if (this.publication_feed_exclusions[feedId].length === 1) {
-            this.publication_feed_exclusions[feedId] = undefined;
-        } else {
-            var index = this.publication_feed_exclusions[feedId].indexOf(publicationId);
-            if (index > -1) {
-                this.publication_feed_exclusions.slice(index, 1);
-            }
+        var index = this.publication_feed_exclusions[feedId].indexOf(publicationId);
+        if (index === -1) {
+            this.publication_feed_exclusions[feedId].push(publicationId);
         }
+    }else{
+        this.publication_feed_exclusions[feedId] = [];
+        this.publication_feed_exclusions[feedId].push(publicationId);
     }
 };
 
 User.prototype.checkPublication = function (feedId, publicationId) {
-    if (!feedId in this.publication_feed_exclusions) {
-        this.publication_feed_exclusions[feedId] = [];
-        this.publication_feed_exclusions[feedId].push(publicationId);
-    } else {
+    if (feedId in this.publication_feed_exclusions) {
         var index = this.publication_feed_exclusions[feedId].indexOf(publicationId);
-        if (index === -1) {
-            this.publication_feed_exclusions.push(publicationId);
+        if (index > -1) {
+            this.publication_feed_exclusions[feedId].splice(index, 1);
         }
     }
 };

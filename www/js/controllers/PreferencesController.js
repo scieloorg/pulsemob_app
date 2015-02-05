@@ -2,7 +2,6 @@ var PreferencesController = function() {
 };
 
 PreferencesController.scroll = {};
-PreferencesController.fontSize = "small";
 
 PreferencesController.prototype = {
     initialize: function() {
@@ -27,10 +26,9 @@ PreferencesController.initListeners = function(){
 PreferencesController.initLanguageAndFont = function(){
     $("#language-container .radio-img img").attr("src","img/preferences/radio_unchecked.png");
     $("#language-radio-"+App.locale).attr("src","img/preferences/radio_checked.png");
-    
-    var fontSize = "small"; // TODO: pegar do usuario
+
     $("#font-container .radio-img img").attr("src","img/preferences/radio_unchecked.png");
-    $("#font-radio-"+PreferencesController.fontSize).attr("src","img/preferences/radio_checked.png");
+    $("#font-radio-"+App.fontSize).attr("src","img/preferences/radio_checked.png");
 };
 
 PreferencesController.changeLanguage = function(){
@@ -38,10 +36,12 @@ PreferencesController.changeLanguage = function(){
     $("#language-container .radio-img img").attr("src","img/preferences/radio_unchecked.png");
     $("#language-radio-"+language).attr("src","img/preferences/radio_checked.png");
     
-    App.locale = language;
-    Localization.refreshAppLocale();
+    App.setLocale(language);
+    App.initCategoryMenu();
     PageLoad.loadLocalizationPage(App.currentController, Navigator.currentPage);
     PreferencesController.setFeedVersion();
+    
+    Service.changeLanguage(language);
 };
 
 PreferencesController.changeFont = function(){
@@ -49,21 +49,8 @@ PreferencesController.changeFont = function(){
     $("#font-container .radio-img img").attr("src","img/preferences/radio_unchecked.png");
     $("#font-radio-"+fontSize).attr("src","img/preferences/radio_checked.png");
     
-    if(fontSize === "large"){
-        $("body").removeClass("font-medium");
-        $("body").addClass("font-large");
-    }else if(fontSize === "medium"){
-        $("body").removeClass("font-large");
-        $("body").addClass("font-medium");
-    }else{
-        $("body").removeClass("font-large");
-        $("body").removeClass("font-medium");
-    }
-    
-    PreferencesController.fontSize = fontSize;
-    
-    App.scrollMenu.refresh();
-    App.refreshScroll(false);
+    App.setFontSize(fontSize);
+    Service.changeFontSize(fontSize);
 };
 
 PreferencesController.rate = function(){
