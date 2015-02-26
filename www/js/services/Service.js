@@ -141,6 +141,22 @@ Service.uncheckPublication = function (idFeed, idPublication) {
     return deferred.promise();
 };
 
+Service.uncheckAllPublications = function (idFeed) {
+    var deferred = $.Deferred();
+    $.when(
+            SciELO.uncheckAllPublications(idFeed)
+            ).then(
+            function (response) {
+                App.currentUser.uncheckAllPublications(idFeed);
+                deferred.resolve(response);
+            },
+            function (err) {
+                deferred.reject("Server request failed.");
+            }
+    );
+    return deferred.promise();
+};
+
 Service.checkPublication = function (idFeed, idPublication) {
     var deferred = $.Deferred();
     $.when(
@@ -148,6 +164,22 @@ Service.checkPublication = function (idFeed, idPublication) {
             ).then(
             function (response) {
                 App.currentUser.checkPublication(idFeed, idPublication);
+                deferred.resolve(response);
+            },
+            function (err) {
+                deferred.reject("Server request failed.");
+            }
+    );
+    return deferred.promise();
+};
+
+Service.checkAllPublications = function (idFeed) {
+    var deferred = $.Deferred();
+    $.when(
+            SciELO.checkAllPublications(idFeed)
+            ).then(
+            function (response) {
+                App.currentUser.checkAllPublications(idFeed);
                 deferred.resolve(response);
             },
             function (err) {

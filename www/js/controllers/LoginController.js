@@ -4,8 +4,7 @@ var LoginController = function () {
 LoginController.USER_TYPE_KEY = "SCIELO_USER_TYPE";
 LoginController.FACEBOOK = "FACEBOOK";
 LoginController.GOOGLE = "GOOGLE";
-LoginController.IOS_API_KEY = "903038984767-9ngq0ut4esd5247kd3oog8jimnab1n9e.apps.googleusercontent.com";
-
+LoginController.IOS_API_KEY = "903038984767-jmg2ov4lvfc5p8k214smfp3bkjv4gcm8.apps.googleusercontent.com";
 LoginController.prototype = {
     initialize: function () {
         LoginController.initListeners();
@@ -24,10 +23,11 @@ LoginController.loginFacebook = function () {
 
     facebookConnectPlugin.login(["public_profile", "email"],
             function (response) {
+                App.showLoadingScreen();
                 var facebookid = response.authResponse.userID;
                 var token = response.authResponse.accessToken;
 
-                facebookConnectPlugin.api(facebookid + "/?fields=email, name", ["public_profile"],
+                facebookConnectPlugin.api(facebookid + "/?fields=email,name", ["public_profile"],
                         function (responseAPI) {
                             
                             if($.ajaxSettings.headers && $.ajaxSettings.headers["googleid"]) delete $.ajaxSettings.headers["googleid"];
@@ -44,14 +44,17 @@ LoginController.loginFacebook = function () {
                                     function (data) {
                                         SciELO.saveCache(LoginController.USER_TYPE_KEY, LoginController.FACEBOOK, false);
                                         Navigator.loadPage("home.html");
+                                        App.hideLoadingScreen();
                                     },
                                     function () {
+                                        App.hideLoadingScreen();
                                         App.showCommonDialog("ERROR", "Error on server login.", false);
                                         Navigator.loadFullPage("login.html");
                                     }
                             );
                         },
                         function (err) {
+                            App.hideLoadingScreen();
                             App.showCommonDialog("ERROR", "Error getting information.", false);
                             Navigator.loadFullPage("login.html");
                         });
@@ -68,12 +71,21 @@ LoginController.loginGoogle = function () {
             },
     function (obj) {
         var google_id = obj.userId;
-        var token = obj.idToken === undefined ? obj.oauthToken : obj.idToken;
+        var tokentype = "";
+        var token = "";
+        
+        if(obj.idToken === undefined){
+            token = obj.oauthToken;
+            tokentype = "access_token";
+        }else{
+            token = obj.idToken;
+            tokentype = "id_token";
+        }
         
         if($.ajaxSettings.headers && $.ajaxSettings.headers["facebookid"]) delete $.ajaxSettings.headers["facebookid"];
         
         $.ajaxSetup({
-            headers: {googleid: google_id, token: token}
+            headers: {googleid: google_id, token: token, tokentype: tokentype}
         });
 
         var userData = {name: obj.displayName, email: obj.email, language: App.locale, font_size: "S"};
@@ -120,7 +132,6 @@ LoginController.autoLoginFacebook = function () {
     facebookConnectPlugin.getLoginStatus(
             function (response) {
                 if (response.status === "connected") {
-                    
                     if($.ajaxSettings.headers && $.ajaxSettings.headers["googleid"]) delete $.ajaxSettings.headers["googleid"];
                     
                     $.ajaxSetup({
@@ -156,12 +167,21 @@ LoginController.autoLoginGoogle = function (cachedUser) {
             },
     function (obj) {
         var google_id = obj.userId;
-        var token = obj.idToken === undefined ? obj.oauthToken : obj.idToken;
+        var tokentype = "";
+        var token = "";
+        
+        if(obj.idToken === undefined){
+            token = obj.oauthToken;
+            tokentype = "access_token";
+        }else{
+            token = obj.idToken;
+            tokentype = "id_token";
+        }
         
         if($.ajaxSettings.headers && $.ajaxSettings.headers["facebookid"]) delete $.ajaxSettings.headers["facebookid"];
         
         $.ajaxSetup({
-            headers: {googleid: google_id, token: token}
+            headers: {googleid: google_id, token: token, tokentype: tokentype}
         });
 
         $.when(

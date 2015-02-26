@@ -19,6 +19,7 @@
         $page: null,
         $appSearchInput: null,
         currentUser: null,
+        DEBUG_BROWSER:false,
         constants: {
             APP_VERSION: "1.0.0",
         }
@@ -29,6 +30,12 @@
         if (!App.isInitialized) {
 
             App.history = new Array();
+            
+            try{
+                analytics.startTrackerWithId('UA-59751520-1');
+            }catch(err){
+                console.log(err);
+            }
 
             App.setDomElements();
             App.addEventListeners();
@@ -48,7 +55,27 @@
 
             App.startLocale();
             
-            LoginController.autoLogin();
+            if(!App.DEBUG_BROWSER){
+                LoginController.autoLogin();
+            }else{
+                $.ajaxSetup({
+                    headers: {facebookid: "944948448856222", token: "CAALA0Tnry2IBAPJdZCAuyuoUikqzaCesUKiZAWFYQ6ODu2ddnyGRy9fPtupsqgnZAaqnZAYddQGUdAOoPNZB09j3E1qru3B1KgZAjC8ZCdOMFSkvoXihdJgSweyBuILIqK5x44VknMpEXrRDPcamKpPXJeS57fpvvMlcCiwOfkAWkJgY3kuvtKBM8tOQJJa7QZBIDekPrAAHTLACP5yKq4S5ZCU7NtyZAxWDFDmaatMrHlrAZDZD"}
+                });
+
+                $.when(
+                        Service.login({name: "Marcellus S.B.", email: "marcellus.sb@gmail.com", language: App.locale, font_size: "S"})
+                        ).then(
+                        function (data) {
+                            // It worked
+                            Navigator.loadPage("home.html");
+                        },
+                        function () {
+                            SciELO.removeCache(LoginController.USER_TYPE_KEY);
+                            App.showCommonDialog("ERROR", "Error on server login.", false);
+                            Navigator.loadFullPage("login.html");
+                        }
+                );
+            }
         }
     };
 
@@ -161,6 +188,7 @@
         if ($(this).val() === "") {
             $("#app-bar-search-input").fadeOut(300, function () {
                 $("#app-bar-title").fadeIn(300);
+                if(!App.DEBUG_BROWSER)  cordova.plugins.Keyboard.close();
             });
         }
     };
@@ -169,11 +197,13 @@
         if (App.$appSearchInput.is(":visible")) {
             if (App.$appSearchInput.children("input").val() !== "") {
                 Navigator.loadPage("home.html");
+                if(!App.DEBUG_BROWSER) cordova.plugins.Keyboard.close();
             }
         } else {
             $("#app-bar-title").fadeOut(300, function () {
                 App.$appSearchInput.fadeIn(300, function () {
                     App.$appSearchInput.children("input").focus();
+                    if(!App.DEBUG_BROWSER) cordova.plugins.Keyboard.show();
                 });
             });
         }
@@ -254,12 +284,18 @@
 
     App.showLoadingScreen = function () {
         //https://github.com/mobimentum/phonegap-plugin-loading-spinner
-//        window.spinnerplugin.show();
+        if(!App.DEBUG_BROWSER) {
+            spinnerplugin.show({
+                overlay: false,    // defaults to true
+                timeout: 30,       // defaults to 0 (no timeout)
+                fullscreen: false,  // defaults to false
+            });
+        }
     };
 
     App.hideLoadingScreen = function () {
         //https://github.com/mobimentum/phonegap-plugin-loading-spinner
-//        window.spinnerplugin.hide();
+        if(!App.DEBUG_BROWSER) spinnerplugin.hide();
     };
 
     App.showBackButton = function () {
