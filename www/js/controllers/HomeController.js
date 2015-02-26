@@ -9,6 +9,7 @@ HomeController.isFavoritePage = false;
 
 HomeController.prototype = {
     initialize: function() {
+        App.showLoadingScreen();
         HomeController.$categories = $("#categories");
         
         HomeController.searchText = App.$appSearchInput.children("input").val();
@@ -51,7 +52,7 @@ HomeController.prototype = {
         return data;
     },
     refresh: function(){
-        
+        App.showLoadingScreen();
         HomeController.cleanData();
         HomeController.$categories.html("");
         
@@ -102,6 +103,7 @@ HomeController.showDefaultHome = function () {
             }
 
             App.refreshScroll(true);
+            App.hideLoadingScreen();
         },
         function (err) {
         }
@@ -142,6 +144,7 @@ HomeController.showFavorites = function () {
             }
 
             App.refreshScroll(true);
+            App.hideLoadingScreen();
         },
         function (err) {
         }
@@ -185,6 +188,7 @@ HomeController.doSearch = function () {
             }
 
             App.refreshScroll(true);
+            App.hideLoadingScreen();
         },
         function (err) {
         }
@@ -245,6 +249,7 @@ HomeController.toggleCategoryMenu = function () {
 };
 
 HomeController.categoryRefresh = function () {
+    App.showLoadingScreen();
     var catId = $(this).data("category");
     $("#category-menu-"+catId).removeClass("context-menu-show");
     
@@ -268,7 +273,7 @@ HomeController.categoryRefresh = function () {
             var limitScroll = (json.response.numFound > 1000) ? 1000 : json.response.numFound;
             var cacheSize = json.response.docs.length;
             
-            HomeController.scroll[catId] = new IScroll('#cat-wrapper-'+catId, { 
+            HomeController.scroll[catId] = new IScroll('#cat-wrapper-'+catId, {
                 scrollX: true,
                 scrollY: false,
                 mouseWheel: false,
@@ -279,6 +284,8 @@ HomeController.categoryRefresh = function () {
                 cacheSize: cacheSize,
                 category: catId
             });
+            
+            App.hideLoadingScreen();
         }, 
         function(err){}
     );
@@ -438,8 +445,13 @@ HomeController.updateContent = function (el, data) {
                         '</div>' +
                         '<div class="article-legend">' +
                             '<div class="article-journal"> '+data.journal_abbreviated_title+' </div>' +
-                            '<div class="article-date"> '+data.publication_date.formatToDateSciELO()+' </div>' +
-                        '</div>' +
+                            '<div class="article-date"> '+
+                                data.publication_date.formatToDateSciELO() +
+                            '</div>';
+                        
+                            if(App.currentUser.isFavoriteArticle(data.id)) html += '<img class="article-fav" src="img/abstract/fav_selected.png"/>';
+                                
+            html +=     '</div>' +
                     '</div>';
         
         

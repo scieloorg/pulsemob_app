@@ -51,6 +51,15 @@ User.prototype.unfavoriteArticle = function (idArticle) {
     }
 };
 
+User.prototype.isFavoriteArticle = function (idArticle) {
+    var index = this.favorites.indexOf(idArticle);
+    if (index > -1) {
+        return true;
+    }else{
+        return false;
+    }
+};
+
 User.prototype.getAllFeedsExclusions = function () {
     return this.feed_exclusions;
 };
@@ -89,6 +98,10 @@ User.prototype.uncheckPublication = function (feedId, publicationId) {
     }
 };
 
+User.prototype.uncheckAllPublications = function (feedId) {
+    this.publication_feed_exclusions[feedId] = FeedsAndPublications.getAllMagazinesIds(feedId);
+};
+
 User.prototype.checkPublication = function (feedId, publicationId) {
     if (feedId in this.publication_feed_exclusions) {
         var index = this.publication_feed_exclusions[feedId].indexOf(publicationId);
@@ -96,6 +109,10 @@ User.prototype.checkPublication = function (feedId, publicationId) {
             this.publication_feed_exclusions[feedId].splice(index, 1);
         }
     }
+};
+
+User.prototype.checkAllPublications = function (feedId) {
+    this.publication_feed_exclusions[feedId] = [];
 };
 
 User.prototype.changeLanguage = function(language){

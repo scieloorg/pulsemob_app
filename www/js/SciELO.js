@@ -62,8 +62,16 @@ SciELO.uncheckPublication = function (idFeed, idPublication){
     return SciELO.callWebServiceFunctionPOST("webservices/preferences/feed/publication/exclusion/create", {feed_id: idFeed, publication_id: idPublication});
 };
 
+SciELO.uncheckAllPublications = function (idFeed){
+    return SciELO.callWebServiceFunctionPOST("webservices/preferences/feed/publication/exclusion/all/create", {feed_id: idFeed});
+};
+
 SciELO.checkPublication = function (idFeed, idPublication){
     return SciELO.callWebServiceFunctionPOST("webservices/preferences/feed/publication/exclusion/delete", {feed_id: idFeed, publication_id: idPublication});
+};
+
+SciELO.checkAllPublications = function (idFeed){
+    return SciELO.callWebServiceFunctionPOST("webservices/preferences/feed/publication/exclusion/all/delete", {feed_id: idFeed});
 };
 
 SciELO.changeLanguage = function (language){
