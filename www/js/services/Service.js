@@ -22,6 +22,23 @@ Service.login = function (userData) {
                 FeedsAndPublications.checkVersion(response.solr_version);
                 App.initCategoryMenu();
                 
+                
+                var analyticsUserId = "";
+                if(user.email){
+                    analyticsUserId = user.email;
+                }else if(user.facebook_id){
+                    analyticsUserId = "fb-"+user.facebook_id;
+                }else{
+                    analyticsUserId = "gp-"+user.google_id;
+                }
+                
+                try{
+                    analytics.setUserId(analyticsUserId);
+                }catch(err){
+                    console.log(err);
+                }
+                
+                
                 deferred.resolve(response);
             },
             function (err) {

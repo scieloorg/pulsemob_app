@@ -30,10 +30,26 @@ HomeController.prototype = {
             $("#home-search-text input").val(HomeController.searchText);
             $("#home-search-box").show();
             HomeController.doSearch();
+            
+            try{
+                analytics.trackView("Pesquisa");
+            }catch(err){
+                console.log(err);
+            }
         }else if(HomeController.isFavoritePage){
             HomeController.showFavorites();
+            try{
+                analytics.trackView("Favoritos");
+            }catch(err){
+                console.log(err);
+            }
         }else{
             HomeController.showDefaultHome();
+            try{
+                analytics.trackView("Home");
+            }catch(err){
+                console.log(err);
+            }
         }
         
         HomeController.initListeners();
@@ -289,6 +305,12 @@ HomeController.categoryRefresh = function () {
         }, 
         function(err){}
     );
+    
+    try{
+        analytics.trackEvent('Categoria', 'Recarregar', FeedsAndPublications.getCategoryName(catId), 1);
+    }catch(err){
+        console.log(err);
+    }
 };
 
 HomeController.categoryShare = function () {
@@ -296,6 +318,12 @@ HomeController.categoryShare = function () {
     $("#category-menu-"+catId).removeClass("context-menu-show");
     
     window.plugins.socialsharing.share(FeedsAndPublications.getCategoryName(catId)+" -", "SciELO Mobile", null, "http://www.scielo.org/applications/scielo-org/php/secondLevel.php?xml=secondLevelForSubjectByLetter&xsl=secondLevelForSubjectByLetter&subject=Health%20Sciences");
+    
+    try{
+        analytics.trackEvent('Categoria', 'Compartilhar', FeedsAndPublications.getCategoryName(catId), 1);
+    }catch(err){
+        console.log(err);
+    }
 };
 
 HomeController.categoryConfig = function () {
@@ -325,6 +353,12 @@ HomeController.categoryRemove = function () {
     }
     
     App.refreshScroll(false);
+    
+    try{
+        analytics.trackEvent('Categoria', 'Dispensar', FeedsAndPublications.getCategoryName(catId), 1);
+    }catch(err){
+        console.log(err);
+    }
 };
 
 HomeController.addCategory = function (categoryData) {

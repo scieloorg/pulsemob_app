@@ -21,14 +21,13 @@
         currentUser: null,
         DEBUG_BROWSER:false,
         constants: {
-            APP_VERSION: "1.0.0",
+            APP_VERSION: "1.0.3"
         }
     };
 
     //init project
     App.init = function () {
         if (!App.isInitialized) {
-
             App.history = new Array();
             
             try{
@@ -106,10 +105,10 @@
     //set Application listeners
     App.addEventListeners = function () {
         //load internal pages
-        App.$headerApp.on('tap', "#app-bar-menu", Transition.toggleMenu);
-        App.$headerApp.on('tap', "#app-bar-back", Navigator.backEvent);
-        App.$headerApp.on('tap', "#app-bar-search", App.search);
-        App.$headerApp.on('tap', '.botoes-app', Navigator.loadPage);
+        App.$headerApp.on('click', "#app-bar-menu", Transition.toggleMenu);
+        App.$headerApp.on('click', "#app-bar-back", Navigator.backEvent);
+        App.$headerApp.on('click', "#app-bar-search", App.search);
+        App.$headerApp.on('click', '.botoes-app', Navigator.loadPage);
         $("#app-bar-search-input input").focusout(App.searchFocusOut);
         App.$menu.on('tap', ".menu-checkbox", App.menuCheckbox);
         App.$page.on('tap', '.botoes-app', Navigator.loadPage);
@@ -117,7 +116,7 @@
 
         $("#app-bar-search-input input").keypress(function (e) {
             if (e.which === 13) {
-                $("#app-bar-search").trigger("tap");
+                $("#app-bar-search").trigger("click");
             }
         });
 
@@ -247,6 +246,12 @@
                 function(){
                     $obj.attr("src", "img/sidebar/checked.png");
                     App.hideLoadingScreen();
+                    
+                    try{
+                        analytics.trackEvent('Categoria', 'Adicionar', FeedsAndPublications.getCategoryName(catId), 1);
+                    }catch(err){
+                        console.log(err);
+                    }
                 },
                 function (err) {
                     App.hideLoadingScreen();
@@ -262,6 +267,12 @@
                 function(){
                     $obj.attr("src", "img/sidebar/unchecked.png");
                     App.hideLoadingScreen();
+                    
+                    try{
+                        analytics.trackEvent('Categoria', 'Remover', FeedsAndPublications.getCategoryName(catId), 1);
+                    }catch(err){
+                        console.log(err);
+                    }
                 },
                 function (err) {
                     App.hideLoadingScreen();
