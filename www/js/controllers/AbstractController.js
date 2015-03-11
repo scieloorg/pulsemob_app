@@ -11,6 +11,13 @@ AbstractController.prototype = {
         AbstractController.populate();
         AbstractController.checkIfIsFavorite();
         App.showBackButton();
+        
+        try{
+            analytics.trackView("Artigo");
+            analytics.trackEvent('Artigo', 'Abrir', AbstractController.articleData.id, 1);
+        }catch(err){
+            console.log(err);
+        }
     },
     destroy: function() {
         App.$page.removeClass("abstract-bg");
@@ -68,6 +75,12 @@ AbstractController.favorite = function(){
             function(){
                 $obj.attr("src", "img/abstract/fav_selected.png");
                 App.hideLoadingScreen();
+                
+                try{
+                    analytics.trackEvent('Artigo', 'Favoritar', AbstractController.articleData.id, 1);
+                }catch(err){
+                    console.log(err);
+                }
             },
             function (err) {
                 App.hideLoadingScreen();
@@ -81,6 +94,12 @@ AbstractController.favorite = function(){
             function(){
                 $obj.attr("src","img/abstract/fav.png");
                 App.hideLoadingScreen();
+                
+                try{
+                    analytics.trackEvent('Artigo', 'Desfavoritar', AbstractController.articleData.id, 1);
+                }catch(err){
+                    console.log(err);
+                }
             },
             function (err) {
                 App.hideLoadingScreen();
@@ -95,6 +114,12 @@ AbstractController.share = function(){
     var pid = AbstractController.articleData.id.substring(0, AbstractController.articleData.id.length-3 );
     
     window.plugins.socialsharing.share(AbstractController.articleData.title+" -", "SciELO Mobile", null, "http://"+domain+"/scielo.php?script=sci_arttext&pid="+pid+"&lng="+App.locale+"&nrm=iso");
+    
+    try{
+        analytics.trackEvent('Artigo', 'Compartilhar', AbstractController.articleData.id, 1);
+    }catch(err){
+        console.log(err);
+    }
 };
 
 AbstractController.openWebArticle = function(){
@@ -102,4 +127,10 @@ AbstractController.openWebArticle = function(){
     var pid = AbstractController.articleData.id.substring(0, AbstractController.articleData.id.length-3 );
     
     App.openLink("http://"+domain+"/scielo.php?script=sci_arttext&pid="+pid+"&lng="+App.locale+"&nrm=iso");
+    
+    try{
+        analytics.trackEvent('Artigo', 'Abrir na Web', AbstractController.articleData.id, 1);
+    }catch(err){
+        console.log(err);
+    }
 };

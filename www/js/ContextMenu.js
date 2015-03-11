@@ -5,7 +5,7 @@ ContextMenu.$menu = null;
 ContextMenu.showFavorites = false;
 
 ContextMenu.init = function() {
-    App.$headerApp.on('tap', "#app-bar-context-menu", ContextMenu.toggleMenu);
+    App.$headerApp.on('click', "#app-bar-context-menu", ContextMenu.toggleMenu);
     App.$page.on('tap', '#block-content-glass', ContextMenu.hide);
     
     ContextMenu.$menu = $("#context-menu");

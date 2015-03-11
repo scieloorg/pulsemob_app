@@ -8,6 +8,11 @@ LoginController.IOS_API_KEY = "903038984767-jmg2ov4lvfc5p8k214smfp3bkjv4gcm8.app
 LoginController.prototype = {
     initialize: function () {
         LoginController.initListeners();
+        try{
+            analytics.trackView("Login");
+        }catch(err){
+            console.log(err);
+        }
     },
     destroy: function () {
         PageLoad.ajxHandle = null;

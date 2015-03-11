@@ -12,6 +12,12 @@ CategoryConfigController.prototype = {
         App.showBackButton();
         CategoryConfigController.startPage();
         CategoryConfigController.initListeners();
+        
+        try{
+            analytics.trackView("Configurar - "+FeedsAndPublications.getCategoryName(CategoryConfigController.categoryId));
+        }catch(err){
+            console.log(err);
+        }
     },
     destroy: function() {
         App.hideBackButton();
@@ -86,6 +92,12 @@ CategoryConfigController.selectAll = function(){
                 CategoryConfigController.magazinesRemoved = [];
                 
                 App.hideLoadingScreen();
+                
+                try{
+                    analytics.trackEvent('Revista', 'Adicionar', 'Todas', 1);
+                }catch(err){
+                    console.log(err);
+                }
             },
             function (err) {
                 App.hideLoadingScreen();
@@ -107,6 +119,12 @@ CategoryConfigController.selectAll = function(){
                 }
                 CategoryConfigController.magazinesSelected = [];
                 App.hideLoadingScreen();
+                
+                try{
+                    analytics.trackEvent('Revista', 'Remover', 'Todas', 1);
+                }catch(err){
+                    console.log(err);
+                }
             },
             function (err) {
                 App.hideLoadingScreen();
@@ -150,6 +168,12 @@ CategoryConfigController.magazineCheckbox = function(){
                 }
                 CategoryConfigController.refreshSelectAll();
                 App.hideLoadingScreen();
+                
+                try{
+                    analytics.trackEvent('Revista', 'Adicionar', FeedsAndPublications.getMagazineName(magazineId), 1);
+                }catch(err){
+                    console.log(err);
+                }
             },
             function (err) {
                 App.hideLoadingScreen();
@@ -171,6 +195,12 @@ CategoryConfigController.magazineCheckbox = function(){
                 }
                 CategoryConfigController.refreshSelectAll();
                 App.hideLoadingScreen();
+                
+                try{
+                    analytics.trackEvent('Revista', 'Remover', FeedsAndPublications.getMagazineName(magazineId), 1);
+                }catch(err){
+                    console.log(err);
+                }
             },
             function (err) {
                 App.hideLoadingScreen();
