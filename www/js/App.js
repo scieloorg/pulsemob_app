@@ -21,7 +21,8 @@
         currentUser: null,
         DEBUG_BROWSER:false,
         constants: {
-            APP_VERSION: "1.0.3"
+            APP_VERSION: "1.0.3",
+            INTRODUCTION_SHOW: "introduction_show"
         }
     };
 
@@ -40,14 +41,19 @@
             App.addEventListeners();
             App.definitions();
             App.isInitialized = true;
-            Localization.refreshAppLocale();
             FeedsAndPublications.loadMap();
             ContextMenu.init();
 
             $.ajaxSetup({
                 statusCode: {
-                    500: function () {
-                        App.showCommonDialog("App", "Ocorreu algum erro na aplicação. Por favor tente novamente mais tarde.");
+                    500: function (err) {
+                        try{
+                            var errorDesc = "Error 500: "+JSON.stringify(err);
+                            analytics.trackException(errorDesc, false);
+                        }catch(errAnalytics){
+                            console.log(errAnalytics);
+                        }
+                        App.showCommonDialog("SciELO",Localization.getAppValue("error-500"));
                     }
                 }
             });
@@ -70,7 +76,7 @@
                         },
                         function () {
                             SciELO.removeCache(LoginController.USER_TYPE_KEY);
-                            App.showCommonDialog("ERROR", "Error on server login.", false);
+                            App.showCommonDialog("SciELO", Localization.getAppValue("error-login"), false);
                             Navigator.loadFullPage("login.html");
                         }
                 );
@@ -147,6 +153,9 @@
     App.setLocale = function(locale){
         App.locale = locale;
         Localization.refreshAppLocale();
+        if(App.currentController && Navigator.currentPage){
+            PageLoad.loadLocalizationPage(App.currentController,Navigator.currentPage);
+        }
     };
 
     App.startLocale = function () {
@@ -246,12 +255,6 @@
                 function(){
                     $obj.attr("src", "img/sidebar/checked.png");
                     App.hideLoadingScreen();
-                    
-                    try{
-                        analytics.trackEvent('Categoria', 'Adicionar', FeedsAndPublications.getCategoryName(catId), 1);
-                    }catch(err){
-                        console.log(err);
-                    }
                 },
                 function (err) {
                     App.hideLoadingScreen();
@@ -267,12 +270,6 @@
                 function(){
                     $obj.attr("src", "img/sidebar/unchecked.png");
                     App.hideLoadingScreen();
-                    
-                    try{
-                        analytics.trackEvent('Categoria', 'Remover', FeedsAndPublications.getCategoryName(catId), 1);
-                    }catch(err){
-                        console.log(err);
-                    }
                 },
                 function (err) {
                     App.hideLoadingScreen();
@@ -334,7 +331,7 @@
     App.showCommonInternetErrorDialog = function () {
         App.hideLoadingScreen();
         Navigator.currentModal = new BootstrapDialog({
-            message: "Por favor verifique a conexão com internet e tente realizar a operação novamente.",
+            message: Localization.getAppValue("error-internet"),
             title: "SciELO",
             buttons: [{
                     label: 'OK',

@@ -3,5 +3,6 @@
     "share": "Share",
     "config": "Settings",
     "favorite": "Favorites",
-    "remove": "Dismiss"
+    "remove": "Dismiss",
+    "result-of":"Results for: "
 }

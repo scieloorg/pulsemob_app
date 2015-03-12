@@ -134,9 +134,9 @@ SciELO.cachedCall = function(webServiceFunction, params, isSessionCache, expirat
                  //retorna para o deferred
                  deferred.resolve(jsonObj);
              }, 
-             function(){ // error
+             function(err){ // error
                  // em caso de erro nao tem como pegar do cache. O erro deve ser tratado no controller
-                 deferred.reject("ERROR");
+                 deferred.reject(err);
              }
         );
     }

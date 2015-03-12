@@ -15,8 +15,8 @@ AbstractController.prototype = {
         try{
             analytics.trackView("Artigo");
             analytics.trackEvent('Artigo', 'Abrir', AbstractController.articleData.id, 1);
-        }catch(err){
-            console.log(err);
+        }catch(errAnalytics){
+            console.log(errAnalytics);
         }
     },
     destroy: function() {
@@ -75,16 +75,11 @@ AbstractController.favorite = function(){
             function(){
                 $obj.attr("src", "img/abstract/fav_selected.png");
                 App.hideLoadingScreen();
-                
-                try{
-                    analytics.trackEvent('Artigo', 'Favoritar', AbstractController.articleData.id, 1);
-                }catch(err){
-                    console.log(err);
-                }
             },
             function (err) {
                 App.hideLoadingScreen();
                 App.showCommonInternetErrorDialog();
+                return;
             }
         );
     }else{
@@ -94,16 +89,11 @@ AbstractController.favorite = function(){
             function(){
                 $obj.attr("src","img/abstract/fav.png");
                 App.hideLoadingScreen();
-                
-                try{
-                    analytics.trackEvent('Artigo', 'Desfavoritar', AbstractController.articleData.id, 1);
-                }catch(err){
-                    console.log(err);
-                }
             },
             function (err) {
                 App.hideLoadingScreen();
                 App.showCommonInternetErrorDialog();
+                return;
             }
         );
     }
@@ -117,8 +107,8 @@ AbstractController.share = function(){
     
     try{
         analytics.trackEvent('Artigo', 'Compartilhar', AbstractController.articleData.id, 1);
-    }catch(err){
-        console.log(err);
+    }catch(errAnalytics){
+        console.log(errAnalytics);
     }
 };
 
@@ -130,7 +120,7 @@ AbstractController.openWebArticle = function(){
     
     try{
         analytics.trackEvent('Artigo', 'Abrir na Web', AbstractController.articleData.id, 1);
-    }catch(err){
-        console.log(err);
+    }catch(errAnalytics){
+        console.log(errAnalytics);
     }
 };

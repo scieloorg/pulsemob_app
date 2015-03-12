@@ -33,27 +33,26 @@ HomeController.prototype = {
             
             try{
                 analytics.trackView("Pesquisa");
-            }catch(err){
-                console.log(err);
+            }catch(errAnalytics){
+                console.log(errAnalytics);
             }
         }else if(HomeController.isFavoritePage){
             HomeController.showFavorites();
             try{
                 analytics.trackView("Favoritos");
-            }catch(err){
-                console.log(err);
+            }catch(errAnalytics){
+                console.log(errAnalytics);
             }
         }else{
             HomeController.showDefaultHome();
             try{
                 analytics.trackView("Home");
-            }catch(err){
-                console.log(err);
+            }catch(errAnalytics){
+                console.log(errAnalytics);
             }
         }
         
         HomeController.initListeners();
-//        Introduction.show();
     },
     destroy: function() {
         PageLoad.ajxHandle = null;
@@ -120,8 +119,24 @@ HomeController.showDefaultHome = function () {
 
             App.refreshScroll(true);
             App.hideLoadingScreen();
+            
+            // mostrar introducao na primeira vez que abrir a home
+            if(!SciELO.hasCache(App.constants.INTRODUCTION_SHOW,false)){
+                Introduction.show();
+                SciELO.saveCache(App.constants.INTRODUCTION_SHOW, {show: true}, false);
+            }
+            
         },
         function (err) {
+            try{
+                var errorDesc = "Error Loading Home: "+JSON.stringify(err);
+                analytics.trackException(errorDesc, false);
+            }catch(errAnalytics){
+                console.log(errAnalytics);
+            }
+            App.hideLoadingScreen();
+            App.showCommonInternetErrorDialog();
+            return;
         }
     );
     
@@ -163,6 +178,15 @@ HomeController.showFavorites = function () {
             App.hideLoadingScreen();
         },
         function (err) {
+            try{
+                var errorDesc = "Error Loading Favorites: "+JSON.stringify(err);
+                analytics.trackException(errorDesc, false);
+            }catch(errAnalytics){
+                console.log(errAnalytics);
+            }
+            App.hideLoadingScreen();
+            App.showCommonInternetErrorDialog();
+            return;
         }
     );
     
@@ -207,6 +231,15 @@ HomeController.doSearch = function () {
             App.hideLoadingScreen();
         },
         function (err) {
+            try{
+                var errorDesc = "Error Loading Search: "+JSON.stringify(err);
+                analytics.trackException(errorDesc, false);
+            }catch(errAnalytics){
+                console.log(errAnalytics);
+            }
+            App.hideLoadingScreen();
+            App.showCommonInternetErrorDialog();
+            return;
         }
     );
 
@@ -303,13 +336,23 @@ HomeController.categoryRefresh = function () {
             
             App.hideLoadingScreen();
         }, 
-        function(err){}
+        function(err){
+            try{
+                var errorDesc = "Error Refresh Category: "+JSON.stringify(err);
+                analytics.trackException(errorDesc, false);
+            }catch(errAnalytics){
+                console.log(errAnalytics);
+            }
+            App.hideLoadingScreen();
+            App.showCommonInternetErrorDialog();
+            return;
+        }
     );
     
     try{
         analytics.trackEvent('Categoria', 'Recarregar', FeedsAndPublications.getCategoryName(catId), 1);
-    }catch(err){
-        console.log(err);
+    }catch(errAnalytics){
+        console.log(errAnalytics);
     }
 };
 
@@ -321,8 +364,8 @@ HomeController.categoryShare = function () {
     
     try{
         analytics.trackEvent('Categoria', 'Compartilhar', FeedsAndPublications.getCategoryName(catId), 1);
-    }catch(err){
-        console.log(err);
+    }catch(errAnalytics){
+        console.log(errAnalytics);
     }
 };
 
@@ -356,8 +399,8 @@ HomeController.categoryRemove = function () {
     
     try{
         analytics.trackEvent('Categoria', 'Dispensar', FeedsAndPublications.getCategoryName(catId), 1);
-    }catch(err){
-        console.log(err);
+    }catch(errAnalytics){
+        console.log(errAnalytics);
     }
 };
 
@@ -456,7 +499,14 @@ HomeController.requestData = function (start, count) {
             function(json){
                 HomeController.scroll[category].updateCache(start, json.response.docs);
             }, 
-            function(err){}
+            function(err){
+                try{
+                    var errorDesc = "Error on requestData: "+JSON.stringify(err);
+                    analytics.trackException(errorDesc, false);
+                }catch(errAnalytics){
+                    console.log(errAnalytics);
+                }
+            }
         );
     }
 };
@@ -491,8 +541,12 @@ HomeController.updateContent = function (el, data) {
         
         el.innerHTML = html;
     }else{
-        console.log('DEU RUIM: '+JSON.stringify(data));
-        console.log(HomeController.scroll);
+        try{
+            var errorDesc = "Error on updateContent. data="+JSON.stringify(data);
+            analytics.trackException(errorDesc, false);
+        }catch(errAnalytics){
+            console.log(errAnalytics);
+        }
     }
 };
 
