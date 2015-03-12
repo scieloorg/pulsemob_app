@@ -14,7 +14,8 @@ CategoryConfigController.prototype = {
         CategoryConfigController.initListeners();
         
         try{
-            analytics.trackView("Configurar - "+FeedsAndPublications.getCategoryName(CategoryConfigController.categoryId));
+            analytics.trackView("Configurar Categoria");
+            analytics.trackEvent('Categoria', 'Configurar', FeedsAndPublications.getCategoryName(CategoryConfigController.categoryId), 1);
         }catch(err){
             console.log(err);
         }

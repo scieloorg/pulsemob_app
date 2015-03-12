@@ -6,7 +6,8 @@ Localization = (function() {
     }
     
     Localization.refreshAppLocale = function(){
-        Localization.loadLocaleFile("app.json",App.locale);
+        Localization.appDictionnary = Localization.getDictionnary("app.json",App.locale);
+        return Localization.applyToCurrentAppHtml();
     };
 
     Localization.loadLocaleFile = function(stringFile) {
@@ -39,6 +40,19 @@ Localization = (function() {
 
     Localization.getValue = function(key) {
         return Localization.dictionnary[key];
+    };
+
+    Localization.applyToCurrentAppHtml = function() {
+        var key, value;
+        
+        for (key in Localization.appDictionnary) {
+            value = Localization.appDictionnary[key];
+            $("#string-" + key).html(value);
+        }
+    };
+
+    Localization.getAppValue = function(key) {
+        return Localization.appDictionnary[key];
     };
 
     return Localization;

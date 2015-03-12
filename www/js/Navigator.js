@@ -41,15 +41,15 @@
             }
         }else{ // sai do app
             Navigator.currentModal = new BootstrapDialog({
-                message: 'Tem certeza que deseja sair do aplicativo?',
+                message: Localization.getAppValue("exit-ask"),
                 buttons: [{
-                        label: 'Sim',
+                        label: Localization.getAppValue("yes"),
                         action: function(dialog) {
                             dialog.close();
                             navigator.app.exitApp();
                         }
                     },{
-                        label: 'Não',
+                        label: Localization.getAppValue("no"),
                         action: function(dialog) {
                             dialog.close();
                         }

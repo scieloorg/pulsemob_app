@@ -27,46 +27,63 @@ LoginController.initListeners = function () {
 LoginController.loginFacebook = function () {
 
     facebookConnectPlugin.login(["public_profile", "email"],
-            function (response) {
-                App.showLoadingScreen();
-                var facebookid = response.authResponse.userID;
-                var token = response.authResponse.accessToken;
+        function (response) {
+            App.showLoadingScreen();
+            var facebookid = response.authResponse.userID;
+            var token = response.authResponse.accessToken;
 
-                facebookConnectPlugin.api(facebookid + "/?fields=email,name", ["public_profile"],
-                        function (responseAPI) {
-                            
-                            if($.ajaxSettings.headers && $.ajaxSettings.headers["googleid"]) delete $.ajaxSettings.headers["googleid"];
-                            
-                            $.ajaxSetup({
-                                headers: {facebookid: facebookid, token: token}
-                            });
+            facebookConnectPlugin.api(facebookid + "/?fields=email,name", ["public_profile"],
+                    function (responseAPI) {
 
-                            var userData = {name: responseAPI.name, email: responseAPI.email, language: App.locale, font_size: "S"};
+                        if($.ajaxSettings.headers && $.ajaxSettings.headers["googleid"]) delete $.ajaxSettings.headers["googleid"];
 
-                            $.when(
-                                    Service.login(userData)
-                                    ).then(
-                                    function (data) {
-                                        SciELO.saveCache(LoginController.USER_TYPE_KEY, LoginController.FACEBOOK, false);
-                                        Navigator.loadPage("home.html");
-                                        App.hideLoadingScreen();
-                                    },
-                                    function () {
-                                        App.hideLoadingScreen();
-                                        App.showCommonDialog("ERROR", "Error on server login.", false);
+                        $.ajaxSetup({
+                            headers: {facebookid: facebookid, token: token}
+                        });
+
+                        var userData = {name: responseAPI.name, email: responseAPI.email, language: App.locale, font_size: "S"};
+
+                        $.when(
+                                Service.login(userData)
+                                ).then(
+                                function (data) {
+                                    SciELO.saveCache(LoginController.USER_TYPE_KEY, LoginController.FACEBOOK, false);
+                                    Navigator.loadPage("home.html");
+                                    App.hideLoadingScreen();
+                                },
+                                function () {
+                                    App.hideLoadingScreen();
+                                    App.showCommonDialog("SciELO", Localization.getAppValue("error-login"), function(){
                                         Navigator.loadFullPage("login.html");
-                                    }
-                            );
-                        },
-                        function (err) {
-                            App.hideLoadingScreen();
-                            App.showCommonDialog("ERROR", "Error getting information.", false);
+                                    });
+                                }
+                        );
+                    },
+                    function (err) {
+                        try{
+                            var errorDesc = "Error api facebook: "+JSON.stringify(err);
+                            analytics.trackException(errorDesc, false);
+                        }catch(errAnalytics){
+                            console.log(errAnalytics);
+                        }
+                        
+                        App.hideLoadingScreen();
+                        App.showCommonDialog("SciELO",Localization.getAppValue("error-facebook"), function(){
                             Navigator.loadFullPage("login.html");
                         });
-            }, function (err) {
-        App.showCommonDialog("ERROR", "Login error.", false);
-        Navigator.loadFullPage("login.html");
-    });
+                    });
+        }, function (err) {
+            try{
+                var errorDesc = "Error login facebook: "+JSON.stringify(err);
+                analytics.trackException(errorDesc, false);
+            }catch(errAnalytics){
+                console.log(errAnalytics);
+            }
+            App.showCommonDialog("SciELO",Localization.getAppValue("error-facebook"), function(){
+                Navigator.loadFullPage("login.html");
+            });
+        }
+    );
 };
 
 LoginController.loginGoogle = function () {
@@ -104,15 +121,22 @@ LoginController.loginGoogle = function () {
                 },
                 function () {
                     SciELO.removeCache(LoginController.USER_TYPE_KEY);
-                    App.showCommonDialog("ERROR", "Error on server login.", false);
-                    Navigator.loadFullPage("login.html");
+                    App.showCommonDialog("SciELO", Localization.getAppValue("error-login"), function(){
+                        Navigator.loadFullPage("login.html");
+                    });
                 }
         );
     },
             function (msg) {
-                App.hideLoadingScreen();
-                App.showCommonDialog("ERROR", "Login failed. (" + msg + ")", false);
-                Navigator.loadFullPage("login.html");
+                try{
+                    var errorDesc = "Error login google: "+JSON.stringify(msg);
+                    analytics.trackException(errorDesc, false);
+                }catch(errAnalytics){
+                    console.log(errAnalytics);
+                }
+                App.showCommonDialog("SciELO",Localization.getAppValue("error-google"), function(){
+                    Navigator.loadFullPage("login.html");
+                });
             }
     );
 };
@@ -151,7 +175,6 @@ LoginController.autoLoginFacebook = function () {
                             },
                             function () {
                                 SciELO.removeCache(LoginController.USER_TYPE_KEY);
-                                App.showCommonDialog("ERROR", "Error on server login.", false);
                                 Navigator.loadFullPage("login.html");
                             }
                     );
@@ -160,12 +183,18 @@ LoginController.autoLoginFacebook = function () {
                 }
             },
             function (err) {
+                try{
+                    var errorDesc = "Error loginStatus facebook: "+JSON.stringify(err);
+                    analytics.trackException(errorDesc, false);
+                }catch(errAnalytics){
+                    console.log(errAnalytics);
+                }
                 SciELO.removeCache(LoginController.USER_TYPE_KEY);
                 Navigator.loadFullPage("login.html");
             });
 };
 
-LoginController.autoLoginGoogle = function (cachedUser) {
+LoginController.autoLoginGoogle = function () {
     window.plugins.googleplus.trySilentLogin(
             {
                 iOSApiKey: LoginController.IOS_API_KEY
@@ -198,12 +227,18 @@ LoginController.autoLoginGoogle = function (cachedUser) {
                 },
                 function (err) {
                     SciELO.removeCache(LoginController.USER_TYPE_KEY);
-                    App.showCommonDialog("ERROR", "Error on server login.", false);
                     Navigator.loadFullPage("login.html");
                 }
         );
     },
             function (msg) {
+                try{
+                    var errorDesc = "Error trySilentLogin google: "+JSON.stringify(msg);
+                    analytics.trackException(errorDesc, false);
+                }catch(errAnalytics){
+                    console.log(errAnalytics);
+                }
+                
                 SciELO.removeCache(LoginController.USER_TYPE_KEY);
                 Navigator.loadFullPage("login.html");
             }

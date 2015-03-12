@@ -47,12 +47,6 @@ PreferencesController.changeLanguage = function(){
     PreferencesController.setFeedVersion();
     
     Service.changeLanguage(language);
-    
-    try{
-        analytics.trackEvent('Preferencias', 'Idioma', language, 1);
-    }catch(err){
-        console.log(err);
-    }
 };
 
 PreferencesController.changeFont = function(){
@@ -62,12 +56,6 @@ PreferencesController.changeFont = function(){
     
     App.setFontSize(fontSize);
     Service.changeFontSize(fontSize);
-    
-    try{
-        analytics.trackEvent('Preferencias', 'Fonte', fontSize, 1);
-    }catch(err){
-        console.log(err);
-    }
 };
 
 PreferencesController.rate = function(){
