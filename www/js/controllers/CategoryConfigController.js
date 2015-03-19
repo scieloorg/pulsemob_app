@@ -23,9 +23,7 @@ CategoryConfigController.prototype = {
     destroy: function() {
         App.hideBackButton();
         App.$page.removeClass("pref-bg");
-        CategoryConfigController.categoryId = null;
-        CategoryConfigController.magazinesRemoved = [];
-        CategoryConfigController.magazinesSelected = [];
+        CategoryConfigController.sendToServer();
         PageLoad.ajxHandle = null;
     }
 };
@@ -74,68 +72,37 @@ CategoryConfigController.startPage = function(){
 };
 
 CategoryConfigController.selectAll = function(){
-    App.showLoadingScreen();
-    
     var $obj = $(this).children("img");
 
     if ($obj.attr("src") === "img/category/unchecked.png") {
-
-        $.when(
-            Service.checkAllPublications(CategoryConfigController.categoryId)
-        ).then(
-            function(){
-                $obj.attr("src", "img/category/checked.png");
-                CategoryConfigController.magazinesSelected = CategoryConfigController.magazinesSelected.concat(CategoryConfigController.magazinesRemoved);
-                for(var i in CategoryConfigController.magazinesRemoved){
-                    var magazineId = CategoryConfigController.magazinesRemoved[i];
-                    $("#cb-img-"+magazineId).attr("src", "img/category/checked.png");
-                }
-                CategoryConfigController.magazinesRemoved = [];
-                
-                App.hideLoadingScreen();
-                
-                try{
-                    analytics.trackEvent('Revista', 'Adicionar', 'Todas', 1);
-                }catch(err){
-                    console.log(err);
-                }
-            },
-            function (err) {
-                App.hideLoadingScreen();
-                App.showCommonInternetErrorDialog();
-            }
-        );
+        $obj.attr("src", "img/category/checked.png");
+        CategoryConfigController.magazinesSelected = CategoryConfigController.magazinesSelected.concat(CategoryConfigController.magazinesRemoved);
+        for(var i in CategoryConfigController.magazinesRemoved){
+            var magazineId = CategoryConfigController.magazinesRemoved[i];
+            $("#cb-img-"+magazineId).attr("src", "img/category/checked.png");
+        }
+        CategoryConfigController.magazinesRemoved = [];
+        
+        try{
+            analytics.trackEvent('Revista', 'Adicionar', 'Todas', 1);
+        }catch(err){
+            console.log(err);
+        }
     } else {
+        $obj.attr("src", "img/category/unchecked.png");
+        CategoryConfigController.magazinesRemoved = CategoryConfigController.magazinesRemoved.concat(CategoryConfigController.magazinesSelected);
+        for(var i in CategoryConfigController.magazinesSelected){
+            var magazineId = CategoryConfigController.magazinesSelected[i];
+            $("#cb-img-"+magazineId).attr("src", "img/category/unchecked.png");
+        }
+        CategoryConfigController.magazinesSelected = [];
 
-
-        $.when(
-            Service.uncheckAllPublications(CategoryConfigController.categoryId)
-        ).then(
-            function(){
-                $obj.attr("src", "img/category/unchecked.png");
-                CategoryConfigController.magazinesRemoved = CategoryConfigController.magazinesRemoved.concat(CategoryConfigController.magazinesSelected);
-                for(var i in CategoryConfigController.magazinesSelected){
-                    var magazineId = CategoryConfigController.magazinesSelected[i];
-                    $("#cb-img-"+magazineId).attr("src", "img/category/unchecked.png");
-                }
-                CategoryConfigController.magazinesSelected = [];
-                App.hideLoadingScreen();
-                
-                try{
-                    analytics.trackEvent('Revista', 'Remover', 'Todas', 1);
-                }catch(err){
-                    console.log(err);
-                }
-            },
-            function (err) {
-                App.hideLoadingScreen();
-                App.showCommonInternetErrorDialog();
-            }
-        );
+        try{
+            analytics.trackEvent('Revista', 'Remover', 'Todas', 1);
+        }catch(err){
+            console.log(err);
+        }
     }
-    
-    // alterando a config de revistas a home eh diferente
-    SciELO.homeCleanCache();
 };
 
 CategoryConfigController.refreshSelectAll = function(){
@@ -150,66 +117,64 @@ CategoryConfigController.refreshSelectAll = function(){
 
 
 CategoryConfigController.magazineCheckbox = function(){
-    App.showLoadingScreen();
-        
     var magazineId = $(this).data("magazine");
     var $obj = $(this).children("img");
 
     if ($obj.attr("src") === "img/category/unchecked.png") {
 
-        $.when(
-            Service.checkPublication(CategoryConfigController.categoryId, magazineId)
-        ).then(
-            function(){
-                $obj.attr("src", "img/category/checked.png");
-                CategoryConfigController.magazinesSelected.push(magazineId);
-                var index = CategoryConfigController.magazinesRemoved.indexOf(magazineId);
-                if (index > -1) {
-                    CategoryConfigController.magazinesRemoved.splice(index, 1);
-                }
-                CategoryConfigController.refreshSelectAll();
-                App.hideLoadingScreen();
-                
-                try{
-                    analytics.trackEvent('Revista', 'Adicionar', FeedsAndPublications.getMagazineName(magazineId), 1);
-                }catch(err){
-                    console.log(err);
-                }
-            },
-            function (err) {
-                App.hideLoadingScreen();
-                App.showCommonInternetErrorDialog();
-            }
-        );
+        $obj.attr("src", "img/category/checked.png");
+        CategoryConfigController.magazinesSelected.push(magazineId);
+        var index = CategoryConfigController.magazinesRemoved.indexOf(magazineId);
+        if (index > -1) {
+            CategoryConfigController.magazinesRemoved.splice(index, 1);
+        }
+        CategoryConfigController.refreshSelectAll();
+
+        try{
+            analytics.trackEvent('Revista', 'Adicionar', FeedsAndPublications.getMagazineName(magazineId), 1);
+        }catch(err){
+            console.log(err);
+        }
     } else {
+        $obj.attr("src", "img/category/unchecked.png");
+        CategoryConfigController.magazinesRemoved.push(magazineId);
+        var index = CategoryConfigController.magazinesSelected.indexOf(magazineId);
+        if (index > -1) {
+            CategoryConfigController.magazinesSelected.splice(index, 1);
+        }
+        CategoryConfigController.refreshSelectAll();
 
+        try{
+            analytics.trackEvent('Revista', 'Remover', FeedsAndPublications.getMagazineName(magazineId), 1);
+        }catch(err){
+            console.log(err);
+        }
+    }
+};
+
+CategoryConfigController.sendToServer = function(){
+    var currentExclusions = App.currentUser.getAllPublicationsExclusionsByFeed(CategoryConfigController.categoryId);
+    
+    var add = $(currentExclusions).not(CategoryConfigController.magazinesRemoved).get();
+    var remove = $(CategoryConfigController.magazinesRemoved).not(currentExclusions).get();
+    
+    if(add.length > 0 || remove.length > 0){
+        var publications = {add:add, remove:remove};
 
         $.when(
-            Service.uncheckPublication(CategoryConfigController.categoryId, magazineId)
+            Service.savePublications(CategoryConfigController.categoryId, publications)
         ).then(
             function(){
-                $obj.attr("src", "img/category/unchecked.png");
-                CategoryConfigController.magazinesRemoved.push(magazineId);
-                var index = CategoryConfigController.magazinesSelected.indexOf(magazineId);
-                if (index > -1) {
-                    CategoryConfigController.magazinesSelected.splice(index, 1);
-                }
-                CategoryConfigController.refreshSelectAll();
-                App.hideLoadingScreen();
-                
-                try{
-                    analytics.trackEvent('Revista', 'Remover', FeedsAndPublications.getMagazineName(magazineId), 1);
-                }catch(err){
-                    console.log(err);
-                }
+                // alterando a config de revistas a home eh diferente
+                SciELO.homeCleanCache();
             },
             function (err) {
-                App.hideLoadingScreen();
                 App.showCommonInternetErrorDialog();
             }
         );
     }
     
-    // alterando a config de revistas a home eh diferente
-    SciELO.homeCleanCache();
+    CategoryConfigController.categoryId = null;
+    CategoryConfigController.magazinesRemoved = [];
+    CategoryConfigController.magazinesSelected = [];
 };

@@ -1,85 +1,72 @@
 var SciELO = function(){};
 
 SciELO.sessionCache = new Array();
-//SciELO.serverURL = "http://localhost:8080/scielo/ws/";
+
 //SciELO.serverURL = "http://192.168.0.27:8000/";
-//SciELO.serverURL = "http://http://infobase.cloudns.org:8001/";
-//SciELO.serverURL = "http://192.168.0.2/";
-SciELO.serverURL = "http://infobase.cloudns.org:8001/";
+SciELO.solrURL = "http://infobase.cloudns.org:8001/";
+SciELO.serverURL = "http://infobase.cloudns.org:8001/webservices/";
 
 
 SciELO.loginUser = function(userInfo){
-    return SciELO.callWebServiceFunctionPOST("webservices/login",userInfo);
+    return SciELO.callWebServiceFunctionPOST("login",userInfo);
 };
 
 SciELO.category = function(data){
-    return SciELO.callWebServiceFunctionPOST("webservices/category", data);
+    return SciELO.callWebServiceFunctionPOST("category", data);
 };
 
 SciELO.search = function(params){
     //chamada solr n tem /webservices
-    return SciELO.callWebServiceFunction("search", params);
+    return SciELO.callSOLRFunction("search", params);
 };
 
 SciELO.feed = function(params){
     //chamada solr n tem /webservices
-    return SciELO.callWebServiceFunction("feed", params);
+    return SciELO.callSOLRFunction("feed", params);
 };
 
 SciELO.home = function(){
-    return SciELO.cachedCall("webservices/home", {}, true, 60 * 60); // uma hora para expirar
+    return SciELO.cachedCall("home", {}, true, 60 * 60); // uma hora para expirar
 };
 
 SciELO.homeCleanCache = function(){
-    SciELO.removeCache("webservices/home", true);
+    SciELO.removeCache("home", true);
 };
 
 SciELO.feedsAndPublications = function(){
-    return SciELO.callWebServiceFunction("webservices/feed/publications/list", {});
+    return SciELO.callWebServiceFunction("feed/publications/list", {});
 };
 
 SciELO.favorite = function(idArticle){
-    return SciELO.callWebServiceFunctionPOST("webservices/favorite/create", {article_id: idArticle});
+    return SciELO.callWebServiceFunctionPOST("favorite/create", {article_id: idArticle});
 };
 
 SciELO.listFavorites = function(){
-    return SciELO.callWebServiceFunction("webservices/favorite/read");
+    return SciELO.callWebServiceFunction("favorite/read");
 };
 
 SciELO.unfavorite = function(idArticle){
-    return SciELO.callWebServiceFunctionPOST("webservices/favorite/delete", {article_id: idArticle});
+    return SciELO.callWebServiceFunctionPOST("favorite/delete", {article_id: idArticle});
 };
 
 SciELO.uncheckFeed = function (idFeed){
-    return SciELO.callWebServiceFunctionPOST("webservices/preferences/feed/exclusion/create", {feed_id: idFeed});
+    return SciELO.callWebServiceFunctionPOST("preferences/feed/exclusion/create", {feed_id: idFeed});
 };
 
 SciELO.checkFeed = function (idFeed){
-    return SciELO.callWebServiceFunctionPOST("webservices/preferences/feed/exclusion/delete", {feed_id: idFeed});
+    return SciELO.callWebServiceFunctionPOST("preferences/feed/exclusion/delete", {feed_id: idFeed});
 };
 
-SciELO.uncheckPublication = function (idFeed, idPublication){
-    return SciELO.callWebServiceFunctionPOST("webservices/preferences/feed/publication/exclusion/create", {feed_id: idFeed, publication_id: idPublication});
-};
-
-SciELO.uncheckAllPublications = function (idFeed){
-    return SciELO.callWebServiceFunctionPOST("webservices/preferences/feed/publication/exclusion/all/create", {feed_id: idFeed});
-};
-
-SciELO.checkPublication = function (idFeed, idPublication){
-    return SciELO.callWebServiceFunctionPOST("webservices/preferences/feed/publication/exclusion/delete", {feed_id: idFeed, publication_id: idPublication});
-};
-
-SciELO.checkAllPublications = function (idFeed){
-    return SciELO.callWebServiceFunctionPOST("webservices/preferences/feed/publication/exclusion/all/delete", {feed_id: idFeed});
+SciELO.savePublications = function (idFeed, publications){
+    return SciELO.callWebServiceFunctionPOST("preferences/feed/publication/save/status", {feed_id: idFeed, publications: publications});
 };
 
 SciELO.changeLanguage = function (language){
-    return SciELO.callWebServiceFunctionPOST("webservices/user/language", {language: language});
+    return SciELO.callWebServiceFunctionPOST("user/language", {language: language});
 };
 
 SciELO.changeFontSize = function (fontSize){
-    return SciELO.callWebServiceFunctionPOST("webservices/user/font", {font_size: fontSize});
+    return SciELO.callWebServiceFunctionPOST("user/font", {font_size: fontSize});
 };
 
 /**
@@ -186,6 +173,19 @@ SciELO.removeCache = function(key, isSessionCache){
     }else{
         window.localStorage.removeItem(key);
     }
+};
+
+SciELO.callSOLRFunction = function(webServiceFunction, params){
+    var callURL = SciELO.solrURL  + webServiceFunction;
+
+    return $.ajax({
+        url: callURL,
+        dataType: 'json',
+        timeout: 15000,
+        type: 'GET',
+        crossDomain: true,
+        data: params
+    });
 };
 
 SciELO.callWebServiceFunction = function(webServiceFunction, params){

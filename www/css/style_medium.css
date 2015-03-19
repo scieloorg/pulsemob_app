@@ -58,6 +58,15 @@ body.font-medium {
 .font-medium .cat-scroller ul{
     height: 224px;
 }
+.font-medium .no-article{
+    width: 165px;
+    height: 220px;
+}
+.font-medium .no-article .add-img{
+    width: 65px;
+    margin-left: 50px;
+    margin-top: 78px;
+}
 .font-medium .article{
     width: 165px;
     height: 220px;
@@ -72,6 +81,7 @@ body.font-medium {
 }
 .font-medium .article-name{
     font-size: 16px;
+    max-height: 120px;
 }
 .font-medium .article-legend{
     height: 45px;

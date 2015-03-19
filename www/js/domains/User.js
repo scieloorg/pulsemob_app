@@ -80,7 +80,7 @@ User.prototype.checkFeed = function (feedId) {
 
 User.prototype.getAllPublicationsExclusionsByFeed = function (feedId) {
     if(feedId in this.publication_feed_exclusions){
-        return this.publication_feed_exclusions[feedId];
+        return this.publication_feed_exclusions[feedId].slice();
     }else{
         return [];
     }

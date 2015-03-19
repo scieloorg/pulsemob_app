@@ -21,7 +21,7 @@
         currentUser: null,
         DEBUG_BROWSER:false,
         constants: {
-            APP_VERSION: "1.0.3",
+            APP_VERSION: "1.0.4",
             INTRODUCTION_SHOW: "introduction_show"
         }
     };
@@ -296,7 +296,7 @@
             spinnerplugin.show({
                 overlay: false,    // defaults to true
                 timeout: 30,       // defaults to 0 (no timeout)
-                fullscreen: false,  // defaults to false
+                fullscreen: false  // defaults to false
             });
         }
     };
