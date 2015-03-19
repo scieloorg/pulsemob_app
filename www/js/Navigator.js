@@ -21,8 +21,6 @@
             return;
         }
         
-        $(".context-menu-show").removeClass("context-menu-show");
-        
         if(Navigator.currentModal !== null){
             Navigator.currentModal.close();
             Navigator.currentModal = null;
@@ -99,7 +97,7 @@
     };
     
     Navigator.load = function(url){
-        $(".context-menu-show").removeClass("context-menu-show");
+        ContextMenu.hide();
         Transition.hideMenu();
         Transition.control = true;
         Navigator.currentPage = url;

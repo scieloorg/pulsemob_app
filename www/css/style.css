@@ -422,6 +422,20 @@ input:focus {
     width: 100%;
     margin-bottom: 0;
 }
+.no-article{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 200px;
+    background-color: #fff;
+    border: 2px #999 solid;
+}
+.no-article .add-img{
+    width: 60px;
+    margin-left: 45px;
+    margin-top: 68px;
+}
 .article{
     position: absolute;
     top: 0;
@@ -456,10 +470,10 @@ input:focus {
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 25px 5px 10px 5px;
+    padding: 35px 5px 10px 5px;
     color: #fff;
     font-size: 14px;
-    max-height: 145px;
+    max-height: 115px;
 }
 .article-legend{
     width: 100%;

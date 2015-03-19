@@ -68,7 +68,8 @@ HomeController.prototype = {
     },
     refresh: function(){
         App.showLoadingScreen();
-        HomeController.cleanData();
+        HomeController.firstData = {};
+        HomeController.scroll = {};
         HomeController.$categories.html("");
         
         if(HomeController.searchText){
@@ -310,29 +311,48 @@ HomeController.categoryRefresh = function () {
         query += " -journal_title_id:"+magazinesExcluded[i];
     }
         
-    var params = {q: query, start: 0, rows: HomeController.firstData[catId].length};
+    var params = {q: query, start: 0};
 
     $.when(
             SciELO.feed(params) 
     ).then( 
         function(json){
             HomeController.firstData[catId] = json.response.docs;
-            HomeController.scroll[catId].destroy();
+            if(HomeController.scroll[catId]) HomeController.scroll[catId].destroy();
             
             var limitScroll = (json.response.numFound > 1000) ? 1000 : json.response.numFound;
             var cacheSize = json.response.docs.length;
+            var minElements = (json.response.docs.length > 10) ? 10 : json.response.docs.length;
             
-            HomeController.scroll[catId] = new IScroll('#cat-wrapper-'+catId, {
-                scrollX: true,
-                scrollY: false,
-                mouseWheel: false,
-                infiniteElements: '#cat-scroller-'+catId+' .article',
-                infiniteLimit: limitScroll,
-                dataset: HomeController.requestData,
-                dataFiller: HomeController.updateContent,
-                cacheSize: cacheSize,
-                category: catId
-            });
+            
+            var $ul = $("#cat-scroller-"+catId+" ul");
+            $ul.html("");
+            
+            
+            if(minElements > 0){
+                var html = "";
+                for(var i=0; i<minElements ;i++){
+                    html += '<li class="article"><img class="loading-img" src="img/loading.gif"/></li>';
+                }
+
+                $ul.html(html);
+
+                HomeController.scroll[catId] = new IScroll('#cat-wrapper-'+catId, {
+                    scrollX: true,
+                    scrollY: false,
+                    mouseWheel: false,
+                    infiniteElements: '#cat-scroller-'+catId+' .article',
+                    infiniteLimit: limitScroll,
+                    dataset: HomeController.requestData,
+                    dataFiller: HomeController.updateContent,
+                    cacheSize: cacheSize,
+                    category: catId
+                });
+            }else{
+                $ul.html('<li class="no-article config-category" data-category="'+catId+'"><img class="add-img" src="img/add.png"/></li>');
+            }
+            
+            
             
             App.hideLoadingScreen();
         }, 
@@ -419,7 +439,7 @@ HomeController.addCategory = function (categoryData) {
                         '<div class="pop-menu-content">' +
                             '<table>';
     
-    if(HomeController.searchText === "" && !HomeController.isFavoritePage){
+    if(!HomeController.searchText && !HomeController.isFavoritePage){
         html += '<tr class="context-menu-row refresh-category" data-category="'+categoryData.id+'" >' +
                     '<td class="context-menu-icon"><img src="img/category/refresh.png"/></td>' +
                     '<td class="item-text context-menu-text"><div>'+Localization.getValue('refresh')+'</div></td>' +
@@ -440,35 +460,51 @@ HomeController.addCategory = function (categoryData) {
                                 '</tr>' +
                             '</table>' +
                         '</div>' +
-                    '</div>' +
+                    '</div>';
+            
+            if(categoryData.minElements > 0){
+                html +=         '<div id="cat-wrapper-'+categoryData.id+'" class="wrapper">' +
+                                    '<div id="cat-scroller-'+categoryData.id+'" class="scroller cat-scroller" >' +
+                                        '<ul data-category="'+categoryData.id+'">';
+
+                for(var i=0; i<categoryData.minElements ;i++){
+                    html += '<li class="article"><img class="loading-img" src="img/loading.gif"/></li>';
+                }
+
+                html +=                 '</ul>' +
+                                    '</div>' +
+                                '</div>' +
+                                '</div>' +
+                            '</div>';
+
+                HomeController.$categories.append(html);
+
+                HomeController.scroll[categoryData.id] = new IScroll('#cat-wrapper-'+categoryData.id, { 
+                    scrollX: true,
+                    scrollY: false,
+                    mouseWheel: false,
+                    infiniteElements: '#cat-scroller-'+categoryData.id+' .article',
+                    infiniteLimit: categoryData.limit,
+                    dataset: HomeController.requestData,
+                    dataFiller: HomeController.updateContent,
+                    cacheSize: categoryData.cacheSize,
+                    category: categoryData.id
+                });
+            }else{
+                html +=         '<div id="cat-wrapper-'+categoryData.id+'" class="wrapper">' +
+                                    '<div id="cat-scroller-'+categoryData.id+'" class="scroller cat-scroller" >' +
+                                        '<ul data-category="'+categoryData.id+'">' +
+                                            '<li class="no-article config-category" data-category="'+categoryData.id+'"><img class="add-img" src="img/add.png"/></li>' +
+                                        '</ul>' +
+                                    '</div>' +
+                                '</div>' +
+                                '</div>' +
+                            '</div>';
+
+                HomeController.$categories.append(html);
+            }
                         
-                    '<div id="cat-wrapper-'+categoryData.id+'" class="wrapper">' +
-                        '<div id="cat-scroller-'+categoryData.id+'" class="scroller cat-scroller" >' +
-                            '<ul data-category="'+categoryData.id+'">';
     
-    for(var i=0; i<categoryData.minElements ;i++){
-        html += '<li class="article"><img class="loading-img" src="img/loading.gif"/></li>';
-    }
-    
-    html +=                 '</ul>' +
-                        '</div>' +
-                    '</div>' +
-                    '</div>' +
-                '</div>';
-    
-    HomeController.$categories.append(html);
-    
-    HomeController.scroll[categoryData.id] = new IScroll('#cat-wrapper-'+categoryData.id, { 
-        scrollX: true,
-        scrollY: false,
-        mouseWheel: false,
-        infiniteElements: '#cat-scroller-'+categoryData.id+' .article',
-        infiniteLimit: categoryData.limit,
-        dataset: HomeController.requestData,
-        dataFiller: HomeController.updateContent,
-        cacheSize: categoryData.cacheSize,
-        category: categoryData.id
-    });
     
 };
 
@@ -487,8 +523,12 @@ HomeController.requestData = function (start, count) {
         var query = "subject_areas_ids:"+category;
 
         var magazinesExcluded = App.currentUser.getAllPublicationsExclusionsByFeed(category);
-        for(var i=0; i<magazinesExcluded.length ;i++){
-            query += " -journal_title_id:"+magazinesExcluded[i];
+        if(magazinesExcluded.length > 0){
+            query += " -journal_title_id: ("+magazinesExcluded[0];
+            for(var i=1; i<magazinesExcluded.length ;i++){
+                query += " OR "+magazinesExcluded[i];
+            }
+            query += ")";
         }
         
         var params = {q: query, start: start, rows: count};

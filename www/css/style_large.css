@@ -58,6 +58,15 @@ body.font-large {
 .font-large .cat-scroller ul{
     height: 244px;
 }
+.font-large .no-article{
+    width: 180px;
+    height: 240px;
+}
+.font-large .no-article .add-img{
+    width: 70px;
+    margin-left: 55px;
+    margin-top: 85px;
+}
 .font-large .article{
     width: 180px;
     height: 240px;
@@ -72,6 +81,7 @@ body.font-large {
 }
 .font-large .article-name{
     font-size: 18px;
+    max-height: 130px;
 }
 .font-large .article-legend{
     height: 50px;

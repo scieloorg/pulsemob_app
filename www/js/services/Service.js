@@ -214,84 +214,27 @@ Service.checkFeed = function (idFeed) {
     return deferred.promise();
 };
 
-Service.uncheckPublication = function (idFeed, idPublication) {
+Service.savePublications = function (idFeed, publications) {
     var deferred = $.Deferred();
     $.when(
-            SciELO.uncheckPublication(idFeed, idPublication)
+            SciELO.savePublications(idFeed, publications)
             ).then(
             function (response) {
-                App.currentUser.uncheckPublication(idFeed, idPublication);
-                deferred.resolve(response);
-            },
-            function (err) {
-                try{
-                    var errorDesc = "Error uncheck magazine: "+JSON.stringify(err);
-                    analytics.trackException(errorDesc, false);
-                }catch(errAnalytics){
-                    console.log(errAnalytics);
+                for(var i in publications.add){
+                    var publicationToAdd = publications.add[i];
+                    App.currentUser.checkPublication(idFeed, publicationToAdd);
                 }
-                deferred.reject(err);
-            }
-    );
-    return deferred.promise();
-};
-
-Service.uncheckAllPublications = function (idFeed) {
-    var deferred = $.Deferred();
-    $.when(
-            SciELO.uncheckAllPublications(idFeed)
-            ).then(
-            function (response) {
-                App.currentUser.uncheckAllPublications(idFeed);
-                deferred.resolve(response);
-            },
-            function (err) {
-                try{
-                    var errorDesc = "Error uncheck all magazine: "+JSON.stringify(err);
-                    analytics.trackException(errorDesc, false);
-                }catch(errAnalytics){
-                    console.log(errAnalytics);
+                
+                for(var i in publications.remove){
+                    var publicationToRemove = publications.remove[i];
+                    App.currentUser.uncheckPublication(idFeed, publicationToRemove);
                 }
-                deferred.reject(err);
-            }
-    );
-    return deferred.promise();
-};
-
-Service.checkPublication = function (idFeed, idPublication) {
-    var deferred = $.Deferred();
-    $.when(
-            SciELO.checkPublication(idFeed, idPublication)
-            ).then(
-            function (response) {
-                App.currentUser.checkPublication(idFeed, idPublication);
+                
                 deferred.resolve(response);
             },
             function (err) {
                 try{
-                    var errorDesc = "Error check magazine: "+JSON.stringify(err);
-                    analytics.trackException(errorDesc, false);
-                }catch(errAnalytics){
-                    console.log(errAnalytics);
-                }
-                deferred.reject(err);
-            }
-    );
-    return deferred.promise();
-};
-
-Service.checkAllPublications = function (idFeed) {
-    var deferred = $.Deferred();
-    $.when(
-            SciELO.checkAllPublications(idFeed)
-            ).then(
-            function (response) {
-                App.currentUser.checkAllPublications(idFeed);
-                deferred.resolve(response);
-            },
-            function (err) {
-                try{
-                    var errorDesc = "Error check all magazine: "+JSON.stringify(err);
+                    var errorDesc = "Error on save magazines: "+JSON.stringify(err);
                     analytics.trackException(errorDesc, false);
                 }catch(errAnalytics){
                     console.log(errAnalytics);
