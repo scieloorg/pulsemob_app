@@ -39,11 +39,17 @@
             case 'preferences.html':
                 App.currentController = new PreferencesController();
                 break;
-            case 'categoryConfig.html':
-                App.currentController = new CategoryConfigController();
+            case 'feedConfig.html':
+                App.currentController = new FeedConfigController();
                 break;
             case 'politics.html':
                 App.currentController = new PoliticsController();
+                break;
+            case 'settings.html':
+                App.currentController = new SettingsController();
+                break;
+            case 'articlesByCategory.html':
+                App.currentController = new ArticlesByCategoryController();
                 break;
             default:
                 alert('No controller found.');

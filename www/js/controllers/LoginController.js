@@ -8,11 +8,7 @@ LoginController.IOS_API_KEY = "903038984767-jmg2ov4lvfc5p8k214smfp3bkjv4gcm8.app
 LoginController.prototype = {
     initialize: function () {
         LoginController.initListeners();
-        try{
-            analytics.trackView("Login");
-        }catch(err){
-            console.log(err);
-        }
+        App.trackView("Login");
     },
     destroy: function () {
         PageLoad.ajxHandle = null;
@@ -20,11 +16,13 @@ LoginController.prototype = {
 };
 
 LoginController.initListeners = function () {
-    document.getElementById('btn-login-facebook').addEventListener('tap', LoginController.loginFacebook, false);
-    document.getElementById('btn-login-google').addEventListener('tap', LoginController.loginGoogle, false);
+    $("#btn-login-facebook").on('tap', LoginController.loginFacebook);
+    $("#btn-login-google").on('tap', LoginController.loginGoogle);
 };
 
 LoginController.loginFacebook = function () {
+    
+    console.log("ENTREI NO FACEBOOK LOGIN!!!");
 
     facebookConnectPlugin.login(["public_profile", "email"],
         function (response) {
@@ -60,25 +58,14 @@ LoginController.loginFacebook = function () {
                         );
                     },
                     function (err) {
-                        try{
-                            var errorDesc = "Error api facebook: "+JSON.stringify(err);
-                            analytics.trackException(errorDesc, false);
-                        }catch(errAnalytics){
-                            console.log(errAnalytics);
-                        }
-                        
+                        App.trackException("Error api facebook: "+JSON.stringify(err));
                         App.hideLoadingScreen();
                         App.showCommonDialog("SciELO",Localization.getAppValue("error-facebook"), function(){
                             Navigator.loadFullPage("login.html");
                         });
                     });
         }, function (err) {
-            try{
-                var errorDesc = "Error login facebook: "+JSON.stringify(err);
-                analytics.trackException(errorDesc, false);
-            }catch(errAnalytics){
-                console.log(errAnalytics);
-            }
+            App.trackException("Error login facebook: "+JSON.stringify(err));
             App.showCommonDialog("SciELO",Localization.getAppValue("error-facebook"), function(){
                 Navigator.loadFullPage("login.html");
             });
@@ -127,13 +114,9 @@ LoginController.loginGoogle = function () {
                 }
         );
     },
-            function (msg) {
-                try{
-                    var errorDesc = "Error login google: "+JSON.stringify(msg);
-                    analytics.trackException(errorDesc, false);
-                }catch(errAnalytics){
-                    console.log(errAnalytics);
-                }
+            function (err) {
+                App.trackException(errorDesc = "Error login google: "+JSON.stringify(err));
+                
                 App.showCommonDialog("SciELO",Localization.getAppValue("error-google"), function(){
                     Navigator.loadFullPage("login.html");
                 });
@@ -163,6 +146,8 @@ LoginController.autoLoginFacebook = function () {
                 if (response.status === "connected") {
                     if($.ajaxSettings.headers && $.ajaxSettings.headers["googleid"]) delete $.ajaxSettings.headers["googleid"];
                     
+                    console.log("#####TOKEN: "+response.authResponse.accessToken);
+                    
                     $.ajaxSetup({
                         headers: {facebookid: response.authResponse.userID, token: response.authResponse.accessToken}
                     });
@@ -183,12 +168,7 @@ LoginController.autoLoginFacebook = function () {
                 }
             },
             function (err) {
-                try{
-                    var errorDesc = "Error loginStatus facebook: "+JSON.stringify(err);
-                    analytics.trackException(errorDesc, false);
-                }catch(errAnalytics){
-                    console.log(errAnalytics);
-                }
+                App.trackException("Error loginStatus facebook: "+JSON.stringify(err));
                 SciELO.removeCache(LoginController.USER_TYPE_KEY);
                 Navigator.loadFullPage("login.html");
             });
@@ -231,14 +211,8 @@ LoginController.autoLoginGoogle = function () {
                 }
         );
     },
-            function (msg) {
-                try{
-                    var errorDesc = "Error trySilentLogin google: "+JSON.stringify(msg);
-                    analytics.trackException(errorDesc, false);
-                }catch(errAnalytics){
-                    console.log(errAnalytics);
-                }
-                
+            function (msg) {    
+                App.trackException("Error trySilentLogin google: "+JSON.stringify(msg));
                 SciELO.removeCache(LoginController.USER_TYPE_KEY);
                 Navigator.loadFullPage("login.html");
             }

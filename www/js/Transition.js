@@ -37,44 +37,6 @@
         }
     };
     
-    Transition.swipeleftMenu = function() {
-        if (App.$menu.hasClass("transitionMenuAppStart") && !Navigator.fullpage) {
-            Transition.hideMenu();
-        }
-    }
-    
-    Transition.swiperightMenu = function() {
-        if (!App.$menu.hasClass("transitionMenuAppStart") && !Navigator.fullpage) {
-            if(Navigator.currentPage === "newAnalysis.html") return;
-            Transition.showMenu();
-        }
-    }
-    
-    //toggleMenu
-    Transition.toggleMenu = function() {
-        if (App.$menu.hasClass("transitionMenuAppStart")) {
-            Transition.hideMenu();
-        } else {
-            Transition.showMenu();
-        }
-    };
-    //hide panel menu
-    Transition.hideMenu = function() {
-        App.$menu.removeClass("transitionMenuAppStart");
-        //App.$content.removeClass("transitionContentAppStart");
-        App.$blockDiv.addClass("hidden");
-    };
-    
-    //show panel menu
-    Transition.showMenu = function() {
-        $(".context-menu-show").removeClass("context-menu-show");
-        App.scrollMenu.scrollTo(0,0);
-        App.$menu.addClass("transitionMenuAppStart");
-        
-        //App.$content.addClass("transitionContentAppStart");
-        App.$blockDiv.removeClass("hidden");
-    };
-    
     Transition.addEventListeners = function() {
         App.$content.on("webkitTransitionEnd transitionend MSTransitionEnd", Transition.End);
     };

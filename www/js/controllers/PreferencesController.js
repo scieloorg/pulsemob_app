@@ -10,11 +10,7 @@ PreferencesController.prototype = {
         PreferencesController.initListeners();
         PreferencesController.setFeedVersion();
         PreferencesController.initLanguageAndFont();
-        try{
-            analytics.trackView("Preferencias");
-        }catch(err){
-            console.log(err);
-        }
+        App.trackView("Preferencias");
     },
     destroy: function() {
         App.$page.removeClass("pref-bg");
@@ -62,20 +58,10 @@ PreferencesController.rate = function(){
     if(typeof device !== 'undefined'){
         if(device.platform === "iOS"){
             App.openLink('itms-apps://itunes.apple.com/us/app/apple-store/id');
-            
-            try{
-                analytics.trackEvent('Preferencias', 'Rate', 'iOS', 1);
-            }catch(err){
-                console.log(err);
-            }
+            App.trackEvent('Preferencias', 'Rate', 'iOS');
         }else if (device.platform === "Android"){
             App.openLink('market://details?id=br.com.scielo');
-            
-            try{
-                analytics.trackEvent('Preferencias', 'Rate', 'Android', 1);
-            }catch(err){
-                console.log(err);
-            }
+            App.trackEvent('Preferencias', 'Rate', 'Android');
         }
     }
 };

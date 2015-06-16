@@ -4,12 +4,10 @@
         isInitialized: false,
         history: null,
         scrollApp: null,
-        scrollMenu: null,
         currentController: null,
         locale: "pt",
         fontSize: "S",
         $contentLoad: null,
-        $menu: null,
         $content: null,
         $contentWrapper: null,
         $headerApp: null,
@@ -19,7 +17,7 @@
         $page: null,
         $appSearchInput: null,
         currentUser: null,
-        DEBUG_BROWSER:false,
+        DEBUG_BROWSER:true,
         constants: {
             APP_VERSION: "1.0.4",
             INTRODUCTION_SHOW: "introduction_show"
@@ -34,25 +32,20 @@
             try{
                 analytics.startTrackerWithId('UA-59751520-1');
             }catch(err){
-                console.log(err);
+                if(!App.DEBUG_BROWSER) console.log(err);
             }
 
             App.setDomElements();
             App.addEventListeners();
             App.definitions();
             App.isInitialized = true;
-            FeedsAndPublications.loadMap();
+            DataMapping.loadMap();
             ContextMenu.init();
 
             $.ajaxSetup({
                 statusCode: {
                     500: function (err) {
-                        try{
-                            var errorDesc = "Error 500: "+JSON.stringify(err);
-                            analytics.trackException(errorDesc, false);
-                        }catch(errAnalytics){
-                            console.log(errAnalytics);
-                        }
+                        App.trackException("Error 500: "+JSON.stringify(err));
                         App.showCommonDialog("SciELO",Localization.getAppValue("error-500"));
                     }
                 }
@@ -64,7 +57,7 @@
                 LoginController.autoLogin();
             }else{
                 $.ajaxSetup({
-                    headers: {facebookid: "944948448856222", token: "CAALA0Tnry2IBAPJdZCAuyuoUikqzaCesUKiZAWFYQ6ODu2ddnyGRy9fPtupsqgnZAaqnZAYddQGUdAOoPNZB09j3E1qru3B1KgZAjC8ZCdOMFSkvoXihdJgSweyBuILIqK5x44VknMpEXrRDPcamKpPXJeS57fpvvMlcCiwOfkAWkJgY3kuvtKBM8tOQJJa7QZBIDekPrAAHTLACP5yKq4S5ZCU7NtyZAxWDFDmaatMrHlrAZDZD"}
+                    headers: {facebookid: "944948448856222", token: "CAALA0Tnry2IBAGxOHtNR8ORgKlaWTiXoZCSNJJYCZC5HZCIXx08a7Qnyl4RC4irPjebZARsqoSxjVwV8SvTgHiY9aTNZBtFzruIZAwu9fefYYSD0tWJ0g0w2Hyw1CVDCylRiCGz699rZAZCmC74sRaGlX5PWziGg1RZBQ25KI2SY6ntaHovZCaEOy92161JVgXDl6CoZCNGnRd4dotx0kAbFMKvwxbmqBS0Adt1SCmH0DHIjwZDZD"}
                 });
 
                 $.when(
@@ -87,7 +80,6 @@
     //set Application elements
     App.setDomElements = function () {
         App.$contentLoad = $("#page-scroller");
-        App.$menu = $("#menu");
         App.$content = $("#content");
         App.$headerApp = $('#app-bar');
         App.$headerTitle = $('#app-bar-title');
@@ -111,12 +103,10 @@
     //set Application listeners
     App.addEventListeners = function () {
         //load internal pages
-        App.$headerApp.on('click', "#app-bar-menu", Transition.toggleMenu);
         App.$headerApp.on('click', "#app-bar-back", Navigator.backEvent);
         App.$headerApp.on('click', "#app-bar-search", App.search);
         App.$headerApp.on('click', '.botoes-app', Navigator.loadPage);
         $("#app-bar-search-input input").focusout(App.searchFocusOut);
-        App.$menu.on('tap', ".menu-checkbox", App.menuCheckbox);
         App.$page.on('tap', '.botoes-app', Navigator.loadPage);
 
 
@@ -132,14 +122,9 @@
         Transition.addEventListeners();
         //listener menu button
 
-        //listener swipe events
-        Hammer(document).on("swipeleft", Transition.swipeleftMenu);
-
 
         //scroll
         App.$contentWrapper.height("100%");
-
-        App.scrollMenu = new IScroll('#menu-content', {scrollbars: false, click: false});
         App.scrollApp = new IScroll('#page-wrapper', {scrollbars: false, click: false});
 
         // nao bugar o scroll quando tiver uma tela com input
@@ -187,8 +172,6 @@
         }
 
         App.fontSize = size;
-
-        App.scrollMenu.refresh();
         App.refreshScroll(false);
     };
 
@@ -204,7 +187,8 @@
     App.search = function () {
         if (App.$appSearchInput.is(":visible")) {
             if (App.$appSearchInput.children("input").val() !== "") {
-                Navigator.loadPage("home.html");
+                ArticlesByCategoryController.searchText = App.$appSearchInput.children("input").val();
+                Navigator.loadPage("articlesByCategory.html");
                 if(!App.DEBUG_BROWSER) cordova.plugins.Keyboard.close();
             }
         } else {
@@ -215,71 +199,6 @@
                 });
             });
         }
-    };
-
-    App.initCategoryMenu = function () {
-        var $categoryMenu = $("#categories-menu");
-        $categoryMenu.html("");
-
-        var allCategories = FeedsAndPublications.getCategoriesOrder();
-        var categoriesRemoved = App.currentUser.getAllFeedsExclusions();
-
-        for (var i in allCategories) {
-            var cat = parseInt(allCategories[i]);
-
-            var img = (categoriesRemoved.indexOf(cat) < 0) ? 'checked' : 'unchecked';
-
-            var html = '<tr class="menu-row">' +
-                            '<td id="menu-checkbox-'+cat+'" class="menu-checkbox" data-category="'+cat+'"><img src="img/sidebar/'+img+'.png"/></td>' +
-                            '<td class="menu-text">'+FeedsAndPublications.getCategoryName(cat)+'</td>' +
-                        '</tr>';
-                
-            $categoryMenu.append(html);
-        }
-
-        App.scrollMenu.refresh();
-        
-    };
-
-    App.menuCheckbox = function () {
-        App.showLoadingScreen();
-        
-        var catId = $(this).data("category");
-        var $obj = $(this).children("img");
-
-        if ($obj.attr("src") === "img/sidebar/unchecked.png") {
-            
-            $.when(
-                Service.checkFeed(catId)
-            ).then(
-                function(){
-                    $obj.attr("src", "img/sidebar/checked.png");
-                    App.hideLoadingScreen();
-                },
-                function (err) {
-                    App.hideLoadingScreen();
-                    App.showCommonInternetErrorDialog();
-                }
-            );
-        } else {
-            
-            
-            $.when(
-                Service.uncheckFeed(catId)
-            ).then(
-                function(){
-                    $obj.attr("src", "img/sidebar/unchecked.png");
-                    App.hideLoadingScreen();
-                },
-                function (err) {
-                    App.hideLoadingScreen();
-                    App.showCommonInternetErrorDialog();
-                }
-            );
-        }
-
-        // alterando a config de categorias a home eh diferente
-        SciELO.homeCleanCache();
     };
 
     App.refreshScroll = function (goTop) {
@@ -307,13 +226,13 @@
     };
 
     App.showBackButton = function () {
-        $("#app-bar-menu").hide();
+        $("#app-bar-blank").hide();
         $("#app-bar-back").show();
     };
 
     App.hideBackButton = function () {
         $("#app-bar-back").hide();
-        $("#app-bar-menu").show();
+        $("#app-bar-blank").show();
     };
 
     App.showFullPage = function () {
@@ -352,6 +271,7 @@
         Navigator.currentModal = new BootstrapDialog({
             message: msg,
             title: title,
+            closable: false,
             buttons: [{
                     label: 'OK',
                     cssClass: 'btn-default btn-ok',
@@ -374,6 +294,7 @@
         Navigator.currentModal = new BootstrapDialog({
             message: msg,
             title: title,
+            closable: false,
             buttons: [{
                     label: btnLabel,
                     cssClass: 'btn-default btn-ok',
@@ -395,6 +316,7 @@
         Navigator.currentModal = new BootstrapDialog({
             message: msg,
             title: title,
+            closable: false,
             buttons: [{
                     label: btn1,
                     cssClass: 'btn-default btn-ok',
@@ -429,6 +351,38 @@
             }
         } else {
             window.open(url);
+        }
+    };
+    
+    App.trackView = function (viewName) {
+        if(!App.DEBUG_BROWSER) {
+            try{
+                analytics.trackView(viewName);
+            }catch(errAnalytics){
+                console.log(errAnalytics);
+            }
+        }
+    };
+    
+    App.trackEvent = function (eventCategory, eventAction, eventLabel ) {
+        if(!App.DEBUG_BROWSER) {
+            try{
+                analytics.trackEvent(eventCategory, eventAction, eventLabel, 1);
+            }catch(errAnalytics){
+                console.log(errAnalytics);
+            }
+        }
+    };
+    
+    App.trackException = function (errorDesc) {
+        if(!App.DEBUG_BROWSER) {
+            try{
+                analytics.trackException(errorDesc, false);
+            }catch(errAnalytics){
+                console.log(errAnalytics);
+            }
+        }else{
+            console.log(errorDesc);
         }
     };
 

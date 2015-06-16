@@ -5,11 +5,7 @@ PoliticsController.prototype = {
     initialize: function() {
         App.$page.addClass("pref-bg");
         App.showBackButton();
-        try{
-            analytics.trackView("Politicas");
-        }catch(err){
-            console.log(err);
-        }
+        App.trackView("Politicas");
     },
     destroy: function() {
         App.$page.removeClass("pref-bg");

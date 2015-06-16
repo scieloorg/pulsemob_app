@@ -15,13 +15,11 @@ var User = function () {
     this.language = null;
     this.font_size = null;
     this.favorites = [];
-    this.feed_exclusions = {};
-    this.publication_feed_exclusions = [];
+    this.feeds = null;
 };
 
 User.prototype.updateFromLoginData = function (loginData) {
-    this.feed_exclusions = loginData.feed_exclusions;
-    this.publication_feed_exclusions = loginData.publication_feed_exclusions;
+    this.feeds = loginData.feeds;
     this.favorites = loginData.favorites;
     this.name = loginData.user.name;
     this.language = loginData.user.language;
@@ -60,65 +58,36 @@ User.prototype.isFavoriteArticle = function (idArticle) {
     }
 };
 
-User.prototype.getAllFeedsExclusions = function () {
-    return this.feed_exclusions;
-};
-
-User.prototype.uncheckFeed = function (feedId) {
-    var index = this.feed_exclusions.indexOf(feedId);
-    if (index === -1) {
-        this.feed_exclusions.push(feedId);
-    }
-};
-
-User.prototype.checkFeed = function (feedId) {
-    var index = this.feed_exclusions.indexOf(feedId);
-    if (index > -1) {
-        this.feed_exclusions.splice(index, 1);
-    }
-};
-
-User.prototype.getAllPublicationsExclusionsByFeed = function (feedId) {
-    if(feedId in this.publication_feed_exclusions){
-        return this.publication_feed_exclusions[feedId].slice();
-    }else{
-        return [];
-    }
-};
-
-User.prototype.uncheckPublication = function (feedId, publicationId) {
-    if (feedId in this.publication_feed_exclusions) {
-        var index = this.publication_feed_exclusions[feedId].indexOf(publicationId);
-        if (index === -1) {
-            this.publication_feed_exclusions[feedId].push(publicationId);
-        }
-    }else{
-        this.publication_feed_exclusions[feedId] = [];
-        this.publication_feed_exclusions[feedId].push(publicationId);
-    }
-};
-
-User.prototype.uncheckAllPublications = function (feedId) {
-    this.publication_feed_exclusions[feedId] = FeedsAndPublications.getAllMagazinesIds(feedId);
-};
-
-User.prototype.checkPublication = function (feedId, publicationId) {
-    if (feedId in this.publication_feed_exclusions) {
-        var index = this.publication_feed_exclusions[feedId].indexOf(publicationId);
-        if (index > -1) {
-            this.publication_feed_exclusions[feedId].splice(index, 1);
-        }
-    }
-};
-
-User.prototype.checkAllPublications = function (feedId) {
-    this.publication_feed_exclusions[feedId] = [];
-};
-
 User.prototype.changeLanguage = function(language){
     this.language = language;
 };
 
 User.prototype.changeFontSize = function(fontSize){
     this.font_size = fontSize;
+};
+
+User.prototype.getFeeds = function(){
+    return this.feeds;
+};
+
+User.prototype.getFeed = function(feedId){
+    return this.feeds[feedId];
+};
+
+User.prototype.getFeedName = function(feedId){
+    return this.feeds[feedId].feed_name;
+};
+
+User.prototype.getFeedMagazines = function(feedId){
+    return this.feeds[feedId].magazines;
+};
+
+User.prototype.setFeed = function(feed){
+    this.feeds[feed.id] = {};
+    this.feeds[feed.id].feed_name = feed.feed_name;
+    this.feeds[feed.id].magazines = feed.magazines;
+};
+
+User.prototype.deleteFeed = function(feedId){
+    delete this.feeds[feedId];
 };

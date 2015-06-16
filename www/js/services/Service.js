@@ -10,46 +10,40 @@ var Service = function () {
 Service.login = function (userData) {
     var deferred = $.Deferred();
     $.when(
-            SciELO.loginUser(userData)
-            ).then(
-            function (response) {
-                // Init user
-                var user = new User();
-                user.updateFromLoginData(response);
-                App.currentUser = user;
-                App.setLocale(user.language);
-                App.setFontSize(user.font_size);
-                FeedsAndPublications.checkVersion(response.solr_version);
-                App.initCategoryMenu();
-                
-                
-                var analyticsUserId = "";
-                if(user.email){
-                    analyticsUserId = user.email;
-                }else if(user.facebook_id){
-                    analyticsUserId = "fb-"+user.facebook_id;
-                }else{
-                    analyticsUserId = "gp-"+user.google_id;
-                }
-                
-                try{
-                    analytics.setUserId(analyticsUserId);
-                }catch(err){
-                    console.log(err);
-                }
-                
-                
-                deferred.resolve(response);
-            },
-            function (err) {
-                try{
-                    var errorDesc = "Error on login: "+JSON.stringify(err);
-                    analytics.trackException(errorDesc, false);
-                }catch(errAnalytics){
-                    console.log(errAnalytics);
-                }
-                deferred.reject(err);
+        SciELO.loginUser(userData)
+    ).then(
+        function (response) {
+            // Init user
+            var user = new User();
+            user.updateFromLoginData(response);
+            App.currentUser = user;
+            App.setLocale(user.language);
+            App.setFontSize(user.font_size);
+            DataMapping.checkVersion(response.solr_version);
+
+
+            var analyticsUserId = "";
+            if(user.email){
+                analyticsUserId = user.email;
+            }else if(user.facebook_id){
+                analyticsUserId = "fb-"+user.facebook_id;
+            }else{
+                analyticsUserId = "gp-"+user.google_id;
             }
+
+            try{
+                analytics.setUserId(analyticsUserId);
+            }catch(err){
+                if(!App.DEBUG_BROWSER) console.log(err);
+            }
+
+
+            deferred.resolve(response);
+        },
+        function (err) {
+            App.trackException("Error on login: "+JSON.stringify(err));
+            deferred.reject(err);
+        }
     );
     return deferred.promise();
 };
@@ -57,28 +51,18 @@ Service.login = function (userData) {
 Service.favoriteArticle = function (idArticle) {
     var deferred = $.Deferred();
     $.when(
-            SciELO.favorite(idArticle)
-            ).then(
-            function (response) {
-                App.currentUser.favoriteArticle(idArticle);
-                
-                try{
-                    analytics.trackEvent('Artigo', 'Favoritar', idArticle, 1);
-                }catch(errAnalytics){
-                    console.log(errAnalytics);
-                }
-                
-                deferred.resolve(response);
-            },
-            function (err) {
-                try{
-                    var errorDesc = "Error favorite article: "+JSON.stringify(err);
-                    analytics.trackException(errorDesc, false);
-                }catch(errAnalytics){
-                    console.log(errAnalytics);
-                }
-                deferred.reject(err);
-            }
+        SciELO.favorite(idArticle)
+    ).then(
+        function (response) {
+            App.currentUser.favoriteArticle(idArticle);
+            App.trackEvent('Artigo', 'Favoritar', idArticle);
+
+            deferred.resolve(response);
+        },
+        function (err) {
+            App.trackException("Error favorite article: "+JSON.stringify(err));
+            deferred.reject(err);
+        }
     );
     return deferred.promise();
 };
@@ -86,29 +70,21 @@ Service.favoriteArticle = function (idArticle) {
 Service.unfavoriteArticle = function (idArticle) {
     var deferred = $.Deferred();
     $.when(
-            SciELO.unfavorite(idArticle)
-            ).then(
-            function (response) {
-                App.currentUser.unfavoriteArticle(idArticle);
-                
-                try{
-                    analytics.trackEvent('Artigo', 'Desfavoritar', AbstractController.articleData.id, 1);
-                }catch(errAnalytics){
-                    console.log(errAnalytics);
-                }
-                
-                deferred.resolve(response);
-            },
-            function (err) {
-                try{
-                    var errorDesc = "Error unfavorite article: "+JSON.stringify(err);
-                    analytics.trackException(errorDesc, false);
-                }catch(errAnalytics){
-                    console.log(errAnalytics);
-                }
-                
-                deferred.reject(err);
-            }
+        SciELO.unfavorite(idArticle)
+    ).then(
+        function (response) {
+            App.currentUser.unfavoriteArticle(idArticle);
+
+
+            App.trackEvent('Artigo', 'Desfavoritar', AbstractController.articleData.id);
+
+
+            deferred.resolve(response);
+        },
+        function (err) {
+            App.trackException("Error unfavorite article: "+JSON.stringify(err));
+            deferred.reject(err);
+        }
     );
     return deferred.promise();
 };
@@ -116,20 +92,15 @@ Service.unfavoriteArticle = function (idArticle) {
 Service.listFavoriteArticles = function () {
     var deferred = $.Deferred();
     $.when(
-            SciELO.listFavorites()
-            ).then(
-            function (response) {
-                deferred.resolve(response);
-            },
-            function (err) {
-                try{
-                    var errorDesc = "Error list favorites articles: "+JSON.stringify(err);
-                    analytics.trackException(errorDesc, false);
-                }catch(errAnalytics){
-                    console.log(errAnalytics);
-                }
-                deferred.reject(err);
-            }
+        SciELO.listFavorites()
+    ).then(
+        function (response) {
+            deferred.resolve(response);
+        },
+        function (err) {
+            App.trackException("Error list favorites articles: "+JSON.stringify(err));
+            deferred.reject(err);
+        }
     );
     return deferred.promise();
 };
@@ -137,110 +108,15 @@ Service.listFavoriteArticles = function () {
 Service.getHomeArticles = function () {
     var deferred = $.Deferred();
     $.when(
-            SciELO.home()
-            ).then(
-            function (response) {
-                deferred.resolve(response);
-            },
-            function (err) {
-                try{
-                    var errorDesc = "Error list home articles: "+JSON.stringify(err);
-                    analytics.trackException(errorDesc, false);
-                }catch(errAnalytics){
-                    console.log(errAnalytics);
-                }
-                
-                deferred.reject(err);
-            }
-    );
-    return deferred.promise();
-};
-
-Service.uncheckFeed = function (idFeed) {
-    var deferred = $.Deferred();
-    $.when(
-            SciELO.uncheckFeed(idFeed)
-            ).then(
-            function (response) {
-                App.currentUser.uncheckFeed(idFeed);
-                
-                try{
-                    analytics.trackEvent('Categoria', 'Remover', FeedsAndPublications.getCategoryName(idFeed), 1);
-                }catch(err){
-                    console.log(err);
-                }
-                
-                deferred.resolve(response);
-            },
-            function (err) {
-                try{
-                    var errorDesc = "Error uncheck category: "+JSON.stringify(err);
-                    analytics.trackException(errorDesc, false);
-                }catch(errAnalytics){
-                    console.log(errAnalytics);
-                }
-                deferred.reject(err);
-            }
-    );
-    return deferred.promise();
-};
-
-Service.checkFeed = function (idFeed) {
-    var deferred = $.Deferred();
-    $.when(
-            SciELO.checkFeed(idFeed)
-            ).then(
-            function (response) {
-                App.currentUser.checkFeed(idFeed);
-                
-                try{
-                    analytics.trackEvent('Categoria', 'Adicionar', FeedsAndPublications.getCategoryName(idFeed), 1);
-                }catch(err){
-                    console.log(err);
-                }
-                
-                deferred.resolve(response);
-            },
-            function (err) {
-                try{
-                    var errorDesc = "Error check category: "+JSON.stringify(err);
-                    analytics.trackException(errorDesc, false);
-                }catch(errAnalytics){
-                    console.log(errAnalytics);
-                }
-                deferred.reject(err);
-            }
-    );
-    return deferred.promise();
-};
-
-Service.savePublications = function (idFeed, publications) {
-    var deferred = $.Deferred();
-    $.when(
-            SciELO.savePublications(idFeed, publications)
-            ).then(
-            function (response) {
-                for(var i in publications.add){
-                    var publicationToAdd = publications.add[i];
-                    App.currentUser.checkPublication(idFeed, publicationToAdd);
-                }
-                
-                for(var i in publications.remove){
-                    var publicationToRemove = publications.remove[i];
-                    App.currentUser.uncheckPublication(idFeed, publicationToRemove);
-                }
-                
-                deferred.resolve(response);
-            },
-            function (err) {
-                try{
-                    var errorDesc = "Error on save magazines: "+JSON.stringify(err);
-                    analytics.trackException(errorDesc, false);
-                }catch(errAnalytics){
-                    console.log(errAnalytics);
-                }
-                deferred.reject(err);
-            }
+        SciELO.home()
+    ).then(
+        function (response) {
+            deferred.resolve(response);
+        },
+        function (err) {
+            App.trackException("Error list home articles: "+JSON.stringify(err));
+            deferred.reject(err);
+        }
     );
     return deferred.promise();
 };
@@ -248,28 +124,18 @@ Service.savePublications = function (idFeed, publications) {
 Service.changeLanguage = function (language) {
     var deferred = $.Deferred();
     $.when(
-            SciELO.changeLanguage(language)
-            ).then(
-            function (response) {
-                App.currentUser.changeLanguage(language);
-                
-                try{
-                    analytics.trackEvent('Preferencias', 'Idioma', language, 1);
-                }catch(err){
-                    console.log(err);
-                }
-                
-                deferred.resolve(response);
-            },
-            function (err) {
-                try{
-                    var errorDesc = "Error change language: "+JSON.stringify(err);
-                    analytics.trackException(errorDesc, false);
-                }catch(errAnalytics){
-                    console.log(errAnalytics);
-                }
-                deferred.reject(err);
-            }
+        SciELO.changeLanguage(language)
+    ).then(
+        function (response) {
+            App.currentUser.changeLanguage(language);
+            App.trackEvent('Preferencias', 'Idioma', language);
+
+            deferred.resolve(response);
+        },
+        function (err) {
+            App.trackException("Error change language: "+JSON.stringify(err));
+            deferred.reject(err);
+        }
     );
     return deferred.promise();
 };
@@ -277,28 +143,70 @@ Service.changeLanguage = function (language) {
 Service.changeFontSize = function (fontSize) {
     var deferred = $.Deferred();
     $.when(
-            SciELO.changeFontSize(fontSize)
-            ).then(
-            function (response) {
-                App.currentUser.changeFontSize(fontSize);
-                
-                try{
-                    analytics.trackEvent('Preferencias', 'Fonte', fontSize, 1);
-                }catch(err){
-                    console.log(err);
-                }
-                
-                deferred.resolve(response);
-            },
-            function (err) {
-                try{
-                    var errorDesc = "Error change font size: "+JSON.stringify(err);
-                    analytics.trackException(errorDesc, false);
-                }catch(errAnalytics){
-                    console.log(errAnalytics);
-                }
-                deferred.reject(err);
-            }
+        SciELO.changeFontSize(fontSize)
+    ).then(
+        function (response) {
+            App.currentUser.changeFontSize(fontSize);
+            App.trackEvent('Preferencias', 'Fonte', fontSize);
+
+            deferred.resolve(response);
+        },
+        function (err) {
+            App.trackException("Error change font size: "+JSON.stringify(err));
+            deferred.reject(err);
+        }
+    );
+    return deferred.promise();
+};
+
+Service.createFeed = function (feedName, magazines) {
+    var deferred = $.Deferred();
+    $.when(
+        SciELO.createFeed(feedName, magazines)
+    ).then(
+        function (response) {
+            App.currentUser.setFeed(response);
+            deferred.resolve(response);
+        },
+        function (err) {
+            App.trackException("Error on createFeed: "+JSON.stringify(err));
+            deferred.reject(err);
+        }
+    );
+    return deferred.promise();
+};
+
+Service.saveFeed = function (feedId, magazinesToAdd, magazinesToRemove) {
+    
+    var deferred = $.Deferred();
+    $.when(
+        SciELO.saveFeed(feedId, magazinesToAdd, magazinesToRemove)
+    ).then(
+        function (response) {
+            App.currentUser.setFeed(response);
+            deferred.resolve(response);
+        },
+        function (err) {
+            App.trackException("Error on saveFeed: "+JSON.stringify(err));
+            deferred.reject(err);
+        }
+    );
+    return deferred.promise();
+};
+
+Service.deleteFeed = function (feedId) {
+    var deferred = $.Deferred();
+    $.when(
+        SciELO.deleteFeed(feedId)
+    ).then(
+        function (response) {
+            App.currentUser.deleteFeed(feedId);
+            deferred.resolve(response);
+        },
+        function (err) {
+            App.trackException("Error on createFeed: "+JSON.stringify(err));
+            deferred.reject(err);
+        }
     );
     return deferred.promise();
 };

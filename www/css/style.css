@@ -79,10 +79,6 @@ body {
     margin: 0px;
 }
 
-.bootstrap-dialog-close-button{
-	display: none !important;
-}
-
 .btn-ok{
     background-color: #bbb;
     color: #fff;
@@ -181,10 +177,8 @@ body {
     color: #ffffff;
     z-index: 1001;
 }
-#app-bar-menu{
-    padding: 0 10px 0 10px;
-    width: 35px;
-    font-size: 14px;
+#app-bar-blank{
+    width: 10px;
 }
 #app-bar-back{
     padding: 0 10px 0 10px;
@@ -230,10 +224,17 @@ body {
     border-bottom: 1px #ccc solid;
 }
 
+#app-bar-settings{
+    width: 30px;
+    text-align: right;
+}
+#app-bar-settings img{
+    width: 20px;
+}
+
 #app-bar-context-menu{
     text-align: center;
-    width: 60px;
-    font-size: 14px;
+    width: 40px;
 }
 #app-bar-context-menu img{
     height: 20px;
@@ -275,45 +276,6 @@ body {
     width: 40px;
     padding: 0 10px;
 }
-
-/* </editor-fold> */
-
-/* <editor-fold desc="MENU APP STYLES"> */
-
-menu {
-    position: absolute;
-    top:0;
-    left:0;
-    min-width: 160px;
-    width:70%;
-    max-width: 500px;
-    height: 100%;
-    background-color: #fff;
-    z-index: 1001;
-}
-#menu-content{
-    position:relative;
-    height: 100%;
-    width: 100%;
-    border-color: transparent;
-    font-size: 16px;
-    padding: 5px 10px;
-}
-.menu-row{
-    height: 40px;
-    border-bottom: 1px #ccc solid;
-}
-.menu-checkbox {
-    width: 35px;
-}
-.menu-checkbox img{
-    width: 35px;
-    padding: 10px 5px;
-}
-.menu-text{
-    padding: 5px 0;
-}
-
 
 /* </editor-fold> */
 
@@ -380,61 +342,102 @@ input:focus {
 
 /* </editor-fold> */
 
-/* <editor-fold desc="HOME STYLES"> */
-
-.category{
-    margin-bottom: 10px;
+/* <editor-fold desc="ARTICLES/FEEDS COMMONS STYLES"> */
+.feed-header{
+    background-color: #d82727;
+    height: 40px;
+    color: #fff;
+    font-family: TerminalDosis-Bold;
+    border-bottom: 2px #000 solid;
 }
-.category-content{
+.feed-header td:first-child{
+    padding-left: 10px;
+}
+.feed-header .back-to-home{
+    width: 30px;
+}
+.feed-header .back-to-home img{
+    height: 24px;
+}
+.feed-menu-btn{
+    text-align: center;
+    width: 40px;
+}
+.feed-menu-btn img{
+    height: 20px;
+}
+.feed-footer{
+    text-align: right;
+    height: 40px;
+    line-height: 40px;
+}
+.feed-footer.back-to-home{
+    text-align: left;
+}
+.feed-footer div{
+    display: inline-block;
+}
+.feed-footer .footer-desc{
+    color: #7c7c7c;
+    padding-right: 4px;
+}
+.feed-footer .footer-img{
+    width: 30px;
+    padding: 0 10px 0 0;
+}
+.feed-footer.back-to-home .footer-img{
+    padding: 0 0 0 10px;
+}
+.feed-footer .footer-img img{ 
+    height: 24px;
+}
+
+.section-content{
     position: relative;
-    padding-top: 10px;
     overflow-y: hidden;
 }
-.category-bar{
+.magazine{
+    margin-bottom: 10px;
+}
+.magazine-bar{
     width: 100%;
     background-color: #C2C2C2;
-    border-bottom: 2px #000 solid;
     height: 45px;
     font-family: TerminalDosis-Bold;
 }
 
-.category-bar table tr{
+.magazine-bar table tr{
     height: 45px;
 }
 
-.category-bar-title{
+.magazine-bar-title{
     padding-left: 8px;
 }
 
-.category-menu-btn{
+.magazine-menu-btn{
     text-align: center;
-    width: 60px;
-    font-size: 14px;
+    width: 40px;
 }
 
-.category-menu-btn img{
+.magazine-menu-btn img{
     height: 20px;
 }
 
-.cat-scroller ul{
+.magazine-scroller{
+    padding-top: 10px;
+}
+
+.magazine-scroller ul{
     position: relative;
     height: 204px;
     width: 100%;
     margin-bottom: 0;
 }
-.no-article{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 150px;
-    height: 200px;
-    background-color: #fff;
-    border: 2px #999 solid;
+.magazine-scroller ul li:first-child{
+    border-left: 10px #EDECED solid;
 }
-.no-article .add-img{
-    width: 60px;
-    margin-left: 45px;
-    margin-top: 68px;
+.magazine-scroller ul li.article:last-child{
+    border-right: none;
 }
 .article{
     position: absolute;
@@ -494,11 +497,11 @@ input:focus {
     right: 10px;
     width: 13px;
 }
-#home-search-box{
+#articles-search-box{
     font-size: 18px;
-    margin-bottom: 10px;
+    margin: 10px;
 }
-.home-search-row{
+.articles-search-row{
     height: 30px;
 }
 #string-result-of{
@@ -508,19 +511,26 @@ input:focus {
     text-align: right;
     padding-right: 5px;
 }
-#home-search-text input{
+#articles-search-text input{
     width: 100%;
     background-color: rgba(0,0,0,0);
     border: none;
 }
-#home-search-btn{
+#articles-search-btn{
     text-align: center;
     width: 60px;
 }
-#home-search-btn img{
+#articles-search-btn img{
     width: 25px;
 }
+
+.no-results{
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+}
 /* </editor-fold> */
+
 
 /* <editor-fold desc="INTRODUCTION STYLES"> */
 
@@ -651,7 +661,7 @@ input:focus {
 .pref-content{
     padding: 10px 5px;
     font-size: 18px;
-    color: #fff;
+    color: #888;
     border-bottom: 1px #bbb solid;
     margin-bottom: 20px;
 }
@@ -690,14 +700,6 @@ input:focus {
 
 /* <editor-fold desc="CATEGORY CONFIG STYLES"> */
 
-#category-name{
-    color: #bbb;
-    border-bottom: 1px #bbb solid;
-    padding: 10px 5px;
-    margin-bottom: 25px;
-    font-size: 14px;
-}
-
 .category-magazine-row{
     height: 40px;
     vertical-align: bottom;
@@ -710,6 +712,107 @@ input:focus {
 .magazine-checkbox img, #select-all img{
     width: 35px;
     padding: 10px 5px;
+}
+
+#btn-save{
+    width: 90px;
+    background-color: #888;
+    padding: 5px 0;
+    text-align: center;
+}
+.btn-save-feed{
+    font-size: 20px;
+    border: 1px #888 solid;
+    border-radius: 5px;
+    padding: 10px 0;
+}
+
+.input-feed{
+    width: 100%;
+    height: 40px;
+    font-size: 20px;
+    border: none;
+    border-bottom: 1px #888 solid;
+    color: #888;
+    background-color: transparent;
+}
+
+/* </editor-fold> */
+
+
+/* <editor-fold desc="SETTINGS STYLES"> */
+
+.settings-desc{
+    font-size: 18px;
+    padding: 10px 5px 5px 5px;
+}
+
+.settings-desc-text{
+    color: #aaa;
+    font-size: 14px;
+    padding: 0 5px;
+}
+
+.settings-title{
+    font-size: 18px;
+    padding: 5px;
+    margin: 20px 0 10px 0;
+    border-bottom: 2px #000 solid;
+}
+
+.settings-item{
+    color: #888;
+    padding: 5px;
+    border-bottom: 1px #bbb solid;
+}
+#search-input{
+    width: 100%;
+    border: none;
+    color: #888;
+    height: 30px;
+    background-color: transparent;
+}
+#btn-search-magazines{
+    width: 40px;
+    text-align: center;
+}
+#btn-search-magazines img{
+    width: 25px;
+}
+
+.settings-letter{
+    display: inline-block;
+    width: 30px;
+    font-size: 18px;
+    color: #888;
+    text-align: center;
+    padding: 5px;
+}
+.settings-row{
+    height: 40px;
+    border-bottom: 1px #bbb solid;
+    font-size: 18px;
+    color: #888;
+}
+.settings-category-name{
+    padding-left: 5px;
+}
+.settings-arrow{
+    width: 30px;
+    text-align: center;
+    padding-bottom: 3px;
+}
+.settings-arrow img{
+    width: 15px;
+}
+
+.settings-list{
+    width: 20px;
+    text-align: center;
+    padding-bottom: 4px;
+}
+.settings-list img{
+    width: 13px;
 }
 
 /* </editor-fold> */
