@@ -18,25 +18,8 @@ menu {
     -webkit-transform: translateX(50%);
 }
 
-.transitionApp1 {
-	opacity:0;
-}
 .transitionApp2 {
 	-webkit-transform: translateX(100%);
-}
-.transitionApp3 {
-	-webkit-transform: scale(0.1);
-}
-.transitionApp4 {
-    -webkit-transform: rotateY(180deg);
-    opacity: 0;
-}
-.transitionApp5 {
-    opacity: 0;
-    -webkit-transform:rotateX(180deg);
-}
-.transitionApp6 {
-	-webkit-transform: translateY(100%);
 }
 
 /* CONTEXT MENU TRANSITIONS */

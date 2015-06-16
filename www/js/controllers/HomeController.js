@@ -3,83 +3,36 @@ var HomeController = function() {
 
 HomeController.firstData = {};
 HomeController.scroll = {};
-HomeController.$categories = null;
+HomeController.$feeds = null;
 HomeController.searchText = null;
 HomeController.isFavoritePage = false;
+
+HomeController.showAllMagazinesOfFeed = null;
 
 HomeController.prototype = {
     initialize: function() {
         App.showLoadingScreen();
-        HomeController.$categories = $("#categories");
-        
-        HomeController.searchText = App.$appSearchInput.children("input").val();
-        
-        if(Navigator.currentPageScreenData){
-            HomeController.searchText = Navigator.currentPageScreenData.searchText;
-            HomeController.isFavoritePage = Navigator.currentPageScreenData.isFavoritePage;
-        }else{
-            HomeController.searchText = App.$appSearchInput.children("input").val();
-            App.$appSearchInput.children("input").val("");
-            App.$appSearchInput.children("input").blur();
-            
-            HomeController.isFavoritePage = ContextMenu.showFavorites;
-            ContextMenu.showFavorites = false;
-        }
-        
-        if(HomeController.searchText){
-            $("#home-search-text input").val(HomeController.searchText);
-            $("#home-search-box").show();
-            HomeController.doSearch();
-            
-            try{
-                analytics.trackView("Pesquisa");
-            }catch(errAnalytics){
-                console.log(errAnalytics);
-            }
-        }else if(HomeController.isFavoritePage){
-            HomeController.showFavorites();
-            try{
-                analytics.trackView("Favoritos");
-            }catch(errAnalytics){
-                console.log(errAnalytics);
-            }
-        }else{
-            HomeController.showDefaultHome();
-            try{
-                analytics.trackView("Home");
-            }catch(errAnalytics){
-                console.log(errAnalytics);
-            }
-        }
-        
+        HomeController.$feeds = $("#feeds");
+
+        HomeController.showHome();
+        App.trackView("Home");
         HomeController.initListeners();
     },
     destroy: function() {
         PageLoad.ajxHandle = null;
+        HomeController.showAllMagazinesOfFeed = null;
         HomeController.cleanData();
         
-    },
-    getScreenData: function () {
-        var data = {};
-        data.searchText = HomeController.searchText;
-        data.isFavoritePage = HomeController.isFavoritePage;
-
-        return data;
     },
     refresh: function(){
         App.showLoadingScreen();
         HomeController.firstData = {};
         HomeController.scroll = {};
-        HomeController.$categories.html("");
+        HomeController.$feeds.html("");
         
-        if(HomeController.searchText){
-            HomeController.doSearch();
-        }else if(HomeController.isFavoritePage){
-            HomeController.showFavorites();
-        }else{
-            SciELO.homeCleanCache();
-            HomeController.showDefaultHome();
-        }
+        SciELO.homeCleanCache();
+        HomeController.showHome();
+        
     }
 };
 
@@ -92,32 +45,64 @@ HomeController.cleanData = function(){
 };
 
 
-HomeController.showDefaultHome = function () {
+HomeController.showHome = function () {
+    
     $.when(
         SciELO.home()
     ).then(
         function (json) {
+            var allFeeds = null;
+            if(HomeController.showAllMagazinesOfFeed){
+                allFeeds = [App.currentUser.getFeed(HomeController.showAllMagazinesOfFeed)];
+            }else{
+                allFeeds = App.currentUser.getFeeds();
+            }
             
-            var categoriesOrder = FeedsAndPublications.getCategoriesOrder();
-            
-            for (var i = 0; i < categoriesOrder.length; i++) {
-                var catId = categoriesOrder[i];
+            for (var feedId in allFeeds) {
+                var feed = allFeeds[feedId];
+                var magazines = feed.magazines;
                 
-                if(json[catId]){
-                    var cat = json[catId];
+                //TODO: incluir html por feed
+                HomeController.addFeed(HomeController.$feeds, feedId, feed.feed_name, HomeController.showAllMagazinesOfFeed === null);
+                
+                var $magazinesContainer = $("#magazines-from-feed-"+feedId);
+                
+                var count = 0;
+                for(var j in magazines){
+                    if(count > 2 && HomeController.showAllMagazinesOfFeed === null){
+                        // mostrar apenas as primeiras 3 revistas
+                        $("#feed-footer-"+feedId).show();
+                        break; 
+                    } 
+                    var magazineId = magazines[j];
+                    var magazineFeedId = magazineId+"_"+feedId;
+                 
+                    if(json[magazineId]){
+                        var magazineData = json[magazineId];
+                        
+                        if(magazineData.docs.length < 1) continue;
+                        
+                        var issn = magazineData.docs[0].scielo_issn;
+                        var domain = magazineData.docs[0].scielo_domain;
 
-                    HomeController.firstData[catId] = cat.docs;
+                        HomeController.firstData[magazineFeedId] = magazineData.docs;
 
-                    var limitScroll = (cat.numFound > 1000) ? 1000 : cat.numFound;
-                    var cacheSize = cat.docs.length;
-                    var minElements = (cat.docs.length > 10) ? 10 : cat.docs.length;
+                        var limitScroll = (magazineData.numFound > 1000) ? 1000 : magazineData.numFound;
+                        var cacheSize = magazineData.docs.length;
+                        var minElements = (magazineData.docs.length > 10) ? 10 : magazineData.docs.length;
 
-
-
-                    HomeController.addCategory({id: catId, name: FeedsAndPublications.getCategoryName(catId), minElements: minElements, limit: limitScroll, cacheSize: cacheSize});
+                        HomeController.addMagazine($magazinesContainer,{id: magazineFeedId, magazineId: magazineId, feedId: feedId, issn: issn, domain: domain, name: DataMapping.getMagazineName(magazineId), minElements: minElements, limit: limitScroll, cacheSize: cacheSize});
+                    }else{
+                        var html = HomeController.createMagazineHTML(magazineFeedId, feedId, magazineId, DataMapping.getMagazineName(magazineId), 1);
+                        $magazinesContainer.append(html);
+                        
+                        HomeController.reloadMagazine(magazineFeedId, magazineId);
+                    }
+                    
+                    count++;
                 }
             }
-
+            
             App.refreshScroll(true);
             App.hideLoadingScreen();
             
@@ -129,12 +114,7 @@ HomeController.showDefaultHome = function () {
             
         },
         function (err) {
-            try{
-                var errorDesc = "Error Loading Home: "+JSON.stringify(err);
-                analytics.trackException(errorDesc, false);
-            }catch(errAnalytics){
-                console.log(errAnalytics);
-            }
+            App.trackException("Error Loading Home: "+JSON.stringify(err));
             App.hideLoadingScreen();
             App.showCommonInternetErrorDialog();
             return;
@@ -143,152 +123,82 @@ HomeController.showDefaultHome = function () {
     
 };
 
-HomeController.showFavorites = function () {
-    $.when(
-        Service.listFavoriteArticles()
-    ).then(
-        function (json) {
-            var categoriesUsed = [];
-            
-            for (var i = 0; i < json.docs.length; i++) {
-                var doc = json.docs[i];
+HomeController.addFeed = function($feedsContainer, feedId, feedName, isDefaultFooter){
+    var html = '<div id="feed-'+feedId+'" class="feed">' +
+                    '<table class="feed-header">' +
+                        '<tr>';
                 
-                for (var j = 0; j < doc.subject_areas_ids.length; j++) {
-                    var catId = doc.subject_areas_ids[j];
-                    if (!HomeController.firstData[catId]) {
-                        HomeController.firstData[catId] = [];
-                        categoriesUsed.push(catId);
-                    }
-
-                    HomeController.firstData[catId].push(doc);
-                }
-            }
-            
-            var categoriesOrder = FeedsAndPublications.getCategoriesOrder();
-            
-            for (var i = 0; i < categoriesOrder.length; i++) {
-                var catId = categoriesOrder[i];
-                if(categoriesUsed.indexOf(catId) >= 0){
-                    var numDocs = HomeController.firstData[catId].length;
-                
-                    HomeController.addCategory({id: catId, name: FeedsAndPublications.getCategoryName(catId), minElements: numDocs, limit: numDocs, cacheSize: numDocs});
-                }
-            }
-
-            App.refreshScroll(true);
-            App.hideLoadingScreen();
-        },
-        function (err) {
-            try{
-                var errorDesc = "Error Loading Favorites: "+JSON.stringify(err);
-                analytics.trackException(errorDesc, false);
-            }catch(errAnalytics){
-                console.log(errAnalytics);
-            }
-            App.hideLoadingScreen();
-            App.showCommonInternetErrorDialog();
-            return;
-        }
-    );
+    if(!isDefaultFooter) html += '<td class="back-to-home"><img alt="" src="img/home/back-arrow-white.png"/></td>';
     
+    html +=                 '<td>'+feedName+'</td>' +
+                            '<td class="feed-menu-btn" data-feed="'+feedId+'"><img alt="" src="img/home/menu_icon.png"/></td>' +
+                        '</tr>' +
+                    '</table>' +
+                    '<div class="section-content">' +
+                        '<div id="feed-menu-'+feedId+'" class="pop-menu">' +
+                            '<div class="pop-menu-content">' +
+                                '<table>' +
+                                    '<tr class="context-menu-row refresh-feed" data-feed="'+feedId+'">' +
+                                        '<td class="context-menu-icon"><img src="img/feed/refresh.png"/></td>' +
+                                        '<td class="item-text context-menu-text"><div>Refresh</div></td>' +
+                                    '</tr>' +
+                                    '<tr class="context-menu-row config-feed" data-feed="'+feedId+'">' +
+                                        '<td class="context-menu-icon"><img src="img/feed/config.png"/></td>' +
+                                        '<td class="item-text context-menu-text"><div>Configurar</div></td>' +
+                                    '</tr>' +
+                                    '<tr class="context-menu-row remove-feed" data-feed="'+feedId+'">' +
+                                        '<td class="context-menu-icon"><img src="img/feed/remove.png"/></td>' +
+                                        '<td class="item-text context-menu-text"><div>Remover</div></td>' +
+                                    '</tr>' +
+                                '</table>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div id="magazines-from-feed-'+feedId+'"></div>' +
+                    '</div>';
+            
+    if(isDefaultFooter){
+        html +=     '<div id="feed-footer-'+feedId+'" style="display: none;" class="feed-footer" data-feed="'+feedId+'">' +
+                        '<div class="footer-desc">Mais em </div>' +
+                        '<div>'+feedName+'</div>' +
+                        '<div class="footer-img"><img alt="" src="img/home/more-arrow.png"/></div>' +
+                    '</div>';
+    }else{
+        //voltar para home
+        html +=     '<div class="feed-footer back-to-home">' +
+                        '<div class="footer-img"><img alt="" src="img/home/back-arrow.png"/></div>' +
+                        '<div class="footer-desc">Voltar para </div>' +
+                        '<div>Minha Lista de Periódicos</div>' +
+                    '</div>';
+    }
+            
+            
+    html +=     '</div>';
+    
+    $feedsContainer.append(html);
 };
 
-HomeController.doSearch = function () {
-
-    var params = {q: HomeController.searchText};
-
-    $.when(
-        SciELO.search(params)
-    ).then(
-        function (json) {
-            var categoriesUsed = [];
-
-            var docs = json.response.docs;
-            for (var i = 0; i < docs.length; i++) {
-                var doc = docs[i];
-                for (var j = 0; j < doc.subject_areas_ids.length; j++) {
-                    var catId = doc.subject_areas_ids[j];
-                    if (!HomeController.firstData[catId]) {
-                        HomeController.firstData[catId] = [];
-                        categoriesUsed.push(catId);
-                    }
-
-                    HomeController.firstData[catId].push(doc);
-                }
-            }
-            
-            var categoriesOrder = FeedsAndPublications.getCategoriesOrder();
-            
-            for (var i = 0; i < categoriesOrder.length; i++) {
-                var catId = categoriesOrder[i];
-                if(categoriesUsed.indexOf(catId) >= 0){
-                    var numDocs = HomeController.firstData[catId].length;
-                
-                    HomeController.addCategory({id: catId, name: FeedsAndPublications.getCategoryName(catId), minElements: numDocs, limit: numDocs, cacheSize: numDocs});
-                }
-            }
-
-            App.refreshScroll(true);
-            App.hideLoadingScreen();
-        },
-        function (err) {
-            try{
-                var errorDesc = "Error Loading Search: "+JSON.stringify(err);
-                analytics.trackException(errorDesc, false);
-            }catch(errAnalytics){
-                console.log(errAnalytics);
-            }
-            App.hideLoadingScreen();
-            App.showCommonInternetErrorDialog();
-            return;
-        }
-    );
-
-};
 
 HomeController.initListeners = function () {
-    HomeController.$categories.on('tap', '.article-link', HomeController.openArticle);
+    HomeController.$feeds.on('tap', '.article-link', ArticleUtils.openArticle);
+    
+    HomeController.$feeds.on('tap', ".feed-menu-btn", HomeController.toggleFeedMenu);
+    HomeController.$feeds.on('tap', ".refresh-feed", HomeController.feedRefresh);
+    HomeController.$feeds.on('tap', ".config-feed", HomeController.feedConfig);
+    HomeController.$feeds.on('tap', ".remove-feed", HomeController.feedRemove);
+    
         
-    HomeController.$categories.on('tap', ".category-menu-btn", HomeController.toggleCategoryMenu);
-    HomeController.$categories.on('tap', ".refresh-category", HomeController.categoryRefresh);
-    HomeController.$categories.on('tap', ".share-category", HomeController.categoryShare);
-    HomeController.$categories.on('tap', ".config-category", HomeController.categoryConfig);
-    HomeController.$categories.on('tap', ".remove-category", HomeController.categoryRemove);
+    HomeController.$feeds.on('tap', ".magazine-menu-btn", HomeController.toggleMagazineMenu);
+    HomeController.$feeds.on('tap', ".refresh-magazine", HomeController.magazineRefresh);
+    HomeController.$feeds.on('tap', ".share-magazine", HomeController.magazineShare);
+    HomeController.$feeds.on('tap', ".remove-magazine", HomeController.magazineRemove);
     
-    $("#home-search-box").on('tap', "#home-search-btn", HomeController.editAndSearch);
-    
-    $("#home-search-text input").keypress(function(e) {
-        if(e.which === 13) {
-            $("#home-search-btn").trigger("tap");
-        }
-    });
-    
+    HomeController.$feeds.on('tap', ".feed-footer", HomeController.showAllMagazines);
+    HomeController.$feeds.on('tap', ".back-to-home", HomeController.showAllFeeds);
 };
 
-
-HomeController.editAndSearch = function(){
-    if($(this).children("img").attr("src") === "img/home/edit_search.png"){
-        $(this).children("img").attr("src","img/home/search.png");
-        $("#home-search-text input").removeAttr('disabled');
-        $("#home-search-text input").focus();
-    }else{
-        $("#home-search-text input").attr('disabled','disabled');
-        $(this).children("img").attr("src","img/home/edit_search.png");
-        
-        if(HomeController.searchText !== $("#home-search-text input").val()){
-            HomeController.cleanData();
-            HomeController.$categories.html("");
-            HomeController.searchText = $("#home-search-text input").val();
-
-            HomeController.doSearch();
-        }
-    }
-    
-};
-
-HomeController.toggleCategoryMenu = function () {
-    var catId = $(this).data("category");
-    var $menu = $("#category-menu-"+catId);
+HomeController.toggleFeedMenu = function () {
+    var feedId = $(this).data("feed");
+    var $menu = $("#feed-menu-"+feedId);
     
     if ($menu.hasClass("context-menu-show")) {
         $menu.removeClass("context-menu-show");
@@ -298,316 +208,252 @@ HomeController.toggleCategoryMenu = function () {
     }
 };
 
-HomeController.categoryRefresh = function () {
-    App.showLoadingScreen();
-    var catId = $(this).data("category");
-    $("#category-menu-"+catId).removeClass("context-menu-show");
+HomeController.feedRefresh = function () {
+    var feedId = $(this).data("feed");
+    $("#feed-menu-"+feedId).removeClass("context-menu-show");
     
+    $("#magazines-from-feed-"+feedId+" .refresh-magazine").trigger("tap");
+};
+
+HomeController.feedConfig = function () {
+    var feedId = $(this).data("feed");
+    $("#feed-menu-"+feedId).removeClass("context-menu-show");
     
-    var query = "subject_areas_ids:"+catId;
-        
-    var magazinesExcluded = App.currentUser.getAllPublicationsExclusionsByFeed(catId);
-    for(var i=0; i<magazinesExcluded.length ;i++){
-        query += " -journal_title_id:"+magazinesExcluded[i];
+    FeedConfigController.selectedType = FeedConfigController.type.FEED_EDIT;
+    FeedConfigController.filterData = feedId;
+    Navigator.loadPage("feedConfig.html");
+};
+
+HomeController.feedRemove = function () {
+    var feedId = $(this).data("feed");
+    $("#feed-menu-"+feedId).removeClass("context-menu-show");
+    
+    $("#feed-"+feedId).fadeOut(800, function(){
+        $("#feed-"+feedId).remove();
+        App.refreshScroll(false);
+    });
+    
+    var feedName = App.currentUser.getFeedName(feedId);
+    Service.deleteFeed(feedId);
+    SciELO.homeCleanCache();
+    
+    App.refreshScroll(false);
+    App.trackEvent('Feed', 'Apagar', feedName);
+};
+
+HomeController.showAllMagazines = function(){
+    var feedId = $(this).data("feed");
+    
+    HomeController.showAllMagazinesOfFeed = feedId;
+    HomeController.$feeds.html("");
+    HomeController.showHome();
+};
+
+HomeController.showAllFeeds = function(){
+    HomeController.showAllMagazinesOfFeed = null;
+    HomeController.$feeds.html("");
+    HomeController.showHome();
+};
+
+HomeController.toggleMagazineMenu = function () {
+    var magazineFeedId = $(this).data("magazinefeed");
+    var $menu = $("#magazine-menu-"+magazineFeedId);
+    
+    if ($menu.hasClass("context-menu-show")) {
+        $menu.removeClass("context-menu-show");
+    } else {
+        $(".context-menu-show").removeClass("context-menu-show");
+        $menu.addClass("context-menu-show");
     }
+};
+
+HomeController.magazineRefresh = function () {
+    var feedId = $(this).data("feed");
+    var magazineId = $(this).data("magazine");
+    var magazineFeedId = magazineId+"_"+feedId;
+    
+    $("#magazine-menu-"+magazineFeedId).removeClass("context-menu-show");
+    
+    HomeController.reloadMagazine(magazineFeedId, magazineId);
+    
+    App.trackEvent('Revista', 'Recarregar', DataMapping.getMagazineName(magazineId));
+};
+
+HomeController.reloadMagazine = function(magazineFeedId, magazineId){
+    var query = "journal_title_id:"+magazineId;
         
     var params = {q: query, start: 0};
 
     $.when(
-            SciELO.feed(params) 
+            SciELO.magazine(params) 
     ).then( 
         function(json){
-            HomeController.firstData[catId] = json.response.docs;
-            if(HomeController.scroll[catId]) HomeController.scroll[catId].destroy();
+            HomeController.firstData[magazineFeedId] = json.response.docs;
+            if(HomeController.scroll[magazineFeedId]) HomeController.scroll[magazineFeedId].destroy();
             
             var limitScroll = (json.response.numFound > 1000) ? 1000 : json.response.numFound;
             var cacheSize = json.response.docs.length;
             var minElements = (json.response.docs.length > 10) ? 10 : json.response.docs.length;
             
             
-            var $ul = $("#cat-scroller-"+catId+" ul");
+            var $ul = $("#magazine-scroller-"+magazineFeedId+" ul");
             $ul.html("");
             
-            
-            if(minElements > 0){
-                var html = "";
-                for(var i=0; i<minElements ;i++){
-                    html += '<li class="article"><img class="loading-img" src="img/loading.gif"/></li>';
-                }
-
-                $ul.html(html);
-
-                HomeController.scroll[catId] = new IScroll('#cat-wrapper-'+catId, {
-                    scrollX: true,
-                    scrollY: false,
-                    mouseWheel: false,
-                    infiniteElements: '#cat-scroller-'+catId+' .article',
-                    infiniteLimit: limitScroll,
-                    dataset: HomeController.requestData,
-                    dataFiller: HomeController.updateContent,
-                    cacheSize: cacheSize,
-                    category: catId
-                });
-            }else{
-                $ul.html('<li class="no-article config-category" data-category="'+catId+'"><img class="add-img" src="img/add.png"/></li>');
+            var html = "";
+            for(var i=0; i<minElements ;i++){
+                html += '<li class="article"><img class="loading-img" src="img/loading.gif"/></li>';
             }
+
+            $ul.html(html);
+
+            HomeController.scroll[magazineFeedId] = new IScroll('#magazine-wrapper-'+magazineFeedId, {
+                scrollX: true,
+                scrollY: false,
+                mouseWheel: false,
+                infiniteElements: '#magazine-scroller-'+magazineFeedId+' .article',
+                infiniteLimit: limitScroll,
+                dataset: HomeController.requestData,
+                dataFiller: ArticleUtils.updateContent,
+                cacheSize: cacheSize,
+                magazineFeedId: magazineFeedId,
+                magazineId: magazineId
+            });
             
-            
-            
-            App.hideLoadingScreen();
         }, 
         function(err){
-            try{
-                var errorDesc = "Error Refresh Category: "+JSON.stringify(err);
-                analytics.trackException(errorDesc, false);
-            }catch(errAnalytics){
-                console.log(errAnalytics);
-            }
-            App.hideLoadingScreen();
+            App.trackException("Error Refresh Category: "+JSON.stringify(err));
             App.showCommonInternetErrorDialog();
             return;
         }
     );
-    
-    try{
-        analytics.trackEvent('Categoria', 'Recarregar', FeedsAndPublications.getCategoryName(catId), 1);
-    }catch(errAnalytics){
-        console.log(errAnalytics);
-    }
 };
 
-HomeController.categoryShare = function () {
-    var catId = $(this).data("category");
-    $("#category-menu-"+catId).removeClass("context-menu-show");
+
+HomeController.magazineShare = function () {
+    var domain = $(this).data("domain"); // TODO: COLOCAR NO MAPPING DE REVISTAS !!!!!!!!!!!!!!!
+    var issn = $(this).data("issn");
+    var feedId = $(this).data("feed");
+    var magazineId = $(this).data("magazine");
+    var magazineFeedId = magazineId+"_"+feedId;
+    $("#magazine-menu-"+magazineFeedId).removeClass("context-menu-show");
+
+    window.plugins.socialsharing.share(DataMapping.getMagazineName(magazineId)+" -", "SciELO Mobile", null, "http://"+domain+"/scielo.php?script=sci_serial&pid="+issn+"&lng="+App.locale);
     
-    window.plugins.socialsharing.share(FeedsAndPublications.getCategoryName(catId)+" -", "SciELO Mobile", null, "http://www.scielo.org/applications/scielo-org/php/secondLevel.php?xml=secondLevelForSubjectByLetter&xsl=secondLevelForSubjectByLetter&subject=Health%20Sciences");
-    
-    try{
-        analytics.trackEvent('Categoria', 'Compartilhar', FeedsAndPublications.getCategoryName(catId), 1);
-    }catch(errAnalytics){
-        console.log(errAnalytics);
-    }
+    App.trackEvent('Revista', 'Compartilhar', DataMapping.getMagazineName(magazineId));
 };
 
-HomeController.categoryConfig = function () {
-    var catId = $(this).data("category");
-    $("#category-menu-"+catId).removeClass("context-menu-show");
+HomeController.magazineRemove = function () {
+    var feedId = $(this).data("feed");
+    var magazineId = $(this).data("magazine");
+    var magazineFeedId = magazineId+"_"+feedId;
     
-    CategoryConfigController.categoryId = catId;
+    $("#magazine-menu-"+magazineFeedId).removeClass("context-menu-show");
     
-    Navigator.loadPage("categoryConfig.html");
-};
-
-HomeController.categoryRemove = function () {
-    var catId = $(this).data("category");
-    $("#category-menu-"+catId).removeClass("context-menu-show");
-    
-    $("#category-"+catId).fadeOut(800, function(){
-        $("#category-"+catId).remove();
+    $("#magazine-"+magazineFeedId).fadeOut(800, function(){
+        $("#magazine-"+magazineFeedId).remove();
         App.refreshScroll(false);
     });
     
-    if(HomeController.searchText === "" && !HomeController.isFavoritePage){
-        // Nao faz loading, o processamento vai ser em background
-        Service.uncheckFeed(catId);
-        
-        $("#menu-checkbox-"+catId+" img").attr("src","img/sidebar/unchecked.png");
-        SciELO.homeCleanCache();
-    }
+    Service.saveFeed(feedId, [], [magazineId]);
+    SciELO.homeCleanCache();
     
     App.refreshScroll(false);
-    
-    try{
-        analytics.trackEvent('Categoria', 'Dispensar', FeedsAndPublications.getCategoryName(catId), 1);
-    }catch(errAnalytics){
-        console.log(errAnalytics);
-    }
+    App.trackEvent('Revista', 'Dispensar', DataMapping.getMagazineName(magazineId));
 };
 
-HomeController.addCategory = function (categoryData) {
-    var html = '<div id="category-'+categoryData.id+'" class="category">' +
-                    '<div class="category-bar">' +
+HomeController.addMagazine = function ($magazinesContainer, magazineFeedData) {
+    
+    var html = HomeController.createMagazineHTML(magazineFeedData.id, magazineFeedData.feedId, magazineFeedData.magazineId, magazineFeedData.name, magazineFeedData.minElements);
+    
+    $magazinesContainer.append(html);
+
+    HomeController.scroll[magazineFeedData.id] = new IScroll('#magazine-wrapper-'+magazineFeedData.id, { 
+        scrollX: true,
+        scrollY: false,
+        mouseWheel: false,
+        infiniteElements: '#magazine-scroller-'+magazineFeedData.id+' .article',
+        infiniteLimit: magazineFeedData.limit,
+        dataset: HomeController.requestData,
+        dataFiller: ArticleUtils.updateContent,
+        cacheSize: magazineFeedData.cacheSize,
+        magazineFeedId: magazineFeedData.id,
+        magazineId: magazineFeedData.magazineId
+    });
+};
+
+HomeController.createMagazineHTML = function (magazineFeedId, feedId, magazineId, magazineName, minElements) {
+    var html = '<div id="magazine-'+magazineFeedId+'" class="magazine">' +
+                    '<div class="magazine-bar">' +
                         '<table>' +
                             '<tr>' +
-                                '<td id="category-title-'+categoryData.id+'" class="category-bar-title">'+categoryData.name+'</td>' +
-                                '<td class="category-menu-btn" data-category="'+categoryData.id+'" ><img src="img/category/menu_icon.png"/></td>' +
+                                '<td id="magazine-bar-'+magazineFeedId+'" class="magazine-bar-title">'+magazineName+'</td>' +
+                                '<td class="magazine-menu-btn" data-magazinefeed="'+magazineFeedId+'" ><img src="img/home/menu_icon.png"/></td>' +
                             '</tr>' +
                         '</table>' +
                     '</div>' +
-                    '<div class="category-content">' +
-                    '<div id="category-menu-'+categoryData.id+'" class="pop-menu">' +
-                        '<div class="pop-menu-content">' +
-                            '<table>';
-    
-    if(!HomeController.searchText && !HomeController.isFavoritePage){
-        html += '<tr class="context-menu-row refresh-category" data-category="'+categoryData.id+'" >' +
-                    '<td class="context-menu-icon"><img src="img/category/refresh.png"/></td>' +
-                    '<td class="item-text context-menu-text"><div>'+Localization.getValue('refresh')+'</div></td>' +
-                '</tr>';
-    }
-                                
-    html +=                     '<tr class="context-menu-row share-category" data-category="'+categoryData.id+'" >' +
-                                    '<td class="context-menu-icon"><img src="img/category/share.png"/></td>' +
-                                    '<td class="item-text context-menu-text"><div>'+Localization.getValue('share')+'</div></td>' +
-                                '</tr>' +
-                                '<tr class="context-menu-row config-category" data-category="'+categoryData.id+'" >' +
-                                    '<td class="context-menu-icon"><img src="img/category/config.png"/></td>' +
-                                    '<td class="item-text context-menu-text"><div>'+Localization.getValue('config')+'</div></td>' +
-                                '</tr>' +
-                                '<tr class="context-menu-row remove-category" data-category="'+categoryData.id+'" >' +
-                                    '<td class="context-menu-icon"><img src="img/category/remove.png"/></td>' +
-                                    '<td class="item-text context-menu-text"><div>'+Localization.getValue('remove')+'</div></td>' +
-                                '</tr>' +
-                            '</table>' +
+                    '<div class="section-content">' +
+                        '<div id="magazine-menu-'+magazineFeedId+'" class="pop-menu">' +
+                            '<div class="pop-menu-content">' +
+                                '<table>'+
+                                    '<tr class="context-menu-row refresh-magazine" data-magazine="'+magazineId+'" data-feed="'+feedId+'" >' +
+                                        '<td class="context-menu-icon"><img src="img/feed/refresh.png"/></td>' +
+                                        '<td class="item-text context-menu-text"><div>'+Localization.getValue('refresh')+'</div></td>' +
+                                    '</tr>' +
+                                    '<tr class="context-menu-row share-magazine" data-magazine="'+magazineId+'" data-feed="'+feedId+'" >' +
+                                        '<td class="context-menu-icon"><img src="img/feed/share.png"/></td>' +
+                                        '<td class="item-text context-menu-text"><div>'+Localization.getValue('share')+'</div></td>' +
+                                    '</tr>' +
+                                    '<tr class="context-menu-row remove-magazine" data-magazine="'+magazineId+'" data-feed="'+feedId+'" >' +
+                                        '<td class="context-menu-icon"><img src="img/feed/remove.png"/></td>' +
+                                        '<td class="item-text context-menu-text"><div>'+Localization.getValue('remove')+'</div></td>' +
+                                    '</tr>' +
+                                '</table>' +
+                            '</div>' +
                         '</div>' +
-                    '</div>';
-            
-            if(categoryData.minElements > 0){
-                html +=         '<div id="cat-wrapper-'+categoryData.id+'" class="wrapper">' +
-                                    '<div id="cat-scroller-'+categoryData.id+'" class="scroller cat-scroller" >' +
-                                        '<ul data-category="'+categoryData.id+'">';
+                        '<div id="magazine-wrapper-'+magazineFeedId+'" class="wrapper">' +
+                            '<div id="magazine-scroller-'+magazineFeedId+'" class="scroller magazine-scroller" >' +
+                                '<ul data-magazine="'+magazineFeedId+'">';
 
-                for(var i=0; i<categoryData.minElements ;i++){
-                    html += '<li class="article"><img class="loading-img" src="img/loading.gif"/></li>';
-                }
+    for(var i=0; i<minElements ;i++){
+        html +=                     '<li class="article"><img class="loading-img" src="img/loading.gif"/></li>';
+    }
 
-                html +=                 '</ul>' +
-                                    '</div>' +
+    html +=                         '</ul>' +
                                 '</div>' +
-                                '</div>' +
-                            '</div>';
-
-                HomeController.$categories.append(html);
-
-                HomeController.scroll[categoryData.id] = new IScroll('#cat-wrapper-'+categoryData.id, { 
-                    scrollX: true,
-                    scrollY: false,
-                    mouseWheel: false,
-                    infiniteElements: '#cat-scroller-'+categoryData.id+' .article',
-                    infiniteLimit: categoryData.limit,
-                    dataset: HomeController.requestData,
-                    dataFiller: HomeController.updateContent,
-                    cacheSize: categoryData.cacheSize,
-                    category: categoryData.id
-                });
-            }else{
-                html +=         '<div id="cat-wrapper-'+categoryData.id+'" class="wrapper">' +
-                                    '<div id="cat-scroller-'+categoryData.id+'" class="scroller cat-scroller" >' +
-                                        '<ul data-category="'+categoryData.id+'">' +
-                                            '<li class="no-article config-category" data-category="'+categoryData.id+'"><img class="add-img" src="img/add.png"/></li>' +
-                                        '</ul>' +
-                                    '</div>' +
-                                '</div>' +
-                                '</div>' +
-                            '</div>';
-
-                HomeController.$categories.append(html);
-            }
-                        
-    
-    
+                            '</div>' +
+                            '</div>' +
+                        '</div>';
+                
+    return html;
 };
 
 HomeController.requestData = function (start, count) {
-    var category = $(this)[0].options.category;
+    var magazineFeedId = $(this)[0].options.magazineFeedId;
+    var magazineId = $(this)[0].options.magazineId;
     
     if(start === 0){
         setTimeout(function(){
-            if(HomeController.scroll[category]){
-                HomeController.scroll[category].updateCache(start, HomeController.firstData[category]);
+            if(HomeController.scroll[magazineFeedId]){
+                HomeController.scroll[magazineFeedId].updateCache(start, HomeController.firstData[magazineFeedId]);
             }
         },500);
         
-    } else if(HomeController.searchText === "" && !HomeController.isFavoritePage){
+    } else {
         
-        var query = "subject_areas_ids:"+category;
-
-        var magazinesExcluded = App.currentUser.getAllPublicationsExclusionsByFeed(category);
-        if(magazinesExcluded.length > 0){
-            query += " -journal_title_id: ("+magazinesExcluded[0];
-            for(var i=1; i<magazinesExcluded.length ;i++){
-                query += " OR "+magazinesExcluded[i];
-            }
-            query += ")";
-        }
+        var query = "journal_title_id:"+magazineId;
         
         var params = {q: query, start: start, rows: count};
         
         $.when(
-                SciELO.feed(params) 
+                SciELO.magazine(params) 
         ).then( 
             function(json){
-                HomeController.scroll[category].updateCache(start, json.response.docs);
+                HomeController.scroll[magazineFeedId].updateCache(start, json.response.docs);
             }, 
             function(err){
-                try{
-                    var errorDesc = "Error on requestData: "+JSON.stringify(err);
-                    analytics.trackException(errorDesc, false);
-                }catch(errAnalytics){
-                    console.log(errAnalytics);
-                }
+                App.trackException("Error on requestData: "+JSON.stringify(err));
             }
         );
     }
 };
 
-HomeController.updateContent = function (el, data) {
-    if (typeof data !== 'undefined'){
-        
-        var abstract = (data["translated_abstracts_"+App.locale]) ? data["translated_abstracts_"+App.locale] : data.original_abstract;
-        
-        var title = (data["translated_titles_"+App.locale]) ? data["translated_titles_"+App.locale] : data.original_title;
-        
-        var keywords = (data["keywords_"+App.locale]) ? data["keywords_"+App.locale].join(", ") : "";
-        
-        var html = '<div class="article-link" data-articleid="'+data.id+'" data-abstract="'+btoa(unescape(encodeURIComponent(abstract)))+'" data-author="'+btoa(unescape(encodeURIComponent(data.first_author)))+'" data-keywords="'+btoa(unescape(encodeURIComponent(keywords)))+'" data-journal="'+btoa(unescape(encodeURIComponent(data.journal_title)))+'">'+
-                        '<div class="article-principal">' +
-                            '<img src="http://'+data.scielo_domain+'/img/revistas/'+data.journal_acronym+'/glogo.gif" />' +
-                            '<div class="article-name">' +
-                                title +
-                            '</div>' +
-                        '</div>' +
-                        '<div class="article-legend">' +
-                            '<div class="article-journal"> '+data.journal_abbreviated_title+' </div>' +
-                            '<div class="article-date"> '+
-                                data.publication_date.formatToDateSciELO() +
-                            '</div>';
-                        
-                            if(App.currentUser.isFavoriteArticle(data.id)) html += '<img class="article-fav" src="img/abstract/fav_selected.png"/>';
-                                
-            html +=     '</div>' +
-                    '</div>';
-        
-        
-        el.innerHTML = html;
-    }else{
-        try{
-            var errorDesc = "Error on updateContent. data="+JSON.stringify(data);
-            analytics.trackException(errorDesc, false);
-        }catch(errAnalytics){
-            console.log(errAnalytics);
-        }
-    }
-};
-
-HomeController.openArticle = function () {
-    var articleData = {};
-    articleData.id = $(this).data("articleid");
-    articleData.abstract = decodeURIComponent(escape(atob($(this).data("abstract"))));
-    articleData.author = decodeURIComponent(escape(atob($(this).data("author"))));
-    articleData.title = $(this).children("div.article-principal").children("div.article-name").html();
-    articleData.imgUrl = $(this).children("div.article-principal").children("img").attr("src");
-    articleData.date = $(this).children("div.article-legend").children("div.article-date").html();
-    articleData.journal = decodeURIComponent(escape(atob($(this).data("journal"))));;
-    articleData.keywords = decodeURIComponent(escape(atob($(this).data("keywords"))));
-    
-    var catId = $(this).parent("li").parent("ul").data("category");
-    articleData.category = $("#category-title-"+catId).html();
-    
-    
-    AbstractController.articleData = articleData;
-    
-    //console.log(JSON.stringify(articleData));
-    
-    Navigator.loadPage("abstract.html");
-};

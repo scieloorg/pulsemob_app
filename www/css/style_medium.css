@@ -28,23 +28,6 @@ body.font-medium {
 
 /* </editor-fold> */
 
-/* <editor-fold desc="MENU APP STYLES"> */
-
-.font-medium .menu-row{
-    height: 45px;
-}
-.font-medium .menu-checkbox {
-    width: 40px;
-}
-.font-medium .menu-checkbox img{
-    width: 40px;
-}
-.font-medium .menu-text{
-    font-size: 18px;
-}
-
-/* </editor-fold> */
-
 /* <editor-fold desc="LOGIN STYLES"> */
 
 .font-medium .login-btn{
@@ -55,7 +38,7 @@ body.font-medium {
 
 /* <editor-fold desc="HOME STYLES"> */
 
-.font-medium .cat-scroller ul{
+.font-medium .magazine-scroller ul{
     height: 224px;
 }
 .font-medium .no-article{

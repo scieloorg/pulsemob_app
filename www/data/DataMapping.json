@@ -1,7 +1,7 @@
 {
     "order_pt": [6, 2, 3, 5, 1, 7, 4, 8],
     "order_en": [6, 7, 2, 4, 5, 3, 1, 8],
-    "solr_version": 63511,
+    "solr_version": 64511,
     "publications": {
         "1": {
             "publication_name": "Old Testament Essays",
@@ -3454,5 +3454,6 @@
             "feed_name_pt": "Lingu\u00edstica, Letras e Artes"
         }
     },
-    "order_es": [6, 2, 3, 5, 7, 1, 4, 8]
+    "order_es": [6, 2, 3, 5, 7, 1, 4, 8],
+    "magazines_order":[5,29,24,23,21,11]
 }

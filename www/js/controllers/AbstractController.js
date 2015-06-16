@@ -12,12 +12,9 @@ AbstractController.prototype = {
         AbstractController.checkIfIsFavorite();
         App.showBackButton();
         
-        try{
-            analytics.trackView("Artigo");
-            analytics.trackEvent('Artigo', 'Abrir', AbstractController.articleData.id, 1);
-        }catch(errAnalytics){
-            console.log(errAnalytics);
-        }
+        App.trackView("Artigo");
+        App.trackEvent('Artigo', 'Abrir', AbstractController.articleData.id);
+        
     },
     destroy: function() {
         App.$page.removeClass("abstract-bg");
@@ -105,11 +102,8 @@ AbstractController.share = function(){
     
     window.plugins.socialsharing.share(AbstractController.articleData.title+" -", "SciELO Mobile", null, "http://"+domain+"/scielo.php?script=sci_arttext&pid="+pid+"&lng="+App.locale+"&nrm=iso");
     
-    try{
-        analytics.trackEvent('Artigo', 'Compartilhar', AbstractController.articleData.id, 1);
-    }catch(errAnalytics){
-        console.log(errAnalytics);
-    }
+    App.trackEvent('Artigo', 'Compartilhar', AbstractController.articleData.id);
+    
 };
 
 AbstractController.openWebArticle = function(){
@@ -117,10 +111,5 @@ AbstractController.openWebArticle = function(){
     var pid = AbstractController.articleData.id.substring(0, AbstractController.articleData.id.length-3 );
     
     App.openLink("http://"+domain+"/scielo.php?script=sci_arttext&pid="+pid+"&lng="+App.locale+"&nrm=iso");
-    
-    try{
-        analytics.trackEvent('Artigo', 'Abrir na Web', AbstractController.articleData.id, 1);
-    }catch(errAnalytics){
-        console.log(errAnalytics);
-    }
+    App.trackEvent('Artigo', 'Abrir na Web', AbstractController.articleData.id);
 };

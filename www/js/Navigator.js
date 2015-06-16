@@ -16,11 +16,6 @@
             return;
         }
         
-        if(App.$menu.hasClass("transitionMenuAppStart")){
-            Transition.hideMenu();
-            return;
-        }
-        
         if(Navigator.currentModal !== null){
             Navigator.currentModal.close();
             Navigator.currentModal = null;
@@ -68,8 +63,7 @@
              newPage = $(this).data("url");
         }
         
-        if(Navigator.currentPage === newPage && Navigator.currentPage !== "home.html") {
-            Transition.hideMenu();
+        if(Navigator.currentPage === newPage && Navigator.currentPage !== "articlesByCategory.html") {
             return;
         }
         
@@ -98,7 +92,8 @@
     
     Navigator.load = function(url){
         ContextMenu.hide();
-        Transition.hideMenu();
+        App.$appSearchInput.children("input").val("");
+        App.$appSearchInput.children("input").blur();
         Transition.control = true;
         Navigator.currentPage = url;
         Navigator.currentPageScreenData = null;

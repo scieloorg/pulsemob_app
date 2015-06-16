@@ -28,23 +28,6 @@ body.font-large {
 
 /* </editor-fold> */
 
-/* <editor-fold desc="MENU APP STYLES"> */
-
-.font-large .menu-row{
-    height: 50px;
-}
-.font-large .menu-checkbox {
-    width: 45px;
-}
-.font-large .menu-checkbox img{
-    width: 45px;
-}
-.font-large .menu-text{
-    font-size: 20px;
-}
-
-/* </editor-fold> */
-
 /* <editor-fold desc="LOGIN STYLES"> */
 
 .font-large .login-btn{
@@ -55,7 +38,7 @@ body.font-large {
 
 /* <editor-fold desc="HOME STYLES"> */
 
-.font-large .cat-scroller ul{
+.font-large .magazine-scroller ul{
     height: 244px;
 }
 .font-large .no-article{

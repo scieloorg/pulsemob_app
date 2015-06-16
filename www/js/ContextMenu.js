@@ -2,7 +2,6 @@ var ContextMenu = function() {
 };
 
 ContextMenu.$menu = null;
-ContextMenu.showFavorites = false;
 
 ContextMenu.init = function() {
     App.$headerApp.on('click', "#app-bar-context-menu", ContextMenu.toggleMenu);
@@ -29,7 +28,6 @@ ContextMenu.toggleMenu = function() {
 
 ContextMenu.show = function() {
     $(".context-menu-show").removeClass("context-menu-show");
-    Transition.hideMenu();
     $("#block-content-glass").show();
     ContextMenu.$menu.addClass("context-menu-show");
 };
@@ -43,7 +41,7 @@ ContextMenu.hide = function() {
 ContextMenu.refreshAction = function() {
     ContextMenu.hide();
     
-    if(Navigator.currentPage === "home.html" ){
+    if(Navigator.currentPage === "home.html" || Navigator.currentPage === "articlesByCategory.html"){
         App.currentController.refresh();
     }
 };
@@ -54,9 +52,7 @@ ContextMenu.favoriteAction = function() {
     App.$appSearchInput.children("input").val("");
     App.$appSearchInput.children("input").blur();
     
-    ContextMenu.showFavorites = true;
-    
-    Navigator.loadPage('home.html');
+    Navigator.loadPage('articlesByCategory.html');
 };
 
 ContextMenu.preferencesAction = function() {
