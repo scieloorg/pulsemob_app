@@ -11,15 +11,19 @@ ArticleUtils.updateContent = function (el, data) {
         
         var keywords = (data["keywords_"+App.locale]) ? data["keywords_"+App.locale].join(", ") : "";
         
-        var html = '<div class="article-link" data-articleid="'+data.id+'" data-abstract="'+btoa(unescape(encodeURIComponent(abstract)))+'" data-author="'+btoa(unescape(encodeURIComponent(data.first_author)))+'" data-keywords="'+btoa(unescape(encodeURIComponent(keywords)))+'" data-journal="'+btoa(unescape(encodeURIComponent(data.journal_title)))+'">'+
+        var domain = DataMapping.getMagazineDomain(data.journal_title_id);
+        var magazineAcronym = DataMapping.getMagazineAcronym(data.journal_title_id);
+        var magazineAbbreviated = DataMapping.getMagazineAbbreviation(data.journal_title_id);
+        
+        var html = '<div class="article-link" data-articleid="'+data.id+'" data-abstract="'+btoa(unescape(encodeURIComponent(abstract)))+'" data-author="'+btoa(unescape(encodeURIComponent(data.first_author)))+'" data-keywords="'+btoa(unescape(encodeURIComponent(keywords)))+'" data-magazineid="'+btoa(unescape(encodeURIComponent(data.journal_title_id)))+'">'+
                         '<div class="article-principal">' +
-                            '<img src="http://'+data.scielo_domain+'/img/revistas/'+data.journal_acronym+'/glogo.gif" />' +
+                            '<img src="http://'+domain+'/img/revistas/'+magazineAcronym+'/glogo.gif" />' +
                             '<div class="article-name">' +
                                 title +
                             '</div>' +
                         '</div>' +
                         '<div class="article-legend">' +
-                            '<div class="article-journal"> '+data.journal_abbreviated_title+' </div>' +
+                            '<div class="article-magazine"> '+magazineAbbreviated+' </div>' +
                             '<div class="article-date"> '+
                                 data.publication_date.formatToDateSciELO() +
                             '</div>';
@@ -38,6 +42,11 @@ ArticleUtils.updateContent = function (el, data) {
 
 
 ArticleUtils.openArticle = function () {
+    
+    if($(".context-menu-show").length){
+        return;
+    }
+    
     var articleData = {};
     articleData.id = $(this).data("articleid");
     articleData.abstract = decodeURIComponent(escape(atob($(this).data("abstract"))));
@@ -45,16 +54,9 @@ ArticleUtils.openArticle = function () {
     articleData.title = $(this).children("div.article-principal").children("div.article-name").html();
     articleData.imgUrl = $(this).children("div.article-principal").children("img").attr("src");
     articleData.date = $(this).children("div.article-legend").children("div.article-date").html();
-    articleData.journal = decodeURIComponent(escape(atob($(this).data("journal"))));;
+    articleData.magazineId = decodeURIComponent(escape(atob($(this).data("magazineid"))));;
     articleData.keywords = decodeURIComponent(escape(atob($(this).data("keywords"))));
     
-    var catId = $(this).parent("li").parent("ul").data("magazine");
-    articleData.category = $("#magazine-title-"+catId).html();
-    
-    
     AbstractController.articleData = articleData;
-    
-    //console.log(JSON.stringify(articleData));
-    
     Navigator.loadPage("abstract.html");
 };

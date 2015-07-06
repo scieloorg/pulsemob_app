@@ -35,7 +35,9 @@ AbstractController.populate = function(){
     $("#article-title").html(AbstractController.articleData.title);
     $("#article-author").html(Localization.getValue("by")+" "+AbstractController.articleData.author);
     
-    $("#article-category-journal").html(AbstractController.articleData.category + " - " +AbstractController.articleData.journal);
+    var magazineName = DataMapping.getMagazineName(AbstractController.articleData.magazineId);
+    
+    $("#article-magazine").html(magazineName);
     $("#article-date").html(AbstractController.articleData.date);
     
     if(AbstractController.articleData.abstract){

@@ -1,3459 +1,619 @@
 {
-    "order_pt": [6, 2, 3, 5, 1, 7, 4, 8],
-    "order_en": [6, 7, 2, 4, 5, 3, 1, 8],
-    "solr_version": 64511,
-    "publications": {
+    "categories_order_en": [7, 4, 1, 3, 6, 2, 5, 8],
+    "magazines_order": [11, 54, 28, 56, 63, 46, 66, 64, 61, 31, 18, 2, 3, 1, 62, 23, 55, 27, 43, 4, 5, 15, 49, 26, 17, 19, 51, 6, 67, 14, 29, 50, 41, 7, 30, 69, 60, 34, 58, 33, 13, 42, 57, 9, 22, 39, 16, 45, 38, 65, 40, 53, 47, 24, 52, 44, 21, 20, 25, 12, 48, 8, 68, 36, 32, 35, 37, 10, 59],
+    "solr_version": 81605,
+    "categories_order_pt": [7, 1, 2, 6, 5, 4, 3, 8],
+    "magazines": {
         "1": {
-            "publication_name": "Old Testament Essays",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Brazilian Journal of Medical and Biological Research",
+            "magazine_acronym": "bjmbr",
+            "magazine_issn": "0100-879X",
+            "magazine_abbreviated_title": "Braz J Med Biol Res",
             "id": 1
         },
         "2": {
-            "publication_name": "Samj: South African Medical Journal",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Brazilian Journal of Chemical Engineering",
+            "magazine_acronym": "bjce",
+            "magazine_issn": "0104-6632",
+            "magazine_abbreviated_title": "Braz. J. Chem. Eng.",
             "id": 2
         },
         "3": {
-            "publication_name": "South African Journal Of Psychiatry",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Brazilian Journal of Genetics",
+            "magazine_acronym": "bjg",
+            "magazine_issn": "0100-8455",
+            "magazine_abbreviated_title": "Braz. J. Genet.",
             "id": 3
         },
         "4": {
-            "publication_name": "Journal Of The Southern African Institute Of Mining And Metallurgy",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Ci\u00eancia da Informa\u00e7\u00e3o",
+            "magazine_acronym": "ci",
+            "magazine_issn": "0100-1965",
+            "magazine_abbreviated_title": "Ci. Inf.",
             "id": 4
         },
         "5": {
-            "publication_name": "Acta Theologica",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Dados",
+            "magazine_acronym": "dados",
+            "magazine_issn": "0011-5258",
+            "magazine_abbreviated_title": "Dados",
             "id": 5
         },
         "6": {
-            "publication_name": "South African Journal Of Occupational Therapy",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Journal of the Brazilian Computer Society",
+            "magazine_acronym": "jbcos",
+            "magazine_issn": "0104-6500",
+            "magazine_abbreviated_title": "J. Braz. Comp. Soc.",
             "id": 6
         },
         "7": {
-            "publication_name": "Water Sa",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Mem\u00f3rias do Instituto Oswaldo Cruz",
+            "magazine_acronym": "mioc",
+            "magazine_issn": "0074-0276",
+            "magazine_abbreviated_title": "Mem. Inst. Oswaldo Cruz",
             "id": 7
         },
         "8": {
-            "publication_name": "Escola Anna Nery",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista do Instituto de Medicina Tropical de S\u00e3o Paulo",
+            "magazine_acronym": "rimtsp",
+            "magazine_issn": "0036-4665",
+            "magazine_abbreviated_title": "Rev. Inst. Med. trop. S. Paulo",
             "id": 8
         },
         "9": {
-            "publication_name": "Brazilian Journal Of Otorhinolaryngology",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista Brasileira de Ci\u00eancias Sociais",
+            "magazine_acronym": "rbcsoc",
+            "magazine_issn": "0102-6909",
+            "magazine_abbreviated_title": "Rev. bras. Ci. Soc.",
             "id": 9
         },
         "10": {
-            "publication_name": "Revista Brasileira De Ginecologia E Obstetr\u00edcia",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Scientia Agricola",
+            "magazine_acronym": "sa",
+            "magazine_issn": "0103-9016",
+            "magazine_abbreviated_title": "Sci. agric. (Piracicaba, Braz.)",
             "id": 10
         },
         "11": {
-            "publication_name": "Cadernos De Sa\u00fade P\u00fablica",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Acta Cirurgica Brasileira",
+            "magazine_acronym": "acb",
+            "magazine_issn": "0102-8650",
+            "magazine_abbreviated_title": "Acta Cir. Bras.",
             "id": 11
         },
         "12": {
-            "publication_name": "Revista Dor",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista de Odontologia da Universidade de S\u00e3o Paulo",
+            "magazine_acronym": "rousp",
+            "magazine_issn": "0103-0663",
+            "magazine_abbreviated_title": "Rev Odontol Univ S\u00e3o Paulo",
             "id": 12
         },
         "13": {
-            "publication_name": "Revista Brasileira De Oftalmologia",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Psicologia USP",
+            "magazine_acronym": "pusp",
+            "magazine_issn": "0103-6564",
+            "magazine_abbreviated_title": "Psicol. USP",
             "id": 13
         },
         "14": {
-            "publication_name": "Gest\u00e3o & Produ\u00e7\u00e3o",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Journal of Venomous Animals and Toxins",
+            "magazine_acronym": "jvat",
+            "magazine_issn": "0104-7930",
+            "magazine_abbreviated_title": "J. Venom. Anim. Toxins",
             "id": 14
         },
         "15": {
-            "publication_name": "Revista Latino-Americana De Enfermagem",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "DELTA: Documenta\u00e7\u00e3o de Estudos em Ling\u00fc\u00edstica Te\u00f3rica e Aplicada",
+            "magazine_acronym": "delta",
+            "magazine_issn": "0102-4450",
+            "magazine_abbreviated_title": "DELTA",
             "id": 15
         },
         "16": {
-            "publication_name": "Jornal Brasileiro De Patologia E Medicina Laboratorial",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista Brasileira de Hist\u00f3ria",
+            "magazine_acronym": "rbh",
+            "magazine_issn": "0102-0188",
+            "magazine_abbreviated_title": "Rev. Bras. Hist.",
             "id": 16
         },
         "17": {
-            "publication_name": "Revista Brasileira De Psiquiatria",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Food Science and Technology (Campinas)",
+            "magazine_acronym": "cta",
+            "magazine_issn": "0101-2061",
+            "magazine_abbreviated_title": "Food Sci. Technol (Campinas)",
             "id": 17
         },
         "18": {
-            "publication_name": "Crop Breeding And Applied Biotechnology",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Brazilian Journal of Botany",
+            "magazine_acronym": "rbb",
+            "magazine_issn": "0100-8404",
+            "magazine_abbreviated_title": "Braz. J. Bot.",
             "id": 18
         },
         "19": {
-            "publication_name": "Pesquisa Veterin\u00e1ria Brasileira",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Genetics and Molecular Biology",
+            "magazine_acronym": "gmb",
+            "magazine_issn": "1415-4757",
+            "magazine_abbreviated_title": "Genet. Mol. Biol.",
             "id": 19
         },
         "20": {
-            "publication_name": "Revista Paulista De Pediatria",
+            "magazine_domain": "www.scielo.org.pe",
+            "magazine_name": "Revista de Investigaciones Veterinarias del Per\u00fa",
+            "magazine_acronym": "rivep",
+            "magazine_issn": "1609-9117",
+            "magazine_abbreviated_title": "Rev. investig. vet. Per\u00fa",
             "id": 20
         },
         "21": {
-            "publication_name": "Clinics",
+            "magazine_domain": "www.scielo.org.pe",
+            "magazine_name": "Revista de Gastroenterolog\u00eda del Per\u00fa",
+            "magazine_acronym": "rgp",
+            "magazine_issn": "1022-5129",
+            "magazine_abbreviated_title": "Rev. gastroenterol. Per\u00fa",
             "id": 21
         },
         "22": {
-            "publication_name": "Trabalho, Educa\u00e7\u00e3o E Sa\u00fade",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista Brasileira de Cirurgia Cardiovascular",
+            "magazine_acronym": "rbccv",
+            "magazine_issn": "0102-7638",
+            "magazine_abbreviated_title": "Rev Bras Cir Cardiovasc",
             "id": 22
         },
         "23": {
-            "publication_name": "Brazilian Journal Of Medical And Biological Research",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Brazilian Journal of Physics",
+            "magazine_acronym": "bjp",
+            "magazine_issn": "0103-9733",
+            "magazine_abbreviated_title": "Braz. J. Phys.",
             "id": 23
         },
         "24": {
-            "publication_name": "Anales Del Instituto De Investigaciones Est\u00e9ticas",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista da Faculdade de Educa\u00e7\u00e3o",
+            "magazine_acronym": "rfe",
+            "magazine_issn": "0102-2555",
+            "magazine_abbreviated_title": "Rev. Fac. Educ.",
             "id": 24
         },
         "25": {
-            "publication_name": "Sociol\u00f3gica (M\u00e9xico)",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista de Microbiologia",
+            "magazine_acronym": "rm",
+            "magazine_issn": "0001-3714",
+            "magazine_abbreviated_title": "Rev. Microbiol.",
             "id": 25
         },
         "26": {
-            "publication_name": "Frontera Norte",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Educa\u00e7\u00e3o & Sociedade",
+            "magazine_acronym": "es",
+            "magazine_issn": "0101-7330",
+            "magazine_abbreviated_title": "Educ. Soc.",
             "id": 26
         },
         "27": {
-            "publication_name": "Revista Mexicana De Ciencias Farmac\u00e9uticas",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Cadernos CEDES",
+            "magazine_acronym": "ccedes",
+            "magazine_issn": "0101-3262",
+            "magazine_abbreviated_title": "Cad. CEDES",
             "id": 27
         },
         "28": {
-            "publication_name": "Papeles De Poblaci\u00f3n",
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Archivos de medicina veterinaria",
+            "magazine_acronym": "amv",
+            "magazine_issn": "0301-732X",
+            "magazine_abbreviated_title": "Arch. med. vet.",
             "id": 28
         },
         "29": {
-            "publication_name": "Archives Of Clinical Psychiatry",
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Literatura y ling\u00fc\u00edstica",
+            "magazine_acronym": "lyl",
+            "magazine_issn": "0716-5811",
+            "magazine_abbreviated_title": "Lit. ling\u00fc\u00edst.",
             "id": 29
         },
         "30": {
-            "publication_name": "Revista Brasileira De Farmacognosia",
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Parasitolog\u00eda al d\u00eda",
+            "magazine_acronym": "pd",
+            "magazine_issn": "0716-0720",
+            "magazine_abbreviated_title": "Parasitol. d\u00eda",
             "id": 30
         },
         "31": {
-            "publication_name": "Latin American Journal Of Solids And Structures",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Bragantia",
+            "magazine_acronym": "brag",
+            "magazine_issn": "0006-8705",
+            "magazine_abbreviated_title": "Bragantia",
             "id": 31
         },
         "32": {
-            "publication_name": "Paid\u00e9ia (Ribeir\u00e3o Preto)",
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Revista m\u00e9dica de Chile",
+            "magazine_acronym": "rmc",
+            "magazine_issn": "0034-9887",
+            "magazine_abbreviated_title": "Rev. m\u00e9d. Chile",
             "id": 32
         },
         "33": {
-            "publication_name": "Biota Neotropica",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Psicologia: Reflex\u00e3o e Cr\u00edtica",
+            "magazine_acronym": "prc",
+            "magazine_issn": "0102-7972",
+            "magazine_abbreviated_title": "Psicol. Reflex. Crit.",
             "id": 33
         },
         "34": {
-            "publication_name": "Soldagem & Inspe\u00e7\u00e3o",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Pesquisa Veterin\u00e1ria Brasileira",
+            "magazine_acronym": "pvb",
+            "magazine_issn": "0100-736X",
+            "magazine_abbreviated_title": "Pesq. Vet. Bras.",
             "id": 34
         },
         "35": {
-            "publication_name": "Revista Do Instituto De Estudos Brasileiros",
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Revista musical chilena",
+            "magazine_acronym": "rmusic",
+            "magazine_issn": "0716-2790",
+            "magazine_abbreviated_title": "Rev. music. chil.",
             "id": 35
         },
         "36": {
-            "publication_name": "Hist\u00f3ria (S\u00e3o Paulo)",
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Revista geol\u00f3gica de Chile",
+            "magazine_acronym": "rgch",
+            "magazine_issn": "0716-0208",
+            "magazine_abbreviated_title": "Rev. geol. Chile",
             "id": 36
         },
         "37": {
-            "publication_name": "Bolet\u00edn De La Sociedad Geol\u00f3gica Mexicana",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Sao Paulo Medical Journal",
+            "magazine_acronym": "spmj",
+            "magazine_issn": "1516-3180",
+            "magazine_abbreviated_title": "Sao Paulo Med. J.",
             "id": 37
         },
         "38": {
-            "publication_name": "Arquivos Brasileiros De Cardiologia",
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Revista chilena de anatom\u00eda",
+            "magazine_acronym": "rca",
+            "magazine_issn": "0716-9868",
+            "magazine_abbreviated_title": "Rev. chil. anat.",
             "id": 38
         },
         "39": {
-            "publication_name": "Sa\u00fade Em Debate",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista Brasileira de Geof\u00edsica",
+            "magazine_acronym": "rbg",
+            "magazine_issn": "0102-261X",
+            "magazine_abbreviated_title": "Rev. Bras. Geof.",
             "id": 39
         },
         "40": {
-            "publication_name": "Therya",
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Revista chilena de pediatr\u00eda",
+            "magazine_acronym": "rcp",
+            "magazine_issn": "0370-4106",
+            "magazine_abbreviated_title": "Rev. chil. pediatr.",
             "id": 40
         },
         "41": {
-            "publication_name": "Brazilian Journal Of Infectious Diseases",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Materials Research",
+            "magazine_acronym": "mr",
+            "magazine_issn": "1516-1439",
+            "magazine_abbreviated_title": "Mat. Res.",
             "id": 41
         },
         "42": {
-            "publication_name": "Revista Brasileira De Educa\u00e7\u00e3o",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Qu\u00edmica Nova",
+            "magazine_acronym": "qn",
+            "magazine_issn": "0100-4042",
+            "magazine_abbreviated_title": "Qu\u00edm. Nova",
             "id": 42
         },
         "43": {
-            "publication_name": "Remhu : Revista Interdisciplinar Da Mobilidade Humana",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Cer\u00e2mica",
+            "magazine_acronym": "ce",
+            "magazine_issn": "0366-6913",
+            "magazine_abbreviated_title": "Cer\u00e2mica",
             "id": 43
         },
         "44": {
-            "publication_name": "Acta Ortop\u00e9dica Mexicana",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista de Antropologia",
+            "magazine_acronym": "ra",
+            "magazine_issn": "0034-7701",
+            "magazine_abbreviated_title": "Rev. Antropol.",
             "id": 44
         },
         "45": {
-            "publication_name": "Revista De Sociologia E Pol\u00edtica",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista Brasileira de Psiquiatria",
+            "magazine_acronym": "rbp",
+            "magazine_issn": "1516-4446",
+            "magazine_abbreviated_title": "Rev. Bras. Psiquiatr.",
             "id": 45
         },
         "46": {
-            "publication_name": "Journal Of Applied Oral Science",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Arquivos de Neuro-Psiquiatria",
+            "magazine_acronym": "anp",
+            "magazine_issn": "0004-282X",
+            "magazine_abbreviated_title": "Arq. Neuro-Psiquiatr.",
             "id": 46
         },
         "47": {
-            "publication_name": "Revista De Odontologia Da Unesp",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista da Associa\u00e7\u00e3o M\u00e9dica Brasileira",
+            "magazine_acronym": "ramb",
+            "magazine_issn": "0104-4230",
+            "magazine_abbreviated_title": "Rev. Assoc. Med. Bras.",
             "id": 47
         },
         "48": {
-            "publication_name": "Mem\u00f3rias Do Instituto Oswaldo Cruz",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista do Hospital das Cl\u00ednicas",
+            "magazine_acronym": "rhc",
+            "magazine_issn": "0041-8781",
+            "magazine_abbreviated_title": "Rev. Hosp. Clin.",
             "id": 48
         },
         "49": {
-            "publication_name": "Correo Cient\u00edfico M\u00e9dico",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Ecl\u00e9tica Qu\u00edmica",
+            "magazine_acronym": "eq",
+            "magazine_issn": "0100-4670",
+            "magazine_abbreviated_title": "Eclet. Qu\u00edm.",
             "id": 49
         },
         "50": {
-            "publication_name": "Intervenci\u00f3n (M\u00e9xico Df)",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Mana",
+            "magazine_acronym": "mana",
+            "magazine_issn": "0104-9313",
+            "magazine_abbreviated_title": "Mana",
             "id": 50
         },
         "51": {
-            "publication_name": "Estudos De Psicologia (Campinas)",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Journal of the Brazilian Chemical Society",
+            "magazine_acronym": "jbchs",
+            "magazine_issn": "0103-5053",
+            "magazine_abbreviated_title": "J. Braz. Chem. Soc.",
             "id": 51
         },
         "52": {
-            "publication_name": "Estudos Avan\u00e7ados",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista da Sociedade Brasileira de Medicina Tropical",
+            "magazine_acronym": "rsbmt",
+            "magazine_issn": "0037-8682",
+            "magazine_abbreviated_title": "Rev. Soc. Bras. Med. Trop.",
             "id": 52
         },
         "53": {
-            "publication_name": "Polibot\u00e1nica",
+            "magazine_domain": "scielo.sld.cu",
+            "magazine_name": "Revista Cubana de Medicina Tropical",
+            "magazine_acronym": "mtr",
+            "magazine_issn": "0375-0760",
+            "magazine_abbreviated_title": "Rev Cubana Med Trop",
             "id": 53
         },
         "54": {
-            "publication_name": "Huitzil",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Anais da Academia Brasileira de Ci\u00eancias",
+            "magazine_acronym": "aabc",
+            "magazine_issn": "0001-3765",
+            "magazine_abbreviated_title": "An. Acad. Bras. Ci\u00eanc.",
             "id": 54
         },
         "55": {
-            "publication_name": "Arquivos Brasileiros De Oftalmologia",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Brazilian Journal of Veterinary Research and Animal Science",
+            "magazine_acronym": "bjvras",
+            "magazine_issn": "1413-9596",
+            "magazine_abbreviated_title": "Braz. J. Vet. Res. Anim. Sci.",
             "id": 55
         },
         "56": {
-            "publication_name": "Brazilian Archives Of Biology And Technology",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Arquivo Brasileiro de Medicina Veterin\u00e1ria e Zootecnia",
+            "magazine_acronym": "abmvz",
+            "magazine_issn": "0102-0935",
+            "magazine_abbreviated_title": "Arq. Bras. Med. Vet. Zootec.",
             "id": 56
         },
         "57": {
-            "publication_name": "Ci\u00eancia Rural",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista Brasileira de Biologia",
+            "magazine_acronym": "rbbio",
+            "magazine_issn": "0034-7108",
+            "magazine_abbreviated_title": "Rev. Bras. Biol.",
             "id": 57
         },
         "58": {
-            "publication_name": "Brazilian Oral Research",
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Proyecciones (Antofagasta)",
+            "magazine_acronym": "proy",
+            "magazine_issn": "0716-0917",
+            "magazine_abbreviated_title": "Proyecciones (Antofagasta)",
             "id": 58
         },
         "59": {
-            "publication_name": "Audiology - Communication Research",
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Teolog\u00eda y vida",
+            "magazine_acronym": "tv",
+            "magazine_issn": "0049-3449",
+            "magazine_abbreviated_title": "Teol. vida",
             "id": 59
         },
         "60": {
-            "publication_name": "Revista Cubana De Pediatr\u00eda",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Pesquisa Odontol\u00f3gica Brasileira",
+            "magazine_acronym": "pob",
+            "magazine_issn": "1517-7491",
+            "magazine_abbreviated_title": "Pesqui. Odontol. Bras.",
             "id": 60
         },
         "61": {
-            "publication_name": "Enfermer\u00eda Nefrol\u00f3gica",
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Bolet\u00edn de la Sociedad Chilena de Qu\u00edmica",
+            "magazine_acronym": "bscq",
+            "magazine_issn": "0366-1644",
+            "magazine_abbreviated_title": "Bol. Soc. Chil. Qu\u00edm.",
             "id": 61
         },
         "62": {
-            "publication_name": "Bulletin Of The World Health Organization",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Brazilian Journal of Microbiology",
+            "magazine_acronym": "bjm",
+            "magazine_issn": "1517-8382",
+            "magazine_abbreviated_title": "Braz. J. Microbiol.",
             "id": 62
         },
         "63": {
-            "publication_name": "Atenea (Concepci\u00f3n)",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Arquivos Brasileiros de Cardiologia",
+            "magazine_acronym": "abc",
+            "magazine_issn": "0066-782X",
+            "magazine_abbreviated_title": "Arq. Bras. Cardiol.",
             "id": 63
         },
         "64": {
-            "publication_name": "Revista M\u00e9dica De Chile",
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Bolet\u00edn chileno de parasitolog\u00eda",
+            "magazine_acronym": "bcpar",
+            "magazine_issn": "0365-9402",
+            "magazine_abbreviated_title": "Bol. chil. parasitol.",
             "id": 64
         },
         "65": {
-            "publication_name": "Revista Mexicana De Sociolog\u00eda",
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Revista chilena de historia natural",
+            "magazine_acronym": "rchnat",
+            "magazine_issn": "0716-078X",
+            "magazine_abbreviated_title": "Rev. chil. hist. nat.",
             "id": 65
         },
         "66": {
-            "publication_name": "Revista M\u00e9dica Electr\u00f3nica",
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Biological Research",
+            "magazine_acronym": "bres",
+            "magazine_issn": "0716-9760",
+            "magazine_abbreviated_title": "Biol. Res.",
             "id": 66
         },
         "67": {
-            "publication_name": "Bolet\u00edn Del Museo Chileno De Arte Precolombino",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Journal of the Brazilian Society of Mechanical Sciences",
+            "magazine_acronym": "jbsms",
+            "magazine_issn": "0100-7386",
+            "magazine_abbreviated_title": "J. Braz. Soc. Mech. Sci.",
             "id": 67
         },
         "68": {
-            "publication_name": "Maderas. Ciencia Y Tecnolog\u00eda",
+            "magazine_domain": "www.scielosp.org",
+            "magazine_name": "Revista Espa\u00f1ola de Salud P\u00fablica",
+            "magazine_acronym": "resp",
+            "magazine_issn": "1135-5727",
+            "magazine_abbreviated_title": "Rev. Esp. Salud Publica",
             "id": 68
         },
         "69": {
-            "publication_name": "Journal Of Soil Science And Plant Nutrition",
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Pesquisa Agropecu\u00e1ria Brasileira",
+            "magazine_acronym": "pab",
+            "magazine_issn": "0100-204X",
+            "magazine_abbreviated_title": "Pesq. agropec. bras.",
             "id": 69
-        },
-        "70": {
-            "publication_name": "Revista Da Escola De Enfermagem Da Usp",
-            "id": 70
-        },
-        "71": {
-            "publication_name": "Servi\u00e7o Social & Sociedade",
-            "id": 71
-        },
-        "72": {
-            "publication_name": "Revista Signos",
-            "id": 72
-        },
-        "73": {
-            "publication_name": "Electronic Journal Of Biotechnology",
-            "id": 73
-        },
-        "74": {
-            "publication_name": "Cadernos Nietzsche",
-            "id": 74
-        },
-        "75": {
-            "publication_name": "T\u00f3picos Del Seminario",
-            "id": 75
-        },
-        "76": {
-            "publication_name": "Econom\u00eda, Sociedad Y Territorio",
-            "id": 76
-        },
-        "77": {
-            "publication_name": "Salud Mental",
-            "id": 77
-        },
-        "78": {
-            "publication_name": "Econoquantum",
-            "id": 78
-        },
-        "79": {
-            "publication_name": "Revista Estudos Feministas",
-            "id": 79
-        },
-        "80": {
-            "publication_name": "Revista Do Col\u00e9gio Brasileiro De Cirurgi\u00f5es",
-            "id": 80
-        },
-        "81": {
-            "publication_name": "Atm\u00f3sfera",
-            "id": 81
-        },
-        "82": {
-            "publication_name": "Boletim De Ci\u00eancias Geod\u00e9sicas",
-            "id": 82
-        },
-        "83": {
-            "publication_name": "Floresta E Ambiente",
-            "id": 83
-        },
-        "84": {
-            "publication_name": "Revista Ceres",
-            "id": 84
-        },
-        "85": {
-            "publication_name": "Novos Estudos - Cebrap",
-            "id": 85
-        },
-        "86": {
-            "publication_name": "Revista Chilena De Infectolog\u00eda",
-            "id": 86
-        },
-        "87": {
-            "publication_name": "Cubo (Temuco)",
-            "id": 87
-        },
-        "88": {
-            "publication_name": "Educaci\u00f3n Qu\u00edmica",
-            "id": 88
-        },
-        "89": {
-            "publication_name": "Psykhe (Santiago)",
-            "id": 89
-        },
-        "90": {
-            "publication_name": "Bakhtiniana: Revista De Estudos Do Discurso",
-            "id": 90
-        },
-        "91": {
-            "publication_name": "Ingenier\u00eda, Investigaci\u00f3n Y Tecnolog\u00eda",
-            "id": 91
-        },
-        "92": {
-            "publication_name": "Revista Iberoamericana De Educaci\u00f3n Superior",
-            "id": 92
-        },
-        "93": {
-            "publication_name": "Revista Cubana De Estomatolog\u00eda",
-            "id": 93
-        },
-        "94": {
-            "publication_name": "Agronom\u00eda Mesoamericana",
-            "id": 94
-        },
-        "95": {
-            "publication_name": "Estudios Atacame\u00f1os",
-            "id": 95
-        },
-        "96": {
-            "publication_name": "Revista Mexicana De Astronom\u00eda Y Astrof\u00edsica",
-            "id": 96
-        },
-        "97": {
-            "publication_name": "Anais Da Academia Brasileira De Ci\u00eancias",
-            "id": 97
-        },
-        "98": {
-            "publication_name": "Revista \u00c1rvore",
-            "id": 98
-        },
-        "99": {
-            "publication_name": "Revista Da Educa\u00e7\u00e3o F\u00edsica / Uem",
-            "id": 99
-        },
-        "100": {
-            "publication_name": "Revista Brasileira De Plantas Medicinais",
-            "id": 100
-        },
-        "101": {
-            "publication_name": "Revista De Economia E Sociologia Rural",
-            "id": 101
-        },
-        "102": {
-            "publication_name": "Nova",
-            "id": 102
-        },
-        "103": {
-            "publication_name": "Ingenier\u00eda Y Ciencia",
-            "id": 103
-        },
-        "104": {
-            "publication_name": "Facultad De Ingenier\u00eda",
-            "id": 104
-        },
-        "105": {
-            "publication_name": "Revista M\u00e9dica De Risaralda",
-            "id": 105
-        },
-        "106": {
-            "publication_name": "Medicas Uis",
-            "id": 106
-        },
-        "107": {
-            "publication_name": "Revista Brasileira De Ensino De F\u00edsica",
-            "id": 107
-        },
-        "108": {
-            "publication_name": "Revista Colombiana De Gastroenterologia",
-            "id": 108
-        },
-        "109": {
-            "publication_name": "Scientiae Studia",
-            "id": 109
-        },
-        "110": {
-            "publication_name": "Qu\u00edmica Nova",
-            "id": 110
-        },
-        "111": {
-            "publication_name": "Zona Pr\u00f3xima",
-            "id": 111
-        },
-        "112": {
-            "publication_name": "Acta Colombiana De Psicolog\u00eda",
-            "id": 112
-        },
-        "113": {
-            "publication_name": "Revista Da Sociedade Brasileira De Medicina Tropical",
-            "id": 113
-        },
-        "114": {
-            "publication_name": "Memorias: Revista Digital De Historia Y Arqueolog\u00eda Desde El Caribe",
-            "id": 114
-        },
-        "115": {
-            "publication_name": "Brazilian Political Science Review",
-            "id": 115
-        },
-        "116": {
-            "publication_name": "Acta Paulista De Enfermagem",
-            "id": 116
-        },
-        "117": {
-            "publication_name": "Revista Colombiana De Obstetricia Y Ginecolog\u00eda",
-            "id": 117
-        },
-        "118": {
-            "publication_name": "Revista Integraci\u00f3n",
-            "id": 118
-        },
-        "119": {
-            "publication_name": "Revista Reflexiones",
-            "id": 119
-        },
-        "120": {
-            "publication_name": "Superficies Y Vac\u00edo",
-            "id": 120
-        },
-        "121": {
-            "publication_name": "Economia Aplicada",
-            "id": 121
-        },
-        "122": {
-            "publication_name": "Revista Cubana De Ciencias Inform\u00e1ticas",
-            "id": 122
-        },
-        "123": {
-            "publication_name": "Revista De La Academia Colombiana De Ciencias Exactas, F\u00edsicas Y Naturales",
-            "id": 123
-        },
-        "124": {
-            "publication_name": "Revista Mexicana De Ciencias Pecuarias",
-            "id": 124
-        },
-        "125": {
-            "publication_name": "Ecosistemas Y Recursos Agropecuarios",
-            "id": 125
-        },
-        "126": {
-            "publication_name": "Genetics And Molecular Biology",
-            "id": 126
-        },
-        "127": {
-            "publication_name": "Journal Of Venomous Animals And Toxins Including Tropical Diseases",
-            "id": 127
-        },
-        "128": {
-            "publication_name": "Revista Cefac",
-            "id": 128
-        },
-        "129": {
-            "publication_name": "Jornal De Pediatria",
-            "id": 129
-        },
-        "130": {
-            "publication_name": "Neotropical Ichthyology",
-            "id": 130
-        },
-        "131": {
-            "publication_name": "Manuscrito",
-            "id": 131
-        },
-        "132": {
-            "publication_name": "Colombian Applied Linguistics Journal",
-            "id": 132
-        },
-        "133": {
-            "publication_name": "Revista Peruana De Ginecolog\u00eda Y Obstetricia",
-            "id": 133
-        },
-        "134": {
-            "publication_name": "Cl\u00ednica Y Salud",
-            "id": 134
-        },
-        "135": {
-            "publication_name": "Psicologia Em Estudo",
-            "id": 135
-        },
-        "136": {
-            "publication_name": "Arquivo Brasileiro De Medicina Veterin\u00e1ria E Zootecnia",
-            "id": 136
-        },
-        "137": {
-            "publication_name": "Revista Chapingo. Serie Ciencias Forestales Y Del Ambiente",
-            "id": 137
-        },
-        "138": {
-            "publication_name": "Literatura Mexicana",
-            "id": 138
-        },
-        "139": {
-            "publication_name": "Arquivos Brasileiros De Endocrinologia & Metabologia",
-            "id": 139
-        },
-        "140": {
-            "publication_name": "Portuguese Journal Of Nephrology & Hypertension",
-            "id": 140
-        },
-        "141": {
-            "publication_name": "Arquivos De Neuro-Psiquiatria",
-            "id": 141
-        },
-        "142": {
-            "publication_name": "Ene",
-            "id": 142
-        },
-        "143": {
-            "publication_name": "Revista Costarricense De Salud P\u00fablica",
-            "id": 143
-        },
-        "144": {
-            "publication_name": "Anuario De Historia Regional Y De Las Fronteras",
-            "id": 144
-        },
-        "145": {
-            "publication_name": "Revista De Ciencias M\u00e9dicas De Pinar Del R\u00edo",
-            "id": 145
-        },
-        "146": {
-            "publication_name": "Revista Mexicana De Micolog\u00eda",
-            "id": 146
-        },
-        "147": {
-            "publication_name": "Revista Mexicana De Investigaci\u00f3n Educativa",
-            "id": 147
-        },
-        "148": {
-            "publication_name": "Ci\u00eancia & Educa\u00e7\u00e3o (Bauru)",
-            "id": 148
-        },
-        "149": {
-            "publication_name": "Universitas Human\u00edstica",
-            "id": 149
-        },
-        "150": {
-            "publication_name": "Health Sa Gesondheid (Online)",
-            "id": 150
-        },
-        "151": {
-            "publication_name": "Pesquisa Agropecu\u00e1ria Brasileira",
-            "id": 151
-        },
-        "152": {
-            "publication_name": "Agrociencia",
-            "id": 152
-        },
-        "153": {
-            "publication_name": "Journal Of Behavior, Health & Social Issues (M\u00e9xico)",
-            "id": 153
-        },
-        "154": {
-            "publication_name": "Sao Paulo Medical Journal",
-            "id": 154
-        },
-        "155": {
-            "publication_name": "Journal Of Seed Science",
-            "id": 155
-        },
-        "156": {
-            "publication_name": "Antipoda. Revista De Antropolog\u00eda Y Arqueolog\u00eda",
-            "id": 156
-        },
-        "157": {
-            "publication_name": "Co-Herencia",
-            "id": 157
-        },
-        "158": {
-            "publication_name": "Revista Finanzas Y Pol\u00edtica Econ\u00f3mica",
-            "id": 158
-        },
-        "159": {
-            "publication_name": "Migraci\u00f3n Y Desarrollo",
-            "id": 159
-        },
-        "160": {
-            "publication_name": "Revista Portuguesa De Cirurgia",
-            "id": 160
-        },
-        "161": {
-            "publication_name": "Horizontes Antropol\u00f3gicos",
-            "id": 161
-        },
-        "162": {
-            "publication_name": "Revista De Osteoporosis Y Metabolismo Mineral",
-            "id": 162
-        },
-        "163": {
-            "publication_name": "Revista Brasileira De Entomologia",
-            "id": 163
-        },
-        "164": {
-            "publication_name": "Formaci\u00f3n Universitaria",
-            "id": 164
-        },
-        "165": {
-            "publication_name": "Papel Politico",
-            "id": 165
-        },
-        "166": {
-            "publication_name": "Rla. Revista De Ling\u00fc\u00edstica Te\u00f3rica Y Aplicada",
-            "id": 166
-        },
-        "167": {
-            "publication_name": "Investigaciones Geogr\u00e1ficas",
-            "id": 167
-        },
-        "168": {
-            "publication_name": "Edumecentro",
-            "id": 168
-        },
-        "169": {
-            "publication_name": "Innovar",
-            "id": 169
-        },
-        "170": {
-            "publication_name": "Revista Brasileira De Meteorologia",
-            "id": 170
-        },
-        "171": {
-            "publication_name": "Revista Espa\u00f1ola De Salud P\u00fablica",
-            "id": 171
-        },
-        "172": {
-            "publication_name": "Avances En Odontoestomatolog\u00eda",
-            "id": 172
-        },
-        "173": {
-            "publication_name": "Revista Chilena De Obstetricia Y Ginecolog\u00eda",
-            "id": 173
-        },
-        "174": {
-            "publication_name": "Revista De Salud P\u00fablica",
-            "id": 174
-        },
-        "175": {
-            "publication_name": "Revista Peruana De Medicina Experimental Y Salud P\u00fablica",
-            "id": 175
-        },
-        "176": {
-            "publication_name": "Norteam\u00e9rica",
-            "id": 176
-        },
-        "177": {
-            "publication_name": "Sa Orthopaedic Journal",
-            "id": 177
-        },
-        "178": {
-            "publication_name": "Revista Electr\u00f3nica De Investigaci\u00f3n Educativa",
-            "id": 178
-        },
-        "179": {
-            "publication_name": "Revista De La Facultad De Derecho Y Ciencias Pol\u00edticas",
-            "id": 179
-        },
-        "180": {
-            "publication_name": "South African Journal Of Science",
-            "id": 180
-        },
-        "181": {
-            "publication_name": "Historia Cr\u00edtica",
-            "id": 181
-        },
-        "182": {
-            "publication_name": "Revista Mexicana De Ingenier\u00eda Qu\u00edmica",
-            "id": 182
-        },
-        "183": {
-            "publication_name": "Revista Colombiana De Entomolog\u00eda",
-            "id": 183
-        },
-        "184": {
-            "publication_name": "Southern African Journal Of Hiv Medicine",
-            "id": 184
-        },
-        "185": {
-            "publication_name": "Journal Of Energy In Southern Africa",
-            "id": 185
-        },
-        "186": {
-            "publication_name": "Indo-Pacific Journal Of Phenomenology",
-            "id": 186
-        },
-        "187": {
-            "publication_name": "Escritos",
-            "id": 187
-        },
-        "188": {
-            "publication_name": "Hidrobiol\u00f3gica",
-            "id": 188
-        },
-        "189": {
-            "publication_name": "Cadernos Metr\u00f3pole",
-            "id": 189
-        },
-        "190": {
-            "publication_name": "Fisioterapia E Pesquisa",
-            "id": 190
-        },
-        "191": {
-            "publication_name": "Revista Fitotecnia Mexicana",
-            "id": 191
-        },
-        "192": {
-            "publication_name": "Bolet\u00edn M\u00e9dico Del Hospital Infantil De M\u00e9xico",
-            "id": 192
-        },
-        "193": {
-            "publication_name": "Econom\u00eda: Teor\u00eda Y Pr\u00e1ctica",
-            "id": 193
-        },
-        "194": {
-            "publication_name": "Forma Y Funci\u00f3n",
-            "id": 194
-        },
-        "195": {
-            "publication_name": "Ces Odontolog\u00eda",
-            "id": 195
-        },
-        "196": {
-            "publication_name": "Investigaci\u00f3n Econ\u00f3mica",
-            "id": 196
-        },
-        "197": {
-            "publication_name": "Hist\u00f3ria, Ci\u00eancias, Sa\u00fade-Manguinhos",
-            "id": 197
-        },
-        "198": {
-            "publication_name": "Brazilian Journal Of Physical Therapy",
-            "id": 198
-        },
-        "199": {
-            "publication_name": "Arquivos Do Instituto Biol\u00f3gico",
-            "id": 199
-        },
-        "200": {
-            "publication_name": "Isonom\u00eda",
-            "id": 200
-        },
-        "201": {
-            "publication_name": "Acta Zool\u00f3gica Mexicana",
-            "id": 201
-        },
-        "202": {
-            "publication_name": "Revista Espa\u00f1ola De Sanidad Penitenciaria",
-            "id": 202
-        },
-        "203": {
-            "publication_name": "Revista Brasileira De Anestesiologia",
-            "id": 203
-        },
-        "204": {
-            "publication_name": "Revista Brasileira De Fruticultura",
-            "id": 204
-        },
-        "205": {
-            "publication_name": "Espiral (Guadalajara)",
-            "id": 205
-        },
-        "206": {
-            "publication_name": "Cs",
-            "id": 206
-        },
-        "207": {
-            "publication_name": "Tecn\u00e9, Episteme Y Didaxis: Ted",
-            "id": 207
-        },
-        "208": {
-            "publication_name": "Revista Chilena De Enfermedades Respiratorias",
-            "id": 208
-        },
-        "209": {
-            "publication_name": "International Archives Of Otorhinolaryngology",
-            "id": 209
-        },
-        "210": {
-            "publication_name": "Revista Archivo M\u00e9dico De Camag\u00fcey",
-            "id": 210
-        },
-        "211": {
-            "publication_name": "Revista De Administra\u00e7\u00e3o De Empresas",
-            "id": 211
-        },
-        "212": {
-            "publication_name": "Infectio",
-            "id": 212
-        },
-        "213": {
-            "publication_name": "Psicolog\u00eda Desde El Caribe",
-            "id": 213
-        },
-        "214": {
-            "publication_name": "Apuntes: Revista De Estudios Sobre Patrimonio Cultural - Journal Of Cultural Heritage Studies",
-            "id": 214
-        },
-        "215": {
-            "publication_name": "Jornal Brasileiro De Pneumologia",
-            "id": 215
-        },
-        "216": {
-            "publication_name": "Journal Of Theoretical And Applied Electronic Commerce Research",
-            "id": 216
-        },
-        "217": {
-            "publication_name": "Revista Colombiana De Qu\u00edmica",
-            "id": 217
-        },
-        "218": {
-            "publication_name": "Revista Colombiana De Ciencias Qu\u00edmico - Farmac\u00e9uticas",
-            "id": 218
-        },
-        "219": {
-            "publication_name": "Revista Brasileira De Engenharia Agr\u00edcola E Ambiental",
-            "id": 219
-        },
-        "220": {
-            "publication_name": "Fem: Revista De La Fundaci\u00f3n Educaci\u00f3n M\u00e9dica",
-            "id": 220
-        },
-        "221": {
-            "publication_name": "Psicologia: Reflex\u00e3o E Cr\u00edtica",
-            "id": 221
-        },
-        "222": {
-            "publication_name": "Pharmacy Practice (Internet)",
-            "id": 222
-        },
-        "223": {
-            "publication_name": "Medicina Y Seguridad Del Trabajo",
-            "id": 223
-        },
-        "224": {
-            "publication_name": "Educa\u00e7\u00e3o E Pesquisa",
-            "id": 224
-        },
-        "225": {
-            "publication_name": "Acta Limnologica Brasiliensia",
-            "id": 225
-        },
-        "226": {
-            "publication_name": "Revista De La Asociaci\u00f3n Espa\u00f1ola De Neuropsiquiatr\u00eda",
-            "id": 226
-        },
-        "227": {
-            "publication_name": "Acta De Investigaci\u00f3n Psicol\u00f3gica",
-            "id": 227
-        },
-        "228": {
-            "publication_name": "Tempo",
-            "id": 228
-        },
-        "229": {
-            "publication_name": "Engenharia Agr\u00edcola",
-            "id": 229
-        },
-        "230": {
-            "publication_name": "Acta Cirurgica Brasileira",
-            "id": 230
-        },
-        "231": {
-            "publication_name": "Revista Brasileira De Zootecnia",
-            "id": 231
-        },
-        "232": {
-            "publication_name": "Revista De Administra\u00e7\u00e3o P\u00fablica",
-            "id": 232
-        },
-        "233": {
-            "publication_name": "Journal Of Technology Management & Innovation",
-            "id": 233
-        },
-        "234": {
-            "publication_name": "Anales De La Facultad De Medicina",
-            "id": 234
-        },
-        "235": {
-            "publication_name": "Revista De Gastroenterolog\u00eda Del Per\u00fa",
-            "id": 235
-        },
-        "236": {
-            "publication_name": "Per: Potchefstroomse Elektroniese Regsblad",
-            "id": 236
-        },
-        "237": {
-            "publication_name": "\u00c1gora: Estudos Em Teoria Psicanal\u00edtica",
-            "id": 237
-        },
-        "238": {
-            "publication_name": "Revista Da Associa\u00e7\u00e3o M\u00e9dica Brasileira",
-            "id": 238
-        },
-        "239": {
-            "publication_name": "Sociedade & Natureza",
-            "id": 239
-        },
-        "240": {
-            "publication_name": "Medicentro Electr\u00f3nica",
-            "id": 240
-        },
-        "241": {
-            "publication_name": "Medisan",
-            "id": 241
-        },
-        "242": {
-            "publication_name": "Informaci\u00f3n Tecnol\u00f3gica",
-            "id": 242
-        },
-        "243": {
-            "publication_name": "Revista Panamericana De Salud P\u00fablica",
-            "id": 243
-        },
-        "244": {
-            "publication_name": "Revista De Enfermagem Refer\u00eancia",
-            "id": 244
-        },
-        "245": {
-            "publication_name": "Terapia Psicol\u00f3gica",
-            "id": 245
-        },
-        "246": {
-            "publication_name": "International Journal Of Morphology",
-            "id": 246
-        },
-        "247": {
-            "publication_name": "Trends In Psychiatry And Psychotherapy",
-            "id": 247
-        },
-        "248": {
-            "publication_name": "Ingenier\u00eda Industrial",
-            "id": 248
-        },
-        "249": {
-            "publication_name": "Journal Of The South African Institution Of Civil Engineering",
-            "id": 249
-        },
-        "250": {
-            "publication_name": "Abcd. Arquivos Brasileiros De Cirurgia Digestiva (S\u00e3o Paulo)",
-            "id": 250
-        },
-        "251": {
-            "publication_name": "Estudos Econ\u00f4micos (S\u00e3o Paulo)",
-            "id": 251
-        },
-        "252": {
-            "publication_name": "Brazilian Journal Of Chemical Engineering",
-            "id": 252
-        },
-        "253": {
-            "publication_name": "Ingenier\u00eda S\u00edsmica",
-            "id": 253
-        },
-        "254": {
-            "publication_name": "Concreto Y Cemento. Investigaci\u00f3n Y Desarrollo",
-            "id": 254
-        },
-        "255": {
-            "publication_name": "Journal Of The Brazilian Chemical Society",
-            "id": 255
-        },
-        "256": {
-            "publication_name": "Einstein (S\u00e3o Paulo)",
-            "id": 256
-        },
-        "257": {
-            "publication_name": "Iheringia. S\u00e9rie Zoologia",
-            "id": 257
-        },
-        "258": {
-            "publication_name": "Revista Chapingo. Serie Horticultura",
-            "id": 258
-        },
-        "259": {
-            "publication_name": "Jornal Brasileiro De Psiquiatria",
-            "id": 259
-        },
-        "260": {
-            "publication_name": "Ingenier\u00eda Energ\u00e9tica",
-            "id": 260
-        },
-        "261": {
-            "publication_name": "Revista Habanera De Ciencias M\u00e9dicas",
-            "id": 261
-        },
-        "262": {
-            "publication_name": "Interface - Comunica\u00e7\u00e3o, Sa\u00fade, Educa\u00e7\u00e3o",
-            "id": 262
-        },
-        "263": {
-            "publication_name": "Argumentos (M\u00e9xico, D.F.)",
-            "id": 263
-        },
-        "264": {
-            "publication_name": "Brazilian Journal Of Pharmaceutical Sciences",
-            "id": 264
-        },
-        "265": {
-            "publication_name": "Journal Of Applied Research And Technology",
-            "id": 265
-        },
-        "266": {
-            "publication_name": "Estudios De Cultura N\u00e1huatl",
-            "id": 266
-        },
-        "267": {
-            "publication_name": "Revista Mexicana De Ciencias Geol\u00f3gicas",
-            "id": 267
-        },
-        "268": {
-            "publication_name": "Pesquisa Operacional",
-            "id": 268
-        },
-        "269": {
-            "publication_name": "Revista De La Educaci\u00f3n Superior",
-            "id": 269
-        },
-        "270": {
-            "publication_name": "Revista De Administra\u00e7\u00e3o Contempor\u00e2nea",
-            "id": 270
-        },
-        "271": {
-            "publication_name": "Journal Of The Mexican Chemical Society",
-            "id": 271
-        },
-        "272": {
-            "publication_name": "Acta Bioethica",
-            "id": 272
-        },
-        "273": {
-            "publication_name": "Nefrolog\u00eda (Madrid)",
-            "id": 273
-        },
-        "274": {
-            "publication_name": "Revista Ciencias De La Salud",
-            "id": 274
-        },
-        "275": {
-            "publication_name": "Sociedad Y Econom\u00eda",
-            "id": 275
-        },
-        "276": {
-            "publication_name": "Colombia Internacional",
-            "id": 276
-        },
-        "277": {
-            "publication_name": "Ci\u00eancia & Sa\u00fade Coletiva",
-            "id": 277
-        },
-        "278": {
-            "publication_name": "Revista Chilena De Derecho",
-            "id": 278
-        },
-        "279": {
-            "publication_name": "Revista Colombiana De Cirug\u00eda",
-            "id": 279
-        },
-        "280": {
-            "publication_name": "Revista Colombiana De Cancerolog\u00eda",
-            "id": 280
-        },
-        "281": {
-            "publication_name": "Revista Brasileira De Ortopedia",
-            "id": 281
-        },
-        "282": {
-            "publication_name": "Ces Medicina",
-            "id": 282
-        },
-        "283": {
-            "publication_name": "Revista De Gest\u00e3o Costeira Integrada",
-            "id": 283
-        },
-        "284": {
-            "publication_name": "Cultura Y Representaciones Sociales",
-            "id": 284
-        },
-        "285": {
-            "publication_name": "Revista De An\u00e1lisis Econ\u00f3mico",
-            "id": 285
-        },
-        "286": {
-            "publication_name": "Dyna",
-            "id": 286
-        },
-        "287": {
-            "publication_name": "Hacia La Promoci\u00f3n De La Salud",
-            "id": 287
-        },
-        "288": {
-            "publication_name": "Production",
-            "id": 288
-        },
-        "289": {
-            "publication_name": "Latin American Journal Of Aquatic Research",
-            "id": 289
-        },
-        "290": {
-            "publication_name": "Lankesteriana",
-            "id": 290
-        },
-        "291": {
-            "publication_name": "Revista Peruana De Biolog\u00eda",
-            "id": 291
-        },
-        "292": {
-            "publication_name": "Journal Of The Chilean Chemical Society",
-            "id": 292
-        },
-        "293": {
-            "publication_name": "Valenciana",
-            "id": 293
-        },
-        "294": {
-            "publication_name": "Revista Mexicana De Ciencias Pol\u00edticas Y Sociales",
-            "id": 294
-        },
-        "295": {
-            "publication_name": "Veritas",
-            "id": 295
-        },
-        "296": {
-            "publication_name": "Revista Interamericana De Bibliotecolog\u00eda",
-            "id": 296
-        },
-        "297": {
-            "publication_name": "Lecturas De Econom\u00eda",
-            "id": 297
-        },
-        "298": {
-            "publication_name": "Revista Brasileira De Epidemiologia",
-            "id": 298
-        },
-        "299": {
-            "publication_name": "Andean Geology",
-            "id": 299
-        },
-        "300": {
-            "publication_name": "Ensaio: Avalia\u00e7\u00e3o E Pol\u00edticas P\u00fablicas Em Educa\u00e7\u00e3o",
-            "id": 300
-        },
-        "301": {
-            "publication_name": "Rem: Revista Escola De Minas",
-            "id": 301
-        },
-        "302": {
-            "publication_name": "Universitas Philosophica",
-            "id": 302
-        },
-        "303": {
-            "publication_name": "Revista De Estudios Sociales",
-            "id": 303
-        },
-        "304": {
-            "publication_name": "Corpoica Ciencia Y Tecnolog\u00eda Agropecuaria",
-            "id": 304
-        },
-        "305": {
-            "publication_name": "Palabra Clave",
-            "id": 305
-        },
-        "306": {
-            "publication_name": "Enfermer\u00eda Universitaria",
-            "id": 306
-        },
-        "307": {
-            "publication_name": "Anais Brasileiros De Dermatologia",
-            "id": 307
-        },
-        "308": {
-            "publication_name": "Acta Ortop\u00e9dica Brasileira",
-            "id": 308
-        },
-        "309": {
-            "publication_name": "Revista Brasileira De Enfermagem",
-            "id": 309
-        },
-        "310": {
-            "publication_name": "Revista Cubana De Plantas Medicinales",
-            "id": 310
-        },
-        "311": {
-            "publication_name": "Organiza\u00e7\u00f5es & Sociedade",
-            "id": 311
-        },
-        "312": {
-            "publication_name": "Ci\u00eancia E Agrotecnologia",
-            "id": 312
-        },
-        "313": {
-            "publication_name": "Revista Cubana De Endocrinolog\u00eda",
-            "id": 313
-        },
-        "314": {
-            "publication_name": "Horticultura Brasileira",
-            "id": 314
-        },
-        "315": {
-            "publication_name": "Revista Cubana De Angiolog\u00eda Y Cirug\u00eda Vascular",
-            "id": 315
-        },
-        "316": {
-            "publication_name": "Tydskrif Vir Geesteswetenskappe",
-            "id": 316
-        },
-        "317": {
-            "publication_name": "The European Journal Of Psychiatry",
-            "id": 317
-        },
-        "318": {
-            "publication_name": "Materials Research",
-            "id": 318
-        },
-        "319": {
-            "publication_name": "Revista De La Facultad De Medicina",
-            "id": 319
-        },
-        "320": {
-            "publication_name": "Tecnura",
-            "id": 320
-        },
-        "321": {
-            "publication_name": "Dados",
-            "id": 321
-        },
-        "322": {
-            "publication_name": "Brazilian Journal Of Microbiology",
-            "id": 322
-        },
-        "323": {
-            "publication_name": "Zoologia (Curitiba)",
-            "id": 323
-        },
-        "324": {
-            "publication_name": "Bragantia",
-            "id": 324
-        },
-        "325": {
-            "publication_name": "Revista De Derecho",
-            "id": 325
-        },
-        "326": {
-            "publication_name": "Mana",
-            "id": 326
-        },
-        "327": {
-            "publication_name": "Cadernos Pagu",
-            "id": 327
-        },
-        "328": {
-            "publication_name": "Revista Brasileira De Sa\u00fade E Produ\u00e7\u00e3o Animal",
-            "id": 328
-        },
-        "329": {
-            "publication_name": "Revista Diacr\u00edtica",
-            "id": 329
-        },
-        "330": {
-            "publication_name": "Brazilian Journal Of Oceanography",
-            "id": 330
-        },
-        "331": {
-            "publication_name": "Revista Brasileira De Ci\u00eancia Do Solo",
-            "id": 331
-        },
-        "332": {
-            "publication_name": "Jistem - Journal Of Information Systems And Technology Management",
-            "id": 332
-        },
-        "333": {
-            "publication_name": "Cultivos Tropicales",
-            "id": 333
-        },
-        "334": {
-            "publication_name": "Codas",
-            "id": 334
-        },
-        "335": {
-            "publication_name": "Nova Economia",
-            "id": 335
-        },
-        "336": {
-            "publication_name": "Scientia Agropecuaria",
-            "id": 336
-        },
-        "337": {
-            "publication_name": "Revista Cubana De Salud P\u00fablica",
-            "id": 337
-        },
-        "338": {
-            "publication_name": "Signos Hist\u00f3ricos",
-            "id": 338
-        },
-        "339": {
-            "publication_name": "Summa Phytopathologica",
-            "id": 339
-        },
-        "340": {
-            "publication_name": "Avances En Enfermer\u00eda",
-            "id": 340
-        },
-        "341": {
-            "publication_name": "South African Journal Of Child Health",
-            "id": 341
-        },
-        "342": {
-            "publication_name": "Arquivos De Medicina",
-            "id": 342
-        },
-        "343": {
-            "publication_name": "Ces Psicolog\u00eda",
-            "id": 343
-        },
-        "344": {
-            "publication_name": "Revista Direito Gv",
-            "id": 344
-        },
-        "345": {
-            "publication_name": "Cirug\u00eda Pl\u00e1stica Ibero-Latinoamericana",
-            "id": 345
-        },
-        "346": {
-            "publication_name": "Physis: Revista De Sa\u00fade Coletiva",
-            "id": 346
-        },
-        "347": {
-            "publication_name": "Convergencia",
-            "id": 347
-        },
-        "348": {
-            "publication_name": "Ram. Revista De Administra\u00e7\u00e3o Mackenzie",
-            "id": 348
-        },
-        "349": {
-            "publication_name": "Iatreia",
-            "id": 349
-        },
-        "350": {
-            "publication_name": "Revista Facultad De Ciencias Econ\u00f3micas: Investigaci\u00f3n Y Reflexi\u00f3n",
-            "id": 350
-        },
-        "351": {
-            "publication_name": "Revista De Economia Pol\u00edtica",
-            "id": 351
-        },
-        "352": {
-            "publication_name": "Revista Latinoamericana De Investigaci\u00f3n En Matem\u00e1tica Educativa",
-            "id": 352
-        },
-        "353": {
-            "publication_name": "Ambiente & Sociedade",
-            "id": 353
-        },
-        "354": {
-            "publication_name": "Index De Enfermer\u00eda",
-            "id": 354
-        },
-        "355": {
-            "publication_name": "Anales De Psicolog\u00eda",
-            "id": 355
-        },
-        "356": {
-            "publication_name": "Revista Brasileira De Cirurgia Cardiovascular",
-            "id": 356
-        },
-        "357": {
-            "publication_name": "Revista Brasileira De Economia",
-            "id": 357
-        },
-        "358": {
-            "publication_name": "Coluna/Columna",
-            "id": 358
-        },
-        "359": {
-            "publication_name": "Profile Issues In Teachers` Professional Development",
-            "id": 359
-        },
-        "360": {
-            "publication_name": "In Die Skriflig",
-            "id": 360
-        },
-        "361": {
-            "publication_name": "Food Science And Technology (Campinas)",
-            "id": 361
-        },
-        "362": {
-            "publication_name": "Revista Brasileira De Ci\u00eancia Pol\u00edtica",
-            "id": 362
-        },
-        "363": {
-            "publication_name": "Revista Brasileira De Medicina Do Esporte",
-            "id": 363
-        },
-        "364": {
-            "publication_name": "Memoria Y Sociedad",
-            "id": 364
-        },
-        "365": {
-            "publication_name": "Revista Internacional De Contaminaci\u00f3n Ambiental",
-            "id": 365
-        },
-        "366": {
-            "publication_name": "Cadernos Sa\u00fade Coletiva",
-            "id": 366
-        },
-        "367": {
-            "publication_name": "Ciencias Marinas",
-            "id": 367
-        },
-        "368": {
-            "publication_name": "Revista Ci\u00eancia Agron\u00f4mica",
-            "id": 368
-        },
-        "369": {
-            "publication_name": "Revista De Biolog\u00eda Marina Y Oceanograf\u00eda",
-            "id": 369
-        },
-        "370": {
-            "publication_name": "Psicoperspectivas",
-            "id": 370
-        },
-        "371": {
-            "publication_name": "Desacatos",
-            "id": 371
-        },
-        "372": {
-            "publication_name": "Ad-Minister",
-            "id": 372
-        },
-        "373": {
-            "publication_name": "Fundamina",
-            "id": 373
-        },
-        "374": {
-            "publication_name": "Revista Colombiana De Anestesiolog\u00eda",
-            "id": 374
-        },
-        "375": {
-            "publication_name": "Actualidades Biol\u00f3gicas",
-            "id": 375
-        },
-        "376": {
-            "publication_name": "Vniversitas",
-            "id": 376
-        },
-        "377": {
-            "publication_name": "Revista Ibracon De Estruturas E Materiais",
-            "id": 377
-        },
-        "378": {
-            "publication_name": "Revista De Sa\u00fade P\u00fablica",
-            "id": 378
-        },
-        "379": {
-            "publication_name": "Revista Chilena De Nutrici\u00f3n",
-            "id": 379
-        },
-        "380": {
-            "publication_name": "Revista Brasileira De Pol\u00edtica Internacional",
-            "id": 380
-        },
-        "381": {
-            "publication_name": "Revista Electr\u00f3nica Educare",
-            "id": 381
-        },
-        "382": {
-            "publication_name": "Revista Mexicana De F\u00edsica",
-            "id": 382
-        },
-        "383": {
-            "publication_name": "Revista Brasileira De Lingu\u00edstica Aplicada",
-            "id": 383
-        },
-        "384": {
-            "publication_name": "Revista Medica Herediana",
-            "id": 384
-        },
-        "385": {
-            "publication_name": "Annali Dell'Istituto Superiore Di Sanit\u00e0",
-            "id": 385
-        },
-        "386": {
-            "publication_name": "Journal For The Study Of Religion",
-            "id": 386
-        },
-        "387": {
-            "publication_name": "Revista Mexicana De Biodiversidad",
-            "id": 387
-        },
-        "388": {
-            "publication_name": "Radiologia Brasileira",
-            "id": 388
-        },
-        "389": {
-            "publication_name": "Acta Amazonica",
-            "id": 389
-        },
-        "390": {
-            "publication_name": "Revista De Geograf\u00eda Norte Grande",
-            "id": 390
-        },
-        "391": {
-            "publication_name": "Secuencia",
-            "id": 391
-        },
-        "392": {
-            "publication_name": "Tydskrif Vir Letterkunde",
-            "id": 392
-        },
-        "393": {
-            "publication_name": "Culturales",
-            "id": 393
-        },
-        "394": {
-            "publication_name": "Anais Do Museu Paulista: Hist\u00f3ria E Cultura Material",
-            "id": 394
-        },
-        "395": {
-            "publication_name": "Revista Brasileira De Geriatria E Gerontologia",
-            "id": 395
-        },
-        "396": {
-            "publication_name": "Revista Cubana De Medicina",
-            "id": 396
-        },
-        "397": {
-            "publication_name": "Di\u00e1logo Andino",
-            "id": 397
-        },
-        "398": {
-            "publication_name": "Revista De La Facultad De Medicina Veterinaria Y De Zootecnia",
-            "id": 398
-        },
-        "399": {
-            "publication_name": "Psicologia Escolar E Educacional",
-            "id": 399
-        },
-        "400": {
-            "publication_name": "South African Journal Of Industrial Engineering",
-            "id": 400
-        },
-        "401": {
-            "publication_name": "Sociologia, Problemas E Pr\u00e1ticas",
-            "id": 401
-        },
-        "402": {
-            "publication_name": "Revista Brasileira De Educa\u00e7\u00e3o F\u00edsica E Esporte",
-            "id": 402
-        },
-        "403": {
-            "publication_name": "Revista Chilena De Radiolog\u00eda",
-            "id": 403
-        },
-        "404": {
-            "publication_name": "Dynamis",
-            "id": 404
-        },
-        "405": {
-            "publication_name": "Revista De Investigaciones Veterinarias Del Per\u00fa",
-            "id": 405
-        },
-        "406": {
-            "publication_name": "Revista Brasileira De Hematologia E Hemoterapia",
-            "id": 406
-        },
-        "407": {
-            "publication_name": "Revista Portuguesa E Brasileira De Gest\u00e3o",
-            "id": 407
-        },
-        "408": {
-            "publication_name": "Revista Latinoamericana De Psicopatologia Fundamental",
-            "id": 408
-        },
-        "409": {
-            "publication_name": "Studia Historiae Ecclesiasticae",
-            "id": 409
-        },
-        "410": {
-            "publication_name": "Sociologias",
-            "id": 410
-        },
-        "411": {
-            "publication_name": "Agronom\u00eda Colombiana",
-            "id": 411
-        },
-        "412": {
-            "publication_name": "Perspectivas Em Ci\u00eancia Da Informa\u00e7\u00e3o",
-            "id": 412
-        },
-        "413": {
-            "publication_name": "Revista Brasileira De Educa\u00e7\u00e3o Especial",
-            "id": 413
-        },
-        "414": {
-            "publication_name": "Revista Chilena De Cardiolog\u00eda",
-            "id": 414
-        },
-        "415": {
-            "publication_name": "Revista Ga\u00facha De Enfermagem",
-            "id": 415
-        },
-        "416": {
-            "publication_name": "Ingenier\u00eda Mec\u00e1nica",
-            "id": 416
-        },
-        "417": {
-            "publication_name": "Educa\u00e7\u00e3o Em Revista",
-            "id": 417
-        },
-        "418": {
-            "publication_name": "Cer\u00e2mica",
-            "id": 418
-        },
-        "419": {
-            "publication_name": "Revista De Nutri\u00e7\u00e3o",
-            "id": 419
-        },
-        "420": {
-            "publication_name": "Medicina Legal De Costa Rica",
-            "id": 420
-        },
-        "421": {
-            "publication_name": "Revista Historia Y Sociedad",
-            "id": 421
-        },
-        "422": {
-            "publication_name": "Chungar\u00e1 (Arica)",
-            "id": 422
-        },
-        "423": {
-            "publication_name": "Revista Chilena De Pediatr\u00eda",
-            "id": 423
-        },
-        "424": {
-            "publication_name": "Medicc Review",
-            "id": 424
-        },
-        "425": {
-            "publication_name": "Revista De Otorrinolaringolog\u00eda Y Cirug\u00eda De Cabeza Y Cuello",
-            "id": 425
-        },
-        "426": {
-            "publication_name": "Revista Chilena De Neuro-Psiquiatr\u00eda",
-            "id": 426
-        },
-        "427": {
-            "publication_name": "Revista Costarricense De Cardiolog\u00eda",
-            "id": 427
-        },
-        "428": {
-            "publication_name": "Investigaci\u00f3n Y Educaci\u00f3n En Enfermer\u00eda",
-            "id": 428
-        },
-        "429": {
-            "publication_name": "Revista Facultad De Ingenier\u00eda Universidad De Antioquia",
-            "id": 429
-        },
-        "430": {
-            "publication_name": "Revista De Neuro-Psiquiatr\u00eda",
-            "id": 430
-        },
-        "431": {
-            "publication_name": "Revista Ciencias T\u00e9cnicas Agropecuarias",
-            "id": 431
-        },
-        "432": {
-            "publication_name": "Lua Nova: Revista De Cultura E Pol\u00edtica",
-            "id": 432
-        },
-        "433": {
-            "publication_name": "Anales Del Sistema Sanitario De Navarra",
-            "id": 433
-        },
-        "434": {
-            "publication_name": "Revista Do Instituto De Medicina Tropical De S\u00e3o Paulo",
-            "id": 434
-        },
-        "435": {
-            "publication_name": "Pesquisa Agropecu\u00e1ria Tropical",
-            "id": 435
-        },
-        "436": {
-            "publication_name": "Revista Brasileira De Reumatologia",
-            "id": 436
-        },
-        "437": {
-            "publication_name": "Revista Gerencia Y Pol\u00edticas De Salud",
-            "id": 437
-        },
-        "438": {
-            "publication_name": "Aquich\u00e1n",
-            "id": 438
-        },
-        "439": {
-            "publication_name": "Problemas Del Desarrollo",
-            "id": 439
-        },
-        "440": {
-            "publication_name": "Psicologia: Ci\u00eancia E Profiss\u00e3o",
-            "id": 440
-        },
-        "441": {
-            "publication_name": "Estudios Pol\u00edticos (M\u00e9xico)",
-            "id": 441
-        },
-        "442": {
-            "publication_name": "Revista Ingenier\u00eda De Construcci\u00f3n",
-            "id": 442
-        },
-        "443": {
-            "publication_name": "Cadernos De Pesquisa",
-            "id": 443
-        },
-        "444": {
-            "publication_name": "Revista Med",
-            "id": 444
-        },
-        "445": {
-            "publication_name": "Transinforma\u00e7\u00e3o",
-            "id": 445
-        },
-        "446": {
-            "publication_name": "Caderno Crh",
-            "id": 446
-        },
-        "447": {
-            "publication_name": "Revista Cubana De Enfermer\u00eda",
-            "id": 447
-        },
-        "448": {
-            "publication_name": "Sa\u00fade E Sociedade",
-            "id": 448
-        },
-        "449": {
-            "publication_name": "Ciencia & Trabajo",
-            "id": 449
-        },
-        "450": {
-            "publication_name": "Ciencia Y Enfermer\u00eda",
-            "id": 450
-        },
-        "451": {
-            "publication_name": "Biological Research",
-            "id": 451
-        },
-        "452": {
-            "publication_name": "Universidad Y Ciencia",
-            "id": 452
-        },
-        "453": {
-            "publication_name": "Revista Brasileira De Ci\u00eancias Do Esporte",
-            "id": 453
-        },
-        "454": {
-            "publication_name": "Literatura: Teor\u00eda, Historia, Cr\u00edtica",
-            "id": 454
-        },
-        "455": {
-            "publication_name": "Cuadernos De Econom\u00eda",
-            "id": 455
-        },
-        "456": {
-            "publication_name": "Cuicuilco",
-            "id": 456
-        },
-        "457": {
-            "publication_name": "Sanidad Militar",
-            "id": 457
-        },
-        "458": {
-            "publication_name": "Biom\u00e9dica",
-            "id": 458
-        },
-        "459": {
-            "publication_name": "Ci\u00eancia Animal Brasileira",
-            "id": 459
-        },
-        "460": {
-            "publication_name": "Ambiente Constru\u00eddo",
-            "id": 460
-        },
-        "461": {
-            "publication_name": "Avances En Psicolog\u00eda Latinoamericana",
-            "id": 461
-        },
-        "462": {
-            "publication_name": "Revista De Ingenier\u00eda",
-            "id": 462
-        },
-        "463": {
-            "publication_name": "South African Journal Of Education",
-            "id": 463
-        },
-        "464": {
-            "publication_name": "Revista Colombiana De Antropolog\u00eda",
-            "id": 464
-        },
-        "465": {
-            "publication_name": "Revista Brasileira De Sa\u00fade Materno Infantil",
-            "id": 465
-        },
-        "466": {
-            "publication_name": "Revista Cubana De Informaci\u00f3n En Ciencias De La Salud",
-            "id": 466
-        },
-        "467": {
-            "publication_name": "Mat\u00e9ria (Rio De Janeiro)",
-            "id": 467
-        },
-        "468": {
-            "publication_name": "Brazilian Journal Of Oral Sciences",
-            "id": 468
-        },
-        "469": {
-            "publication_name": "Bolet\u00edn De Investigaciones Marinas Y Costeras - Invemar",
-            "id": 469
-        },
-        "470": {
-            "publication_name": "Revista Chilena De Historia Natural",
-            "id": 470
-        },
-        "471": {
-            "publication_name": "Acta Scientiarum. Animal Sciences",
-            "id": 471
-        },
-        "472": {
-            "publication_name": "Revista Mexicana De Ingenier\u00eda Biom\u00e9dica",
-            "id": 472
-        },
-        "473": {
-            "publication_name": "Missionalia",
-            "id": 473
-        },
-        "474": {
-            "publication_name": "Teolog\u00eda Y Vida",
-            "id": 474
-        },
-        "475": {
-            "publication_name": "Revista Cl\u00ednica De Medicina De Familia",
-            "id": 475
-        },
-        "476": {
-            "publication_name": "Revista De La Facultad De Medicina (M\u00e9xico)",
-            "id": 476
-        },
-        "477": {
-            "publication_name": "Salud Colectiva",
-            "id": 477
-        },
-        "478": {
-            "publication_name": "Psicologia",
-            "id": 478
-        },
-        "479": {
-            "publication_name": "Computaci\u00f3n Y Sistemas",
-            "id": 479
-        },
-        "480": {
-            "publication_name": "Fisioterapia Em Movimento",
-            "id": 480
-        },
-        "481": {
-            "publication_name": "Pap\u00e9is Avulsos De Zoologia (S\u00e3o Paulo)",
-            "id": 481
-        },
-        "482": {
-            "publication_name": "South African Journal Of Economic And Management Sciences",
-            "id": 482
-        },
-        "483": {
-            "publication_name": "Psicologia & Sociedade",
-            "id": 483
-        },
-        "484": {
-            "publication_name": "Investigaciones Andina",
-            "id": 484
-        },
-        "485": {
-            "publication_name": "Dental Press Journal Of Orthodontics",
-            "id": 485
-        },
-        "486": {
-            "publication_name": "Revista De Administra\u00e7\u00e3o (S\u00e3o Paulo)",
-            "id": 486
-        },
-        "487": {
-            "publication_name": "Cerne",
-            "id": 487
-        },
-        "488": {
-            "publication_name": "Jornal Brasileiro De Nefrologia",
-            "id": 488
-        },
-        "489": {
-            "publication_name": "Rgo - Revista Ga\u00facha De Odontologia",
-            "id": 489
-        },
-        "490": {
-            "publication_name": "Texto & Contexto - Enfermagem",
-            "id": 490
-        },
-        "491": {
-            "publication_name": "Am\u00e9rica Latina En La Historia Econ\u00f3mica",
-            "id": 491
-        },
-        "492": {
-            "publication_name": "Desaf\u00edos",
-            "id": 492
-        },
-        "493": {
-            "publication_name": "Revista Chilena De Cirug\u00eda",
-            "id": 493
-        },
-        "494": {
-            "publication_name": "Boletim Do Museu Paraense Em\u00edlio Goeldi. Ci\u00eancias Humanas",
-            "id": 494
-        },
-        "495": {
-            "publication_name": "Alteridades",
-            "id": 495
-        },
-        "496": {
-            "publication_name": "Psicologia Usp",
-            "id": 496
-        },
-        "497": {
-            "publication_name": "Estudios Sociales (Hermosillo, Son.)",
-            "id": 497
-        },
-        "498": {
-            "publication_name": "Acta Bot\u00e1nica Mexicana",
-            "id": 498
-        },
-        "499": {
-            "publication_name": "Educa\u00e7\u00e3o & Realidade",
-            "id": 499
-        },
-        "500": {
-            "publication_name": "Acta Scientiarum. Agronomy",
-            "id": 500
-        },
-        "501": {
-            "publication_name": "Escritos De Psicolog\u00eda (Internet)",
-            "id": 501
-        },
-        "502": {
-            "publication_name": "Gaceta Sanitaria",
-            "id": 502
-        },
-        "503": {
-            "publication_name": "Ensayos Sobre Pol\u00edtica Econ\u00f3mica",
-            "id": 503
-        },
-        "504": {
-            "publication_name": "Bar - Brazilian Administration Review",
-            "id": 504
-        },
-        "505": {
-            "publication_name": "Journal Of Transport Literature",
-            "id": 505
-        },
-        "506": {
-            "publication_name": "Polis (Santiago)",
-            "id": 506
-        },
-        "507": {
-            "publication_name": "Psicologia, Sa\u00fade & Doen\u00e7as",
-            "id": 507
-        },
-        "508": {
-            "publication_name": "International Braz J Urol",
-            "id": 508
-        },
-        "509": {
-            "publication_name": "Avalia\u00e7\u00e3o: Revista Da Avalia\u00e7\u00e3o Da Educa\u00e7\u00e3o Superior (Campinas)",
-            "id": 509
-        },
-        "510": {
-            "publication_name": "Diversitas: Perspectivas En Psicolog\u00eda",
-            "id": 510
-        },
-        "511": {
-            "publication_name": "Revista Latinoamericana De Bio\u00e9tica",
-            "id": 511
-        },
-        "512": {
-            "publication_name": "Brazilian Journal Of Biology",
-            "id": 512
-        },
-        "513": {
-            "publication_name": "Acta M\u00e9dica Costarricense",
-            "id": 513
-        },
-        "514": {
-            "publication_name": "Arquivos De Gastroenterologia",
-            "id": 514
-        },
-        "515": {
-            "publication_name": "Phronimon",
-            "id": 515
-        },
-        "516": {
-            "publication_name": "Koers",
-            "id": 516
-        },
-        "517": {
-            "publication_name": "Engenharia Sanitaria E Ambiental",
-            "id": 517
-        },
-        "518": {
-            "publication_name": "Motriz: Revista De Educa\u00e7\u00e3o F\u00edsica",
-            "id": 518
-        },
-        "519": {
-            "publication_name": "Acta Botanica Brasilica",
-            "id": 519
-        },
-        "520": {
-            "publication_name": "Acta Agron\u00f3mica",
-            "id": 520
-        },
-        "521": {
-            "publication_name": "Cuadernos De Desarrollo Rural",
-            "id": 521
-        },
-        "522": {
-            "publication_name": "Alea : Estudos Neolatinos",
-            "id": 522
-        },
-        "523": {
-            "publication_name": "Kriterion: Revista De Filosofia",
-            "id": 523
-        },
-        "524": {
-            "publication_name": "Hoehnea",
-            "id": 524
-        },
-        "525": {
-            "publication_name": "Revista Colombiana De Ciencias Pecuarias",
-            "id": 525
-        },
-        "526": {
-            "publication_name": "Revista Brasileira De Ci\u00eancia Av\u00edcola",
-            "id": 526
-        },
-        "527": {
-            "publication_name": "Scientia Agricola",
-            "id": 527
-        },
-        "528": {
-            "publication_name": "Hts Theological Studies",
-            "id": 528
-        },
-        "529": {
-            "publication_name": "Silva Lusitana",
-            "id": 529
-        },
-        "530": {
-            "publication_name": "Motricidade",
-            "id": 530
-        },
-        "531": {
-            "publication_name": "Revista Ambiente & \u00c1gua",
-            "id": 531
-        },
-        "532": {
-            "publication_name": "Revista Portuguesa De Medicina Geral E Familiar",
-            "id": 532
-        },
-        "533": {
-            "publication_name": "Pol\u00edmeros",
-            "id": 533
-        },
-        "534": {
-            "publication_name": "Fractal : Revista De Psicologia",
-            "id": 534
-        },
-        "535": {
-            "publication_name": "Etnogr\u00e1fica",
-            "id": 535
-        },
-        "536": {
-            "publication_name": "Jornal Vascular Brasileiro",
-            "id": 536
-        },
-        "537": {
-            "publication_name": "Ct&F - Ciencia, Tecnolog\u00eda Y Futuro",
-            "id": 537
-        },
-        "538": {
-            "publication_name": "Tropical Plant Pathology",
-            "id": 538
-        },
-        "539": {
-            "publication_name": "Estudios Socio-Jur\u00eddicos",
-            "id": 539
-        },
-        "540": {
-            "publication_name": "Vaccimonitor",
-            "id": 540
-        },
-        "541": {
-            "publication_name": "Revista Brasileira De Terapia Intensiva",
-            "id": 541
-        },
-        "542": {
-            "publication_name": "Revista Cl\u00ednica De Periodoncia, Implantolog\u00eda Y Rehabilitaci\u00f3n Oral",
-            "id": 542
-        },
-        "543": {
-            "publication_name": "Urbe. Revista Brasileira De Gest\u00e3o Urbana",
-            "id": 543
-        },
-        "544": {
-            "publication_name": "Arq (Santiago)",
-            "id": 544
-        },
-        "545": {
-            "publication_name": "Revista De Estudios Hist\u00f3ricos De La Masoner\u00eda Latinoamericana Y Caribe\u00f1a",
-            "id": 545
-        },
-        "546": {
-            "publication_name": "International Journal Of Psychological Research",
-            "id": 546
-        },
-        "547": {
-            "publication_name": "Farmacia Hospitalaria",
-            "id": 547
-        },
-        "548": {
-            "publication_name": "Revista Latinoamericana De Ciencias Sociales, Ni\u00f1ez Y Juventud",
-            "id": 548
-        },
-        "549": {
-            "publication_name": "Universitas Psychologica",
-            "id": 549
-        },
-        "550": {
-            "publication_name": "Revista Ingenier\u00edas Universidad De Medell\u00edn",
-            "id": 550
-        },
-        "551": {
-            "publication_name": "Revista De Bio\u00e9tica Y Derecho",
-            "id": 551
-        },
-        "552": {
-            "publication_name": "Revista Invi",
-            "id": 552
-        },
-        "553": {
-            "publication_name": "Revista De Ciencia Pol\u00edtica (Santiago)",
-            "id": 553
-        },
-        "554": {
-            "publication_name": "South African Journal Of Surgery",
-            "id": 554
-        },
-        "555": {
-            "publication_name": "Revista Brasileira De Educa\u00e7\u00e3o M\u00e9dica",
-            "id": 555
-        },
-        "556": {
-            "publication_name": "Hist\u00f3ria Da Educa\u00e7\u00e3o",
-            "id": 556
-        },
-        "557": {
-            "publication_name": "An\u00e1lise Social",
-            "id": 557
-        },
-        "558": {
-            "publication_name": "Educaci\u00f3n M\u00e9dica Superior",
-            "id": 558
-        },
-        "559": {
-            "publication_name": "Portugaliae Electrochimica Acta",
-            "id": 559
-        },
-        "560": {
-            "publication_name": "Salud P\u00fablica De M\u00e9xico",
-            "id": 560
-        },
-        "561": {
-            "publication_name": "Revista Cubana De Hematolog\u00eda, Inmunolog\u00eda Y Hemoterapia",
-            "id": 561
-        },
-        "562": {
-            "publication_name": "Neumolog\u00eda Y Cirug\u00eda De T\u00f3rax",
-            "id": 562
-        },
-        "563": {
-            "publication_name": "Journal Of  Coloproctology (Rio De Janeiro)",
-            "id": 563
-        },
-        "564": {
-            "publication_name": "South African Journal Of Animal Science",
-            "id": 564
-        },
-        "565": {
-            "publication_name": "Idesia (Arica)",
-            "id": 565
-        },
-        "566": {
-            "publication_name": "Educar Em Revista",
-            "id": 566
-        },
-        "567": {
-            "publication_name": "Revista Lus\u00f3fona De Educa\u00e7\u00e3o",
-            "id": 567
-        },
-        "568": {
-            "publication_name": "Revista De Derecho (Valdivia)",
-            "id": 568
-        },
-        "569": {
-            "publication_name": "Ingenier\u00eda Hidr\u00e1ulica Y Ambiental",
-            "id": 569
-        },
-        "570": {
-            "publication_name": "Revista De Economia Contempor\u00e2nea",
-            "id": 570
-        },
-        "571": {
-            "publication_name": "Poblaci\u00f3n Y Salud En Mesoam\u00e9rica",
-            "id": 571
-        },
-        "572": {
-            "publication_name": "T\u00f3picos (M\u00e9xico)",
-            "id": 572
-        },
-        "573": {
-            "publication_name": "Perfil De Coyuntura Econ\u00f3mica",
-            "id": 573
-        },
-        "574": {
-            "publication_name": "Revista Facultad Nacional De Salud P\u00fablica",
-            "id": 574
-        },
-        "575": {
-            "publication_name": "Eure (Santiago)",
-            "id": 575
-        },
-        "576": {
-            "publication_name": "Economia E Sociedade",
-            "id": 576
-        },
-        "577": {
-            "publication_name": "Revista Brasileira De Engenharia Biom\u00e9dica",
-            "id": 577
-        },
-        "578": {
-            "publication_name": "Ciencia E Investigaci\u00f3n Agraria",
-            "id": 578
-        },
-        "579": {
-            "publication_name": "Psicologia: Teoria E Pesquisa",
-            "id": 579
-        },
-        "580": {
-            "publication_name": "Perfiles Educativos",
-            "id": 580
-        },
-        "581": {
-            "publication_name": "Revista De Estudios Hist\u00f3rico-Jur\u00eddicos",
-            "id": 581
-        },
-        "582": {
-            "publication_name": "Agricultura, Sociedad Y Desarrollo",
-            "id": 582
-        },
-        "583": {
-            "publication_name": "Acta Biol\u00f3gica Colombiana",
-            "id": 583
-        },
-        "584": {
-            "publication_name": "Biotecnolog\u00eda En El Sector Agropecuario Y Agroindustrial",
-            "id": 584
-        },
-        "585": {
-            "publication_name": "Cinta De Moebio",
-            "id": 585
-        },
-        "586": {
-            "publication_name": "International Journal Of Odontostomatology",
-            "id": 586
-        },
-        "587": {
-            "publication_name": "Revista Latinoamericana De Qu\u00edmica",
-            "id": 587
-        },
-        "588": {
-            "publication_name": "Universidad Y Salud",
-            "id": 588
-        },
-        "589": {
-            "publication_name": "Revista Brasileira De Parasitologia Veterin\u00e1ria",
-            "id": 589
-        },
-        "590": {
-            "publication_name": "Revista Odontol\u00f3gica Mexicana",
-            "id": 590
-        },
-        "591": {
-            "publication_name": "Revista Portuguesa De Ortopedia E Traumatologia",
-            "id": 591
-        },
-        "592": {
-            "publication_name": "Jornal Portugu\u00eas De Gastrenterologia",
-            "id": 592
-        },
-        "593": {
-            "publication_name": "Ingenier\u00eda E Investigaci\u00f3n",
-            "id": 593
-        },
-        "594": {
-            "publication_name": "Acta Neurol\u00f3gica Colombiana",
-            "id": 594
-        },
-        "595": {
-            "publication_name": "Cuestiones Teol\u00f3gicas",
-            "id": 595
-        },
-        "596": {
-            "publication_name": "El \u00c1gora U.S.B.",
-            "id": 596
-        },
-        "597": {
-            "publication_name": "Estudios De Cultura Maya",
-            "id": 597
-        },
-        "598": {
-            "publication_name": "Nutrici\u00f3n Hospitalaria",
-            "id": 598
-        },
-        "599": {
-            "publication_name": "Rela\u00e7\u00f5es Internacionais (R:I)",
-            "id": 599
-        },
-        "600": {
-            "publication_name": "Opini\u00e3o P\u00fablica",
-            "id": 600
-        },
-        "601": {
-            "publication_name": "Econom\u00eda Unam",
-            "id": 601
-        },
-        "602": {
-            "publication_name": "Revista Mexicana De Cardiolog\u00eda",
-            "id": 602
-        },
-        "603": {
-            "publication_name": "Brazilian Dental Journal",
-            "id": 603
-        },
-        "604": {
-            "publication_name": "Yesterday And Today",
-            "id": 604
-        },
-        "605": {
-            "publication_name": "Biosalud",
-            "id": 605
-        },
-        "606": {
-            "publication_name": "Revista Colombiana De Ciencias Hort\u00edcolas",
-            "id": 606
-        },
-        "607": {
-            "publication_name": "Anagramas -Rumbos Y Sentidos De La Comunicaci\u00f3n-",
-            "id": 607
-        },
-        "608": {
-            "publication_name": "Sociedade E Estado",
-            "id": 608
-        },
-        "609": {
-            "publication_name": "Revista De Protecci\u00f3n Vegetal",
-            "id": 609
-        },
-        "610": {
-            "publication_name": "Revista Cubana De Medicina Militar",
-            "id": 610
-        },
-        "611": {
-            "publication_name": "Sexualidad, Salud Y Sociedad (Rio De Janeiro)",
-            "id": 611
-        },
-        "612": {
-            "publication_name": "Linguagem Em (Dis)Curso",
-            "id": 612
-        },
-        "613": {
-            "publication_name": "Estudos De Psicologia (Natal)",
-            "id": 613
-        },
-        "614": {
-            "publication_name": "Revista Andaluza De Medicina Del Deporte",
-            "id": 614
-        },
-        "615": {
-            "publication_name": "Rodrigu\u00e9sia",
-            "id": 615
-        },
-        "616": {
-            "publication_name": "Planta Daninha",
-            "id": 616
-        },
-        "617": {
-            "publication_name": "Cadernos Ebape.Br",
-            "id": 617
-        },
-        "618": {
-            "publication_name": "Cuadernos De Historia (Santiago)",
-            "id": 618
-        },
-        "619": {
-            "publication_name": "Chilean Journal Of Agricultural Research",
-            "id": 619
-        },
-        "620": {
-            "publication_name": "Ingeniare. Revista Chilena De Ingenier\u00eda",
-            "id": 620
-        },
-        "621": {
-            "publication_name": "Revista Brasileira De Cineantropometria & Desempenho Humano",
-            "id": 621
-        },
-        "622": {
-            "publication_name": "Revista Brasileira De Cardiologia Invasiva",
-            "id": 622
-        },
-        "623": {
-            "publication_name": "Trans/Form/A\u00e7\u00e3o",
-            "id": 623
-        },
-        "624": {
-            "publication_name": "Intera\u00e7\u00f5es (Campo Grande)",
-            "id": 624
-        },
-        "625": {
-            "publication_name": "Estudios Internacionales (Santiago)",
-            "id": 625
-        },
-        "626": {
-            "publication_name": "Nauplius",
-            "id": 626
-        },
-        "627": {
-            "publication_name": "Revista Cubana De Investigaciones Biom\u00e9dicas",
-            "id": 627
-        },
-        "628": {
-            "publication_name": "Bolet\u00edn Cient\u00edfico. Centro De Museos. Museo De Historia Natural",
-            "id": 628
-        },
-        "629": {
-            "publication_name": "Revista Historia De La Educaci\u00f3n Latinoamericana",
-            "id": 629
-        },
-        "630": {
-            "publication_name": "Revista Colombiana De Educaci\u00f3n",
-            "id": 630
-        },
-        "631": {
-            "publication_name": "Revista Mexicana De Ciencias Forestales",
-            "id": 631
-        },
-        "632": {
-            "publication_name": "Alfa : Revista De Lingu\u00edstica (S\u00e3o Jos\u00e9 Do Rio Preto)",
-            "id": 632
-        },
-        "633": {
-            "publication_name": "Gerokomos",
-            "id": 633
-        },
-        "634": {
-            "publication_name": "Revista De La Universidad Industrial De Santander. Salud",
-            "id": 634
-        },
-        "635": {
-            "publication_name": "Estudios Pol\u00edticos",
-            "id": 635
-        },
-        "636": {
-            "publication_name": "Ultima D\u00e9cada",
-            "id": 636
-        },
-        "637": {
-            "publication_name": "Ideas Y Valores",
-            "id": 637
-        },
-        "638": {
-            "publication_name": "Relaciones (Zamora)",
-            "id": 638
-        },
-        "639": {
-            "publication_name": "Psico-Usf",
-            "id": 639
-        },
-        "640": {
-            "publication_name": "Revista Espa\u00f1ola De Enfermedades Digestivas",
-            "id": 640
-        },
-        "641": {
-            "publication_name": "Archivos De Medicina Veterinaria",
-            "id": 641
-        },
-        "642": {
-            "publication_name": "Ecos De Econom\u00eda",
-            "id": 642
-        },
-        "643": {
-            "publication_name": "Tecno L\u00f3gicas",
-            "id": 643
-        },
-        "644": {
-            "publication_name": "Tema (S\u00e3o Carlos)",
-            "id": 644
-        },
-        "645": {
-            "publication_name": "Estudios De Historia Novohispana",
-            "id": 645
-        },
-        "646": {
-            "publication_name": "Sa Journal Of Radiology",
-            "id": 646
-        },
-        "647": {
-            "publication_name": "Entramado",
-            "id": 647
-        },
-        "648": {
-            "publication_name": "Aisthesis",
-            "id": 648
-        },
-        "649": {
-            "publication_name": "Pol\u00edtica Y Cultura",
-            "id": 649
-        },
-        "650": {
-            "publication_name": "Estudios Pedag\u00f3gicos (Valdivia)",
-            "id": 650
-        },
-        "651": {
-            "publication_name": "Revista De Relaciones Internacionales, Estrategia Y Seguridad",
-            "id": 651
-        },
-        "652": {
-            "publication_name": "Estudios Constitucionales",
-            "id": 652
-        },
-        "653": {
-            "publication_name": "Revista Mexicana De F\u00edsica E",
-            "id": 653
-        },
-        "654": {
-            "publication_name": "Polis",
-            "id": 654
-        },
-        "655": {
-            "publication_name": "Estudios Gerenciales",
-            "id": 655
-        },
-        "656": {
-            "publication_name": "Revista Contabilidade & Finan\u00e7as",
-            "id": 656
-        },
-        "657": {
-            "publication_name": "Sa Journal Of Industrial Psychology",
-            "id": 657
-        },
-        "658": {
-            "publication_name": "Bolema: Boletim De Educa\u00e7\u00e3o Matem\u00e1tica",
-            "id": 658
-        },
-        "659": {
-            "publication_name": "Bolet\u00edn De Filolog\u00eda",
-            "id": 659
-        },
-        "660": {
-            "publication_name": "Bosque (Valdivia)",
-            "id": 660
-        },
-        "661": {
-            "publication_name": "Revista Chilena De Derecho Privado",
-            "id": 661
-        },
-        "662": {
-            "publication_name": "Psychologia. Avances De La Disciplina",
-            "id": 662
-        },
-        "663": {
-            "publication_name": "African Journal Of Primary Health Care & Family Medicine",
-            "id": 663
-        },
-        "664": {
-            "publication_name": "African Natural History",
-            "id": 664
-        },
-        "665": {
-            "publication_name": "Pediatr\u00eda Atenci\u00f3n Primaria",
-            "id": 665
-        },
-        "666": {
-            "publication_name": "Varia Historia",
-            "id": 666
-        },
-        "667": {
-            "publication_name": "Medievalista Online",
-            "id": 667
-        },
-        "668": {
-            "publication_name": "Revista Colombiana De Cardiolog\u00eda",
-            "id": 668
-        },
-        "669": {
-            "publication_name": "Revista Colombiana De Psiquiatr\u00eda",
-            "id": 669
-        },
-        "670": {
-            "publication_name": "Anuario Colombiano De Historia Social Y De La Cultura",
-            "id": 670
-        },
-        "671": {
-            "publication_name": "Revista De La Construcci\u00f3n",
-            "id": 671
-        },
-        "672": {
-            "publication_name": "Tabula Rasa",
-            "id": 672
-        },
-        "673": {
-            "publication_name": "Revista Brasileira De Ci\u00eancias Sociais",
-            "id": 673
-        },
-        "674": {
-            "publication_name": "Actualidades Investigativas En Educaci\u00f3n",
-            "id": 674
-        },
-        "675": {
-            "publication_name": "Revista De Medicina Veterinaria",
-            "id": 675
-        },
-        "676": {
-            "publication_name": "Latinoam\u00e9rica. Revista De Estudios Latinoamericanos",
-            "id": 676
-        },
-        "677": {
-            "publication_name": "Investigaci\u00f3n Bibliotecol\u00f3gica",
-            "id": 677
-        },
-        "678": {
-            "publication_name": "Investigaci\u00f3n En Educaci\u00f3n M\u00e9dica",
-            "id": 678
-        },
-        "679": {
-            "publication_name": "Pen\u00ednsula",
-            "id": 679
-        },
-        "680": {
-            "publication_name": "Revista De Ci\u00eancias Agr\u00e1rias",
-            "id": 680
-        },
-        "681": {
-            "publication_name": "Alpha (Osorno)",
-            "id": 681
-        },
-        "682": {
-            "publication_name": "Cuadernos De Administraci\u00f3n",
-            "id": 682
-        },
-        "683": {
-            "publication_name": "Geof\u00edsica Internacional",
-            "id": 683
-        },
-        "684": {
-            "publication_name": "Revista De Psicolog\u00eda Del Trabajo Y De Las Organizaciones",
-            "id": 684
-        },
-        "685": {
-            "publication_name": "Avances En Periodoncia E Implantolog\u00eda Oral",
-            "id": 685
-        },
-        "686": {
-            "publication_name": "The European Journal Of Psychology Applied To Legal Context",
-            "id": 686
-        },
-        "687": {
-            "publication_name": "Cadernos Cedes",
-            "id": 687
-        },
-        "688": {
-            "publication_name": "De Jure",
-            "id": 688
-        },
-        "689": {
-            "publication_name": "Revista Brasileira De Sa\u00fade Ocupacional",
-            "id": 689
-        },
-        "690": {
-            "publication_name": "Calidad En La Educaci\u00f3n",
-            "id": 690
-        },
-        "691": {
-            "publication_name": "Psicologia Cl\u00ednica",
-            "id": 691
-        },
-        "692": {
-            "publication_name": "Revista Derecho Del Estado",
-            "id": 692
-        },
-        "693": {
-            "publication_name": "Acta Medica Colombiana",
-            "id": 693
-        },
-        "694": {
-            "publication_name": "Read. Revista Eletr\u00f4nica De Administra\u00e7\u00e3o (Porto Alegre)",
-            "id": 694
-        },
-        "695": {
-            "publication_name": "Proyecciones (Antofagasta)",
-            "id": 695
-        },
-        "696": {
-            "publication_name": "Signos Filos\u00f3ficos",
-            "id": 696
-        },
-        "697": {
-            "publication_name": "Brazilian Journal Of Food Technology",
-            "id": 697
-        },
-        "698": {
-            "publication_name": "Colombia M\u00e9dica",
-            "id": 698
-        },
-        "699": {
-            "publication_name": "Revista Bio\u00e9tica",
-            "id": 699
-        },
-        "700": {
-            "publication_name": "Vibrant: Virtual Brazilian Anthropology",
-            "id": 700
-        },
-        "701": {
-            "publication_name": "Ingenier\u00eda Y Universidad",
-            "id": 701
-        },
-        "702": {
-            "publication_name": "Cuadernos De Contabilidad",
-            "id": 702
-        },
-        "703": {
-            "publication_name": "Polibits",
-            "id": 703
-        },
-        "704": {
-            "publication_name": "Koedoe",
-            "id": 704
-        },
-        "705": {
-            "publication_name": "Acta Po\u00e9tica",
-            "id": 705
-        },
-        "706": {
-            "publication_name": "Estudios De Historia Moderna Y Contempor\u00e1nea De M\u00e9xico",
-            "id": 706
-        },
-        "707": {
-            "publication_name": "Migraciones Internacionales",
-            "id": 707
-        },
-        "708": {
-            "publication_name": "Revista Cubana De Anestesiolog\u00eda Y Reanimaci\u00f3n",
-            "id": 708
-        },
-        "709": {
-            "publication_name": "Revista Mexicana De Trastornos Alimentarios",
-            "id": 709
-        },
-        "710": {
-            "publication_name": "Tip. Revista Especializada En Ciencias Qu\u00edmico-Biol\u00f3gicas",
-            "id": 710
-        },
-        "711": {
-            "publication_name": "Revista U.D.C.A Actualidad & Divulgaci\u00f3n Cient\u00edfica",
-            "id": 711
-        },
-        "712": {
-            "publication_name": "Cuadernos De Administraci\u00f3n (Universidad Del Valle)",
-            "id": 712
-        },
-        "713": {
-            "publication_name": "Revista Cubana De Farmacia",
-            "id": 713
-        },
-        "714": {
-            "publication_name": "Gayana. Bot\u00e1nica",
-            "id": 714
-        },
-        "715": {
-            "publication_name": "Revista Geol\u00f3gica De Am\u00e9rica Central",
-            "id": 715
-        },
-        "716": {
-            "publication_name": "Gaceta M\u00e9dica Espirituana",
-            "id": 716
-        },
-        "717": {
-            "publication_name": "Revista Brasileira De Estudos Pedag\u00f3gicos",
-            "id": 717
-        },
-        "718": {
-            "publication_name": "Magallania (Punta Arenas)",
-            "id": 718
-        },
-        "719": {
-            "publication_name": "Horizonte M\u00e9dico",
-            "id": 719
-        },
-        "720": {
-            "publication_name": "Revista Colombiana De Reumatolog\u00eda",
-            "id": 720
-        },
-        "721": {
-            "publication_name": "Delta: Documenta\u00e7\u00e3o De Estudos Em Ling\u00fc\u00edstica Te\u00f3rica E Aplicada",
-            "id": 721
-        },
-        "722": {
-            "publication_name": "An\u00e1lisis Pol\u00edtico",
-            "id": 722
-        },
-        "723": {
-            "publication_name": "Revista De Salud Animal",
-            "id": 723
-        },
-        "724": {
-            "publication_name": "Pro-Posi\u00e7\u00f5es",
-            "id": 724
-        },
-        "725": {
-            "publication_name": "Arquitectura Y Urbanismo",
-            "id": 725
-        },
-        "726": {
-            "publication_name": "Revista Facultad De Odontolog\u00eda Universidad De Antioquia",
-            "id": 726
-        },
-        "727": {
-            "publication_name": "Ingenier\u00eda Electr\u00f3nica, Autom\u00e1tica Y Comunicaciones",
-            "id": 727
-        },
-        "728": {
-            "publication_name": "Revista Cubana De Medicina General Integral",
-            "id": 728
-        },
-        "729": {
-            "publication_name": "Perspectivas En Nutrici\u00f3n Humana",
-            "id": 729
-        },
-        "730": {
-            "publication_name": "Revista Mvz C\u00f3rdoba",
-            "id": 730
-        },
-        "731": {
-            "publication_name": "Lenguaje",
-            "id": 731
-        },
-        "732": {
-            "publication_name": "Perinatolog\u00eda Y Reproducci\u00f3n Humana",
-            "id": 732
-        },
-        "733": {
-            "publication_name": "Di\u00e1noia",
-            "id": 733
-        },
-        "734": {
-            "publication_name": "Agronom\u00eda Costarricense",
-            "id": 734
-        },
-        "735": {
-            "publication_name": "Revista Lasallista De Investigaci\u00f3n",
-            "id": 735
-        },
-        "736": {
-            "publication_name": "Ius Et Praxis",
-            "id": 736
-        },
-        "737": {
-            "publication_name": "Nucleus",
-            "id": 737
-        },
-        "738": {
-            "publication_name": "Colombia Forestal",
-            "id": 738
-        },
-        "739": {
-            "publication_name": "Religi\u00e3o & Sociedade",
-            "id": 739
-        },
-        "740": {
-            "publication_name": "Biotecnolog\u00eda Aplicada",
-            "id": 740
-        },
-        "741": {
-            "publication_name": "Theologica Xaveriana",
-            "id": 741
-        },
-        "742": {
-            "publication_name": "Universitas Scientiarum",
-            "id": 742
-        },
-        "743": {
-            "publication_name": "Discusiones Filos\u00f3ficas",
-            "id": 743
-        },
-        "744": {
-            "publication_name": "Tempo Social",
-            "id": 744
-        },
-        "745": {
-            "publication_name": "Episteme",
-            "id": 745
-        },
-        "746": {
-            "publication_name": "Gal\u00e1xia (S\u00e3o Paulo)",
-            "id": 746
-        },
-        "747": {
-            "publication_name": "Revista De Derecho Privado",
-            "id": 747
-        },
-        "748": {
-            "publication_name": "Educa\u00e7\u00e3o & Sociedade",
-            "id": 748
-        },
-        "749": {
-            "publication_name": "Franciscanum. Revista De Las Ciencias Del Esp\u00edritu",
-            "id": 749
-        },
-        "750": {
-            "publication_name": "Estudos Hist\u00f3ricos (Rio De Janeiro)",
-            "id": 750
-        },
-        "751": {
-            "publication_name": "Humanidades M\u00e9dicas",
-            "id": 751
-        },
-        "752": {
-            "publication_name": "Revista Cubana De Medicina Tropical",
-            "id": 752
-        },
-        "753": {
-            "publication_name": "Historia (Santiago)",
-            "id": 753
-        },
-        "754": {
-            "publication_name": "Revista Brasileira De Hist\u00f3ria",
-            "id": 754
-        },
-        "755": {
-            "publication_name": "Revista De Derecho (Valpara\u00edso)",
-            "id": 755
-        },
-        "756": {
-            "publication_name": "Cuadernos De Geograf\u00eda - Revista Colombiana De Geograf\u00eda",
-            "id": 756
-        },
-        "757": {
-            "publication_name": "Literatura Y Ling\u00fc\u00edstica",
-            "id": 757
-        },
-        "758": {
-            "publication_name": "Revista Venezolana De Endocrinolog\u00eda Y Metabolismo",
-            "id": 758
-        },
-        "759": {
-            "publication_name": "Archivos Latinoamericanos De Nutrici\u00f3n",
-            "id": 759
-        },
-        "760": {
-            "publication_name": "Bolet\u00edn De Ciencias De La Tierra",
-            "id": 760
-        },
-        "761": {
-            "publication_name": "Psychology In Society",
-            "id": 761
-        },
-        "762": {
-            "publication_name": "Journal Of Economics, Finance And Administrative Science",
-            "id": 762
-        },
-        "763": {
-            "publication_name": "South African Journal Of Agricultural Extension",
-            "id": 763
-        },
-        "764": {
-            "publication_name": "Ciencia E Ingenier\u00eda Neogranadina",
-            "id": 764
-        },
-        "765": {
-            "publication_name": "Revista Cubana De Obstetricia Y Ginecolog\u00eda",
-            "id": 765
-        },
-        "766": {
-            "publication_name": "Revista De La Sociedad Qu\u00edmica Del Per\u00fa",
-            "id": 766
-        },
-        "767": {
-            "publication_name": "Bioagro",
-            "id": 767
-        },
-        "768": {
-            "publication_name": "Revista Latinoamericana De Metalurgia Y Materiales",
-            "id": 768
-        },
-        "769": {
-            "publication_name": "Revista De Econom\u00eda Del Caribe",
-            "id": 769
-        },
-        "770": {
-            "publication_name": "Revista Cubana De Oftalmolog\u00eda",
-            "id": 770
-        },
-        "771": {
-            "publication_name": "Revista Ean",
-            "id": 771
-        },
-        "772": {
-            "publication_name": "Signo Y Pensamiento",
-            "id": 772
-        },
-        "773": {
-            "publication_name": "International Law",
-            "id": 773
-        },
-        "774": {
-            "publication_name": "Revista Peruana De Medicina Experimental Y Salud Publica",
-            "id": 774
-        },
-        "775": {
-            "publication_name": "Acta M\u00e9dica Peruana",
-            "id": 775
-        },
-        "776": {
-            "publication_name": "Trabalhos Em Lingu\u00edstica Aplicada",
-            "id": 776
-        },
-        "777": {
-            "publication_name": "Revista Portuguesa De Educa\u00e7\u00e3o",
-            "id": 777
-        },
-        "778": {
-            "publication_name": "Pol\u00edtica Criminal",
-            "id": 778
-        },
-        "779": {
-            "publication_name": "Revista De Derecho (Coquimbo)",
-            "id": 779
-        },
-        "780": {
-            "publication_name": "Boletin De Geolog\u00eda",
-            "id": 780
-        },
-        "781": {
-            "publication_name": "Folios",
-            "id": 781
-        },
-        "782": {
-            "publication_name": "E-Journal Of Portuguese History",
-            "id": 782
-        },
-        "783": {
-            "publication_name": "Historelo. Revista De Historia Regional Y Local",
-            "id": 783
-        },
-        "784": {
-            "publication_name": "Cadernos De Estudos Africanos",
-            "id": 784
-        },
-        "785": {
-            "publication_name": "Aret\u00e9",
-            "id": 785
-        },
-        "786": {
-            "publication_name": "Pensamiento & Gesti\u00f3n",
-            "id": 786
-        },
-        "787": {
-            "publication_name": "Revista Cubana De Inform\u00e1tica M\u00e9dica",
-            "id": 787
-        },
-        "788": {
-            "publication_name": "Persona Y Bio\u00e9tica",
-            "id": 788
-        },
-        "789": {
-            "publication_name": "Liberabit",
-            "id": 789
-        },
-        "790": {
-            "publication_name": "Revista Colombiana De Biotecnolog\u00eda",
-            "id": 790
-        },
-        "791": {
-            "publication_name": "Revista De Econom\u00eda Institucional",
-            "id": 791
-        },
-        "792": {
-            "publication_name": "Anthropologica",
-            "id": 792
-        },
-        "793": {
-            "publication_name": "Revista Ion",
-            "id": 793
-        },
-        "794": {
-            "publication_name": "Revista Salud Uninorte",
-            "id": 794
-        },
-        "795": {
-            "publication_name": "Afro-\u00c1sia",
-            "id": 795
-        },
-        "796": {
-            "publication_name": "Intersedes",
-            "id": 796
-        },
-        "797": {
-            "publication_name": "N\u00f3madas",
-            "id": 797
-        },
-        "798": {
-            "publication_name": "Earth Sciences Research Journal",
-            "id": 798
-        },
-        "799": {
-            "publication_name": "Ecolog\u00eda Aplicada",
-            "id": 799
-        },
-        "800": {
-            "publication_name": "Revista De Psicolog\u00eda (Pucp)",
-            "id": 800
-        },
-        "801": {
-            "publication_name": "Revista Colombiana De Psicolog\u00eda",
-            "id": 801
-        },
-        "802": {
-            "publication_name": "Contexto Internacional",
-            "id": 802
-        },
-        "803": {
-            "publication_name": "Revista Musical Chilena",
-            "id": 803
-        },
-        "804": {
-            "publication_name": "South African Dental Journal",
-            "id": 804
-        },
-        "805": {
-            "publication_name": "Obras Y Proyectos",
-            "id": 805
-        },
-        "806": {
-            "publication_name": "Sociologia",
-            "id": 806
-        },
-        "807": {
-            "publication_name": "Gayana (Concepci\u00f3n)",
-            "id": 807
-        },
-        "808": {
-            "publication_name": "Pastos Y Forrajes",
-            "id": 808
-        },
-        "809": {
-            "publication_name": "Gen",
-            "id": 809
-        },
-        "810": {
-            "publication_name": "Cuadernos.Info",
-            "id": 810
-        },
-        "811": {
-            "publication_name": "Revista Brasileira De Estudos De Popula\u00e7\u00e3o",
-            "id": 811
-        },
-        "812": {
-            "publication_name": "Estudios Filol\u00f3gicos",
-            "id": 812
-        },
-        "813": {
-            "publication_name": "Revista Cubana De Cirug\u00eda",
-            "id": 813
-        },
-        "814": {
-            "publication_name": "Cuadernos Del Cendes",
-            "id": 814
-        },
-        "815": {
-            "publication_name": "Machado De Assis Em Linha",
-            "id": 815
-        },
-        "816": {
-            "publication_name": "Cuadernos De Medicina Forense",
-            "id": 816
-        },
-        "817": {
-            "publication_name": "Revista Colombiana De Estad\u00edstica",
-            "id": 817
-        },
-        "818": {
-            "publication_name": "D\u00edkaion Revista De Fundamentaci\u00f3n Jur\u00eddica",
-            "id": 818
-        },
-        "819": {
-            "publication_name": "Revista Colombiana De Matem\u00e1ticas",
-            "id": 819
-        },
-        "820": {
-            "publication_name": "Cuadernos De Psicolog\u00eda Del Deporte",
-            "id": 820
-        },
-        "821": {
-            "publication_name": "Risti - Revista Ib\u00e9rica De Sistemas E Tecnologias De Informa\u00e7\u00e3o",
-            "id": 821
-        },
-        "822": {
-            "publication_name": "Historia",
-            "id": 822
-        },
-        "823": {
-            "publication_name": "Corros\u00e3o E Protec\u00e7\u00e3o De Materiais",
-            "id": 823
-        },
-        "824": {
-            "publication_name": "Angiologia E Cirurgia Vascular",
-            "id": 824
-        },
-        "825": {
-            "publication_name": "Latin American Journal Of Economics",
-            "id": 825
-        },
-        "826": {
-            "publication_name": "Sequ\u00eancia (Florian\u00f3polis)",
-            "id": 826
-        },
-        "827": {
-            "publication_name": "Sin\u00e9ctica",
-            "id": 827
-        },
-        "828": {
-            "publication_name": "Revista Mexicana De Ciencias Agr\u00edcolas",
-            "id": 828
-        },
-        "829": {
-            "publication_name": "Contadur\u00eda Y Administraci\u00f3n",
-            "id": 829
-        },
-        "830": {
-            "publication_name": "African Human Rights Law Journal",
-            "id": 830
-        },
-        "831": {
-            "publication_name": "Revista Portuguesa De Imunoalergologia",
-            "id": 831
-        },
-        "832": {
-            "publication_name": "Liminar",
-            "id": 832
-        },
-        "833": {
-            "publication_name": "Botanical Sciences",
-            "id": 833
-        },
-        "834": {
-            "publication_name": "Acta Literaria",
-            "id": 834
-        },
-        "835": {
-            "publication_name": "Revista Portuguesa De Sa\u00fade P\u00fablica",
-            "id": 835
-        },
-        "836": {
-            "publication_name": "Confines De Relaciones Internacionales Y Ciencia Pol\u00edtica",
-            "id": 836
-        },
-        "837": {
-            "publication_name": "Investigaci\u00f3n Y Postgrado",
-            "id": 837
-        },
-        "838": {
-            "publication_name": "Pandaemonium Germanicum",
-            "id": 838
-        },
-        "839": {
-            "publication_name": "An\u00e1lise Psicol\u00f3gica",
-            "id": 839
-        },
-        "840": {
-            "publication_name": "Investigaci\u00f3n Y Desarrollo",
-            "id": 840
-        },
-        "841": {
-            "publication_name": "Revista Portuguesa De Enfermagem De Sa\u00fade Mental",
-            "id": 841
-        },
-        "842": {
-            "publication_name": "Bolet\u00edn De Malariolog\u00eda Y Salud Ambiental",
-            "id": 842
-        },
-        "843": {
-            "publication_name": "Pensamiento Psicol\u00f3gico",
-            "id": 843
-        },
-        "844": {
-            "publication_name": "Comunidad Y Salud",
-            "id": 844
-        },
-        "845": {
-            "publication_name": "Parad\u00edgma",
-            "id": 845
-        },
-        "846": {
-            "publication_name": "Psychology & Neuroscience",
-            "id": 846
-        },
-        "847": {
-            "publication_name": "Si Somos Americanos",
-            "id": 847
-        },
-        "848": {
-            "publication_name": "Journal Of Microwaves, Optoelectronics And Electromagnetic Applications",
-            "id": 848
         }
     },
-    "feeds": {
+    "categories_order_es": [7, 1, 2, 6, 4, 5, 3, 8],
+    "categories": {
         "1": {
-            "feed_name_es": "Humanidades",
-            "publications": [272, 112, 513, 705, 5, 674, 830, 795, 237, 648, 681, 495, 353, 491, 97, 394, 24, 839, 557, 722, 792, 156, 670, 144, 785, 263, 63, 509, 461, 658, 494, 659, 67, 115, 446, 687, 784, 443, 74, 327, 690, 422, 148, 585, 157, 276, 802, 49, 756, 618, 814, 595, 456, 284, 321, 688, 733, 743, 510, 417, 224, 499, 748, 558, 566, 782, 596, 300, 503, 647, 745, 187, 95, 597, 266, 706, 645, 812, 625, 650, 635, 52, 51, 613, 750, 535, 575, 781, 534, 749, 373, 822, 197, 181, 556, 36, 161, 528, 751, 637, 360, 186, 624, 262, 50, 840, 428, 837, 386, 153, 762, 216, 516, 523, 676, 789, 832, 138, 454, 432, 718, 326, 131, 667, 114, 364, 707, 473, 530, 797, 85, 1, 600, 32, 305, 165, 845, 679, 236, 788, 515, 346, 571, 359, 724, 478, 440, 691, 213, 135, 399, 221, 507, 483, 579, 496, 370, 639, 662, 761, 846, 89, 638, 599, 739, 43, 531, 699, 362, 673, 42, 413, 555, 107, 717, 395, 754, 380, 464, 630, 801, 787, 553, 101, 351, 581, 545, 390, 269, 179, 800, 651, 45, 329, 35, 178, 79, 437, 629, 421, 92, 735, 511, 548, 408, 567, 147, 777, 119, 711, 657, 448, 109, 391, 611, 696, 338, 827, 847, 239, 410, 463, 180, 409, 672, 228, 744, 474, 245, 741, 75, 572, 22, 623, 316, 636, 149, 302, 549, 293, 666, 295, 700, 7, 604],
-            "feed_name_en": "Human Sciences",
+            "category_name_es": "Ciencias Biol\u00f3gicas",
+            "category_name_en": "Biological Sciences",
             "id": 1,
-            "feed_name_pt": "Ci\u00eancias Humanas"
+            "magazines": [54, 66, 64, 18, 3, 1, 62, 19, 14, 7, 30, 57, 38, 65, 25, 8],
+            "category_name_pt": "Ci\u00eancias Biol\u00f3gicas"
         },
         "2": {
-            "feed_name_es": "Ciencias Biologicas",
-            "publications": [389, 272, 583, 519, 498, 225, 201, 375, 663, 664, 353, 97, 451, 605, 33, 740, 584, 628, 469, 842, 833, 56, 512, 41, 23, 322, 330, 738, 18, 799, 125, 88, 73, 716, 714, 807, 126, 150, 188, 524, 54, 257, 246, 271, 127, 704, 290, 289, 48, 626, 130, 481, 788, 53, 531, 163, 589, 100, 84, 470, 790, 183, 310, 369, 123, 609, 723, 434, 191, 365, 735, 511, 548, 587, 387, 124, 146, 291, 711, 615, 2, 177, 804, 763, 564, 6, 180, 184, 40, 710, 452, 742, 540, 7, 323],
-            "feed_name_en": "Biological Sciences",
+            "category_name_es": "Ciencias de la Salud",
+            "category_name_en": "Health Sciences",
             "id": 2,
-            "feed_name_pt": "Ci\u00eancias Biol\u00f3gicas"
+            "magazines": [11, 54, 63, 46, 1, 7, 60, 22, 45, 40, 53, 47, 52, 21, 20, 12, 48, 8, 68, 32, 37],
+            "category_name_pt": "Ci\u00eancias da Sa\u00fade"
         },
         "3": {
-            "feed_name_es": "Ciencias de la Salud",
-            "publications": [250, 389, 272, 230, 227, 693, 513, 775, 594, 308, 44, 116, 663, 307, 97, 234, 433, 355, 824, 385, 438, 29, 759, 38, 139, 55, 514, 342, 141, 59, 340, 172, 685, 458, 605, 842, 192, 56, 603, 41, 23, 468, 9, 264, 198, 58, 62, 11, 366, 282, 195, 343, 277, 449, 450, 345, 134, 21, 334, 698, 358, 844, 49, 816, 820, 485, 404, 558, 168, 256, 142, 61, 306, 647, 8, 501, 547, 220, 480, 190, 716, 502, 809, 633, 287, 150, 197, 719, 751, 349, 354, 212, 416, 262, 209, 508, 246, 586, 678, 484, 840, 488, 16, 215, 259, 129, 592, 536, 46, 563, 127, 106, 424, 240, 420, 223, 241, 48, 530, 518, 273, 562, 102, 737, 598, 665, 732, 788, 729, 222, 346, 571, 140, 507, 846, 388, 614, 210, 699, 203, 622, 453, 621, 356, 402, 309, 298, 30, 395, 10, 406, 363, 13, 281, 17, 436, 465, 689, 541, 128, 414, 493, 208, 86, 426, 379, 173, 423, 403, 274, 475, 542, 374, 280, 668, 218, 279, 108, 117, 669, 720, 427, 143, 708, 315, 813, 313, 447, 93, 713, 561, 466, 787, 627, 396, 728, 610, 752, 765, 770, 60, 310, 337, 238, 99, 70, 113, 551, 145, 244, 235, 405, 226, 319, 476, 634, 430, 419, 47, 162, 425, 684, 723, 174, 378, 80, 434, 12, 640, 171, 202, 726, 574, 415, 261, 735, 511, 15, 444, 64, 105, 66, 384, 602, 27, 709, 590, 243, 20, 291, 133, 774, 175, 160, 841, 831, 532, 591, 835, 794, 711, 758, 489, 646, 477, 77, 560, 2, 457, 154, 177, 39, 448, 804, 341, 6, 3, 554, 184, 490, 317, 686, 247, 588, 540],
-            "feed_name_en": "Health Sciences",
+            "category_name_es": "Ingenierias",
+            "category_name_en": "Engineering",
             "id": 3,
-            "feed_name_pt": "Ci\u00eancias da Sa\u00fade"
+            "magazines": [54, 2, 43, 67, 41],
+            "category_name_pt": "Engenharias"
         },
         "4": {
-            "feed_name_es": "Ingenieria",
-            "publications": [460, 97, 725, 740, 584, 842, 56, 252, 418, 764, 254, 823, 537, 286, 73, 517, 104, 164, 14, 242, 620, 593, 727, 260, 569, 248, 91, 416, 253, 103, 701, 265, 848, 233, 249, 4, 505, 31, 318, 467, 737, 805, 268, 703, 533, 288, 301, 531, 577, 790, 122, 462, 671, 429, 377, 442, 550, 793, 735, 768, 472, 182, 821, 34, 400, 180, 643, 320, 7],
-            "feed_name_en": "Engineering",
+            "category_name_es": "Ciencias Sociales Aplicadas",
+            "category_name_en": "Applied Social Sciences",
             "id": 4,
-            "feed_name_pt": "Engenharias"
+            "magazines": [4],
+            "category_name_pt": "Ci\u00eancias Sociais Aplicadas"
         },
         "5": {
-            "feed_name_es": "Ciencias Exactas y de la Tierra",
-            "publications": [389, 664, 97, 299, 81, 740, 584, 82, 760, 780, 469, 37, 330, 367, 479, 87, 798, 125, 73, 647, 807, 683, 167, 332, 185, 255, 292, 216, 4, 289, 559, 695, 110, 531, 170, 790, 817, 819, 217, 122, 787, 369, 283, 123, 766, 715, 118, 735, 96, 267, 382, 653, 180, 120, 643, 644, 40, 452, 742, 7],
-            "feed_name_en": "Exact And Earth Sciences",
+            "category_name_es": "Humanidades",
+            "category_name_en": "Human Sciences",
             "id": 5,
-            "feed_name_pt": "Ci\u00eancias Exatas e da Terra"
+            "magazines": [54, 27, 5, 26, 50, 33, 13, 9, 16, 24, 44, 59],
+            "category_name_pt": "Ci\u00eancias Humanas"
         },
         "6": {
-            "feed_name_es": "Ciencias Agricolas",
-            "publications": [520, 389, 500, 471, 664, 582, 152, 411, 734, 94, 97, 641, 136, 199, 767, 584, 660, 324, 56, 697, 487, 619, 459, 312, 578, 57, 738, 304, 18, 521, 333, 125, 229, 647, 83, 361, 314, 565, 155, 69, 127, 68, 808, 151, 435, 19, 616, 531, 98, 526, 331, 219, 204, 100, 328, 231, 84, 137, 258, 368, 431, 606, 525, 680, 398, 675, 609, 723, 191, 735, 828, 631, 730, 711, 527, 336, 529, 763, 564, 180, 339, 538, 452, 7],
-            "feed_name_en": "Agricultural Sciences",
+            "category_name_es": "Ciencias Exactas y de la Tierra",
+            "category_name_en": "Exact And Earth Sciences",
             "id": 6,
-            "feed_name_pt": "Ci\u00eancias Agr\u00e1rias"
+            "magazines": [54, 61, 23, 49, 51, 6, 67, 58, 42, 39, 36],
+            "category_name_pt": "Ci\u00eancias Exatas e da Terra"
         },
         "7": {
-            "feed_name_es": "Ciencias Sociales Aplicadas",
-            "publications": [272, 674, 372, 582, 353, 607, 394, 214, 263, 544, 725, 504, 446, 784, 617, 189, 836, 829, 347, 206, 682, 712, 702, 521, 455, 814, 810, 393, 284, 688, 371, 492, 397, 818, 121, 576, 76, 193, 601, 78, 642, 73, 647, 205, 652, 655, 441, 497, 539, 251, 26, 746, 783, 753, 169, 624, 546, 773, 796, 677, 196, 840, 200, 736, 332, 233, 216, 825, 297, 832, 718, 707, 159, 797, 176, 335, 311, 305, 28, 786, 843, 573, 580, 788, 412, 654, 506, 778, 649, 439, 348, 694, 638, 43, 357, 811, 278, 661, 656, 466, 270, 211, 232, 486, 285, 325, 779, 747, 568, 755, 570, 769, 101, 791, 351, 303, 671, 179, 692, 344, 771, 381, 350, 158, 437, 296, 552, 511, 352, 294, 65, 407, 119, 711, 826, 71, 772, 608, 275, 806, 401, 25, 482, 207, 445, 316, 636, 543, 376, 111],
-            "feed_name_en": "Applied Social Sciences",
+            "category_name_es": "Ciencias Agr\u00edcolas",
+            "category_name_en": "Agricultural Sciences",
             "id": 7,
-            "feed_name_pt": "Ci\u00eancias Sociais Aplicadas"
+            "magazines": [54, 28, 56, 31, 55, 17, 14, 69, 34, 25, 10],
+            "category_name_pt": "Ci\u00eancias Agr\u00e1rias"
         },
         "8": {
-            "feed_name_es": "Linguistica, Letras y Artes",
-            "publications": [834, 705, 648, 522, 632, 681, 63, 90, 784, 157, 132, 393, 721, 647, 781, 194, 50, 731, 612, 757, 815, 305, 838, 383, 545, 735, 548, 803, 119, 72, 166, 776, 316, 392],
-            "feed_name_en": "Linguistics, Letters And Arts",
+            "category_name_es": "Ling\u00fcistica, Letras y Artes",
+            "category_name_en": "Linguistics, Letters And Arts",
             "id": 8,
-            "feed_name_pt": "Lingu\u00edstica, Letras e Artes"
+            "magazines": [15, 29, 35],
+            "category_name_pt": "Ling\u00fc\u00edstica, Letras e Artes"
         }
-    },
-    "order_es": [6, 2, 3, 5, 7, 1, 4, 8],
-    "magazines_order":[5,29,24,23,21,11]
+    }
 }

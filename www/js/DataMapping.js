@@ -58,6 +58,22 @@ DataMapping.getMagazineName = function(magazineId) {
     return DataMapping.map.magazines[magazineId].magazine_name;
 };
 
+DataMapping.getMagazineDomain = function(magazineId) {
+    return DataMapping.map.magazines[magazineId].magazine_domain;
+};
+
+DataMapping.getMagazineAbbreviation = function(magazineId){
+    return DataMapping.map.magazines[magazineId].magazine_abbreviated_title;
+};
+
+DataMapping.getMagazineAcronym = function(magazineId){
+    return DataMapping.map.magazines[magazineId].magazine_acronym;
+};
+
+DataMapping.getMagazineISSN = function(magazineId){
+    return DataMapping.map.magazines[magazineId].magazine_issn;
+};
+
 DataMapping.getCategoriesOrder = function() {
     return DataMapping.map["categories_order_"+App.locale];
 };

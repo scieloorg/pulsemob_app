@@ -21,5 +21,6 @@
     "exit-ask":"Tem certeza que deseja fechar o aplicativo?",
     
     "yes":"Yes",
-    "no":"No"
+    "no":"No",
+    "error":"Error"
 }

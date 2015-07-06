@@ -4,8 +4,8 @@ var ContextMenu = function() {
 ContextMenu.$menu = null;
 
 ContextMenu.init = function() {
-    App.$headerApp.on('click', "#app-bar-context-menu", ContextMenu.toggleMenu);
-    App.$page.on('tap', '#block-content-glass', ContextMenu.hide);
+    App.$headerApp.on('tap', "#app-bar-context-menu", ContextMenu.toggleMenu);
+    $("body").on('tap',ContextMenu.hide);
     
     ContextMenu.$menu = $("#context-menu");
     
@@ -18,24 +18,23 @@ ContextMenu.init = function() {
 };
 
 //toggleMenu
-ContextMenu.toggleMenu = function() {
+ContextMenu.toggleMenu = function(event) {
     if (ContextMenu.$menu.hasClass("context-menu-show")) {
         ContextMenu.hide();
     } else {
         ContextMenu.show();
     }
+    
+    event.stopPropagation();
 };
 
 ContextMenu.show = function() {
     $(".context-menu-show").removeClass("context-menu-show");
-    $("#block-content-glass").show();
     ContextMenu.$menu.addClass("context-menu-show");
 };
 
-ContextMenu.hide = function() {
-    ContextMenu.$menu.removeClass("context-menu-show");
-    // timeout para o evento do 'tap' no menu nao passar para pagina de baixo
-    setTimeout(function(){ $("#block-content-glass").hide(); },300);
+ContextMenu.hide = function(event) {
+    $(".context-menu-show").removeClass("context-menu-show");
 };
 
 ContextMenu.refreshAction = function() {

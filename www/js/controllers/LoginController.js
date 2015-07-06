@@ -21,9 +21,6 @@ LoginController.initListeners = function () {
 };
 
 LoginController.loginFacebook = function () {
-    
-    console.log("ENTREI NO FACEBOOK LOGIN!!!");
-
     facebookConnectPlugin.login(["public_profile", "email"],
         function (response) {
             App.showLoadingScreen();
@@ -51,24 +48,18 @@ LoginController.loginFacebook = function () {
                                 },
                                 function () {
                                     App.hideLoadingScreen();
-                                    App.showCommonDialog("SciELO", Localization.getAppValue("error-login"), function(){
-                                        Navigator.loadFullPage("login.html");
-                                    });
+                                    App.showCommonDialog("SciELO", Localization.getAppValue("error-login"), null);
                                 }
                         );
                     },
                     function (err) {
                         App.trackException("Error api facebook: "+JSON.stringify(err));
                         App.hideLoadingScreen();
-                        App.showCommonDialog("SciELO",Localization.getAppValue("error-facebook"), function(){
-                            Navigator.loadFullPage("login.html");
-                        });
+                        App.showCommonDialog("SciELO",Localization.getAppValue("error-facebook"), null);
                     });
         }, function (err) {
             App.trackException("Error login facebook: "+JSON.stringify(err));
-            App.showCommonDialog("SciELO",Localization.getAppValue("error-facebook"), function(){
-                Navigator.loadFullPage("login.html");
-            });
+            App.showCommonDialog("SciELO",Localization.getAppValue("error-facebook"), null);
         }
     );
 };
@@ -106,20 +97,16 @@ LoginController.loginGoogle = function () {
                     SciELO.saveCache(LoginController.USER_TYPE_KEY, LoginController.GOOGLE, false);
                     Navigator.loadPage("home.html");
                 },
-                function () {
+                function (error) {
+                    App.trackException(errorDesc = "Error login google: "+JSON.stringify(error));
                     SciELO.removeCache(LoginController.USER_TYPE_KEY);
-                    App.showCommonDialog("SciELO", Localization.getAppValue("error-login"), function(){
-                        Navigator.loadFullPage("login.html");
-                    });
+                    App.showCommonDialog("SciELO", Localization.getAppValue("error-login"), null);
                 }
         );
     },
             function (err) {
                 App.trackException(errorDesc = "Error login google: "+JSON.stringify(err));
-                
-                App.showCommonDialog("SciELO",Localization.getAppValue("error-google"), function(){
-                    Navigator.loadFullPage("login.html");
-                });
+                App.showCommonDialog("SciELO",Localization.getAppValue("error-google"), null);
             }
     );
 };
@@ -144,9 +131,8 @@ LoginController.autoLoginFacebook = function () {
     facebookConnectPlugin.getLoginStatus(
             function (response) {
                 if (response.status === "connected") {
+                    App.showLoadingScreen();
                     if($.ajaxSettings.headers && $.ajaxSettings.headers["googleid"]) delete $.ajaxSettings.headers["googleid"];
-                    
-                    console.log("#####TOKEN: "+response.authResponse.accessToken);
                     
                     $.ajaxSetup({
                         headers: {facebookid: response.authResponse.userID, token: response.authResponse.accessToken}
@@ -157,10 +143,12 @@ LoginController.autoLoginFacebook = function () {
                             function (data) {
                                 // It worked
                                 Navigator.loadPage("home.html");
+                                App.hideLoadingScreen();
                             },
                             function () {
                                 SciELO.removeCache(LoginController.USER_TYPE_KEY);
                                 Navigator.loadFullPage("login.html");
+                                App.hideLoadingScreen();
                             }
                     );
                 } else {

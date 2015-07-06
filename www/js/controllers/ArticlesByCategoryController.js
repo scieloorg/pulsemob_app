@@ -5,6 +5,7 @@ ArticlesByCategoryController.scroll = {};
 ArticlesByCategoryController.docs = {};
 ArticlesByCategoryController.$categories = null;
 ArticlesByCategoryController.searchText = null;
+ArticlesByCategoryController.willStart = false;
 
 ArticlesByCategoryController.prototype = {
     initialize: function() {
@@ -18,6 +19,7 @@ ArticlesByCategoryController.prototype = {
         
         ArticlesByCategoryController.start();
         ArticlesByCategoryController.initListeners();
+        ArticlesByCategoryController.willStart = false;
     },
     destroy: function() {
         PageLoad.ajxHandle = null;
@@ -69,6 +71,8 @@ ArticlesByCategoryController.showFavorites = function(){
         function (json) {
             if(!json || !json.docs || json.docs.length < 1){
                 $("#string-no-favorites").show();
+                App.refreshScroll(true);
+                App.hideLoadingScreen();
             }else{
                 ArticlesByCategoryController.showArticles(json);
             }
@@ -92,6 +96,8 @@ ArticlesByCategoryController.doSearch = function () {
         function (json) {
             if(!json || !json.response || !json.response.docs || json.response.docs.length < 1){
                 $("#string-no-search-results").show();
+                App.refreshScroll(true);
+                App.hideLoadingScreen();
             }else{
                 ArticlesByCategoryController.showArticles(json.response);
             }
@@ -133,8 +139,7 @@ ArticlesByCategoryController.showArticles = function (solrResults) {
             ArticlesByCategoryController.addCategory(catId, ArticlesByCategoryController.docs[catId].length);
         }
     }
-
-//    ArticlesByCategoryController.initListeners();
+    
     App.refreshScroll(true);
     App.hideLoadingScreen();
 };
@@ -216,5 +221,7 @@ ArticlesByCategoryController.cleanData = function(){
     
     ArticlesByCategoryController.docs = {};
     ArticlesByCategoryController.scroll = {};
-    ArticlesByCategoryController.searchText = null;
+    if(!ArticlesByCategoryController.willStart){
+        ArticlesByCategoryController.searchText = null;
+    }
 };

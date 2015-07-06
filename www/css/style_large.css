@@ -38,6 +38,17 @@ body.font-large {
 
 /* <editor-fold desc="HOME STYLES"> */
 
+.font-large #no-feeds .botoes-app div:first-child{
+    font-size: 22px;
+}
+.font-large #no-feeds .botoes-app div:last-child img{
+    width: 40px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="ARTICLES/FEEDS COMMONS STYLES"> */
+
 .font-large .magazine-scroller ul{
     height: 244px;
 }
@@ -70,14 +81,17 @@ body.font-large {
     height: 50px;
     font-size: 16px;
 }
-.font-large .article-journal{
+.font-large .article-magazine{
     max-height: 20px;
 }
-.font-large #home-search-box{
+.font-large #articles-search-box{
+    font-size: 22px;
+}
+.font-large #articles-search-text{
     font-size: 22px;
 }
 .font-large #string-result-of{
-    width: 125px;
+    width: 130px;
 }
 
 /* </editor-fold> */
@@ -141,21 +155,47 @@ body.font-large {
 
 /* </editor-fold> */
 
-/* <editor-fold desc="CATEGORY CONFIG STYLES"> */
+/* <editor-fold desc="FEED CONFIG STYLES"> */
 
-.font-large #category-name{
-    font-size: 18px;
-}
-
-.font-large .category-magazine-row{
+.font-large .feed-config-magazine-row{
     height: 50px;
 }
 
-.font-large .magazine-checkbox {
+.font-large .magazine-checkbox, .font-large #select-all {
     width: 45px;
 }
-.font-large .magazine-checkbox img{
+.font-large .magazine-checkbox img, .font-large #select-all img{
     width: 45px;
+}
+
+.font-large .btn-save-feed{
+    font-size: 24px;
+}
+
+.font-large .input-feed{
+    font-size: 24px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="SETTINGS STYLES"> */
+
+.font-large .settings-desc{
+    font-size: 22px;
+}
+
+.font-large .settings-desc-text{
+    font-size: 18px;
+}
+
+.font-large .settings-title{
+    font-size: 22px;
+}
+.font-large .settings-letter{
+    font-size: 22px;
+}
+.font-large .settings-row{
+    font-size: 22px;
 }
 
 /* </editor-fold> */

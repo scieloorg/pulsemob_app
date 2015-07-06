@@ -13,11 +13,10 @@
         $headerApp: null,
         $headerTitle: null,
         $loadingDiv: null,
-        $blockDiv: null,
         $page: null,
         $appSearchInput: null,
         currentUser: null,
-        DEBUG_BROWSER:true,
+        DEBUG_BROWSER:false,
         constants: {
             APP_VERSION: "1.0.4",
             INTRODUCTION_SHOW: "introduction_show"
@@ -61,17 +60,17 @@
                 });
 
                 $.when(
-                        Service.login({name: "Marcellus S.B.", email: "marcellus.sb@gmail.com", language: App.locale, font_size: "S"})
-                        ).then(
-                        function (data) {
-                            // It worked
-                            Navigator.loadPage("home.html");
-                        },
-                        function () {
-                            SciELO.removeCache(LoginController.USER_TYPE_KEY);
-                            App.showCommonDialog("SciELO", Localization.getAppValue("error-login"), false);
-                            Navigator.loadFullPage("login.html");
-                        }
+                    Service.login({name: "Marcellus S.B.", email: "marcellus.sb@gmail.com", language: App.locale, font_size: "S"})
+                ).then(
+                    function (data) {
+                        // It worked
+                        Navigator.loadPage("home.html");
+                    },
+                    function () {
+                        SciELO.removeCache(LoginController.USER_TYPE_KEY);
+                        App.showCommonDialog("SciELO", Localization.getAppValue("error-login"), false);
+                        Navigator.loadFullPage("login.html");
+                    }
                 );
             }
         }
@@ -84,7 +83,6 @@
         App.$headerApp = $('#app-bar');
         App.$headerTitle = $('#app-bar-title');
         App.$loadingDiv = $('#loading');
-        App.$blockDiv = $('#block-content');
         App.$contentWrapper = $("#page-wrapper");
         App.$page = $("#page");
         App.$appSearchInput = $("#app-bar-search-input");
@@ -103,9 +101,9 @@
     //set Application listeners
     App.addEventListeners = function () {
         //load internal pages
-        App.$headerApp.on('click', "#app-bar-back", Navigator.backEvent);
-        App.$headerApp.on('click', "#app-bar-search", App.search);
-        App.$headerApp.on('click', '.botoes-app', Navigator.loadPage);
+        App.$headerApp.on('tap', "#app-bar-back", Navigator.backEvent);
+        App.$headerApp.on('tap', "#app-bar-search", App.search);
+        App.$headerApp.on('tap', '.botoes-app', Navigator.loadPage);
         $("#app-bar-search-input input").focusout(App.searchFocusOut);
         App.$page.on('tap', '.botoes-app', Navigator.loadPage);
 
@@ -132,6 +130,10 @@
             var focusObj = $(":focus");
             focusObj.blur();
         });
+        
+        App.scrollApp.on('scrollStart', function () {
+            ContextMenu.hide();
+        }); 
 
     };
     
@@ -187,6 +189,7 @@
     App.search = function () {
         if (App.$appSearchInput.is(":visible")) {
             if (App.$appSearchInput.children("input").val() !== "") {
+                ArticlesByCategoryController.willStart = true;
                 ArticlesByCategoryController.searchText = App.$appSearchInput.children("input").val();
                 Navigator.loadPage("articlesByCategory.html");
                 if(!App.DEBUG_BROWSER) cordova.plugins.Keyboard.close();
@@ -213,7 +216,7 @@
         //https://github.com/mobimentum/phonegap-plugin-loading-spinner
         if(!App.DEBUG_BROWSER) {
             spinnerplugin.show({
-                overlay: false,    // defaults to true
+                overlay: true,    // defaults to true
                 timeout: 30,       // defaults to 0 (no timeout)
                 fullscreen: false  // defaults to false
             });

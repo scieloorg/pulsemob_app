@@ -18,6 +18,12 @@ FeedConfigController.filterData = null;
 FeedConfigController.prototype = {
     initialize: function() {
         App.showBackButton();
+        
+        if(Navigator.currentPageScreenData){
+            FeedConfigController.selectedType = Navigator.currentPageScreenData.type;
+            FeedConfigController.filterData = Navigator.currentPageScreenData.filter;
+        }
+        
         FeedConfigController.setHeader();
         FeedConfigController.startPage();
         FeedConfigController.initListeners();
@@ -28,7 +34,6 @@ FeedConfigController.prototype = {
         }else{
             App.trackView("Criar Feed");
         }
-        
     },
     destroy: function() {
         App.hideBackButton();
@@ -36,30 +41,35 @@ FeedConfigController.prototype = {
         FeedConfigController.filterData = null;
         FeedConfigController.searchResults = null;
         PageLoad.ajxHandle = null;
+    },
+    getScreenData: function () {
+        var data = {type: FeedConfigController.selectedType, filter: FeedConfigController.filterData};
+        return data;
     }
 };
 
 FeedConfigController.initListeners = function(){
     $("#magazine-container").on('tap', ".magazine-checkbox", FeedConfigController.magazineCheckbox);
     $("#magazine-container").on('tap', "#select-all", FeedConfigController.selectAll);
-    $("#category-header").on('tap', "#btn-save", FeedConfigController.save);
+    $("#feed-config-header").on('tap', "#btn-save", FeedConfigController.save);
+    $("#search-container").on('tap', "#btn-search-magazines", FeedConfigController.doSearch);
 };
 
 FeedConfigController.setHeader = function(){
     switch (FeedConfigController.selectedType) {
         case FeedConfigController.type.SEARCH:
-            $("#category-name").html("PESQUISAR PERIÓDICOS");
+            $("#category-name").html(Localization.getValue("search-magazines"));
             $("#search-container").show();
             $("#search-input").val(FeedConfigController.filterData.query);
             break;
         case FeedConfigController.type.LETTER:
-            $("#category-name").html("LISTA ALFABÉTICA DE PERIÓDICOS");
+            $("#category-name").html(Localization.getValue("alfabetic-magazines"));
             $("#letter-container").show();
             $("#letter-container").html(FeedConfigController.filterData);
             break;
         case FeedConfigController.type.CATEGORY:
             if(FeedConfigController.filterData === 0){
-                $("#category-name").html("TODOS");
+                $("#category-name").html(Localization.getValue("all-magazines"));
             }else{
                 $("#category-name").html(DataMapping.getCategoryName(FeedConfigController.filterData));
             }
@@ -68,6 +78,30 @@ FeedConfigController.setHeader = function(){
             // caso FeedConfigController.type.FEED_EDIT
             $("#category-name").html(App.currentUser.getFeedName(FeedConfigController.filterData));
             break;
+    }
+};
+
+FeedConfigController.doSearch = function(){
+    App.showLoadingScreen();
+    var searchQuery = $("#search-input").val();
+    
+    if(searchQuery){
+        $.when(
+            SciELO.searchMagazines(searchQuery)
+        ).then(
+            function (data) {
+                // It worked
+                FeedConfigController.filterData = {query: searchQuery, results:data};
+                FeedConfigController.startPage();
+                App.hideLoadingScreen();
+            },
+            function () {
+                //TODO: add msg error
+                App.hideLoadingScreen();
+            }
+        );
+    }else{
+        App.showCommonDialog("SciELO",Localization.getValue("search-required"),null);
     }
 };
 
@@ -106,28 +140,39 @@ FeedConfigController.getMagazines = function(){
 
 FeedConfigController.startPage = function(){
     var $magazinesTable = $("#magazines-table");
-    
-    var first = '<tr class="category-magazine-row">' +
-                    '<td id="select-all"><img src="img/category/checked.png"/></td>' +
-                    '<td class="menu-text">Todos</td>' +
-                '</tr>';
-            
-    $magazinesTable.append(first);
+    $magazinesTable.html("");
     
     var allMagazinesIds = FeedConfigController.getMagazines();
     
-    for(var i in allMagazinesIds){
-        var magazineId = allMagazinesIds[i];
-        
-        var html = '<tr class="category-magazine-row">' +
-                        '<td class="magazine-checkbox" data-magazine="'+magazineId+'"><img id="cb-img-'+magazineId+'" src="img/category/checked.png"/></td>' +
-                        '<td class="menu-text">'+DataMapping.getMagazineName(magazineId)+'</td>' +
+    if(allMagazinesIds.length > 0){
+        var first = '<tr class="feed-config-magazine-row">' +
+                        '<td id="select-all"><img src="img/category/checked.png"/></td>' +
+                        '<td class="menu-text">'+Localization.getValue("all-magazines")+'</td>' +
                     '</tr>';
-            
-        $magazinesTable.append(html);
+
+        $magazinesTable.append(first);
+
+        for(var i in allMagazinesIds){
+            var magazineId = allMagazinesIds[i];
+
+            var html = '<tr class="feed-config-magazine-row">' +
+                            '<td class="magazine-checkbox" data-magazine="'+magazineId+'"><img id="cb-img-'+magazineId+'" src="img/category/checked.png"/></td>' +
+                            '<td class="menu-text">'+DataMapping.getMagazineName(magazineId)+'</td>' +
+                        '</tr>';
+
+            $magazinesTable.append(html);
+        }
+
+        FeedConfigController.magazinesSelected = allMagazinesIds;
+        $("#btn-save").show();
+    }else{
+        var empty = '<tr class="feed-config-magazine-row">' +
+                        '<td class="menu-text">'+Localization.getValue("no-magazines")+'</td>' +
+                    '</tr>';
+        $magazinesTable.append(empty);
+        
+        $("#btn-save").hide();
     }
-    
-    FeedConfigController.magazinesSelected = allMagazinesIds;
 };
 
 FeedConfigController.selectAll = function(){
@@ -188,18 +233,24 @@ FeedConfigController.magazineCheckbox = function(){
 
 FeedConfigController.save = function(){
     
+    if(FeedConfigController.magazinesSelected.length < 1){
+        App.showCommonDialog("SciELO",Localization.getValue("select-one-magazine"),null);
+        return;
+    }
+    
     // Caso esteja editando um feed, não deve ser exibido o popup
     if(FeedConfigController.selectedType === FeedConfigController.type.FEED_EDIT){
-        FeedConfigController.saveEditFeed();
+        var feedName = App.currentUser.getFeedName(FeedConfigController.filterData);
+        App.showCommonQuestionDialog("SciELO",Localization.getValue("confirm-changes")+" \""+feedName+"\"?",Localization.getAppValue("yes"),FeedConfigController.saveEditFeed,Localization.getAppValue("no"),null);
         return;
     }
     
     var isNewFeed = false;
     
-    var $inputNewFeed = $('<input type="text" class="input-feed" style="display: none;" placeholder="Titulo da nova lista" />');
+    var $inputNewFeed = $('<input type="text" class="input-feed" style="display: none;" placeholder="'+Localization.getValue("feed-name-placeholder")+'" />');
     
     var $selectFeedExistent = $('<select class="input-feed" style="display: none;"></select>');
-    $selectFeedExistent.append('<option disabled="disabled" selected="selected">Selecione uma lista</option>');
+    $selectFeedExistent.append('<option disabled="disabled" selected="selected">'+Localization.getValue("select-feed")+'</option>');
     var allFeeds = App.currentUser.getFeeds();
     for (var i in allFeeds) {
         var feed = allFeeds[i];
@@ -207,26 +258,26 @@ FeedConfigController.save = function(){
     }
     
     var dialog = new BootstrapDialog({
-        title:"Salvar",
+        title:Localization.getValue("save"),
         message: function(dialogRef){
             var $container = $('<div></div>');
             
             var $btnsContainer = $('<div></div>');
             
-            var $button = $('<div class="btn-save-feed">Nova lista</div>');
+            var $button = $('<div class="btn-save-feed">'+Localization.getValue("new-feed")+'</div>');
             $button.on('tap', {dialogRef: dialogRef}, function(event){
                 isNewFeed = true;
                 $btnsContainer.fadeOut(400,function(){
                     $inputNewFeed.fadeIn(400);
-                    event.data.dialogRef.getModalFooter().fadeIn(400);
+                    dialogRef.getModalFooter().fadeIn(400);
                 });
             });
             
-            var $button2 = $('<div class="btn-save-feed" style="margin-top: 20px;">Adicionar a uma lista existente</div>');
+            var $button2 = $('<div class="btn-save-feed" style="margin-top: 20px;">'+Localization.getValue("add-to-feed")+'</div>');
             $button2.on('tap', {dialogRef: dialogRef}, function(event){
                 $btnsContainer.fadeOut(400,function(){
                     $selectFeedExistent.fadeIn(400);
-                    event.data.dialogRef.getModalFooter().fadeIn(400);
+                    dialogRef.getModalFooter().fadeIn(400);
                 });
             });
             
@@ -240,7 +291,7 @@ FeedConfigController.save = function(){
             return $container;
         },
         buttons: [{
-                label: 'Cancelar',
+                label: Localization.getValue("cancel"),
                 cssClass: 'btn-default btn-ok',
                 action: function(dialogRef){
                     dialogRef.close();
@@ -255,7 +306,7 @@ FeedConfigController.save = function(){
                         if(feedName){
                             FeedConfigController.createNewFeed(feedName);
                         }else{
-                            App.showCommonDialog("Erro","Favor informar o nome da nova lista.");
+                            App.showCommonDialog(Localization.getAppValue("error"),Localization.getValue("feed-name-required"));
                             return;
                         }
                         
@@ -264,7 +315,7 @@ FeedConfigController.save = function(){
                         if(feedId){
                             FeedConfigController.addToExistentFeed(feedId);
                         }else{
-                            App.showCommonDialog("Erro","Favor selecionar uma lista.");
+                            App.showCommonDialog(Localization.getAppValue("error"),Localization.getValue("feed-required"));
                             return;
                         }
                     }

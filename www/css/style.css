@@ -133,30 +133,6 @@ body {
     height:100%;
     overflow: hidden;
 }
-#block-content{
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    float: left;
-    height: 100%;
-    background-color: #333333;
-    -moz-opacity: .60;
-    filter: alpha(opacity=60);
-    opacity: .60;
-    z-index: 2;
-}
-#block-content-glass{
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    float: left;
-    height: 100%;
-    z-index: 2;
-}
 .page-content{
     height: 100%;
 }
@@ -225,11 +201,13 @@ body {
 }
 
 #app-bar-settings{
-    width: 30px;
+    width: 35px;
     text-align: right;
+    padding-right: 5px;
 }
 #app-bar-settings img{
     width: 20px;
+    margin-bottom: 2px;
 }
 
 #app-bar-context-menu{
@@ -238,6 +216,7 @@ body {
 }
 #app-bar-context-menu img{
     height: 20px;
+    margin-bottom: 3px;
 }
 
 
@@ -342,10 +321,35 @@ input:focus {
 
 /* </editor-fold> */
 
+/* <editor-fold desc="HOME STYLES"> */
+
+#no-feeds{
+    padding: 20px;
+    text-align: center;
+    width: auto;
+}
+#no-feeds .botoes-app{
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px;
+    border: 2px #999 solid;
+    border-radius: 5px;
+}
+#no-feeds .botoes-app div:first-child{
+    font-size: 18px;
+    color: #777;
+    margin-bottom: 10px;
+}
+#no-feeds .botoes-app div:last-child img{
+    width: 30px;
+}
+
+/* </editor-fold> */
+
 /* <editor-fold desc="ARTICLES/FEEDS COMMONS STYLES"> */
 .feed-header{
     background-color: #d82727;
-    height: 40px;
+    height: 45px;
     color: #fff;
     font-family: TerminalDosis-Bold;
     border-bottom: 2px #000 solid;
@@ -365,11 +369,10 @@ input:focus {
 }
 .feed-menu-btn img{
     height: 20px;
+    margin-bottom: 3px;
 }
 .feed-footer{
-    text-align: right;
-    height: 40px;
-    line-height: 40px;
+    min-height: 40px;
 }
 .feed-footer.back-to-home{
     text-align: left;
@@ -380,12 +383,20 @@ input:focus {
 .feed-footer .footer-desc{
     color: #7c7c7c;
     padding-right: 4px;
+    white-space: nowrap;
+    text-align: right;
+}
+.feed-footer .footer-name{
+    width:1%;
+    white-space: nowrap;
 }
 .feed-footer .footer-img{
     width: 30px;
+    text-align: right;
     padding: 0 10px 0 0;
 }
 .feed-footer.back-to-home .footer-img{
+    text-align: left;
     padding: 0 0 0 10px;
 }
 .feed-footer .footer-img img{ 
@@ -402,7 +413,7 @@ input:focus {
 .magazine-bar{
     width: 100%;
     background-color: #C2C2C2;
-    height: 45px;
+    min-height: 45px;
     font-family: TerminalDosis-Bold;
 }
 
@@ -421,6 +432,7 @@ input:focus {
 
 .magazine-menu-btn img{
     height: 20px;
+    margin-bottom: 3px;
 }
 
 .magazine-scroller{
@@ -487,7 +499,7 @@ input:focus {
     padding: 5px 5px;
     font-family: TerminalDosis-ExtraLight;
 }
-.article-journal{
+.article-magazine{
     max-height: 15px;
     overflow: hidden;
 }
@@ -530,7 +542,6 @@ input:focus {
     padding: 20px;
 }
 /* </editor-fold> */
-
 
 /* <editor-fold desc="INTRODUCTION STYLES"> */
 
@@ -698,9 +709,9 @@ input:focus {
 
 /* </editor-fold> */
 
-/* <editor-fold desc="CATEGORY CONFIG STYLES"> */
+/* <editor-fold desc="FEED CONFIG STYLES"> */
 
-.category-magazine-row{
+.feed-config-magazine-row{
     height: 40px;
     vertical-align: bottom;
 }
@@ -738,7 +749,6 @@ input:focus {
 }
 
 /* </editor-fold> */
-
 
 /* <editor-fold desc="SETTINGS STYLES"> */
 
