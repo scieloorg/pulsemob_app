@@ -1,3 +1,9 @@
 {
-    
+    "magazines-list":"Lista de periódicos",
+    "create-feed-desc":"Crie suas listas de periódicos utilizando a pesquisa, as listas alfabéticas ou as áreas do conhecimento",
+    "search-magazines":"PESQUISAR PERIÓDICOS",
+    "alfabetic-magazines":"LOCALIZAR NAS LISTAS ALFABÉTICAS",
+    "categories-magazines":"LOCALIZAR NAS ÁREAS DO CONHECIMENTO",
+    "my-feeds":"MINHAS LISTAS DE PERIÓDICOS",
+    "all": "TODAS"
 }

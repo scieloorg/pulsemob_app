@@ -83,9 +83,9 @@ User.prototype.getFeedMagazines = function(feedId){
 };
 
 User.prototype.setFeed = function(feed){
-    this.feeds[feed.id] = {};
-    this.feeds[feed.id].feed_name = feed.feed_name;
-    this.feeds[feed.id].magazines = feed.magazines;
+    this.feeds[feed.feed_id] = {};
+    this.feeds[feed.feed_id].feed_name = feed.feed_name;
+    this.feeds[feed.feed_id].magazines = feed.magazines;
 };
 
 User.prototype.deleteFeed = function(feedId){

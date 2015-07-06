@@ -3,5 +3,10 @@
     "share": "Compartilhar",
     "config": "Configurar",
     "favorite": "Favoritos",
-    "remove": "Dispensar"
+    "remove": "Dispensar",
+    "no-feeds":"Você ainda não possue nenhuma lista de periódicos configurada.",
+    "start-now":"Começe agora!",
+    "back-to":"Voltar para",
+    "my-feed":"Minha Lista de Periódicos",
+    "more-in":"Mais em"
 }

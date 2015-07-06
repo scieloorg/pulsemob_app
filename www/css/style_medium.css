@@ -38,6 +38,17 @@ body.font-medium {
 
 /* <editor-fold desc="HOME STYLES"> */
 
+.font-medium #no-feeds .botoes-app div:first-child{
+    font-size: 20px;
+}
+.font-medium #no-feeds .botoes-app div:last-child img{
+    width: 35px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="ARTICLES/FEEDS COMMONS STYLES"> */
+
 .font-medium .magazine-scroller ul{
     height: 224px;
 }
@@ -70,10 +81,13 @@ body.font-medium {
     height: 45px;
     font-size: 14px;
 }
-.font-medium .article-journal{
+.font-medium .article-magazine{
     max-height: 18px;
 }
-.font-medium #home-search-box{
+.font-medium #articles-search-box{
+    font-size: 20px;
+}
+.font-medium #articles-search-text{
     font-size: 20px;
 }
 .font-medium #string-result-of{
@@ -141,21 +155,45 @@ body.font-medium {
 
 /* </editor-fold> */
 
-/* <editor-fold desc="CATEGORY CONFIG STYLES"> */
+/* <editor-fold desc="FEED CONFIG STYLES"> */
 
-.font-medium #category-name{
-    font-size: 16px;
-}
-
-.font-medium .category-magazine-row{
+.font-medium .feed-config-magazine-row{
     height: 45px;
 }
 
-.font-medium .magazine-checkbox {
+.font-medium .magazine-checkbox, .font-medium #select-all {
     width: 40px;
 }
-.font-medium .magazine-checkbox img{
+.font-medium .magazine-checkbox img, .font-medium #select-all img{
     width: 40px;
+}
+.font-medium .btn-save-feed{
+    font-size: 22px;
+}
+.font-medium .input-feed{
+    font-size: 22px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="SETTINGS STYLES"> */
+
+.font-medium .settings-desc{
+    font-size: 20px;
+}
+
+.font-medium .settings-desc-text{
+    font-size: 16px;
+}
+
+.font-medium .settings-title{
+    font-size: 20px;
+}
+.font-medium .settings-letter{
+    font-size: 20px;
+}
+.font-medium .settings-row{
+    font-size: 20px;
 }
 
 /* </editor-fold> */

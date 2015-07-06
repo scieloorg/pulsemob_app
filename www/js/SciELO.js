@@ -12,15 +12,8 @@ SciELO.loginUser = function(userInfo){
     return SciELO.callWebServiceFunctionPOST("login",userInfo);
 };
 
-SciELO.searchMagazines = function(params){
-    //return SciELO.callWebServiceFunctionPOST("login",userInfo);
-    return $.ajax({
-        url: 'data/testeSearch.json',
-        dataType: 'json',
-        timeout: 15000,
-        crossDomain: true,
-        contentType: 'application/json; charset=UTF-8'
-    });
+SciELO.searchMagazines = function(searchQuery){
+    return SciELO.callWebServiceFunctionPOST("magazine/search", {q: searchQuery});
 };
 
 SciELO.createFeed = function(feedName, magazines){
@@ -33,17 +26,6 @@ SciELO.saveFeed = function(feedId, magazinesToAdd, magazinesToRemove){
 
 SciELO.deleteFeed = function(feedId){
     return SciELO.callWebServiceFunctionPOST("feed/delete",{feed_id: feedId});
-};
-
-SciELO.removeMagazineFromFeed = function(params){
-    //return SciELO.callWebServiceFunctionPOST("login",userInfo);
-    return $.ajax({
-        url: 'data/saveNewFeed.json',
-        dataType: 'json',
-        timeout: 15000,
-        crossDomain: true,
-        contentType: 'application/json; charset=UTF-8'
-    });
 };
 
 SciELO.search = function(params){

@@ -23,7 +23,7 @@ SettingsController.initCategorySection = function () {
 
     // opcao de mostrar todas revistas
     $categorySection.append('<tr class="settings-category settings-row" data-categoryid="0">' +
-                                '<td class="settings-category-name">TODAS</td>' +
+                                '<td class="settings-category-name">'+Localization.getValue("all")+'</td>' +
                                 '<td class="settings-arrow"><img src="img/settings/arrow.png" /></td>' +
                             '</tr>');
 
@@ -70,16 +70,13 @@ SettingsController.filterSearch = function () {
     FeedConfigController.selectedType = FeedConfigController.type.SEARCH;
     var searchQuery = $("#search-input").val();
     
-    
-    var params = {q:searchQuery};
-    
     $.when(
-        SciELO.searchMagazines(params)
+        SciELO.searchMagazines(searchQuery)
     ).then(
         function (data) {
             // It worked
             FeedConfigController.filterData = {query: searchQuery, results:data};
-            Navigator.loadPage("categoryConfig.html");
+            Navigator.loadPage("feedConfig.html");
             App.hideLoadingScreen();
         },
         function () {
