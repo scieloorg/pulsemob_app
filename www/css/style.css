@@ -11,6 +11,12 @@
     -webkit-tap-highlight-color: transparent; /* For some Androids */ 	
     -webkit-user-select: auto!important;   
 }
+
+#article-abstract{
+    width: 100%;
+    border: none;
+}
+
 body {
     width:100%;
     padding: 0;
@@ -276,6 +282,11 @@ input::-webkit-inner-spin-button {
 }
 input:hover,
 input:focus {
+    box-shadow: none;
+    outline: none;
+}
+textarea:hover,
+textarea:focus {
     box-shadow: none;
     outline: none;
 }

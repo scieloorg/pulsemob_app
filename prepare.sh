@@ -32,4 +32,4 @@ cordova -d plugin add https://github.com/marcellus-sb/phonegap-plugin-loading-sp
 cordova -d plugin add https://github.com/danwilson/google-analytics-plugin.git
 
 # Remover a biblioteca duplicada (instalada pelo plugin do google plus e facebook connect)
-cordova -d plugin rm android.support.v4
+# cordova -d plugin rm android.support.v4
