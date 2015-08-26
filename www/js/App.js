@@ -16,7 +16,7 @@
         $page: null,
         $appSearchInput: null,
         currentUser: null,
-        DEBUG_BROWSER:false,
+        DEBUG_BROWSER:true,
         constants: {
             APP_VERSION: "1.0.4",
             INTRODUCTION_SHOW: "introduction_show"
