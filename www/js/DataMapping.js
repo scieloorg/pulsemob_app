@@ -81,3 +81,7 @@ DataMapping.getCategoriesOrder = function() {
 DataMapping.getMagazinesOrder = function() {
     return DataMapping.map["magazines_order"];
 };
+
+DataMapping.getAllMagazines = function() {
+    return DataMapping.map.magazines;
+};
