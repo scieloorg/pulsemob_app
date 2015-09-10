@@ -8,6 +8,7 @@ HomeController.searchText = null;
 HomeController.isFavoritePage = false;
 
 HomeController.showAllMagazinesOfFeed = null;
+HomeController.allFeeds = null;
 
 HomeController.prototype = {
     initialize: function() {
@@ -50,6 +51,7 @@ HomeController.cleanData = function(){
     HomeController.scroll = {};
     HomeController.searchText = null;
     HomeController.isFavoritePage = false;
+    HomeController.allFeeds = null;
 };
 
 
@@ -61,15 +63,14 @@ HomeController.showHome = function () {
         SciELO.home()
     ).then(
         function (json) {
-            var allFeeds = null;
             if(HomeController.showAllMagazinesOfFeed){
-                allFeeds = [App.currentUser.getFeed(HomeController.showAllMagazinesOfFeed)];
+                HomeController.allFeeds = [App.currentUser.getFeed(HomeController.showAllMagazinesOfFeed)];
             }else{
-                allFeeds = App.currentUser.getFeeds();
+                HomeController.allFeeds = App.currentUser.getFeeds();
             }
             
-            for (var feedId in allFeeds) {
-                var feed = allFeeds[feedId];
+            for (var feedId in HomeController.allFeeds) {
+                var feed = HomeController.allFeeds[feedId];
                 var magazines = feed.magazines;
                 
                 //TODO: incluir html por feed
@@ -192,7 +193,7 @@ HomeController.initListeners = function () {
     HomeController.$feeds.on('tap', ".feed-menu-btn", HomeController.toggleFeedMenu);
     HomeController.$feeds.on('tap', ".refresh-feed", HomeController.feedRefresh);
     HomeController.$feeds.on('tap', ".config-feed", HomeController.feedConfig);
-    HomeController.$feeds.on('tap', ".remove-feed", HomeController.feedRemove);
+    HomeController.$feeds.on('tap', ".remove-feed", HomeController.feedRemoveEvent);
     
         
     HomeController.$feeds.on('tap', ".magazine-menu-btn", HomeController.toggleMagazineMenu);
@@ -232,22 +233,26 @@ HomeController.feedConfig = function () {
     Navigator.loadPage("feedConfig.html");
 };
 
-HomeController.feedRemove = function () {
+HomeController.feedRemoveEvent = function () {
     var feedId = $(this).data("feed");
+    HomeController.feedRemove(feedId);
     
-    $("#feed-"+feedId).fadeOut(800, function(){
-        $("#feed-"+feedId).remove();
-        if(HomeController.$feeds.html() === ""){
+};
+
+HomeController.feedRemove = function (feedId) {
+    $("#feed-" + feedId).fadeOut(800, function () {
+        $("#feed-" + feedId).remove();
+        if (HomeController.$feeds.html() === "") {
             $("#no-feeds").show();
         }
         App.refreshScroll(false);
     });
-    
+
     var feedName = App.currentUser.getFeedName(feedId);
-    
+
     Service.deleteFeed(feedId);
     SciELO.homeCleanCache();
-    
+
     App.trackEvent('Feed', 'Apagar', feedName);
 };
 
@@ -353,16 +358,26 @@ HomeController.magazineShare = function () {
 HomeController.magazineRemove = function () {
     var feedId = $(this).data("feed");
     var magazineId = $(this).data("magazine");
-    var magazineFeedId = magazineId+"_"+feedId;
-    
-    $("#magazine-"+magazineFeedId).fadeOut(800, function(){
-        $("#magazine-"+magazineFeedId).remove();
-        App.refreshScroll(false);
-    });
-    
-    Service.saveFeed(feedId, [], [magazineId]);
-    SciELO.homeCleanCache();
-    
+    var magazineFeedId = magazineId + "_" + feedId;
+
+    if (HomeController.allFeeds[feedId].magazines.length === 1) {
+        App.showCommonQuestionDialog("SciELO", Localization.getValue('remove-feed'), Localization.getValue('yes'), function () {
+            HomeController.feedRemove(feedId);
+        }, Localization.getValue('no'), null);
+
+    } else {
+        $("#magazine-" + magazineFeedId).fadeOut(800, function () {
+            $("#magazine-" + magazineFeedId).remove();
+            App.refreshScroll(false);
+        });
+
+        Service.saveFeed(feedId, [], [magazineId]);
+        SciELO.homeCleanCache();
+        var index = HomeController.allFeeds[feedId].magazines.indexOf(magazineId);
+        HomeController.allFeeds[feedId].magazines.splice(index, 1);
+        HomeController.preAddMagazine(feedId);
+    }
+
     App.trackEvent('Revista', 'Dispensar', DataMapping.getMagazineName(magazineId));
 };
 
@@ -460,5 +475,21 @@ HomeController.requestData = function (start, count) {
             }
         );
     }
+};
+
+HomeController.preAddMagazine = function (feedId) {
+    var feed = HomeController.allFeeds[feedId];
+    var magazines = feed.magazines;
+
+    var $magazinesContainer = $("#magazines-from-feed-" + feedId);
+    if (magazines.length < 3) {
+        return;
+    }
+    var magazineId = magazines[2];
+    var magazineFeedId = magazineId + "_" + feedId;
+
+    var html = HomeController.createMagazineHTML(magazineFeedId, feedId, magazineId, DataMapping.getMagazineName(magazineId), 1);
+    $magazinesContainer.append(html);
+    HomeController.reloadMagazine(magazineFeedId, magazineId);
 };
 
