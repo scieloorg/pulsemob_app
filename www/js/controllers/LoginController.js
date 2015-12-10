@@ -67,7 +67,7 @@ LoginController.loginFacebook = function () {
 LoginController.loginGoogle = function () {
     window.plugins.googleplus.login(
             {
-                iOSApiKey: LoginController.IOS_API_KEY
+                webApiKey: '903038984767-5o20b4jvoks84fqmn0qoo51a97n15pl3.apps.googleusercontent.com'
             },
     function (obj) {
         var google_id = obj.userId;
