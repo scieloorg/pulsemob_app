@@ -12,11 +12,12 @@
         $contentWrapper: null,
         $headerApp: null,
         $headerTitle: null,
+        $iosSystemBar: null,
         $loadingDiv: null,
         $page: null,
         $appSearchInput: null,
         currentUser: null,
-        DEBUG_BROWSER:true,
+        DEBUG_BROWSER:false,
         constants: {
             APP_VERSION: "1.0.4",
             INTRODUCTION_SHOW: "introduction_show"
@@ -86,6 +87,7 @@
         App.$contentWrapper = $("#page-wrapper");
         App.$page = $("#page");
         App.$appSearchInput = $("#app-bar-search-input");
+        App.$iosSystemBar = $("#ios-sys-bar");
     };
 
     //set definitions project
@@ -96,6 +98,14 @@
         $(document).on('touchmove', function (event) {
             event.preventDefault();
         });
+        
+        if (typeof device !== 'undefined') {
+            if (device.platform === "iOS") {
+                App.$iosSystemBar.show();
+                var totalHeight = App.$content.height() - App.$iosSystemBar.height();
+                App.$content.height(totalHeight);
+            }
+        }
     };
 
     //set Application listeners
@@ -239,14 +249,26 @@
     };
 
     App.showFullPage = function () {
-        App.$page.css('top', '0px');
-        App.$contentWrapper.height("100%");
+        var defaultHeight = 0;
+        if (typeof device !== 'undefined') {
+            if (device.platform === "iOS") {
+                defaultHeight = App.$iosSystemBar.height();
+            }
+        }
+        App.$contentWrapper.css('top', '0px');
+        App.$contentWrapper.height(window.innerHeight - defaultHeight);
         App.$headerApp.fadeOut(400);
     };
 
     App.showNormalPage = function () {
-        App.$page.css('top', App.$headerApp.height());
-        App.$contentWrapper.height(window.innerHeight - App.$headerApp.height());
+        var defaultHeight = 0;
+        if (typeof device !== 'undefined') {
+            if (device.platform === "iOS") {
+                defaultHeight = App.$iosSystemBar.height();
+            }
+        }
+        App.$contentWrapper.css('top', App.$headerApp.height());
+        App.$contentWrapper.height(window.innerHeight - (App.$headerApp.height() + defaultHeight));
         App.$headerApp.fadeIn(1000);
     };
     
