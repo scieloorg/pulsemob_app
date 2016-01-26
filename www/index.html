@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <!-- LOAD CSS -->
+        <!-- VENDOR CSS -->
+
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <link href="css/bootstrap-dialog.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="css/jquery.mobile.custom.theme.min.css" />
+        <link rel="stylesheet" href="css/jquery.mobile.custom.structure.min.css" />
+        
+        <!-- APPLICATION CSS -->
+        <link rel="stylesheet" href="css/transitions.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/style_medium.css" />
+        <link rel="stylesheet" href="css/style_large.css" />
+
+        <meta charset="UTF-8" />
+
+        <!-- LIBRARIES (load with bower) -->
+        <script type="text/javascript" src="js/vendors/jquery.js"></script>
+        <script type="text/javascript" src="js/vendors/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/vendors/fastclick.js"></script>
+        <script type="text/javascript" src="js/vendors/iscroll-infinite.js"></script>
+        <script type="text/javascript" src="js/vendors/hammer.min.js"></script>
+        <script type="text/javascript" src="js/vendors/bootstrap-dialog.js"></script>
+        <script type="text/javascript" src="js/vendors/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="js/vendors/jquery.mobile.custom.min.js"></script>
+        
+        <script type="text/javascript" src="cordova.js"></script>
+
+        <!-- LOAD JAVASCRIPT -->
+        <!-- CONTROLLERS -->
+        <script type="text/javascript" src="js/controllers/HomeController.js"></script>
+        <script type="text/javascript" src="js/controllers/PreferencesController.js"></script>
+        <script type="text/javascript" src="js/controllers/LoginController.js"></script>
+        <script type="text/javascript" src="js/controllers/AbstractController.js"></script>
+        <script type="text/javascript" src="js/controllers/PoliticsController.js"></script>
+        <script type="text/javascript" src="js/controllers/FeedConfigController.js"></script>
+        <script type="text/javascript" src="js/controllers/SettingsController.js"></script>
+        <script type="text/javascript" src="js/controllers/ArticlesByCategoryController.js"></script>
+        <script type="text/javascript" src="js/controllers/ArticleUtils.js"></script>
+
+        <!-- Application -->
+        <script type="text/javascript" src="js/App.js"></script>
+        <script type="text/javascript" src="js/Navigator.js"></script>
+        <script type="text/javascript" src="js/Transition.js"></script>
+        <script type="text/javascript" src="js/PageLoad.js"></script>
+        <script type="text/javascript" src="js/Commons.js"></script>
+        <script type="text/javascript" src="js/ContextMenu.js"></script>
+        <script type="text/javascript" src="js/localization.js"></script>
+        <script type="text/javascript" src="js/Introduction.js"></script>
+        <script type="text/javascript" src="js/SciELO.js"></script>
+        <script type="text/javascript" src="js/DataMapping.js"></script>
+        <script type="text/javascript" src="js/services/Service.js"></script>
+        <script type="text/javascript" src="js/domains/User.js"></script>
+
+        <script type="text/javascript" charset="utf-8">
+        function onLoad() { 
+            if(!App.DEBUG_BROWSER) {
+                document.addEventListener("deviceready", App.init, false);
+            } else {
+                setTimeout(function(){
+                    console.log("INIT DEBUG!");
+                    App.init();
+                },1000);
+            }
+        }
+        </script>
+        
+
+        <!-- VIEWPORT -->
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>SciELO</title>
+
+    </head>
+    <body onload="onLoad()">
+        <div id="ios-sys-bar"></div>
+        <!-- BOX CONTENT LOAD PAGES WITH AJAX-->
+        <header id="app-bar" class="color-bg-dark-blue" style="display: none;">
+            <!-- Cabeçalho default do aplicativo -->
+            <div class="container-fluid" id="default-bar">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table>
+                            <tr class="item-row" style="height: 40px;">
+                                <td id="app-bar-blank"></td>
+                                <td id="app-bar-back" style="display: none;"><img style="width: 20px;" src="img/back.png"/></td>
+                                <td id="app-bar-icon" class="botoes-app" data-url="home.html"><img src="img/icon.png"/></td>
+                                <td id="app-bar-title" class="botoes-app" data-url="home.html">SciELO</td>
+                                <td id="app-bar-search-input" style="display: none;"><input type="text"/></td>
+                                <td id="app-bar-search"><img src="img/search.png"/></td>
+                                <td id="app-bar-settings" class="botoes-app" data-url="settings.html"><img src="img/settings.png"/></td>
+                                <td id="app-bar-context-menu"><img src="img/context_menu/menu_icon.png"/></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div id="page">
+            
+            <!-- CONTEXT MENU -->
+            <div id="context-menu" class="pop-menu">
+                <div id="context-menu-content" class="pop-menu-content">
+                    <table>
+                        <tr id="cm-refresh" class="context-menu-row" >
+                            <td class="context-menu-icon"><img src="img/context_menu/refresh.png"/></td>
+                            <td class="item-text context-menu-text"><div id="string-refresh"></div></td>
+                        </tr>
+                        <tr id="cm-favorite" class="context-menu-row">
+                            <td class="context-menu-icon"><img src="img/context_menu/fav.png"/></td>
+                            <td class="item-text context-menu-text"><div id="string-favorite"></div></td>
+                        </tr>
+                        <tr id="cm-preferences" class="context-menu-row">
+                            <td class="context-menu-icon"><img src="img/context_menu/pref.png"/></td>
+                            <td class="item-text context-menu-text"><div id="string-preferences"></div></td>
+                        </tr>
+                        <tr id="cm-welcome" class="context-menu-row">
+                            <td class="context-menu-icon"><img src="img/context_menu/welcome.png"/></td>
+                            <td class="item-text context-menu-text"><div id="string-welcome"></div></td>
+                        </tr>
+                        <tr id="cm-feedback" class="context-menu-row">
+                            <td class="context-menu-icon"><img src="img/context_menu/feedback.png"/></td>
+                            <td class="item-text context-menu-text"><div id="string-feedback"></div></td>
+                        </tr>
+                        <tr id="cm-politics" class="context-menu-row">
+                            <td class="context-menu-icon"><img src="img/context_menu/politics.png"/></td>
+                            <td class="item-text context-menu-text"><div id="string-politics"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- DYNAMIC CONTENT -->
+            <div id="content">
+
+                <div id="page-wrapper" class="wrapper">
+                    <div id="page-scroller" class="scroller">
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- ITRODUCTION -->
+            <div id="intro-container" style="display: none;">
+                <div id="close-btn">
+                    <img src="img/home/close.png" />
+                </div>
+                <div id="intro-wrapper" class="wrapper">
+                    <div id="intro-scroller" class="scroller">
+                        <div class="intro-content">
+                            <div id="scielo-video">
+                                <img class="img-responsive" src="img/home/scielo_video.png"/>
+                            </div>
+                            <div class="login-icon intro">
+                                <img class="img-responsive" src="img/login/icon.png" />
+                            </div>
+                            <div id="string-intro-welcome" class="intro-welcome"></div>
+                            <div style="width: 80%; max-width: 280px; margin: auto auto; text-align: center;">
+                                <div id="info-carousel" class="carousel slide">
+                                    <!-- Carousel items -->
+                                    <div class="carousel-inner">
+                                        <div class="active item"><div id="string-intro-item1" class="carousel-content-item"></div></div>
+                                        <div class="item"><div id="string-intro-item2" class="carousel-content-item"></div></div>
+                                        <div class="item"><div id="string-intro-item3" class="carousel-content-item"></div></div>
+                                        <div class="item"><div id="string-intro-item4" class="carousel-content-item"></div></div>
+                                        <div class="item"><div id="string-intro-item5" class="carousel-content-item"></div></div>
+                                    </div>
+
+                                    <!-- Carousel indicators -->
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#info-carousel" data-slide-to="0" class="active"></li>
+                                        <li data-target="#info-carousel" data-slide-to="1"></li>
+                                        <li data-target="#info-carousel" data-slide-to="2"></li>
+                                        <li data-target="#info-carousel" data-slide-to="3"></li>
+                                        <li data-target="#info-carousel" data-slide-to="4"></li>
+                                    </ol> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,846 @@
+/* <editor-fold desc="GLOBAL SETTINGS"> */
+
+*{  
+    margin:0;
+    padding:0;
+    list-style:none;
+
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+    -webkit-tap-highlight-color: transparent; /* For some Androids */ 	
+    -webkit-user-select: auto!important;   
+}
+
+#article-abstract{
+    width: 100%;
+    border: none;
+}
+
+body {
+    width:100%;
+    padding: 0;
+    color: #000;
+    background-color: #EDECED;
+    overflow: hidden;
+    font-family: TerminalDosis;
+}
+
+@font-face {
+    font-family: Industrial736;
+    src: url(../fonts/industrial-736-bt-roman-1361507983.ttf);
+}
+
+@font-face {
+    font-family: TerminalDosis;
+    src: url(../fonts/terminal-dosis.regular.ttf);
+}
+
+@font-face {
+    font-family: TerminalDosis-Bold;
+    src: url(../fonts/terminal-dosis.bold.ttf);
+}
+
+@font-face {
+    font-family: TerminalDosis-ExtraLight;
+    src: url(../fonts/terminal-dosis.extralight.ttf);
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="MODAL"> */
+
+.modal{
+    outline: 0 !important;
+}
+.modal-dialog{
+    height: 100%;
+}
+.modal-body{
+    text-align: center;
+}
+.modal-content{
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -moz-transform:translateY(-50%);
+}
+.modal-header{
+    text-align: center;
+    display: block !important;
+    background-color: #FF4533;
+    border: 0;
+}
+.bootstrap-dialog-title{
+    color: #fff!important;
+}
+
+.modal-footer{
+    padding: 10px;
+    border: none;
+    margin-top: 5px;
+    text-align: center;
+    margin: 0px;
+}
+
+.btn-ok{
+    background-color: #bbb;
+    color: #fff;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="BOX LOAD PAGES"> */
+
+#page {
+    position:fixed;
+    width:100%;
+    height:100%;
+    -webkit-transition: translate3d(0,0,0);
+    transform: translate3d(0, 0, 0);
+    overflow: hidden;
+}
+.wrapper {
+        position: relative;
+        z-index: 1;
+	left: 0;
+	width: 100%;
+        height: 100%;
+	overflow: hidden;
+}
+.scroller {
+    position:relative; 
+    min-height: 100%;
+    z-index: 1;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    width: 100%;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    -o-text-size-adjust: none;
+    text-size-adjust: none;
+}
+#content {
+    width:100%;
+    position: absolute;
+    left:0px;
+    height:100%;
+    overflow: hidden;
+}
+.page-content{
+    height: 100%;
+}
+#content, #page {
+    -webkit-overflow-scrolling:touch;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="APP BAR"> */
+
+#ios-sys-bar{
+    width: 100%;
+    height: 20px;
+    background-color: #000;
+    display: none;
+}
+
+#app-bar{
+    position: absolute;
+    min-height: 40px;
+    width: 100%;
+    border: none;
+    background-color: #111;
+    color: #ffffff;
+    z-index: 1001;
+}
+#app-bar-blank{
+    width: 10px;
+}
+#app-bar-back{
+    padding: 0 10px 0 10px;
+    width: 35px;
+    font-size: 14px;
+}
+#app-bar-title{
+    height: 40px;
+    font-size: 25px;
+    font-family: Industrial736;
+    letter-spacing: 1.5px;
+    vertical-align: bottom;
+    padding-bottom: 4px;
+}
+#app-bar-title span {
+    margin-top: 10px;
+}
+#app-bar-icon{
+    width: 37px;
+}
+#app-bar-icon img {
+    height: 30px;
+    padding-right: 7px;
+}
+
+#app-bar-search{
+    width: 30px;
+    font-size: 14px;
+    text-align: center;
+}
+#app-bar-search img{
+    width: 22px;
+}
+
+#app-bar-search-input{
+    padding: 0 10px;
+}
+#app-bar-search-input input{
+    width: 100%;
+    background-color: #111;
+    color: #fff;
+    border: none;
+    border-bottom: 1px #ccc solid;
+}
+
+#app-bar-settings{
+    width: 35px;
+    text-align: right;
+    padding-right: 5px;
+}
+#app-bar-settings img{
+    width: 20px;
+    margin-bottom: 2px;
+}
+
+#app-bar-context-menu{
+    text-align: center;
+    width: 40px;
+}
+#app-bar-context-menu img{
+    height: 20px;
+    margin-bottom: 3px;
+}
+
+
+/* </editor-fold> */
+
+/* <editor-fold desc="CONTEXT MENU APP STYLES"> */
+
+.pop-menu {
+    position: absolute;
+    top:0;
+    right: 10px;
+    background-color: #171717;
+    z-index: 1001;
+}
+.pop-menu-content{
+    position:relative;
+    width: 100%;
+    color: #fff;
+    padding: 5px 15px;
+}
+
+.context-menu-row{
+    padding: 20px;
+    border-bottom: 1px #333 solid;
+    height: 45px;
+}
+.context-menu-text div{
+    padding-right: 10px;
+}
+
+.context-menu-icon {
+    width: 40px;
+    font-size: 14px;
+}
+.context-menu-icon img{
+    width: 40px;
+    padding: 0 10px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="COMMON STYLES"> */
+
+table{
+    width: 100%;
+}
+
+td{
+    vertical-align: middle;
+}
+
+input[type=number]::-webkit-outer-spin-button { margin: 0; }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input:hover,
+input:focus {
+    box-shadow: none;
+    outline: none;
+}
+textarea:hover,
+textarea:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="LOGIN STYLES"> */
+
+.login-icon{
+    padding: 60px 0;
+    width: 30%;
+    max-width: 120px;
+    margin: auto auto;
+}
+.login-btn-container{
+    text-align: center;
+    width: 70%;
+    max-width: 320px;
+    margin: auto auto;
+}
+.login-btn{
+    border-radius: 3px;
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+.login-btn tr{
+    height: 45px;
+}
+.login-btn-icon{
+    width: 45px;
+    border-right: 2px rgba(0,0,0,0.2) solid;
+}
+.login-btn-icon img{
+    width: 25px;
+}
+.login-btn.facebook{
+    background-color: #3C558D;
+}
+.login-btn.google{
+    background-color: #D9321D;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="HOME STYLES"> */
+
+#no-feeds{
+    padding: 20px;
+    text-align: center;
+    width: auto;
+}
+#no-feeds .botoes-app{
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px;
+    border: 2px #999 solid;
+    border-radius: 5px;
+}
+#no-feeds .botoes-app div:first-child{
+    font-size: 18px;
+    color: #777;
+    margin-bottom: 10px;
+}
+#no-feeds .botoes-app div:last-child img{
+    width: 30px;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="ARTICLES/FEEDS COMMONS STYLES"> */
+.feed-header{
+    background-color: #d82727;
+    height: 45px;
+    color: #fff;
+    font-family: TerminalDosis-Bold;
+    border-bottom: 2px #000 solid;
+}
+.feed-header td:first-child{
+    padding-left: 10px;
+}
+.feed-header .back-to-home{
+    width: 30px;
+}
+.feed-header .back-to-home img{
+    height: 24px;
+}
+.feed-menu-btn{
+    text-align: center;
+    width: 40px;
+}
+.feed-menu-btn img{
+    height: 20px;
+    margin-bottom: 3px;
+}
+.feed-footer{
+    min-height: 40px;
+}
+.feed-footer.back-to-home{
+    text-align: left;
+}
+.feed-footer div{
+    display: inline-block;
+}
+.feed-footer .footer-desc{
+    color: #7c7c7c;
+    padding-right: 4px;
+    white-space: nowrap;
+    text-align: right;
+}
+.feed-footer .footer-name{
+    width:1%;
+    white-space: nowrap;
+}
+.feed-footer .footer-img{
+    width: 30px;
+    text-align: right;
+    padding: 0 10px 0 0;
+}
+.feed-footer.back-to-home .footer-img{
+    text-align: left;
+    padding: 0 0 0 10px;
+}
+.feed-footer .footer-img img{ 
+    height: 24px;
+}
+
+.section-content{
+    position: relative;
+    overflow-y: hidden;
+}
+.magazine{
+    margin-bottom: 10px;
+}
+.magazine-bar{
+    width: 100%;
+    background-color: #C2C2C2;
+    min-height: 45px;
+    font-family: TerminalDosis-Bold;
+}
+
+.magazine-bar table tr{
+    height: 45px;
+}
+
+.magazine-bar-title{
+    padding-left: 8px;
+}
+
+.magazine-menu-btn{
+    text-align: center;
+    width: 40px;
+}
+
+.magazine-menu-btn img{
+    height: 20px;
+    margin-bottom: 3px;
+}
+
+.magazine-scroller{
+    padding-top: 10px;
+}
+
+.magazine-scroller ul{
+    position: relative;
+    height: 204px;
+    width: 100%;
+    margin-bottom: 0;
+}
+.magazine-scroller ul li:first-child{
+    border-left: 10px #EDECED solid;
+}
+.magazine-scroller ul li.article:last-child{
+    border-right: none;
+}
+.article{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 200px;
+    background-color: #fff;
+    border-right: 10px #EDECED solid;
+}
+
+.article .loading-img{
+    width: 60px;
+    margin-left: 45px;
+    margin-top: 55px;
+}
+
+.article-principal{
+    width: 100%;
+    height: 160px;
+    border: 2px #999 solid;
+    border-bottom: none;
+    position: relative;
+    overflow-y: hidden;
+}
+.article-principal img{
+    width: 100%;
+}
+.article-name{
+    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1));
+    background: -webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1));
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 35px 5px 10px 5px;
+    color: #fff;
+    font-size: 14px;
+    max-height: 115px;
+}
+.article-legend{
+    width: 100%;
+    height: 40px;
+    border: 2px #999 solid;
+    border-top: none;
+    font-size: 12px;
+    padding: 5px 5px;
+    font-family: TerminalDosis-ExtraLight;
+}
+.article-magazine{
+    max-height: 15px;
+    overflow: hidden;
+}
+.article-fav{
+    position: absolute;
+    bottom: 7px;
+    right: 10px;
+    width: 13px;
+}
+#articles-search-box{
+    font-size: 18px;
+    margin: 10px;
+}
+.articles-search-row{
+    height: 30px;
+}
+#string-result-of{
+    color: #989898;
+    font-family: TerminalDosis-ExtraLight;
+    width: 110px;
+    text-align: right;
+    padding-right: 5px;
+}
+#articles-search-text input{
+    width: 100%;
+    background-color: rgba(0,0,0,0);
+    border: none;
+}
+#articles-search-btn{
+    text-align: center;
+    width: 60px;
+}
+#articles-search-btn img{
+    width: 25px;
+}
+
+.no-results{
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+}
+/* </editor-fold> */
+
+/* <editor-fold desc="INTRODUCTION STYLES"> */
+
+#intro-container{
+    width: 90%;
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    background: #fff;
+    box-shadow: 0px 0px 10px #222222;
+    z-index: 1001;
+}
+.intro-content{
+    padding: 40px 0 20px 0;
+}
+#close-btn{
+    position: absolute;
+    top: -20px;
+    right: -15px;
+    z-index: 1001;
+}
+#close-btn img{
+    width: 50px;
+}
+#scielo-video{
+    width: 70%;
+    max-width: 350px;
+    margin: auto auto;
+}
+.login-icon.intro{
+    padding-top: 20px;
+    padding-bottom: 10px;
+    width: 20%;
+}
+.intro-welcome{
+    text-align: center;
+    font-size: 24px;
+}
+.carousel-content-item{
+    padding: 10px;
+    font-size: 16px;
+}
+#info-carousel .carousel-indicators li{
+    background-color: #C3C3C3 !important;
+    border: none;
+}
+#info-carousel .carousel-indicators li.active{
+    background-color: #393A3C !important;
+    border: none;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="ABSTRACT STYLES"> */
+
+.abstract-bg{
+    background-color: #fff;
+}
+.abstract-header{
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    /*background-size: 100%;*/
+}
+
+.abstract-desc-container{
+    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1));
+    background: -webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1));
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: #fff;
+    font-size: 14px;
+    padding: 30px 10px 10px 10px;
+}
+
+.abstract-desc-title{
+    font-size: 18px;
+}
+.abstract-desc-author{
+    margin-bottom: 5px;
+}
+.abstract-desc-details{
+    font-family: TerminalDosis-ExtraLight;
+}
+.abstract-img{
+    width: 40px;
+    text-align: center;
+}
+.abstract-img img{
+    width: 22px;
+}
+.abstract-content{
+    text-align: center;
+    padding: 10px 0;
+}
+.abstract-web-btn{
+    background-color: #DEDEDE;
+    border-radius: 3px;
+    margin: 15px 0;
+}
+.abstract-web-btn img{
+    width: 22px;
+    margin-right: 3px;
+}
+.abstract-content-text{
+    text-align: left;
+    padding: 10px 20px;
+}
+.abstract-content-tags{
+    text-align: left;
+    font-family: TerminalDosis-Bold;
+    padding: 10px 20px;
+}
+/* </editor-fold> */
+
+/* <editor-fold desc="PREFERENCES STYLES"> */
+
+.pref-bg{
+    background-color: #1E1E1E;
+}
+.pref-title{
+    color: #bbb;
+    border-bottom: 2px #bbb solid;
+    padding: 10px 5px;
+}
+.pref-content{
+    padding: 10px 5px;
+    font-size: 18px;
+    color: #888;
+    border-bottom: 1px #bbb solid;
+    margin-bottom: 20px;
+}
+.radio-img{
+    width: 30px;
+    vertical-align: middle;
+    
+}
+.radio-img img{
+    width: 22px;
+}
+.radio-option{
+    height: 35px;
+}
+
+.general-title{
+    margin-top: 5px;
+}
+
+.general-subtitle{
+    color: #bbb;
+    font-size: 12px;
+    margin: 5px 0;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="POLITICS STYLES"> */
+
+#string-politics-content{
+    font-size: 14px;
+    color: #bbb;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="FEED CONFIG STYLES"> */
+
+.feed-config-magazine-row{
+    height: 40px;
+    vertical-align: bottom;
+}
+
+.magazine-checkbox, #select-all {
+    width: 35px;
+    vertical-align: middle;
+}
+.magazine-checkbox img, #select-all img{
+    width: 35px;
+    padding: 10px 5px;
+}
+
+#btn-save{
+    width: 90px;
+    background-color: #888;
+    padding: 5px 0;
+    text-align: center;
+}
+.btn-save-feed{
+    font-size: 20px;
+    border: 1px #888 solid;
+    border-radius: 5px;
+    padding: 10px 0;
+}
+
+.input-feed{
+    width: 100%;
+    height: 40px;
+    font-size: 20px;
+    border: none;
+    border-bottom: 1px #888 solid;
+    color: #888;
+    background-color: transparent;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold desc="SETTINGS STYLES"> */
+
+.settings-desc{
+    font-size: 18px;
+    padding: 10px 5px 5px 5px;
+}
+
+.settings-desc-text{
+    color: #aaa;
+    font-size: 14px;
+    padding: 0 5px;
+}
+
+.settings-title{
+    font-size: 18px;
+    padding: 5px;
+    margin: 20px 0 10px 0;
+    border-bottom: 2px #000 solid;
+}
+
+.settings-item{
+    color: #888;
+    padding: 5px;
+    border-bottom: 1px #bbb solid;
+}
+#search-input{
+    width: 100%;
+    border: none;
+    color: #888;
+    height: 30px;
+    background-color: transparent;
+}
+#btn-search-magazines{
+    width: 40px;
+    text-align: center;
+}
+#btn-search-magazines img{
+    width: 25px;
+}
+
+.settings-letter{
+    display: inline-block;
+    width: 30px;
+    font-size: 18px;
+    color: #888;
+    text-align: center;
+    padding: 5px;
+}
+.settings-row{
+    height: 40px;
+    border-bottom: 1px #bbb solid;
+    font-size: 18px;
+    color: #888;
+}
+.settings-category-name{
+    padding-left: 5px;
+}
+.settings-arrow{
+    width: 30px;
+    text-align: center;
+    padding-bottom: 3px;
+}
+.settings-arrow img{
+    width: 15px;
+}
+
+.settings-list{
+    width: 20px;
+    text-align: center;
+    padding-bottom: 4px;
+}
+.settings-list img{
+    width: 13px;
+}
+
+/* </editor-fold> */

@@ -1,0 +1,17 @@
+{
+    "save":"SALVAR",
+    "search-magazines":"BUSCAR PERIÓDICOS",
+    "alfabetic-magazines":"LISTA ALFABÉTICA DE PERIÓDICOS",
+    "all-magazines":"TODOS",
+    "search-required":"Por favor preencha o campo de pesquisa.",
+    "no-magazines":"Não há periódicos",
+    "select-one-magazine":"Por favor selecione pelo menos um periódico.",
+    "confirm-changes":"Tem certeza que deseja salvar as alterações da lista",
+    "feed-name-placeholder":"Titulo da nova lista",
+    "select-feed":"Selecione uma lista",
+    "new-feed":"Nova lista",
+    "add-to-feed":"Adicionar a uma lista existente",
+    "cancel":"Cancelar",
+    "feed-name-required":"Favor informar o nome da nova lista.",
+    "feed-required":"Favor selecionar uma lista."
+}

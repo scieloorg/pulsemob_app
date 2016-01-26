@@ -1,0 +1,15 @@
+{
+    "language": "LANGUAGE",
+    "spanish": "Spanish",
+    "portuguese": "Portuguese",
+    "english": "English",
+    "font-size": "FONT SIZE",
+    "small": "Small",
+    "medium": "Medium",
+    "large": "Large",
+    "general": "GENERAL",
+    "version": "Version",
+    "scielo-desc": "Scientific Eletronic Library Online<br>FAPESP | CNPq | BIREME/OPAS/OMS FapUnifesp",
+    "rate": "Rate us",
+    "rate-subtitle": "Rate our SciELO News Feeder"
+}

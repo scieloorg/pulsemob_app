@@ -1,0 +1,619 @@
+{
+    "categories_order_en": [7, 4, 1, 3, 6, 2, 5, 8],
+    "magazines_order": [11, 54, 28, 56, 63, 46, 66, 64, 61, 31, 18, 2, 3, 1, 62, 23, 55, 27, 43, 4, 5, 15, 49, 26, 17, 19, 51, 6, 67, 14, 29, 50, 41, 7, 30, 69, 60, 34, 58, 33, 13, 42, 57, 9, 22, 39, 16, 45, 38, 65, 40, 53, 47, 24, 52, 44, 21, 20, 25, 12, 48, 8, 68, 36, 32, 35, 37, 10, 59],
+    "solr_version": 81605,
+    "categories_order_pt": [7, 1, 2, 6, 5, 4, 3, 8],
+    "magazines": {
+        "1": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Brazilian Journal of Medical and Biological Research",
+            "magazine_acronym": "bjmbr",
+            "magazine_issn": "0100-879X",
+            "magazine_abbreviated_title": "Braz J Med Biol Res",
+            "id": 1
+        },
+        "2": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Brazilian Journal of Chemical Engineering",
+            "magazine_acronym": "bjce",
+            "magazine_issn": "0104-6632",
+            "magazine_abbreviated_title": "Braz. J. Chem. Eng.",
+            "id": 2
+        },
+        "3": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Brazilian Journal of Genetics",
+            "magazine_acronym": "bjg",
+            "magazine_issn": "0100-8455",
+            "magazine_abbreviated_title": "Braz. J. Genet.",
+            "id": 3
+        },
+        "4": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Ci\u00eancia da Informa\u00e7\u00e3o",
+            "magazine_acronym": "ci",
+            "magazine_issn": "0100-1965",
+            "magazine_abbreviated_title": "Ci. Inf.",
+            "id": 4
+        },
+        "5": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Dados",
+            "magazine_acronym": "dados",
+            "magazine_issn": "0011-5258",
+            "magazine_abbreviated_title": "Dados",
+            "id": 5
+        },
+        "6": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Journal of the Brazilian Computer Society",
+            "magazine_acronym": "jbcos",
+            "magazine_issn": "0104-6500",
+            "magazine_abbreviated_title": "J. Braz. Comp. Soc.",
+            "id": 6
+        },
+        "7": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Mem\u00f3rias do Instituto Oswaldo Cruz",
+            "magazine_acronym": "mioc",
+            "magazine_issn": "0074-0276",
+            "magazine_abbreviated_title": "Mem. Inst. Oswaldo Cruz",
+            "id": 7
+        },
+        "8": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista do Instituto de Medicina Tropical de S\u00e3o Paulo",
+            "magazine_acronym": "rimtsp",
+            "magazine_issn": "0036-4665",
+            "magazine_abbreviated_title": "Rev. Inst. Med. trop. S. Paulo",
+            "id": 8
+        },
+        "9": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista Brasileira de Ci\u00eancias Sociais",
+            "magazine_acronym": "rbcsoc",
+            "magazine_issn": "0102-6909",
+            "magazine_abbreviated_title": "Rev. bras. Ci. Soc.",
+            "id": 9
+        },
+        "10": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Scientia Agricola",
+            "magazine_acronym": "sa",
+            "magazine_issn": "0103-9016",
+            "magazine_abbreviated_title": "Sci. agric. (Piracicaba, Braz.)",
+            "id": 10
+        },
+        "11": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Acta Cirurgica Brasileira",
+            "magazine_acronym": "acb",
+            "magazine_issn": "0102-8650",
+            "magazine_abbreviated_title": "Acta Cir. Bras.",
+            "id": 11
+        },
+        "12": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista de Odontologia da Universidade de S\u00e3o Paulo",
+            "magazine_acronym": "rousp",
+            "magazine_issn": "0103-0663",
+            "magazine_abbreviated_title": "Rev Odontol Univ S\u00e3o Paulo",
+            "id": 12
+        },
+        "13": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Psicologia USP",
+            "magazine_acronym": "pusp",
+            "magazine_issn": "0103-6564",
+            "magazine_abbreviated_title": "Psicol. USP",
+            "id": 13
+        },
+        "14": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Journal of Venomous Animals and Toxins",
+            "magazine_acronym": "jvat",
+            "magazine_issn": "0104-7930",
+            "magazine_abbreviated_title": "J. Venom. Anim. Toxins",
+            "id": 14
+        },
+        "15": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "DELTA: Documenta\u00e7\u00e3o de Estudos em Ling\u00fc\u00edstica Te\u00f3rica e Aplicada",
+            "magazine_acronym": "delta",
+            "magazine_issn": "0102-4450",
+            "magazine_abbreviated_title": "DELTA",
+            "id": 15
+        },
+        "16": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista Brasileira de Hist\u00f3ria",
+            "magazine_acronym": "rbh",
+            "magazine_issn": "0102-0188",
+            "magazine_abbreviated_title": "Rev. Bras. Hist.",
+            "id": 16
+        },
+        "17": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Food Science and Technology (Campinas)",
+            "magazine_acronym": "cta",
+            "magazine_issn": "0101-2061",
+            "magazine_abbreviated_title": "Food Sci. Technol (Campinas)",
+            "id": 17
+        },
+        "18": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Brazilian Journal of Botany",
+            "magazine_acronym": "rbb",
+            "magazine_issn": "0100-8404",
+            "magazine_abbreviated_title": "Braz. J. Bot.",
+            "id": 18
+        },
+        "19": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Genetics and Molecular Biology",
+            "magazine_acronym": "gmb",
+            "magazine_issn": "1415-4757",
+            "magazine_abbreviated_title": "Genet. Mol. Biol.",
+            "id": 19
+        },
+        "20": {
+            "magazine_domain": "www.scielo.org.pe",
+            "magazine_name": "Revista de Investigaciones Veterinarias del Per\u00fa",
+            "magazine_acronym": "rivep",
+            "magazine_issn": "1609-9117",
+            "magazine_abbreviated_title": "Rev. investig. vet. Per\u00fa",
+            "id": 20
+        },
+        "21": {
+            "magazine_domain": "www.scielo.org.pe",
+            "magazine_name": "Revista de Gastroenterolog\u00eda del Per\u00fa",
+            "magazine_acronym": "rgp",
+            "magazine_issn": "1022-5129",
+            "magazine_abbreviated_title": "Rev. gastroenterol. Per\u00fa",
+            "id": 21
+        },
+        "22": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista Brasileira de Cirurgia Cardiovascular",
+            "magazine_acronym": "rbccv",
+            "magazine_issn": "0102-7638",
+            "magazine_abbreviated_title": "Rev Bras Cir Cardiovasc",
+            "id": 22
+        },
+        "23": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Brazilian Journal of Physics",
+            "magazine_acronym": "bjp",
+            "magazine_issn": "0103-9733",
+            "magazine_abbreviated_title": "Braz. J. Phys.",
+            "id": 23
+        },
+        "24": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista da Faculdade de Educa\u00e7\u00e3o",
+            "magazine_acronym": "rfe",
+            "magazine_issn": "0102-2555",
+            "magazine_abbreviated_title": "Rev. Fac. Educ.",
+            "id": 24
+        },
+        "25": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista de Microbiologia",
+            "magazine_acronym": "rm",
+            "magazine_issn": "0001-3714",
+            "magazine_abbreviated_title": "Rev. Microbiol.",
+            "id": 25
+        },
+        "26": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Educa\u00e7\u00e3o & Sociedade",
+            "magazine_acronym": "es",
+            "magazine_issn": "0101-7330",
+            "magazine_abbreviated_title": "Educ. Soc.",
+            "id": 26
+        },
+        "27": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Cadernos CEDES",
+            "magazine_acronym": "ccedes",
+            "magazine_issn": "0101-3262",
+            "magazine_abbreviated_title": "Cad. CEDES",
+            "id": 27
+        },
+        "28": {
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Archivos de medicina veterinaria",
+            "magazine_acronym": "amv",
+            "magazine_issn": "0301-732X",
+            "magazine_abbreviated_title": "Arch. med. vet.",
+            "id": 28
+        },
+        "29": {
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Literatura y ling\u00fc\u00edstica",
+            "magazine_acronym": "lyl",
+            "magazine_issn": "0716-5811",
+            "magazine_abbreviated_title": "Lit. ling\u00fc\u00edst.",
+            "id": 29
+        },
+        "30": {
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Parasitolog\u00eda al d\u00eda",
+            "magazine_acronym": "pd",
+            "magazine_issn": "0716-0720",
+            "magazine_abbreviated_title": "Parasitol. d\u00eda",
+            "id": 30
+        },
+        "31": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Bragantia",
+            "magazine_acronym": "brag",
+            "magazine_issn": "0006-8705",
+            "magazine_abbreviated_title": "Bragantia",
+            "id": 31
+        },
+        "32": {
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Revista m\u00e9dica de Chile",
+            "magazine_acronym": "rmc",
+            "magazine_issn": "0034-9887",
+            "magazine_abbreviated_title": "Rev. m\u00e9d. Chile",
+            "id": 32
+        },
+        "33": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Psicologia: Reflex\u00e3o e Cr\u00edtica",
+            "magazine_acronym": "prc",
+            "magazine_issn": "0102-7972",
+            "magazine_abbreviated_title": "Psicol. Reflex. Crit.",
+            "id": 33
+        },
+        "34": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Pesquisa Veterin\u00e1ria Brasileira",
+            "magazine_acronym": "pvb",
+            "magazine_issn": "0100-736X",
+            "magazine_abbreviated_title": "Pesq. Vet. Bras.",
+            "id": 34
+        },
+        "35": {
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Revista musical chilena",
+            "magazine_acronym": "rmusic",
+            "magazine_issn": "0716-2790",
+            "magazine_abbreviated_title": "Rev. music. chil.",
+            "id": 35
+        },
+        "36": {
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Revista geol\u00f3gica de Chile",
+            "magazine_acronym": "rgch",
+            "magazine_issn": "0716-0208",
+            "magazine_abbreviated_title": "Rev. geol. Chile",
+            "id": 36
+        },
+        "37": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Sao Paulo Medical Journal",
+            "magazine_acronym": "spmj",
+            "magazine_issn": "1516-3180",
+            "magazine_abbreviated_title": "Sao Paulo Med. J.",
+            "id": 37
+        },
+        "38": {
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Revista chilena de anatom\u00eda",
+            "magazine_acronym": "rca",
+            "magazine_issn": "0716-9868",
+            "magazine_abbreviated_title": "Rev. chil. anat.",
+            "id": 38
+        },
+        "39": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista Brasileira de Geof\u00edsica",
+            "magazine_acronym": "rbg",
+            "magazine_issn": "0102-261X",
+            "magazine_abbreviated_title": "Rev. Bras. Geof.",
+            "id": 39
+        },
+        "40": {
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Revista chilena de pediatr\u00eda",
+            "magazine_acronym": "rcp",
+            "magazine_issn": "0370-4106",
+            "magazine_abbreviated_title": "Rev. chil. pediatr.",
+            "id": 40
+        },
+        "41": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Materials Research",
+            "magazine_acronym": "mr",
+            "magazine_issn": "1516-1439",
+            "magazine_abbreviated_title": "Mat. Res.",
+            "id": 41
+        },
+        "42": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Qu\u00edmica Nova",
+            "magazine_acronym": "qn",
+            "magazine_issn": "0100-4042",
+            "magazine_abbreviated_title": "Qu\u00edm. Nova",
+            "id": 42
+        },
+        "43": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Cer\u00e2mica",
+            "magazine_acronym": "ce",
+            "magazine_issn": "0366-6913",
+            "magazine_abbreviated_title": "Cer\u00e2mica",
+            "id": 43
+        },
+        "44": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista de Antropologia",
+            "magazine_acronym": "ra",
+            "magazine_issn": "0034-7701",
+            "magazine_abbreviated_title": "Rev. Antropol.",
+            "id": 44
+        },
+        "45": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista Brasileira de Psiquiatria",
+            "magazine_acronym": "rbp",
+            "magazine_issn": "1516-4446",
+            "magazine_abbreviated_title": "Rev. Bras. Psiquiatr.",
+            "id": 45
+        },
+        "46": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Arquivos de Neuro-Psiquiatria",
+            "magazine_acronym": "anp",
+            "magazine_issn": "0004-282X",
+            "magazine_abbreviated_title": "Arq. Neuro-Psiquiatr.",
+            "id": 46
+        },
+        "47": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista da Associa\u00e7\u00e3o M\u00e9dica Brasileira",
+            "magazine_acronym": "ramb",
+            "magazine_issn": "0104-4230",
+            "magazine_abbreviated_title": "Rev. Assoc. Med. Bras.",
+            "id": 47
+        },
+        "48": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista do Hospital das Cl\u00ednicas",
+            "magazine_acronym": "rhc",
+            "magazine_issn": "0041-8781",
+            "magazine_abbreviated_title": "Rev. Hosp. Clin.",
+            "id": 48
+        },
+        "49": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Ecl\u00e9tica Qu\u00edmica",
+            "magazine_acronym": "eq",
+            "magazine_issn": "0100-4670",
+            "magazine_abbreviated_title": "Eclet. Qu\u00edm.",
+            "id": 49
+        },
+        "50": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Mana",
+            "magazine_acronym": "mana",
+            "magazine_issn": "0104-9313",
+            "magazine_abbreviated_title": "Mana",
+            "id": 50
+        },
+        "51": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Journal of the Brazilian Chemical Society",
+            "magazine_acronym": "jbchs",
+            "magazine_issn": "0103-5053",
+            "magazine_abbreviated_title": "J. Braz. Chem. Soc.",
+            "id": 51
+        },
+        "52": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista da Sociedade Brasileira de Medicina Tropical",
+            "magazine_acronym": "rsbmt",
+            "magazine_issn": "0037-8682",
+            "magazine_abbreviated_title": "Rev. Soc. Bras. Med. Trop.",
+            "id": 52
+        },
+        "53": {
+            "magazine_domain": "scielo.sld.cu",
+            "magazine_name": "Revista Cubana de Medicina Tropical",
+            "magazine_acronym": "mtr",
+            "magazine_issn": "0375-0760",
+            "magazine_abbreviated_title": "Rev Cubana Med Trop",
+            "id": 53
+        },
+        "54": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Anais da Academia Brasileira de Ci\u00eancias",
+            "magazine_acronym": "aabc",
+            "magazine_issn": "0001-3765",
+            "magazine_abbreviated_title": "An. Acad. Bras. Ci\u00eanc.",
+            "id": 54
+        },
+        "55": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Brazilian Journal of Veterinary Research and Animal Science",
+            "magazine_acronym": "bjvras",
+            "magazine_issn": "1413-9596",
+            "magazine_abbreviated_title": "Braz. J. Vet. Res. Anim. Sci.",
+            "id": 55
+        },
+        "56": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Arquivo Brasileiro de Medicina Veterin\u00e1ria e Zootecnia",
+            "magazine_acronym": "abmvz",
+            "magazine_issn": "0102-0935",
+            "magazine_abbreviated_title": "Arq. Bras. Med. Vet. Zootec.",
+            "id": 56
+        },
+        "57": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Revista Brasileira de Biologia",
+            "magazine_acronym": "rbbio",
+            "magazine_issn": "0034-7108",
+            "magazine_abbreviated_title": "Rev. Bras. Biol.",
+            "id": 57
+        },
+        "58": {
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Proyecciones (Antofagasta)",
+            "magazine_acronym": "proy",
+            "magazine_issn": "0716-0917",
+            "magazine_abbreviated_title": "Proyecciones (Antofagasta)",
+            "id": 58
+        },
+        "59": {
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Teolog\u00eda y vida",
+            "magazine_acronym": "tv",
+            "magazine_issn": "0049-3449",
+            "magazine_abbreviated_title": "Teol. vida",
+            "id": 59
+        },
+        "60": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Pesquisa Odontol\u00f3gica Brasileira",
+            "magazine_acronym": "pob",
+            "magazine_issn": "1517-7491",
+            "magazine_abbreviated_title": "Pesqui. Odontol. Bras.",
+            "id": 60
+        },
+        "61": {
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Bolet\u00edn de la Sociedad Chilena de Qu\u00edmica",
+            "magazine_acronym": "bscq",
+            "magazine_issn": "0366-1644",
+            "magazine_abbreviated_title": "Bol. Soc. Chil. Qu\u00edm.",
+            "id": 61
+        },
+        "62": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Brazilian Journal of Microbiology",
+            "magazine_acronym": "bjm",
+            "magazine_issn": "1517-8382",
+            "magazine_abbreviated_title": "Braz. J. Microbiol.",
+            "id": 62
+        },
+        "63": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Arquivos Brasileiros de Cardiologia",
+            "magazine_acronym": "abc",
+            "magazine_issn": "0066-782X",
+            "magazine_abbreviated_title": "Arq. Bras. Cardiol.",
+            "id": 63
+        },
+        "64": {
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Bolet\u00edn chileno de parasitolog\u00eda",
+            "magazine_acronym": "bcpar",
+            "magazine_issn": "0365-9402",
+            "magazine_abbreviated_title": "Bol. chil. parasitol.",
+            "id": 64
+        },
+        "65": {
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Revista chilena de historia natural",
+            "magazine_acronym": "rchnat",
+            "magazine_issn": "0716-078X",
+            "magazine_abbreviated_title": "Rev. chil. hist. nat.",
+            "id": 65
+        },
+        "66": {
+            "magazine_domain": "www.scielo.cl",
+            "magazine_name": "Biological Research",
+            "magazine_acronym": "bres",
+            "magazine_issn": "0716-9760",
+            "magazine_abbreviated_title": "Biol. Res.",
+            "id": 66
+        },
+        "67": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Journal of the Brazilian Society of Mechanical Sciences",
+            "magazine_acronym": "jbsms",
+            "magazine_issn": "0100-7386",
+            "magazine_abbreviated_title": "J. Braz. Soc. Mech. Sci.",
+            "id": 67
+        },
+        "68": {
+            "magazine_domain": "www.scielosp.org",
+            "magazine_name": "Revista Espa\u00f1ola de Salud P\u00fablica",
+            "magazine_acronym": "resp",
+            "magazine_issn": "1135-5727",
+            "magazine_abbreviated_title": "Rev. Esp. Salud Publica",
+            "id": 68
+        },
+        "69": {
+            "magazine_domain": "www.scielo.br",
+            "magazine_name": "Pesquisa Agropecu\u00e1ria Brasileira",
+            "magazine_acronym": "pab",
+            "magazine_issn": "0100-204X",
+            "magazine_abbreviated_title": "Pesq. agropec. bras.",
+            "id": 69
+        }
+    },
+    "categories_order_es": [7, 1, 2, 6, 4, 5, 3, 8],
+    "categories": {
+        "1": {
+            "category_name_es": "Ciencias Biol\u00f3gicas",
+            "category_name_en": "Biological Sciences",
+            "id": 1,
+            "magazines": [54, 66, 64, 18, 3, 1, 62, 19, 14, 7, 30, 57, 38, 65, 25, 8],
+            "category_name_pt": "Ci\u00eancias Biol\u00f3gicas"
+        },
+        "2": {
+            "category_name_es": "Ciencias de la Salud",
+            "category_name_en": "Health Sciences",
+            "id": 2,
+            "magazines": [11, 54, 63, 46, 1, 7, 60, 22, 45, 40, 53, 47, 52, 21, 20, 12, 48, 8, 68, 32, 37],
+            "category_name_pt": "Ci\u00eancias da Sa\u00fade"
+        },
+        "3": {
+            "category_name_es": "Ingenierias",
+            "category_name_en": "Engineering",
+            "id": 3,
+            "magazines": [54, 2, 43, 67, 41],
+            "category_name_pt": "Engenharias"
+        },
+        "4": {
+            "category_name_es": "Ciencias Sociales Aplicadas",
+            "category_name_en": "Applied Social Sciences",
+            "id": 4,
+            "magazines": [4],
+            "category_name_pt": "Ci\u00eancias Sociais Aplicadas"
+        },
+        "5": {
+            "category_name_es": "Humanidades",
+            "category_name_en": "Human Sciences",
+            "id": 5,
+            "magazines": [54, 27, 5, 26, 50, 33, 13, 9, 16, 24, 44, 59],
+            "category_name_pt": "Ci\u00eancias Humanas"
+        },
+        "6": {
+            "category_name_es": "Ciencias Exactas y de la Tierra",
+            "category_name_en": "Exact And Earth Sciences",
+            "id": 6,
+            "magazines": [54, 61, 23, 49, 51, 6, 67, 58, 42, 39, 36],
+            "category_name_pt": "Ci\u00eancias Exatas e da Terra"
+        },
+        "7": {
+            "category_name_es": "Ciencias Agr\u00edcolas",
+            "category_name_en": "Agricultural Sciences",
+            "id": 7,
+            "magazines": [54, 28, 56, 31, 55, 17, 14, 69, 34, 25, 10],
+            "category_name_pt": "Ci\u00eancias Agr\u00e1rias"
+        },
+        "8": {
+            "category_name_es": "Ling\u00fcistica, Letras y Artes",
+            "category_name_en": "Linguistics, Letters And Arts",
+            "id": 8,
+            "magazines": [15, 29, 35],
+            "category_name_pt": "Ling\u00fc\u00edstica, Letras e Artes"
+        }
+    }
+}
