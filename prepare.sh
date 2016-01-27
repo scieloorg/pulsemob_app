@@ -11,7 +11,7 @@ cordova platform add ios
 
 cordova -d plugin add https://github.com/Infobase/oauth_patch_plugin.git --variable FACEBOOK_APP_ID="774954805873506"
 
-cordova -d plugin add https://github.com/marcellus-sb/cordova-plugin-googleplus.git
+cordova -d plugin add cordova-plugin-googleplus --variable REVERSED_CLIENT_ID="com.googleusercontent.apps.903038984767-jmg2ov4lvfc5p8k214smfp3bkjv4gcm8"
 
 cordova -d plugin add https://github.com/marcellus-sb/phonegap-facebook-plugin.git --variable APP_ID="774954805873506" --variable APP_NAME="SciELO"
 
@@ -23,7 +23,7 @@ cordova -d plugin add https://github.com/apache/cordova-plugin-inappbrowser.git
 
 cordova -d plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-globalization.git
 
-cordova -d plugin add https://github.com/marcellus-sb/SocialSharing-PhoneGap-Plugin.git
+cordova -d plugin add cordova-plugin-x-socialsharing
 
 cordova -d plugin add https://github.com/marcellus-sb/ionic-plugins-keyboard.git
 

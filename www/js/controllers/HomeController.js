@@ -294,7 +294,7 @@ HomeController.magazineRefresh = function () {
 };
 
 HomeController.reloadMagazine = function(magazineFeedId, magazineId){
-    var query = "journal_title_id:"+magazineId;
+    var query = "journal_id:"+magazineId;
         
     var params = {q: query, start: 0};
 
@@ -460,7 +460,7 @@ HomeController.requestData = function (start, count) {
         
     } else {
         
-        var query = "journal_title_id:"+magazineId;
+        var query = "journal_id:"+magazineId;
         
         var params = {q: query, start: start, rows: count};
         
