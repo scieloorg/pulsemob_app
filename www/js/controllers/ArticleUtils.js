@@ -11,13 +11,15 @@ ArticleUtils.updateContent = function (el, data) {
         
         var keywords = (data["keywords_"+App.locale]) ? data["keywords_"+App.locale].join(", ") : "";
         
-        var domain = DataMapping.getMagazineDomain(data.journal_title_id);
-        var magazineAcronym = DataMapping.getMagazineAcronym(data.journal_title_id);
-        var magazineAbbreviated = DataMapping.getMagazineAbbreviation(data.journal_title_id);
+        var domain = DataMapping.getMagazineDomain(data.journal_id);
+        var magazineAcronym = DataMapping.getMagazineAcronym(data.journal_id);
+        var magazineAbbreviated = DataMapping.getMagazineAbbreviation(data.journal_id);
         
-        var html = '<div class="article-link" data-articleid="'+data.id+'" data-abstract="'+btoa(unescape(encodeURIComponent(abstract)))+'" data-author="'+btoa(unescape(encodeURIComponent(data.first_author)))+'" data-keywords="'+btoa(unescape(encodeURIComponent(keywords)))+'" data-magazineid="'+btoa(unescape(encodeURIComponent(data.journal_title_id)))+'">'+
+        var imagePath = (data["image_upload_path"]) ? SciELO.imageBaseURL+data["image_upload_path"] : "http://"+domain+"/img/revistas/"+magazineAcronym+"/glogo.gif";
+        
+        var html = '<div class="article-link" data-articleid="'+data.id+'" data-abstract="'+btoa(unescape(encodeURIComponent(abstract)))+'" data-author="'+btoa(unescape(encodeURIComponent(data.first_author)))+'" data-keywords="'+btoa(unescape(encodeURIComponent(keywords)))+'" data-magazineid="'+btoa(unescape(encodeURIComponent(data.journal_id)))+'">'+
                         '<div class="article-principal">' +
-                            '<img src="http://'+domain+'/img/revistas/'+magazineAcronym+'/glogo.gif" />' +
+                            '<img src="'+imagePath+'" />' +
                             '<div class="article-name">' +
                                 title +
                             '</div>' +
