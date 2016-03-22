@@ -83,8 +83,8 @@ Em seguida, o projeto para Xcode é gerado na pasta platforms/ios. Para sumbter 
 Para alterar o endereço dos serviços utilizados pelo aplicativo, as seguintes variaveis no arquivo /js/SciELO.js devem ser alteradas:
 
 ```
-	SciELO.solrURL = "http://**<SERVER ADDRESS>**/"; //Endereço do SOLR com os dados da SciELO indexados
-	SciELO.imageBaseURL = "http://**<SERVER ADDRESS>**/"; //Endereço das imagens submetidas pelo backoffice
-	SciELO.serverURL = "http://**<SERVER ADDRESS>**/webservices/mobile/"; //Endereço dos serviços utilizados pelo aplicativo
+	SciELO.solrURL = "http://<SERVER ADDRESS>/"; //Endereço do SOLR com os dados da SciELO indexados
+	SciELO.imageBaseURL = "http://<SERVER ADDRESS>/"; //Endereço das imagens submetidas pelo backoffice
+	SciELO.serverURL = "http://<SERVER ADDRESS>/webservices/mobile/"; //Endereço dos serviços utilizados pelo aplicativo
 ```
 
