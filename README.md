@@ -55,6 +55,16 @@ Para compatibilidade de todos os plugins, a configuração a baixo deve ser inse
   configurations {    all\*.exclude group: 'com.android.support', module: 'support-v4'}
 ```
 
+# Altrando Endereço dos Serviços
+
+Para alterar o endereço dos serviços utilizados pelo aplicativo, as seguintes variaveis no arquivo /js/SciELO.js devem ser alteradas:
+
+```
+	SciELO.solrURL = "http://<SERVER ADDRESS>/"; //Endereço do SOLR com os dados da SciELO indexados
+	SciELO.imageBaseURL = "http://<SERVER ADDRESS>/"; //Endereço das imagens submetidas pelo backoffice
+	SciELO.serverURL = "http://<SERVER ADDRESS>/webservices/mobile/"; //Endereço dos serviços utilizados pelo aplicativo
+```
+
 # Gerando versão Android
 
 O script a baixo executa os passos necessários para gerar o pacote APK que possa ser submetido para Google Play Store.
@@ -77,14 +87,3 @@ cordova build ios
 ```
 
 Em seguida, o projeto para Xcode é gerado na pasta platforms/ios. Para sumbter uma versão para o itunes deve seguir os procedimentos padrões.
-
-# Altrando Endereço dos Serviços
-
-Para alterar o endereço dos serviços utilizados pelo aplicativo, as seguintes variaveis no arquivo /js/SciELO.js devem ser alteradas:
-
-```
-	SciELO.solrURL = "http://<SERVER ADDRESS>/"; //Endereço do SOLR com os dados da SciELO indexados
-	SciELO.imageBaseURL = "http://<SERVER ADDRESS>/"; //Endereço das imagens submetidas pelo backoffice
-	SciELO.serverURL = "http://<SERVER ADDRESS>/webservices/mobile/"; //Endereço dos serviços utilizados pelo aplicativo
-```
-
