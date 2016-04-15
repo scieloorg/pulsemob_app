@@ -120,7 +120,7 @@
 
         $("#app-bar-search-input input").keypress(function (e) {
             if (e.which === 13) {
-                $("#app-bar-search").trigger("click");
+                $("#app-bar-search").trigger("tap");
             }
         });
 
