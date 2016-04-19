@@ -1,3 +1,17 @@
 {
-    "magazines": "REVISTAS"
+    "save":"SAVE",
+    "search-magazines":"SEARCH PAPER",
+    "alfabetic-magazines":"ALPHABETICAL LIST OF PAPER",
+    "all-magazines":"ALL",
+    "search-required":"Please complete the search field.",
+    "no-magazines":"There are no papers",
+    "select-one-magazine":"Please select at least one paper.",
+    "confirm-changes":"Are you sure you want to save the list changes",
+    "feed-name-placeholder":"Title of the new list",
+    "select-feed":"Select a list",
+    "new-feed":"New list",
+    "add-to-feed":"Add to an existing list",
+    "cancel":"Cancel",
+    "feed-name-required":"Please enter the name of the new list.",
+    "feed-required":"Please select a list."
 }

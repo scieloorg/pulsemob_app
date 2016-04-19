@@ -4,5 +4,12 @@
     "config": "Settings",
     "favorite": "Favorites",
     "remove": "Dismiss",
-    "result-of":"Results for: "
+    "no-feeds":"You do not have any list of configured papers.",
+    "start-now":"Start now!",
+    "back-to":"Go back to",
+    "my-feed":"My Paper List",
+    "more-in":"More in",
+    "remove-feed": "When dispensing this magazine, you will also be dispensing the feed. Are you sure you want to continue?",
+    "yes": "Yes",
+    "no": "No"
 }
