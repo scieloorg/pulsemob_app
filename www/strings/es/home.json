@@ -1,8 +1,15 @@
 {
-    "refresh": "Recarregar",
-    "share": "Compartilhar",
-    "config": "Configurar",
+    "refresh": "Recargar",
+    "share": "Compartir",
+    "config": "Ajustes",
     "favorite": "Favoritos",
     "remove": "Dispensar",
-    "result-of":"Resultado para: "
+    "no-feeds":"Usted no tiene ninguna lista de periódicos configurados.",
+    "start-now":"¡Empezar ahora!",
+    "back-to":"Volver a",
+    "my-feed":"Mi Lista de Periódicos",
+    "more-in":"Más en",
+    "remove-feed": "Al suministrar esta revista, también se le dispensar la alimentación. ¿Seguro que desea continuar?",
+    "yes": "Sí",
+    "no": "No"
 }

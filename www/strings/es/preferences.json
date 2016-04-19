@@ -1,15 +1,15 @@
 {
     "language": "IDIOMA",
-    "spanish": "Espanhol",
-    "portuguese": "Português",
-    "english": "Inglês",
+    "spanish": "Español",
+    "portuguese": "Portugués",
+    "english": "Inglés",
     "font-size": "TAMANHO DA FONTE",
-    "small": "Pequena",
-    "medium": "Média",
+    "small": "Pequeño",
+    "medium": "Medio",
     "large": "Grande",
-    "general": "GERAL",
-    "version": "Versão",
+    "general": "GENERAL",
+    "version": "Versión",
     "scielo-desc": "Scientific Eletronic Library Online<br>FAPESP | CNPq | BIREME/OPAS/OMS FapUnifesp",
     "rate": "Rate us",
-    "rate-subtitle": "Avalie a nossa SciELO News Feeder"
+    "rate-subtitle": "Evalúe nuestra SciELO News Feeder"
 }

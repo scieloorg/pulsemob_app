@@ -13,12 +13,12 @@
     "intro-item4":"Vivamus diam velit, vestibulum vitae ante eget, facilisis volutpat nisl. Donec ac pellentesque neque. Suspendisse sagittis elit justo, et porttitor risus aliquet nec. Maecenas vitae massa tortor.",
     "intro-item5":"Integer feugiat magna vitae ullamcorper volutpat. Donec vel mi eros. Vivamus gravida aliquam ultricies. Integer tempus leo eget justo eleifend, eget dictum neque maximus.",
     
-    "error-500":"Ocorreu algum erro na aplicação. Por favor tente novamente mais tarde.",
-    "error-login":"Não foi possivel realizar a autenticação. Por favor verifique a conexão com a internet e tente novamente.",
-    "error-facebook":"Não foi possivel se conectar ao facebook. Por favor tente novamente mais tarde.",
-    "error-google":"Não foi possivel se conectar ao google. Por favor tente novamente mais tarde.",
-    "error-internet":"Por favor verifique a conexão com internet e tente realizar a operação novamente.",
-    "exit-ask":"Tem certeza que deseja fechar o aplicativo?",
+    "error-500":"An error has occurred in the application. Please try again later.",
+    "error-login":"It was not possible to authenticate. Please check your internet connection and try again.",
+    "error-facebook":"Could not connect to facebook. Please try again later.",
+    "error-google":"Could not connect to Google. Please try again later.",
+    "error-internet":"Please check your Internet connection and try the operation again.",
+    "exit-ask":"Are you sure you want to close the application?",
     
     "yes":"Yes",
     "no":"No",
