@@ -125,6 +125,7 @@
         });
 
         document.addEventListener("backbutton", Navigator.backEvent, true);
+        document.addEventListener("searchbutton", App.search, true);
 
         //listener end transition
         Transition.addEventListeners();
