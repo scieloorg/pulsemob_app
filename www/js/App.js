@@ -120,11 +120,12 @@
 
         $("#app-bar-search-input input").keypress(function (e) {
             if (e.which === 13) {
-                $("#app-bar-search").trigger("click");
+                $("#app-bar-search").trigger("tap");
             }
         });
 
         document.addEventListener("backbutton", Navigator.backEvent, true);
+        document.addEventListener("searchbutton", App.search, true);
 
         //listener end transition
         Transition.addEventListeners();
