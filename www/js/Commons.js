@@ -14,8 +14,17 @@ String.prototype.hashCode = function() {
     return hash;
 };
 
+// format date to a format that is not affected to brazil's timezone 
+String.prototype.formatDateBrazil = function(dateString) {
+    var date = dateString.split("T");
+    date = date[0].split("-");
+    var date = new Date(date[0], (date[1] - 1), date[2]);
+    return date;
+};
+
 String.prototype.formatToDateSciELO = function() {
-    var date = new Date(this);
+    var bDate = String.prototype.formatDateBrazil(this);
+    var date = new Date(bDate);
     
     var formattedDate = null;
     var month  = ""+(date.getMonth() + 1);
