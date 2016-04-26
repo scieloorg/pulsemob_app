@@ -5,7 +5,22 @@ var ArticleUtils = function() {
 ArticleUtils.updateContent = function (el, data) {
     if (typeof data !== 'undefined'){
         
-        var abstract = (data["translated_abstracts_"+App.locale]) ? data["translated_abstracts_"+App.locale] : data.original_abstract;
+        var abstract;
+        var languages = ["pt", "es", "en","fr"];
+        
+        // varifica o abstract na lingua original se não tiver verifica para outras línguas
+        if(data["translated_abstracts_"+App.locale]){
+            abstract = data["translated_abstracts_"+App.locale];
+        }else if(data.original_abstract){
+            abstract = data.original_abstract;
+        }else{
+            for (i = 0; i < languages.length; i++) { 
+                if(data["translated_abstracts_"+languages[i]]){
+                    abstract = data["translated_abstracts_"+languages[i]];                    
+                    break;
+                }
+            }            
+        }
         
         var title = (data["translated_titles_"+App.locale]) ? data["translated_titles_"+App.locale] : data.original_title;
         
