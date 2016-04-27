@@ -15,6 +15,7 @@ ContextMenu.init = function() {
     ContextMenu.$menu.on('tap', "#cm-welcome", ContextMenu.welcomeAction);
     ContextMenu.$menu.on('tap', "#cm-feedback", ContextMenu.feedbackAction);
     ContextMenu.$menu.on('tap', "#cm-politics", ContextMenu.politicsAction);
+    
 };
 
 //toggleMenu
@@ -38,38 +39,63 @@ ContextMenu.hide = function(event) {
 };
 
 ContextMenu.refreshAction = function() {
-    ContextMenu.hide();
+    setTimeout(function(){   
+        
+        ContextMenu.hide();
+
+        if(Navigator.currentPage === "home.html" || Navigator.currentPage === "articlesByCategory.html"){
+            App.currentController.refresh();
+        }
     
-    if(Navigator.currentPage === "home.html" || Navigator.currentPage === "articlesByCategory.html"){
-        App.currentController.refresh();
-    }
+    }, 250);
 };
 
 ContextMenu.favoriteAction = function() {
-    ContextMenu.hide();
-    // Se tiver algo na busca, deve ser removido
-    App.$appSearchInput.children("input").val("");
-    App.$appSearchInput.children("input").blur();
+    setTimeout(function(){   
+
+        ContextMenu.hide();
+        // Se tiver algo na busca, deve ser removido
+        App.$appSearchInput.children("input").val("");
+        App.$appSearchInput.children("input").blur();
+
+        Navigator.loadPage('articlesByCategory.html');
     
-    Navigator.loadPage('articlesByCategory.html');
+    }, 250);
+    
 };
 
 ContextMenu.preferencesAction = function() {
-    ContextMenu.hide();
-    Navigator.loadPage('preferences.html');
+    setTimeout(function(){
+
+        ContextMenu.hide();
+        Navigator.loadPage('preferences.html');
+    
+    }, 250);
 };
 
 ContextMenu.welcomeAction = function() {
-    ContextMenu.hide();
-    Introduction.show();
+    setTimeout(function(){
+
+        ContextMenu.hide();
+        Introduction.show();
+        
+    }, 250);
 };
 
 ContextMenu.feedbackAction = function() {
-    ContextMenu.hide();
-    App.openLink("http://www.scielo.org/php/contact.php?lang="+App.locale);
+    setTimeout(function(){
+
+        ContextMenu.hide();
+        App.openLink("http://www.scielo.org/php/contact.php?lang="+App.locale);
+        
+    }, 250);
 };
 
 ContextMenu.politicsAction = function() {
-    ContextMenu.hide();
-    Navigator.loadPage("politics.html");
+    setTimeout(function(){        
+
+        ContextMenu.hide();
+        Navigator.loadPage("politics.html");
+               
+    }, 250);
 };
