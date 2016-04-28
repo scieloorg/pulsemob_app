@@ -65,6 +65,15 @@ Para alterar o endereço dos serviços utilizados pelo aplicativo, as seguintes 
 	SciELO.serverURL = "http://<SERVER ADDRESS>/webservices/mobile/"; //Endereço dos serviços utilizados pelo aplicativo
 ```
 
+# Altrando Google Analytics
+
+Para alterar o Tracking Id do Google Analytics utilizado pelo aplicativo, o métedo no arquivo /js/App.js deve ser alterado:
+
+```
+	analytics.startTrackerWithId('<TRACKING ID>'); //ID de acompanhamento do app, vinculado a uma conta do Google
+	
+```
+
 # Gerando versão Android
 
 O script a baixo executa os passos necessários para gerar o pacote APK que possa ser submetido para Google Play Store.
