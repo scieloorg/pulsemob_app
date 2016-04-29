@@ -22,6 +22,8 @@ ArticleUtils.updateContent = function (el, data) {
             }            
         }
         
+        if(abstract === undefined){ abstract = ''; }
+        
         var title = (data["translated_titles_"+App.locale]) ? data["translated_titles_"+App.locale] : data.original_title;
         
         var keywords = (data["keywords_"+App.locale]) ? data["keywords_"+App.locale].join(", ") : "";
