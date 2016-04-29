@@ -6,12 +6,11 @@
     "feedback": "Feedback",
     "politics": "Políticas",
     
-    "intro-welcome": "Bienvenido a SciELO",
-    "intro-item1":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id viverra magna. Sed molestie accumsan risus, ut sodales quam placerat in. Fusce eu bibendum augue.",
-    "intro-item2":"Ut id maximus metus. Vestibulum in pellentesque ante, quis fermentum leo. Sed efficitur scelerisque elementum. Proin sed fringilla erat. Aenean congue congue nunc, sit amet tristique felis varius eget.",
-    "intro-item3":"Duis bibendum sem ac nisl pretium iaculis. Sed eu neque in tellus faucibus varius in id mi. Nam at ultricies velit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "intro-item4":"Vivamus diam velit, vestibulum vitae ante eget, facilisis volutpat nisl. Donec ac pellentesque neque. Suspendisse sagittis elit justo, et porttitor risus aliquet nec. Maecenas vitae massa tortor.",
-    "intro-item5":"Integer feugiat magna vitae ullamcorper volutpat. Donec vel mi eros. Vivamus gravida aliquam ultricies. Integer tempus leo eget justo eleifend, eget dictum neque maximus.",
+    "intro-welcome": "SciELO - Biblioteca Científica",
+    "intro-item1":"Biblioteca de artículos de las mejores revistas científicas de Ibero-América y África del Sur",
+    "intro-item2":"La biblioteca SciELO (Scientific Electronic Library Online) publica semanalmente más de mil nuevos artículos de las mejores revistas científicas de los países iberoamericanos y de África del Sul",
+    "intro-item3":"Artículos que comunican resultados de investigación en ciencias de la agricultura, biológicas, ingenierías, exactas y de la tierra, humanas, literatura-letras-y-artes, salud e sociales aplicadas",
+    "intro-item4":"En total, la biblioteca abarca poco más de mil revistas y sobre 600 mil artículos.",
     
     "error-500":"Ha ocurrido un error en la aplicación. Por favor, inténtelo de nuevo más tarde.",
     "error-login":"No fue posible autenticar. Por favor, compruebe su conexión a Internet y vuelve a intentarlo.",
