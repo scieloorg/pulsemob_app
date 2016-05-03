@@ -7,10 +7,9 @@
     "politics": "Politics",
     
     "intro-welcome": "SciELO - Scientific Library",
-    "intro-item1":"Library of articles from the best Ibero-American and South African journals",
-    "intro-item2":"SciELO (Scientific Electronic Library Online) publishes weekly over one thousand new articles from the best iberoamerican journals and South Africa",
-    "intro-item3":"These articles communicate research results from the following scientific áreas: Agriculture, Biology, Exact and Earth, Health, Engineering, Social Sciences and Humanities",
-    "intro-item4":"Overall, SciELO covers more than one thousand journals and over 600 thousand articles.",
+    "intro-item1":"Esse aplicativo apresenta os últimos artigos publicados pelos periódicos SciELO e permite também navegar retroativamente assim como efetuar buscas.",
+    "intro-item2":"É possível ver tudo o que é publicado ou filtrar artigos por áreas temáticas e/ou por um ou mais periódicos específicos.",
+    "intro-item3":"Utilize a opção configurações do menu para definir ou redefinir a área temática e/ou o periódico ou conjunto de periódicos de seu interesse.",
     
     "error-500":"An error has occurred in the application. Please try again later.",
     "error-login":"It was not possible to authenticate. Please check your internet connection and try again.",

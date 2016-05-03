@@ -7,10 +7,9 @@
     "politics": "Políticas",
     
     "intro-welcome": "SciELO - Biblioteca Científica",
-    "intro-item1":"Biblioteca de artículos de las mejores revistas científicas de Ibero-América y África del Sur",
-    "intro-item2":"La biblioteca SciELO (Scientific Electronic Library Online) publica semanalmente más de mil nuevos artículos de las mejores revistas científicas de los países iberoamericanos y de África del Sul",
-    "intro-item3":"Artículos que comunican resultados de investigación en ciencias de la agricultura, biológicas, ingenierías, exactas y de la tierra, humanas, literatura-letras-y-artes, salud e sociales aplicadas",
-    "intro-item4":"En total, la biblioteca abarca poco más de mil revistas y sobre 600 mil artículos.",
+    "intro-item1":"Esse aplicativo apresenta os últimos artigos publicados pelos periódicos SciELO e permite também navegar retroativamente assim como efetuar buscas.",
+    "intro-item2":"É possível ver tudo o que é publicado ou filtrar artigos por áreas temáticas e/ou por um ou mais periódicos específicos.",
+    "intro-item3":"Utilize a opção configurações do menu para definir ou redefinir a área temática e/ou o periódico ou conjunto de periódicos de seu interesse.",
     
     "error-500":"Ha ocurrido un error en la aplicación. Por favor, inténtelo de nuevo más tarde.",
     "error-login":"No fue posible autenticar. Por favor, compruebe su conexión a Internet y vuelve a intentarlo.",
