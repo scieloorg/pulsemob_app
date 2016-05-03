@@ -7,10 +7,9 @@
     "politics": "Políticas",
     
     "intro-welcome": "SciELO - Biblioteca Científica",
-    "intro-item1":"Biblioteca de artigos das melhores revistas científicas do Brasil e países da Rede SciELO",
-    "intro-item2":"A biblioteca SciELO (Scientific Electronic Library Online) publica semanalmente mais de mil novos artigos das melhores revistas científicas do Brasil e demais países ibero-americanos e da África do Sul",
-    "intro-item3":"Esses artigos comunicam resultados de pesquisas em ciências agrárias, biológicas, engenharias, exatas e da terra, humanas, literatura-letras-e-artes, saúde e sociais aplicadas",
-    "intro-item4":"No todo, a biblioteca contém pouco mais de mil revistas e sobre 600 mil artigos",
+    "intro-item1":"Esse aplicativo apresenta os últimos artigos publicados pelos periódicos SciELO e permite também navegar retroativamente assim como efetuar buscas.",
+    "intro-item2":"É possível ver tudo o que é publicado ou filtrar artigos por áreas temáticas e/ou por um ou mais periódicos específicos.",
+    "intro-item3":"Utilize a opção configurações do menu para definir ou redefinir a área temática e/ou o periódico ou conjunto de periódicos de seu interesse.",
     
     "error-500":"Ocorreu algum erro na aplicação. Por favor tente novamente mais tarde.",
     "error-login":"Não foi possivel realizar a autenticação. Por favor verifique a conexão com a internet e tente novamente.",
