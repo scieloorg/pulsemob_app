@@ -126,6 +126,7 @@
 
         document.addEventListener("backbutton", Navigator.backEvent, true);
         document.addEventListener("searchbutton", App.search, true);
+        document.addEventListener("menubutton", ContextMenu.toggleMenu, true);
 
         //listener end transition
         Transition.addEventListeners();
