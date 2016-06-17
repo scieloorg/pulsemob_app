@@ -55,6 +55,24 @@ Para compatibilidade de todos os plugins, a configuração a baixo deve ser inse
   configurations {    all\*.exclude group: 'com.android.support', module: 'support-v4'}
 ```
 
+Também dever incluido o valor a baixo no grupo android -> defaultConfig
+
+```
+  applicationId "br.com.scielo"
+```
+
+Por exemplo:
+
+```
+	android {
+	...
+	    defaultConfig {
+	        applicationId "br.com.scielo"
+	        ...
+	    }
+	}
+```
+
 # Altrando Endereço dos Serviços
 
 Para alterar o endereço dos serviços utilizados pelo aplicativo, as seguintes variaveis no arquivo /js/SciELO.js devem ser alteradas:
