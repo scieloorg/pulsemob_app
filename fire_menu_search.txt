@@ -1,0 +1,58 @@
+https://issues.apache.org/jira/browse/CB-8921
+
+in platform_www/cordova.js in the bootstrap function (around line 1532) change this line:
+
+	cordova.addDocumentEventHandler('menubutton');
+	cordova.addDocumentEventHandler('searchbutton');
+
+to this:
+
+	var menuButtonChannel = cordova.addDocumentEventHandler('menubutton');
+	menuButtonChannel.onHasSubscribersChange = function() {
+	  exec(null, null, APP_PLUGIN_NAME, "overrideButton", ['menubutton', this.numHandlers == 1]);
+	};
+
+	var searchButtonChannel = cordova.addDocumentEventHandler('searchbutton');
+	searchButtonChannel.onHasSubscribersChange = function() {
+	  exec(null, null, APP_PLUGIN_NAME, "overrideButton", ['searchbutton', this.numHandlers == 1]);
+	};
+
+This will trigger the frameworks overrideButton method as soon as an event handler is added to "menubutton" and "searchbutton".
+Then change the overrideButton method in CordovaLib/src/org/apache/cordova/CoreAndroid.java line 243 make the method look like this (add the last two else-if clause):
+
+    public void overrideButton(String button, boolean override) {
+        LOG.i("App", "WARNING: Volume Button Default Behavior will be overridden.  The volume event will be fired!");
+        if (button.equals("volumeup")) {
+            webView.setButtonPlumbedToJs(KeyEvent.KEYCODE_VOLUME_UP, override);
+        }
+        else if (button.equals("volumedown")) {
+            webView.setButtonPlumbedToJs(KeyEvent.KEYCODE_VOLUME_DOWN, override);
+        }
+        else if (button.equals("searchbutton")) {
+            webView.setButtonPlumbedToJs(KeyEvent.KEYCODE_SEARCH, override);
+        }
+        else if (button.equals("menubutton")) {
+            webView.setButtonPlumbedToJs(KeyEvent.KEYCODE_MENU, override);
+        }
+    }
+
+Finally in CordovaLib/src/org/apache/cordova/CordovaWebViewImpl.java line 357 (setButtonPlumbedToJs) add a case statement after the entry like this:
+
+public void setButtonPlumbedToJs(int keyCode, boolean override) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+            case KeyEvent.KEYCODE_VOLUME_UP:
+            case KeyEvent.KEYCODE_BACK:
+            case KeyEvent.KEYCODE_MENU:
+            case KeyEvent.KEYCODE_SEARCH:
+                // TODO: Why are search and menu buttons handled separately?
+                if (override) {
+                    boundKeyCodes.add(keyCode);
+                } else {
+                    boundKeyCodes.remove(keyCode);
+                }
+                return;
+            default:
+                throw new IllegalArgumentException("Unsupported keycode: " + keyCode);
+        }
+    }
