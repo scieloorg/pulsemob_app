@@ -123,7 +123,7 @@ AbstractController.favorite = function () {
 };
 
 AbstractController.share = function () {
-    var domain = AbstractController.articleData.imgUrl.split("/")[2];
+    var domain = AbstractController.articleData.domain;
     var pid = AbstractController.articleData.id.substring(0, AbstractController.articleData.id.length - 3);
 
     window.plugins.socialsharing.share(AbstractController.articleData.title + " -", "SciELO Mobile", null, "http://" + domain + "/scielo.php?script=sci_arttext&pid=" + pid + "&lng=" + App.locale + "&nrm=iso");
@@ -133,7 +133,7 @@ AbstractController.share = function () {
 };
 
 AbstractController.openWebArticle = function () {
-    var domain = AbstractController.articleData.imgUrl.split("/")[2];
+    var domain = AbstractController.articleData.domain;
     var pid = AbstractController.articleData.id.substring(0, AbstractController.articleData.id.length - 3);
 
     App.openLink("http://" + domain + "/scielo.php?script=sci_arttext&pid=" + pid + "&lng=" + App.locale + "&nrm=iso");

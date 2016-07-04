@@ -34,7 +34,7 @@ ArticleUtils.updateContent = function (el, data) {
         
         var imagePath = (data["image_upload_path"]) ? SciELO.imageBaseURL+data["image_upload_path"] : "http://"+domain+"/img/revistas/"+magazineAcronym+"/glogo.gif";
         
-        var html = '<div class="article-link" data-articleid="'+data.id+'" data-abstract="'+btoa(unescape(encodeURIComponent(abstract)))+'" data-author="'+btoa(unescape(encodeURIComponent(data.first_author)))+'" data-keywords="'+btoa(unescape(encodeURIComponent(keywords)))+'" data-magazineid="'+btoa(unescape(encodeURIComponent(data.journal_id)))+'">'+
+        var html = '<div class="article-link" data-domain="'+domain+'" data-articleid="'+data.id+'" data-abstract="'+btoa(unescape(encodeURIComponent(abstract)))+'" data-author="'+btoa(unescape(encodeURIComponent(data.first_author)))+'" data-keywords="'+btoa(unescape(encodeURIComponent(keywords)))+'" data-magazineid="'+btoa(unescape(encodeURIComponent(data.journal_id)))+'">'+
                         '<div class="article-principal">' +
                             '<img src="'+imagePath+'" />' +
                             '<div class="article-name">' +
@@ -67,6 +67,7 @@ ArticleUtils.openArticle = function () {
     }
     
     var articleData = {};
+    articleData.domain = $(this).data("domain");
     articleData.id = $(this).data("articleid");
     articleData.abstract = decodeURIComponent(escape(atob($(this).data("abstract"))));
     articleData.author = decodeURIComponent(escape(atob($(this).data("author"))));
