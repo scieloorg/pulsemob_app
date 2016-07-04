@@ -44,6 +44,7 @@ cordova -d plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-glo
 cordova -d plugin add cordova-plugin-x-socialsharing 
 cordova -d plugin add https://github.com/marcellus-sb/ionic-plugins-keyboard.git 
 cordova -d plugin add https://github.com/marcellus-sb/phonegap-plugin-loading-spinner.git 
+cordova -d plugin add https://github.com/apache/cordova-plugin-whitelist
 cordova -d plugin add https://github.com/danwilson/google-analytics-plugin.git |
 ```
 

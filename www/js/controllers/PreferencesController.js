@@ -38,7 +38,7 @@ PreferencesController.changeLanguage = function(){
     $("#language-radio-"+language).attr("src","img/preferences/radio_checked.png");
     
     App.setLocale(language);
-    App.initCategoryMenu();
+    //App.initCategoryMenu();
     PageLoad.loadLocalizationPage(App.currentController, Navigator.currentPage);
     PreferencesController.setFeedVersion();
     

@@ -3,9 +3,9 @@ var SciELO = function(){};
 SciELO.sessionCache = new Array();
 
 //SciELO.serverURL = "http://192.168.0.27:8000/";
-SciELO.solrURL = "http://infobase.cloudns.org:8001/";
-SciELO.imageBaseURL = "http://infobase.cloudns.org:8001/";
-SciELO.serverURL = "http://infobase.cloudns.org:8001/webservices/mobile/";
+SciELO.solrURL = "http://webservices.pulsemob.scielo.org/";
+SciELO.imageBaseURL = "http://webservices.pulsemob.scielo.org/";
+SciELO.serverURL = "http://webservices.pulsemob.scielo.org/webservices/mobile/";
 //SciELO.serverURL = "http://192.168.0.27:8000/";
 
 
