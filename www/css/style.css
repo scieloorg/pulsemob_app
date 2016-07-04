@@ -622,7 +622,7 @@ textarea:focus {
     position: relative;
     height: 200px;
     overflow: hidden;
-    /*background-size: 100%;*/
+    background-size: 90% auto !important;
 }
 
 .abstract-desc-container{
