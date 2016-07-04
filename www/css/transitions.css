@@ -34,3 +34,7 @@ menu {
     -webkit-transform: translateY(0);
     
 }
+
+#context-menu.context-menu-show{
+    top: 40px;
+}

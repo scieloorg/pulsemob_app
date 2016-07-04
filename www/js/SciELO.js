@@ -2,9 +2,12 @@ var SciELO = function(){};
 
 SciELO.sessionCache = new Array();
 
-SciELO.solrURL = "http://webservices.backoffice.scielo.org/";
-SciELO.imageBaseURL = "http://webservices.backoffice.scielo.org/";
-SciELO.serverURL = "http://webservices.backoffice.scielo.org/webservices/mobile/";
+//SciELO.serverURL = "http://192.168.0.27:8000/";
+SciELO.solrURL = "http://webservices.pulsemob.scielo.org/";
+SciELO.imageBaseURL = "http://webservices.pulsemob.scielo.org/";
+SciELO.serverURL = "http://webservices.pulsemob.scielo.org/webservices/mobile/";
+//SciELO.serverURL = "http://192.168.0.27:8000/";
+
 
 SciELO.loginUser = function(userInfo){
     return SciELO.callWebServiceFunctionPOST("login",userInfo);
