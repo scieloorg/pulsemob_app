@@ -53,7 +53,7 @@ O script deve ser executado para criar os projetos Android e iOS com os devidos 
 Para compatibilidade de todos os plugins, a configuração a baixo deve ser inserida no arquivo "platforms/android/build.gradle".
 
 ```
-  configurations {    all\*.exclude group: 'com.android.support', module: 'support-v4'}
+  configurations {    all*.exclude group: 'com.android.support', module: 'support-v4'}
 ```
 
 Também dever incluido o valor a baixo no grupo android -> defaultConfig
