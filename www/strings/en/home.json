@@ -4,7 +4,7 @@
     "config": "Settings",
     "favorite": "Favorites",
     "remove": "Dismiss",
-    "no-feeds":"You do not have any list of configured papers.",
+    "no-feeds":"You need to define a list of journals to start.",
     "start-now":"Start now!",
     "back-to":"Go back to",
     "my-feed":"My Paper List",
