@@ -4,7 +4,7 @@
     "config": "Ajustes",
     "favorite": "Favoritos",
     "remove": "Dispensar",
-    "no-feeds":"Usted no tiene ninguna lista de periódicos configurados.",
+    "no-feeds":"Usted necesita definir la lista de periódicos para empezar.",
     "start-now":"¡Empezar ahora!",
     "back-to":"Volver a",
     "my-feed":"Mi Lista de Periódicos",
