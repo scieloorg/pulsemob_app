@@ -57,11 +57,11 @@
                 LoginController.autoLogin();
             }else{
                 $.ajaxSetup({
-                    headers: {facebookid: "944948448856222", token: "CAALA0Tnry2IBAGxOHtNR8ORgKlaWTiXoZCSNJJYCZC5HZCIXx08a7Qnyl4RC4irPjebZARsqoSxjVwV8SvTgHiY9aTNZBtFzruIZAwu9fefYYSD0tWJ0g0w2Hyw1CVDCylRiCGz699rZAZCmC74sRaGlX5PWziGg1RZBQ25KI2SY6ntaHovZCaEOy92161JVgXDl6CoZCNGnRd4dotx0kAbFMKvwxbmqBS0Adt1SCmH0DHIjwZDZD"}
+                    headers: {facebookid: "446832978797059", token: "EAALA0Tnry2IBAKBsKMEGBZCq4ZAkRjnuAiMibocbNfZCOuUyvZCPOPzoAAmyIFjB4Fd8wckPWsYX2yO0o0MF9HiKsCjqE0zGujIEQZCV8yuO35MJ6f9yZC0MvMsE4pM8h2reZBm0zm7ZCTadRTwm03NOmxYnh7ENyRGUY0QSIMvbOdGjuYExWpKZCZCBZAcVlkNZCchWn5Uvk6BwxQZDZD"}
                 });
 
                 $.when(
-                    Service.login({name: "Marcellus S.B.", email: "marcellus.sb@gmail.com", language: App.locale, font_size: "S"})
+                    Service.login({name: "Infobase Apps", email: "infobaseapps@gmail.com", language: App.locale, font_size: "S"})
                 ).then(
                     function (data) {
                         // It worked
@@ -101,6 +101,7 @@
         
         if (typeof device !== 'undefined') {
             if (device.platform === "iOS") {
+                cordova.plugins.Keyboard.disableScroll(true);
                 App.$iosSystemBar.show();
                 var totalHeight = App.$content.height() - App.$iosSystemBar.height();
                 App.$content.height(totalHeight);
