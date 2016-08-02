@@ -394,6 +394,7 @@ textarea:focus {
 }
 .feed-footer.back-to-home{
     text-align: left;
+    padding-top: 10px;
 }
 .feed-footer div{
     display: inline-block;
@@ -558,6 +559,10 @@ textarea:focus {
     width: 100%;
     text-align: center;
     padding: 20px;
+}
+
+#category-scroller{
+    position: absolute;
 }
 /* </editor-fold> */
 
