@@ -394,7 +394,12 @@ textarea:focus {
 }
 .feed-footer.back-to-home{
     text-align: left;
-    padding-top: 10px;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    background-color: #EDECED;
+    width: 100%;
+    padding: 5px;
 }
 .feed-footer div{
     display: inline-block;

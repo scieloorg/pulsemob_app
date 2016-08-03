@@ -61,7 +61,6 @@ HomeController.cleanData = function(){
 HomeController.showHome = function () {
     
     HomeController.$feeds.html("");
-    var showAll = false;
     
     $.when(
         SciELO.home()
@@ -71,10 +70,9 @@ HomeController.showHome = function () {
                 HomeController.allFeeds = [App.currentUser.getFeed(HomeController.showAllMagazinesOfFeed)];
             }else{
                 HomeController.allFeeds = App.currentUser.getFeeds();
-                showAll = true;
             }
             
-            if(showAll){
+            if(HomeController.showAllMagazinesOfFeed === null){
                 for (var feedId in HomeController.allFeeds) {
                     var feed = HomeController.allFeeds[feedId];
                     var magazines = feed.magazines;
@@ -450,6 +448,7 @@ HomeController.magazineShare = function () {
 };
 
 HomeController.magazineRemove = function () {
+    
     var feedId = $(this).data("feed");
     var magazineId = $(this).data("magazine");
     var magazineFeedId = magazineId + "_" + feedId;
@@ -464,12 +463,26 @@ HomeController.magazineRemove = function () {
             $("#magazine-" + magazineFeedId).remove();
             App.refreshScroll(false);
         });
+        
+        if(HomeController.showAllMagazinesOfFeed !== null){            
+            feedId = HomeController.showAllMagazinesOfFeed;
+        }
 
         Service.saveFeed(feedId, [], [magazineId]);
         SciELO.homeCleanCache();
-        var index = HomeController.allFeeds[feedId].magazines.indexOf(magazineId);
-        HomeController.allFeeds[feedId].magazines.splice(index, 1);
-        HomeController.preAddMagazine(feedId);
+        
+        if(HomeController.showAllMagazinesOfFeed === null){
+            
+            var index = HomeController.allFeeds[feedId].magazines.indexOf(magazineId);
+            HomeController.allFeeds[feedId].magazines.splice(index, 1);
+            HomeController.preAddMagazine(feedId);
+        }else{
+            if(HomeController.allFeeds[0].magazines.length === 4){
+                HomeController.showAllMagazinesOfFeed = null;
+            }
+            ContextMenu.refreshAction();
+        }
+        
     }
 
     App.trackEvent('Revista', 'Dispensar', DataMapping.getMagazineName(magazineId));
