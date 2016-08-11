@@ -1,4 +1,6 @@
 {
+    "load-next-feed": "Cargar siguientes listas de periódicos",
+    "load-before-feed": "Cargar anterior listas de periódicos",
     "refresh": "Recargar",
     "share": "Compartir",
     "config": "Ajustes",

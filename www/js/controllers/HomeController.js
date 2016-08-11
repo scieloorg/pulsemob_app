@@ -5,6 +5,8 @@ HomeController.firstData = {};
 HomeController.scroll = {};
 HomeController.vScroll = {};
 HomeController.$feeds = null;
+HomeController.page = 1;
+HomeController.numberOfFeedsPage = 4;
 HomeController.searchText = null;
 HomeController.isFavoritePage = false;
 
@@ -52,6 +54,7 @@ HomeController.cleanData = function(){
     HomeController.firstData = {};
     HomeController.scroll = {};
     HomeController.vScroll = {};
+    HomeController.page = 1;
     HomeController.searchText = null;
     HomeController.isFavoritePage = false;
     HomeController.allFeeds = null;
@@ -73,47 +76,13 @@ HomeController.showHome = function () {
             }
             
             if(HomeController.showAllMagazinesOfFeed === null){
-                for (var feedId in HomeController.allFeeds) {
-                    var feed = HomeController.allFeeds[feedId];
-                    var magazines = feed.magazines;
-
-                    //TODO: incluir html por feed
-                    HomeController.addFeed(HomeController.$feeds, feedId, feed.feed_name, HomeController.showAllMagazinesOfFeed === null);
-
-                    var $magazinesContainer = $("#magazines-from-feed-"+feedId);
-
-                    var count = 0;
-                    for(var j in magazines){
-                        if(count > 2 && HomeController.showAllMagazinesOfFeed === null){
-                            // mostrar apenas as primeiras 3 revistas
-                            $("#feed-footer-"+feedId).show();
-                            break; 
-                        } 
-                        var magazineId = magazines[j];
-                        var magazineFeedId = magazineId+"_"+feedId;
-
-                        if(json[magazineId]){
-                            var magazineData = json[magazineId];
-
-                            if(magazineData.docs.length < 1) continue;
-
-                            HomeController.firstData[magazineFeedId] = magazineData.docs;
-
-                            var limitScroll = (magazineData.numFound > 1000) ? 1000 : magazineData.numFound;
-                            var cacheSize = magazineData.docs.length;
-                            var minElements = (magazineData.docs.length > 10) ? 10 : magazineData.docs.length;
-
-                            count++;
-                            HomeController.addMagazine($magazinesContainer,{id: magazineFeedId, magazineId: magazineId, feedId: feedId, name: DataMapping.getMagazineName(magazineId), minElements: minElements, limit: limitScroll, cacheSize: cacheSize});
-                        }else if(HomeController.showAllMagazinesOfFeed !== null){
-                            var html = HomeController.createMagazineHTML(magazineFeedId, feedId, magazineId, DataMapping.getMagazineName(magazineId), 1);
-                            $magazinesContainer.append(html);
-
-                            HomeController.reloadMagazine(magazineFeedId, magazineId);
-                        }
-                    }
-                }
+                
+                HomeController.addFeedsHome(json);
+                
             }else{
+                
+                $("#string-load-before-feed").hide();
+                $("#string-load-next-feed").hide();
                 
                 for (var feedId in HomeController.allFeeds) {
                     var feed = HomeController.allFeeds[feedId];
@@ -213,6 +182,104 @@ HomeController.showHome = function () {
     
 };
 
+HomeController.addFeedsHome = function(json){
+    
+    // go back one page if there is no more feed on there
+    var nummberOfFeeds = Object.keys(HomeController.allFeeds).length;
+    if( (HomeController.page-1)*HomeController.numberOfFeedsPage === (nummberOfFeeds) ){
+        HomeController.page--;
+    }
+    
+    var feeds = [];
+    var page = HomeController.page;
+    var count = 1;
+    for(var feedId in HomeController.allFeeds){        
+        if( ((((page-1)*HomeController.numberOfFeedsPage))<count) && (count<=(page*HomeController.numberOfFeedsPage)) ){
+            feeds.push(feedId);
+        }        
+        count++;
+    }
+
+    HomeController.addBeforeFeedOpt(HomeController.$feeds);
+
+    for (var i=0; i<feeds.length; i++) {
+        var feedId = feeds[i];  
+        var feed = HomeController.allFeeds[feedId];
+        var magazines = feed.magazines;
+
+        //TODO: incluir html por feed
+        
+        HomeController.addFeed(HomeController.$feeds, feedId, feed.feed_name, HomeController.showAllMagazinesOfFeed === null);
+
+        var $magazinesContainer = $("#magazines-from-feed-"+feedId);
+
+        var count = 0;
+        for(var j in magazines){
+            if(count > 2 && HomeController.showAllMagazinesOfFeed === null){
+                // mostrar apenas as primeiras 3 revistas
+                $("#feed-footer-"+feedId).show();
+                break; 
+            } 
+            var magazineId = magazines[j];
+            var magazineFeedId = magazineId+"_"+feedId;
+
+            if(json[magazineId]){
+                var magazineData = json[magazineId];
+
+                if(magazineData.docs.length < 1) continue;
+
+                HomeController.firstData[magazineFeedId] = magazineData.docs;
+
+                var limitScroll = (magazineData.numFound > 1000) ? 1000 : magazineData.numFound;
+                var cacheSize = magazineData.docs.length;
+                var minElements = (magazineData.docs.length > 10) ? 10 : magazineData.docs.length;
+
+                count++;
+                HomeController.addMagazine($magazinesContainer,{id: magazineFeedId, magazineId: magazineId, feedId: feedId, name: DataMapping.getMagazineName(magazineId), minElements: minElements, limit: limitScroll, cacheSize: cacheSize});
+            }else if(HomeController.showAllMagazinesOfFeed !== null){
+                var html = HomeController.createMagazineHTML(magazineFeedId, feedId, magazineId, DataMapping.getMagazineName(magazineId), 1);
+                $magazinesContainer.append(html);
+
+                HomeController.reloadMagazine(magazineFeedId, magazineId);
+            }
+        }
+    }
+    
+    HomeController.addNextFeedOpt(HomeController.$feeds);
+
+};
+
+HomeController.addBeforeFeedOpt = function($feedsContainer){
+    
+    if(HomeController.page>1){
+        $("#string-load-before-feed").show();
+    }else{
+        $("#string-load-before-feed").hide();
+    }
+};
+
+HomeController.pageBefore = function(){
+    HomeController.page--;
+    ContextMenu.refreshAction();
+};
+
+HomeController.addNextFeedOpt = function($feedsContainer){
+    
+    var nummberOfFeeds = Object.keys(HomeController.allFeeds).length;
+    var page = HomeController.page;
+    
+    if(page*HomeController.numberOfFeedsPage < nummberOfFeeds){
+        $("#string-load-next-feed").show();
+    }else{
+        $("#string-load-next-feed").hide();
+    }
+};
+
+HomeController.pageNext = function(){
+    HomeController.page++;
+    ContextMenu.refreshAction();
+};
+
 HomeController.addFeed = function($feedsContainer, feedId, feedName, isDefaultFooter){
     var html = '<div id="feed-'+feedId+'" class="feed">' +
                     '<table class="feed-header">' +
@@ -286,6 +353,9 @@ HomeController.initListeners = function () {
     
     HomeController.$feeds.on('tap', ".feed-footer", HomeController.showAllMagazines);
     HomeController.$feeds.on('tap', ".back-to-home", HomeController.showAllFeeds);
+    $(".page-content").on('tap', "#string-load-before-feed", HomeController.pageBefore);
+    $(".page-content").on('tap', "#string-load-next-feed", HomeController.pageNext);   
+
 };
 
 HomeController.toggleFeedMenu = function (event) {
@@ -323,20 +393,31 @@ HomeController.feedRemoveEvent = function () {
 };
 
 HomeController.feedRemove = function (feedId) {
-    $("#feed-" + feedId).fadeOut(800, function () {
-        $("#feed-" + feedId).remove();
-        if (HomeController.$feeds.html() === "") {
-            $("#no-feeds").show();
-        }
-        App.refreshScroll(false);
-    });
-
+    
+    var nummberOfFeeds = Object.keys(HomeController.allFeeds).length;
+    
+    // remove feed if inside a page to see all paper on it
+    if(HomeController.showAllMagazinesOfFeed !== null){
+        feedId = HomeController.showAllMagazinesOfFeed;
+        HomeController.showAllMagazinesOfFeed = null;
+    }else{ // if is main page
+        $("#feed-" + feedId).fadeOut(800, function () {
+            $("#feed-" + feedId).remove();
+            if ((HomeController.$feeds.html() === "") &&(nummberOfFeeds === 1)) {
+                $("#no-feeds").show();
+            }
+            App.refreshScroll(false);
+        });    
+    }
+    
     var feedName = App.currentUser.getFeedName(feedId);
 
     Service.deleteFeed(feedId);
     SciELO.homeCleanCache();
 
     App.trackEvent('Feed', 'Apagar', feedName);
+    
+    ContextMenu.refreshAction();
 };
 
 HomeController.showAllMagazines = function(){

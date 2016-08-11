@@ -1,4 +1,6 @@
 {
+    "load-next-feed": "Load next paper list",
+    "load-before-feed": "Load previous paper list",
     "refresh": "Refresh",
     "share": "Share",
     "config": "Settings",
