@@ -605,11 +605,6 @@ textarea:focus {
 #close-btn img{
     width: 50px;
 }
-#scielo-video{
-    width: 70%;
-    max-width: 350px;
-    margin: auto auto;
-}
 .login-icon.intro{
     padding-top: 20px;
     padding-bottom: 10px;
