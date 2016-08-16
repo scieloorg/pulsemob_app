@@ -187,7 +187,7 @@ HomeController.addFeedsHome = function(json){
     // go back one page if there is no more feed on there
     var nummberOfFeeds = Object.keys(HomeController.allFeeds).length;
     if( (HomeController.page-1)*HomeController.numberOfFeedsPage === (nummberOfFeeds) ){
-        HomeController.page--;
+        HomeController.page--;       
     }
     
     var feeds = [];
@@ -259,8 +259,10 @@ HomeController.addBeforeFeedOpt = function($feedsContainer){
 };
 
 HomeController.pageBefore = function(){
-    HomeController.page--;
-    ContextMenu.refreshAction();
+    if(HomeController.page>1){
+        HomeController.page--;
+        ContextMenu.refreshAction();
+    }
 };
 
 HomeController.addNextFeedOpt = function($feedsContainer){
@@ -276,8 +278,11 @@ HomeController.addNextFeedOpt = function($feedsContainer){
 };
 
 HomeController.pageNext = function(){
-    HomeController.page++;
-    ContextMenu.refreshAction();
+    var nummberOfFeeds = Object.keys(HomeController.allFeeds).length;
+    if(HomeController.page*HomeController.numberOfFeedsPage < nummberOfFeeds){
+        HomeController.page++;
+        ContextMenu.refreshAction();
+    }    
 };
 
 HomeController.addFeed = function($feedsContainer, feedId, feedName, isDefaultFooter){
