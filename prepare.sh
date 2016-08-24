@@ -18,8 +18,6 @@ cordova -d plugin add https://github.com/marcellus-sb/phonegap-facebook-plugin.g
 
 cordova -d plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
 
-cordova -d plugin add https://github.com/Glitchbone/CordovaYoutubeVideoPlayer.git
-
 cordova -d plugin add https://github.com/apache/cordova-plugin-inappbrowser.git
 
 cordova -d plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-globalization.git

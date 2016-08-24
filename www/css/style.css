@@ -352,7 +352,7 @@ textarea:focus {
     padding: 10px;
     border: 2px #999 solid;
     border-radius: 5px;
-}
+}feed-opt
 #no-feeds .botoes-app div:first-child{
     font-size: 18px;
     color: #777;
@@ -361,7 +361,18 @@ textarea:focus {
 #no-feeds .botoes-app div:last-child img{
     width: 30px;
 }
-
+.feed-opt{
+    background-color: #d82727;
+    color: #000;
+    font-family: TerminalDosis-Bold;
+    border: 2px #000 solid;
+    margin: 15px;
+    padding: 5px 0 5px 20px;
+    display: none;
+    background-color: #C2C2C2;
+    font-family: TerminalDosis-Bold;
+    border-radius: 5px 60px;    
+}
 /* </editor-fold> */
 
 /* <editor-fold desc="ARTICLES/FEEDS COMMONS STYLES"> */
@@ -390,10 +401,16 @@ textarea:focus {
     margin-bottom: 3px;
 }
 .feed-footer{
-    min-height: 40px;
+    min-height: 50px;
 }
 .feed-footer.back-to-home{
     text-align: left;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    background-color: #EDECED;
+    width: 100%;
+    padding: 5px;
 }
 .feed-footer div{
     display: inline-block;
@@ -559,6 +576,10 @@ textarea:focus {
     text-align: center;
     padding: 20px;
 }
+
+#category-scroller{
+    position: absolute;
+}
 /* </editor-fold> */
 
 /* <editor-fold desc="INTRODUCTION STYLES"> */
@@ -583,11 +604,6 @@ textarea:focus {
 }
 #close-btn img{
     width: 50px;
-}
-#scielo-video{
-    width: 70%;
-    max-width: 350px;
-    margin: auto auto;
 }
 .login-icon.intro{
     padding-top: 20px;

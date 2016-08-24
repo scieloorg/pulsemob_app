@@ -13,7 +13,6 @@ Introduction.show = function(){
 
 Introduction.start = function(){
     $("#intro-container").on('tap', "#close-btn", Introduction.closeIntro);
-    $("#intro-container").on('tap', "#scielo-video", Introduction.showVideo);
     
     var height = App.$contentWrapper.height() * 0.9;
     $("#intro-wrapper").css("height",height+"px");
@@ -62,10 +61,6 @@ Introduction.carouselNormalization = function() {
                     normalizeHeights(); //run it again 
             });
     }
-};
-
-Introduction.showVideo = function () {
-    YoutubeVideoPlayer.openVideo('yY0t4JeXz80');
 };
 
 Introduction.closeIntro = function () {
