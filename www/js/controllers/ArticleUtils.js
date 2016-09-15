@@ -44,7 +44,7 @@ ArticleUtils.updateContent = function (el, data) {
                         '<div class="article-legend">' +
                             '<div class="article-magazine"> '+magazineAbbreviated+' </div>' +
                             '<div class="article-date"> '+
-                                data.publication_date.formatToDateSciELO() +
+                                data.publication_date_str +
                             '</div>';
                         
                             if(App.currentUser.isFavoriteArticle(data.id)) html += '<img class="article-fav" src="img/abstract/fav_selected.png"/>';
