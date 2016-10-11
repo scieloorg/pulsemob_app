@@ -691,6 +691,10 @@ textarea:focus {
     font-family: TerminalDosis-Bold;
     padding: 10px 20px;
 }
+.article-info{
+    text-align: left;
+    padding: 10px 20px;
+}
 /* </editor-fold> */
 
 /* <editor-fold desc="PREFERENCES STYLES"> */
