@@ -30,7 +30,7 @@
             App.history = new Array();
             
             try{
-                analytics.startTrackerWithId('UA-59751520-1');
+                analytics.startTrackerWithId('UA-79736855-1');
             }catch(err){
                 if(!App.DEBUG_BROWSER) console.log(err);
             }
