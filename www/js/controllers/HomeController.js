@@ -9,6 +9,7 @@ HomeController.page = 1;
 HomeController.numberOfFeedsPage = 4;
 HomeController.searchText = null;
 HomeController.isFavoritePage = false;
+HomeController.feedPosition = '';
 
 HomeController.showAllMagazinesOfFeed = null;
 HomeController.allFeeds = null;
@@ -61,6 +62,17 @@ HomeController.cleanData = function(){
 };
 
 
+HomeController.goto = function () {
+    setTimeout(function () {
+        App.scrollApp.scrollToElement("#feed-"+HomeController.feedPosition);     
+        if(App.scrollApp.y === 0 && HomeController.feedPosition !== -1){
+          HomeController.goto();  
+        }else{
+            HomeController.feedPosition = -1;
+        }
+    }, 100);
+};
+
 HomeController.showHome = function () {
     
     HomeController.$feeds.html("");
@@ -78,6 +90,10 @@ HomeController.showHome = function () {
             if(HomeController.showAllMagazinesOfFeed === null){
                 
                 HomeController.addFeedsHome(json);
+                
+                if($("#feed-"+HomeController.feedPosition)[0]){                       
+                    HomeController.goto();
+                }
                 
             }else{
                 
@@ -290,7 +306,7 @@ HomeController.addFeed = function($feedsContainer, feedId, feedName, isDefaultFo
                     '<table class="feed-header">' +
                         '<tr>';
                 
-    if(!isDefaultFooter) html += '<td class="back-to-home"><img alt="" src="img/home/back-arrow-white.png"/></td>';
+    if(!isDefaultFooter) html += '<td class="back-to-home-top"><img alt="" src="img/home/back-arrow-white.png"/></td>';
     
     html +=                 '<td>'+feedName+'</td>' +
                             '<td class="feed-menu-btn" data-feed="'+feedId+'"><img alt="" src="img/home/menu_icon.png"/></td>' +
@@ -357,7 +373,7 @@ HomeController.initListeners = function () {
     HomeController.$feeds.on('tap', ".remove-magazine", HomeController.magazineRemove);
     
     HomeController.$feeds.on('tap', ".feed-footer", HomeController.showAllMagazines);
-    HomeController.$feeds.on('tap', ".back-to-home", HomeController.showAllFeeds);
+    HomeController.$feeds.on('tap', ".back-to-home-top", HomeController.showAllFeeds);
     $(".page-content").on('tap', "#string-load-before-feed", HomeController.pageBefore);
     $(".page-content").on('tap', "#string-load-next-feed", HomeController.pageNext);   
 
@@ -436,6 +452,7 @@ HomeController.showAllMagazines = function(){
     }else{ // show all feed
         
         var feedId = $(this).data("feed");    
+        HomeController.feedPosition = feedId;
         HomeController.showAllMagazinesOfFeed = feedId;
         HomeController.$feeds.html("");
         HomeController.showHome();
