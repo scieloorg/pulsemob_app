@@ -580,6 +580,18 @@ textarea:focus {
 #category-scroller{
     position: absolute;
 }
+@media (min-width: 400px) { 
+    .magazine-scroller ul{
+        height: 240px;
+    }
+    .article{        
+        width: 180px;
+        height: 240px;        
+    }
+    .article-principal{
+        height: 200px;
+    }
+}
 /* </editor-fold> */
 
 /* <editor-fold desc="INTRODUCTION STYLES"> */
