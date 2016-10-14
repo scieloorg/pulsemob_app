@@ -386,10 +386,10 @@ textarea:focus {
 .feed-header td:first-child{
     padding-left: 10px;
 }
-.feed-header .back-to-home{
+.feed-header .back-to-home-top{
     width: 30px;
 }
-.feed-header .back-to-home img{
+.feed-header .back-to-home-top img{
     height: 24px;
 }
 .feed-menu-btn{
@@ -579,6 +579,18 @@ textarea:focus {
 
 #category-scroller{
     position: absolute;
+}
+@media (min-width: 400px) { 
+    .magazine-scroller ul{
+        height: 240px;
+    }
+    .article{        
+        width: 180px;
+        height: 240px;        
+    }
+    .article-principal{
+        height: 200px;
+    }
 }
 /* </editor-fold> */
 
