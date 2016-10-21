@@ -33,3 +33,5 @@ cordova -d plugin add https://github.com/apache/cordova-plugin-whitelist
 
 # Remover a biblioteca duplicada (instalada pelo plugin do google plus e facebook connect)
 # cordova -d plugin rm android.support.v4
+
+echo "add on build.gradle:    configurations {    all*.exclude group: 'com.android.support', module: 'support-v4'}"
