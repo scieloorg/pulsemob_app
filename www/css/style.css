@@ -766,11 +766,25 @@ textarea:focus {
     vertical-align: bottom;
 }
 
+.feed-config-collection-row{
+    height: 40px;
+    vertical-align: bottom;
+}
+
 .magazine-checkbox, #select-all {
     width: 35px;
     vertical-align: middle;
 }
 .magazine-checkbox img, #select-all img{
+    width: 35px;
+    padding: 10px 5px;
+}
+
+.collection-checkbox, #select-all {
+    width: 35px;
+    vertical-align: middle;
+}
+.collection-checkbox img, #select-all img{
     width: 35px;
     padding: 10px 5px;
 }
@@ -805,6 +819,11 @@ textarea:focus {
 .settings-desc{
     font-size: 18px;
     padding: 10px 5px 5px 5px;
+}
+
+#collection-section .collection-checkbox, #collection-section #select-all {
+    width: 25px;
+    margin-right: 5px;
 }
 
 .settings-desc-text{
