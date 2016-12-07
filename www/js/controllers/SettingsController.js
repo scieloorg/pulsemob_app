@@ -49,7 +49,7 @@ SettingsController.initCollectionsSection = function () {
         $collectionSection.append(
             '<div  class="feed-config-collection-row col-xs-6">' +                
                 '<img class="collection-checkbox" data-collection="'+value[1]+'" id="cb-img-'+value[1]+'" src="'+imgString+'">' +
-                '<span class="menu-text">'+value[0]+'</span>' +
+                '<span class="menu-text">'+JSON.parse('"' + value[0].replace(/\"/g, '\\"') + '"')+'</span>' +
             '</div>'
         );
     });   
