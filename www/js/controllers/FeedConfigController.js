@@ -154,13 +154,17 @@ FeedConfigController.startPage = function(){
 
         for(var i in allMagazinesIds){
             var magazineId = allMagazinesIds[i];
+            
+            if( App.collectionsSelected.indexOf( DataMapping.getMagazineDomain(magazineId)) > -1 ){
+            
+                var html = '<tr class="feed-config-magazine-row">' +
+                                '<td class="magazine-checkbox" data-magazine="'+magazineId+'"><img id="cb-img-'+magazineId+'" src="img/category/checked.png"/></td>' +
+                                '<td class="menu-text">'+DataMapping.getMagazineName(magazineId)+'</td>' +
+                            '</tr>';
 
-            var html = '<tr class="feed-config-magazine-row">' +
-                            '<td class="magazine-checkbox" data-magazine="'+magazineId+'"><img id="cb-img-'+magazineId+'" src="img/category/checked.png"/></td>' +
-                            '<td class="menu-text">'+DataMapping.getMagazineName(magazineId)+'</td>' +
-                        '</tr>';
-
-            $magazinesTable.append(html);
+                $magazinesTable.append(html);
+                
+            }
         }
 
         FeedConfigController.magazinesSelected = allMagazinesIds;

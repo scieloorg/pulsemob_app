@@ -59,6 +59,10 @@ SciELO.listFavorites = function(){
     return SciELO.callWebServiceFunction("favorite/read");
 };
 
+SciELO.listCollections = function(){
+    return SciELO.callWebServiceFunction("collection");
+};
+
 SciELO.unfavorite = function(idArticle){
     return SciELO.callWebServiceFunctionPOST("favorite/delete", {article_id: idArticle});
 };
