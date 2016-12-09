@@ -8,7 +8,7 @@ SettingsController.prototype = {
         App.showBackButton();
         App.trackView("Settings");
         
-        SettingsController.initCollectionsSection();
+        SettingsController.listCollections();
         SettingsController.initAlphabeticalOrderFilter();
         SettingsController.initCategorySection();
         SettingsController.initFeedsSection();
@@ -19,6 +19,32 @@ SettingsController.prototype = {
         PageLoad.ajxHandle = null;
     }
 };
+
+SettingsController.listCollections = function(){
+        
+        $.when(
+            Service.listCollections()
+        ).then(
+            function (json) {
+                App.collection = json;
+                console.log(JSON.stringify(App.collection));
+                $.each( App.collection, function( key, value ) {
+                    App.collectionsSelected.push(value[1]);
+                }); 
+                SettingsController.initCollectionsSection();
+            },
+            function (err) {               
+//                App.trackException("Error Loading Collections: "+JSON.stringify(err));
+//                App.collection = collection;
+//            
+//                $.each( App.collection, function( key, value ) {
+//                    App.collectionsSelected.push(value[1]);
+//                });            
+                SettingsController.initCollectionsSection();
+                return;                
+            }
+        );
+    };
 
 SettingsController.getCollectionDomain = function (key){
     return App.collection[key][1];

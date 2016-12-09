@@ -40,15 +40,11 @@
             App.definitions();
             App.isInitialized = true;
             DataMapping.loadMap();
-            ContextMenu.init();
+            ContextMenu.init();     
             
-            App.collection = collection;
+            App.collection = {};
             App.collectionsRemoved = [];
             App.collectionsSelected = [];
-            
-            $.each( App.collection, function( key, value ) {
-                App.collectionsSelected.push(value[1]);
-            }); 
 
             $.ajaxSetup({
                 statusCode: {
@@ -420,6 +416,6 @@
         }else{
             console.log(errorDesc);
         }
-    };
+    };    
 
 })(window);
