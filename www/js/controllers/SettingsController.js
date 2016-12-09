@@ -1,24 +1,27 @@
 var SettingsController = function () {
 };
 
-
-
 SettingsController.prototype = {
     initialize: function () {
         App.showBackButton();
         App.trackView("Settings");
         
         SettingsController.listCollections();
-        SettingsController.initAlphabeticalOrderFilter();
-        SettingsController.initCategorySection();
-        SettingsController.initFeedsSection();
-        SettingsController.initListeners();
+        
     },
     destroy: function () {
         App.hideBackButton();
         PageLoad.ajxHandle = null;
     }
 };
+
+SettingsController.initAll = function(){
+    SettingsController.initCollectionsSection()
+    SettingsController.initAlphabeticalOrderFilter();
+    SettingsController.initCategorySection();
+    SettingsController.initFeedsSection();
+    SettingsController.initListeners();
+}
 
 SettingsController.listCollections = function(){
         
@@ -27,11 +30,10 @@ SettingsController.listCollections = function(){
         ).then(
             function (json) {
                 App.collection = json;
-                console.log(JSON.stringify(App.collection));
                 $.each( App.collection, function( key, value ) {
                     App.collectionsSelected.push(value[1]);
                 }); 
-                SettingsController.initCollectionsSection();
+                SettingsController.initAll();
             },
             function (err) {               
 //                App.trackException("Error Loading Collections: "+JSON.stringify(err));
@@ -40,7 +42,7 @@ SettingsController.listCollections = function(){
 //                $.each( App.collection, function( key, value ) {
 //                    App.collectionsSelected.push(value[1]);
 //                });            
-                SettingsController.initCollectionsSection();
+                SettingsController.initAll();
                 return;                
             }
         );
