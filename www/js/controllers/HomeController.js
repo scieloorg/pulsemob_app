@@ -91,8 +91,10 @@ HomeController.showHome = function () {
                 
                 HomeController.addFeedsHome(json);
                 
-                if($("#feed-"+HomeController.feedPosition)[0]){                       
-                    HomeController.goto();
+                if($("#feed-"+HomeController.feedPosition)[0]){  
+                    if($(".feed")[0].id !== 'feed-'+HomeController.feedPosition){
+                        HomeController.goto();
+                    }
                 }
                 
             }else{
