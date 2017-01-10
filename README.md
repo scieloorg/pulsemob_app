@@ -115,3 +115,28 @@ cordova build ios
 ```
 
 Em seguida, o projeto para Xcode é gerado na pasta platforms/ios. Para sumbter uma versão para o itunes deve seguir os procedimentos padrões.
+
+# Habilitando o login do Google
+
+Para habilitar o login tem que ser criada duas credencias em [oauthclient](https://console.developers.google.com/apis/credentials/oauthclient)
+
+A primeira é a credencial de **Aplicativo da Web** usando as configurações:
+
+- Origens JavaScript autorizadas
+    * http://localhost:8080
+    * http://localhost:3000
+
+- URIs de redirecionamento autorizados
+    * http://localhost:8080
+    * http://localhost
+
+No final desta configuração será gerada uma Id do cliente. Essa Id tem que ser usada no *prepare.sh*, mas de forma invertida. E também ela tem que ser inserida no arquivo **LoginController.js** nos campos: *LoginController.IOS_API_KEY* e  *webClientId*
+
+A segunda credencial é a de **Android** usando a configuração:
+
+- Nome do pacote
+    * br.com.scielo
+    
+Também tem que informar o SHA-1, na pópia página Credenciais informa como obter. Para informações mais detalhadas acesse [app-signing](https://developer.android.com/studio/publish/app-signing.html)
+
+  
