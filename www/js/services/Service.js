@@ -89,6 +89,22 @@ Service.unfavoriteArticle = function (idArticle) {
     return deferred.promise();
 };
 
+Service.listCollections = function () {
+    var deferred = $.Deferred();
+    $.when(
+        SciELO.listCollections()
+    ).then(
+        function (response) {
+            deferred.resolve(response);
+        },
+        function (err) {
+            App.trackException("Error list collections: "+JSON.stringify(err));
+            deferred.reject(err);
+        }
+    );
+    return deferred.promise();
+};
+
 Service.listFavoriteArticles = function () {
     var deferred = $.Deferred();
     $.when(

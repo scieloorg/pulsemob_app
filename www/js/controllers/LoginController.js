@@ -4,7 +4,7 @@ var LoginController = function () {
 LoginController.USER_TYPE_KEY = "SCIELO_USER_TYPE";
 LoginController.FACEBOOK = "FACEBOOK";
 LoginController.GOOGLE = "GOOGLE";
-LoginController.IOS_API_KEY = "903038984767-jmg2ov4lvfc5p8k214smfp3bkjv4gcm8.apps.googleusercontent.com";
+LoginController.IOS_API_KEY = "903038984767-bl1tvssqabh2pllnrralgessk6qjia2i.apps.googleusercontent.com";
 LoginController.prototype = {
     initialize: function () {
         LoginController.initListeners();
@@ -67,7 +67,7 @@ LoginController.loginFacebook = function () {
 LoginController.loginGoogle = function () {
     window.plugins.googleplus.login(
             {
-                webClientId: '903038984767-5o20b4jvoks84fqmn0qoo51a97n15pl3.apps.googleusercontent.com'
+                webClientId: '903038984767-bl1tvssqabh2pllnrralgessk6qjia2i.apps.googleusercontent.com'
             },
     function (obj) {
         var google_id = obj.userId;

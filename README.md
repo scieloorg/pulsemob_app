@@ -115,3 +115,37 @@ cordova build ios
 ```
 
 Em seguida, o projeto para Xcode é gerado na pasta platforms/ios. Para sumbter uma versão para o itunes deve seguir os procedimentos padrões.
+
+# Habilitando o login do Google
+
+Para habilitar o login tem que ser criada credencias em [oauthclient](https://console.developers.google.com/apis/credentials/oauthclient)
+
+A primeira é a credencial de **Aplicativo da Web** usando as configurações:
+
+- Origens JavaScript autorizadas
+    * http://localhost:8080
+    * http://localhost:3000
+
+- URIs de redirecionamento autorizados
+    * http://localhost:8080
+    * http://localhost
+
+No final desta configuração será gerada uma Id do cliente. Ela tem que ser inserida no arquivo **LoginController.js** nos campos: *LoginController.IOS_API_KEY* e  *webClientId*.
+
+**- Versão para Android -**
+
+A variável Id do cliente gerada anteriormente, na credencial de **Aplicativo da Web**, tem que ser usada no campo REVERSED_CLIENT_ID no *prepare.sh*(sem aspas), mas de forma invertida.
+
+Tem que se criar uma credencial para **Android** usando a configuração:
+
+- Nome do pacote
+    * nome do pacote presente no arquivo config.xml
+    
+Também tem que informar o SHA-1, na pópia página Credenciais informa como obter. Para informações mais detalhadas acesse [app-signing](https://developer.android.com/studio/publish/app-signing.html).
+
+ **- Versão para IOS -**
+ 
+ Acesse o [link](https://developers.google.com/mobile/add?platform=ios&cntapi=signin) para criar a credencial do IOS, escolha o nome do projedo da SciELO e depois informe, como IOS Bundle ID, o nome do pacote presente no arquivo config.xml. 
+ 
+ Após isso, habilite o Google  sign-in e gere o arquivo de configuração, será apresentada uma opção de download do arquivo GoogleService-Info.plist. Neste arquivo existe a variável REVERSED_CLIENT_ID, use ela no prepare.sh(sem aspas) no campo REVERSED_CLIENT_ID
+ 
