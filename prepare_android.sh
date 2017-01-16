@@ -1,5 +1,4 @@
 #!/bin/bash
-cordova platform rm ios
 cordova platform rm android
 
 cd plugins
@@ -7,11 +6,11 @@ rm -rf *
 cd ..
 
 cordova platform add android
-cordova platform add ios
 
 cordova -d plugin add https://github.com/Infobase/oauth_patch_plugin.git --variable FACEBOOK_APP_ID="774954805873506"
 
-cordova -d plugin add cordova-plugin-googleplus --variable REVERSED_CLIENT_ID="com.googleusercontent.apps.903038984767-bl1tvssqabh2pllnrralgessk6qjia2i"
+# Client ID Android
+cordova -d plugin add cordova-plugin-googleplus --variable REVERSED_CLIENT_ID=com.googleusercontent.apps.903038984767-bl1tvssqabh2pllnrralgessk6qjia2i
 
 cordova -d plugin add https://github.com/marcellus-sb/phonegap-facebook-plugin.git --variable APP_ID="774954805873506" --variable APP_NAME="SciELO"
 
