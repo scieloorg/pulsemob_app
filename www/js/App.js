@@ -61,7 +61,7 @@
                 LoginController.autoLogin();
             }else{
                 $.ajaxSetup({
-                    headers: {facebookid: "446832978797059", token: "EAALA0Tnry2IBAKBsKMEGBZCq4ZAkRjnuAiMibocbNfZCOuUyvZCPOPzoAAmyIFjB4Fd8wckPWsYX2yO0o0MF9HiKsCjqE0zGujIEQZCV8yuO35MJ6f9yZC0MvMsE4pM8h2reZBm0zm7ZCTadRTwm03NOmxYnh7ENyRGUY0QSIMvbOdGjuYExWpKZCZCBZAcVlkNZCchWn5Uvk6BwxQZDZD"}
+                    headers: {facebookid: "446832978797059", token: "EAALA0Tnry2IBABI2Y2XZB2MFKrpVVZCgF4p5woGAMj8dlp5aWa0iq9CPkCrw1eiGxa5aZBtCFhpoiXXRLK4YEwbRQknQPqbvZCE4fqQirLyRdaMw0ysRRoJVVg3BczsvW2kCXeAwyKiH2yBfnV9uDY5uVxsIoZCt601puGhwOtgZDZD"}
                 });
 
                 $.when(
