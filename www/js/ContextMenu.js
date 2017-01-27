@@ -93,7 +93,7 @@ ContextMenu.feedbackAction = function() {
                 window.open("market://details?id=org.scielo.pulsemob", "_system");
                 break;
             case "ios":
-                window.open('https://itunes.apple.com/app/angry-birds/id343200656', "_system","location=no");
+                window.open('https://itunes.apple.com/app/scielomobile/id1096323730', "_system","location=no");
                 break;
         }     
         
