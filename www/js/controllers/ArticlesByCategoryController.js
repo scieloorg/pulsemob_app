@@ -204,6 +204,7 @@ ArticlesByCategoryController.editAndSearch = function(){
     }else{
         $("#articles-search-text input").attr('disabled','disabled');
         $(this).children("img").attr("src","img/home/edit_search.png");
+        App.showLoadingScreen();
         
         ArticlesByCategoryController.cleanData();
         $("#string-no-search-results").hide();

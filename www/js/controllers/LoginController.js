@@ -65,6 +65,7 @@ LoginController.loginFacebook = function () {
 };
 
 LoginController.loginGoogle = function () {
+    App.showLoadingScreen();
     window.plugins.googleplus.login(
             {
                 webClientId: '903038984767-bl1tvssqabh2pllnrralgessk6qjia2i.apps.googleusercontent.com'
@@ -94,10 +95,12 @@ LoginController.loginGoogle = function () {
                 Service.login(userData)
                 ).then(
                 function (data) {
+                    App.hideLoadingScreen();
                     SciELO.saveCache(LoginController.USER_TYPE_KEY, LoginController.GOOGLE, false);
                     Navigator.loadPage("home.html");
                 },
                 function (error) {
+                    App.hideLoadingScreen();
                     App.trackException(errorDesc = "Error login google: "+JSON.stringify(error));
                     SciELO.removeCache(LoginController.USER_TYPE_KEY);
                     App.showCommonDialog("SciELO", Localization.getAppValue("error-login"), null);
@@ -105,6 +108,7 @@ LoginController.loginGoogle = function () {
         );
     },
             function (err) {
+                App.hideLoadingScreen();
                 App.trackException(errorDesc = "Error login google: "+JSON.stringify(err));
                 App.showCommonDialog("SciELO",Localization.getAppValue("error-google"), null);
             }
