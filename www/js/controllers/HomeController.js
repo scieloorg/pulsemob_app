@@ -70,7 +70,7 @@ HomeController.goto = function () {
         }else{
             HomeController.feedPosition = -1;
         }
-    }, 100);
+    }, 1000);
 };
 
 HomeController.showHome = function () {
