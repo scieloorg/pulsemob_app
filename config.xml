@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="br.com.scielo" version="1.0.9">
-    <name>SciELO</name>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="org.scielo.pulsemob" version="1.0.28">
+    <name>SciELOMobile</name>
     <description>
         Scientific Eletronic Library Online
     </description>
-    <author email="marcellus.batista@infobase.com.br" href="http://www.infobase.com.br">
+    <author email="scielo@scielo.org" href="http://www.infobase.com.br">
         Infobase Vix Team
     </author>
     <content src="index.html"/>
