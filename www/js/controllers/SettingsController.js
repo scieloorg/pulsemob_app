@@ -30,9 +30,11 @@ SettingsController.listCollections = function(){
         ).then(
             function (json) {
                 App.collection = json;
-                $.each( App.collection, function( key, value ) {
-                    App.collectionsSelected.push(value[1]);
-                }); 
+                if(App.collectionsSelected.length == 0 & App.collectionsRemoved.length == 0){
+                    $.each( App.collection, function( key, value ) {
+                        App.collectionsSelected.push(value[1]);
+                    }); 
+                }
                 SettingsController.initAll();
             },
             function (err) {               

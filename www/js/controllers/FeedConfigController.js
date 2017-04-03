@@ -143,8 +143,15 @@ FeedConfigController.startPage = function(){
     $magazinesTable.html("");
     
     var allMagazinesIds = FeedConfigController.getMagazines();
+    var allMagazinesIdsByCollection = [];
     
-    if(allMagazinesIds.length > 0){
+    $.each( allMagazinesIds, function( key, value ) {            
+        if( App.collectionsSelected.indexOf( DataMapping.getMagazineDomain(value)) > -1 ){     
+            allMagazinesIdsByCollection.push(value);
+        }            
+    });    
+    
+    if(allMagazinesIdsByCollection.length > 0){
         var first = '<tr class="feed-config-magazine-row">' +
                         '<td id="select-all"><img src="img/category/checked.png"/></td>' +
                         '<td class="menu-text">'+Localization.getValue("all-magazines")+'</td>' +
@@ -152,22 +159,17 @@ FeedConfigController.startPage = function(){
 
         $magazinesTable.append(first);
 
-        for(var i in allMagazinesIds){
-            var magazineId = allMagazinesIds[i];
-            
-            if( App.collectionsSelected.indexOf( DataMapping.getMagazineDomain(magazineId)) > -1 ){
-            
-                var html = '<tr class="feed-config-magazine-row">' +
-                                '<td class="magazine-checkbox" data-magazine="'+magazineId+'"><img id="cb-img-'+magazineId+'" src="img/category/checked.png"/></td>' +
-                                '<td class="menu-text">'+DataMapping.getMagazineName(magazineId)+'</td>' +
-                            '</tr>';
+        for(var i in allMagazinesIdsByCollection){
+            var magazineId = allMagazinesIdsByCollection[i];            
+            var html = '<tr class="feed-config-magazine-row">' +
+                            '<td class="magazine-checkbox" data-magazine="'+magazineId+'"><img id="cb-img-'+magazineId+'" src="img/category/checked.png"/></td>' +
+                            '<td class="menu-text">'+DataMapping.getMagazineName(magazineId)+'</td>' +
+                        '</tr>';
 
-                $magazinesTable.append(html);
-                
-            }
+            $magazinesTable.append(html);
         }
 
-        FeedConfigController.magazinesSelected = allMagazinesIds;
+        FeedConfigController.magazinesSelected = allMagazinesIdsByCollection;
         $("#btn-save").show();
     }else{
         var empty = '<tr class="feed-config-magazine-row">' +
