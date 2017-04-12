@@ -77,6 +77,17 @@ ArticleUtils.openArticle = function () {
     articleData.magazineId = decodeURIComponent(escape(atob($(this).data("magazineid"))));;
     articleData.keywords = decodeURIComponent(escape(atob($(this).data("keywords"))));
     
+    if(HomeController.showAllMagazinesOfFeed === null){
+        HomeController.PositionArticleHome = this.parentNode.parentNode.dataset.magazine;
+        HomeController.PositionListHome = -1;
+    }else{
+        HomeController.PositionArticleHome = -1;
+        HomeController.PositionListHome = HomeController.showAllMagazinesOfFeed;
+        HomeController.PositionArticleList = this.parentNode.parentNode.dataset.magazine;
+    }
+    
+    HomeController.forceBackHome = false
+    
     AbstractController.articleData = articleData;
     Navigator.loadPage("abstract.html");
 };

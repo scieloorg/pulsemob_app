@@ -9,7 +9,11 @@ HomeController.page = 1;
 HomeController.numberOfFeedsPage = 4;
 HomeController.searchText = null;
 HomeController.isFavoritePage = false;
-HomeController.feedPosition = '';
+HomeController.feedPosition = -1;
+HomeController.PositionArticleHome = -1;
+HomeController.PositionListHome = -1;
+HomeController.PositionArticleList = -1;
+HomeController.forceBackHome = true;
 
 HomeController.showAllMagazinesOfFeed = null;
 HomeController.allFeeds = null;
@@ -63,14 +67,49 @@ HomeController.cleanData = function(){
 
 
 HomeController.goto = function () {
-    setTimeout(function () {
-        App.scrollApp.scrollToElement("#feed-"+HomeController.feedPosition);     
-        if(App.scrollApp.y === 0 && HomeController.feedPosition !== -1){
-          HomeController.goto();  
-        }else{
-            HomeController.feedPosition = -1;
-        }
-    }, 1000);
+    
+    
+    
+    if(HomeController.PositionArticleHome.length > 0){    
+        setTimeout(function () {
+            App.scrollApp.scrollToElement("#magazine-bar-"+HomeController.PositionArticleHome);     
+            if(App.scrollApp.y === 0 && HomeController.PositionArticleHome !== -1){
+              HomeController.goto();  
+            }else{
+                HomeController.PositionArticleHome = -1;
+            }
+        }, 1000);
+    }else if(HomeController.PositionArticleList.length > 0){       
+        setTimeout(function () {
+            //HomeController.vScroll.scrollTo(0,-($("#magazine-bar-"+HomeController.PositionArticleList).offset().top - $("#default-bar").height() - $(".feed-header").height()));     
+            if($("#magazine-bar-"+HomeController.PositionArticleList).offset() !== undefined){
+                var myVar = setInterval(myTimer, 1);
+                var t = 0;
+                var limit = ($("#magazine-bar-"+HomeController.PositionArticleList).offset().top - $("#default-bar").height() - $(".feed-header").height());
+                function myTimer() {
+                    t++;t++;t++;
+                    HomeController.vScroll.scrollTo(0,-t);
+                    if(t>limit){HomeController.PositionArticleList = -1; clearInterval(myVar);}
+
+                }
+
+                if(HomeController.vScroll.scrollApp.y === 0 && HomeController.PositionArticleList !== -1){
+                  HomeController.goto();  
+                }else{
+                    HomeController.PositionArticleList = -1;
+                }
+            }
+        }, 1000); 
+    } else if(HomeController.feedPosition > -1){
+        setTimeout(function () {
+            App.scrollApp.scrollToElement("#feed-"+HomeController.feedPosition);     
+            if(App.scrollApp.y === 0 && HomeController.feedPosition !== -1){
+              HomeController.goto();  
+            }else{
+                HomeController.feedPosition = -1;
+            }
+        }, 1000);
+    }
 };
 
 HomeController.showHome = function () {
@@ -81,6 +120,16 @@ HomeController.showHome = function () {
         SciELO.home()
     ).then(
         function (json) {
+            
+            if(HomeController.PositionListHome> -1){
+                HomeController.showAllMagazinesOfFeed = HomeController.PositionListHome;
+            }
+            
+            if(HomeController.forceBackHome){
+                HomeController.showAllMagazinesOfFeed = null;
+                HomeController.PositionListHome = -1;
+            }
+            
             if(HomeController.showAllMagazinesOfFeed){
                 HomeController.allFeeds = [App.currentUser.getFeed(HomeController.showAllMagazinesOfFeed)];
             }else{
@@ -91,11 +140,16 @@ HomeController.showHome = function () {
                 
                 HomeController.addFeedsHome(json);
                 
-                if($("#feed-"+HomeController.feedPosition)[0]){  
+                
+                if($("#magazine-bar-"+HomeController.PositionArticleHome)[0]){  
+                    HomeController.goto();
+                }else if($("#feed-"+HomeController.feedPosition)[0]){  
                     if($(".feed")[0].id !== 'feed-'+HomeController.feedPosition){
                         HomeController.goto();
                     }
                 }
+                
+                HomeController.forceBackHome = false;
                 
             }else{
                 
@@ -177,6 +231,9 @@ HomeController.showHome = function () {
                         infiniteLimit: limitScroll
                     });   
                 }
+                HomeController.goto();  
+                
+                HomeController.forceBackHome = true;
                 
             }
             
