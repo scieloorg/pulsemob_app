@@ -1,6 +1,7 @@
 var ArticleUtils = function() {
 };
 
+ArticleUtils.selectedArticle;
 
 ArticleUtils.updateContent = function (el, data) {
     if (typeof data !== 'undefined'){
@@ -66,6 +67,8 @@ ArticleUtils.openArticle = function () {
         return;
     }
     
+    ArticleUtils.selectedArticle = this;
+    
     var articleData = {};
     articleData.domain = $(this).data("domain");
     articleData.id = $(this).data("articleid");
@@ -77,17 +80,57 @@ ArticleUtils.openArticle = function () {
     articleData.magazineId = decodeURIComponent(escape(atob($(this).data("magazineid"))));;
     articleData.keywords = decodeURIComponent(escape(atob($(this).data("keywords"))));
     
-    if(HomeController.showAllMagazinesOfFeed === null){
-        HomeController.PositionArticleHome = this.parentNode.parentNode.dataset.magazine;
-        HomeController.PositionListHome = -1;
-    }else{
-        HomeController.PositionArticleHome = -1;
-        HomeController.PositionListHome = HomeController.showAllMagazinesOfFeed;
-        HomeController.PositionArticleList = this.parentNode.parentNode.dataset.magazine;
-    }
-    
-    HomeController.forceBackHome = false
-    
     AbstractController.articleData = articleData;
-    Navigator.loadPage("abstract.html");
+    //Navigator.loadPage("abstract.html");    
+  
+    $.get('pages/abstract.html', function(data) {
+        App.$articleWrapper.html(data);
+    });
+    
+    $("#page-wrapper").animate({
+        left: '100%'
+    });
+    
+    setTimeout(function () {
+        App.$contentWrapper.hide();
+        
+        App.$articleWrapper.show();
+        
+        $("#page-wrapper-article").animate({
+            left: '0%'
+        });
+        
+        App.$page.addClass("abstract-bg");
+        AbstractController.initListeners();
+        AbstractController.populate();
+        AbstractController.checkIfIsFavorite();
+        App.showBackButton();
+
+        App.trackView("Artigo");
+        App.trackEvent('Artigo', 'Abrir', AbstractController.articleData.id);
+        new IScroll('#page-wrapper-article');
+        App.$headerApp.off('tap', "#app-bar-back");
+        App.$headerApp.on('tap', "#app-bar-back", ArticleUtils.backEvent);
+    }, 500);
+    
+    ArticleUtils.backEvent = function(){
+        $("#page-wrapper-article").animate({
+            left: '100%'
+        });
+            
+        setTimeout(function () {
+            App.$page.removeClass("abstract-bg");
+            App.hideBackButton();
+            PageLoad.ajxHandle = null;
+            App.$headerApp.off('tap', "#app-bar-back");
+            App.$headerApp.on('tap', "#app-bar-back", Navigator.backEvent);
+            App.$articleWrapper.hide();
+            App.$contentWrapper.show();    
+            
+            $("#page-wrapper").animate({
+                left: '0%'
+            });
+        }, 500);        
+    };    
+    
 };

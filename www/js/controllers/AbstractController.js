@@ -97,6 +97,7 @@ AbstractController.favorite = function () {
                 ).then(
                 function () {
                     $obj.attr("src", "img/abstract/fav_selected.png");
+                    $(ArticleUtils.selectedArticle).children(".article-legend").append( "<img class=\"article-fav\" src=\"img/abstract/fav_selected.png\"/>" );
                     App.hideLoadingScreen();
                 },
                 function (err) {
@@ -111,6 +112,7 @@ AbstractController.favorite = function () {
                 ).then(
                 function () {
                     $obj.attr("src", "img/abstract/fav.png");
+                    $(ArticleUtils.selectedArticle).children(".article-legend").children(".article-fav").remove();
                     App.hideLoadingScreen();
                 },
                 function (err) {

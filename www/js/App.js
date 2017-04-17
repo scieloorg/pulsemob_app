@@ -89,6 +89,7 @@
         App.$headerTitle = $('#app-bar-title');
         App.$loadingDiv = $('#loading');
         App.$contentWrapper = $("#page-wrapper");
+        App.$articleWrapper = $("#page-wrapper-article");
         App.$page = $("#page");
         App.$appSearchInput = $("#app-bar-search-input");
         App.$iosSystemBar = $("#ios-sys-bar");
@@ -141,6 +142,7 @@
         //scroll
         App.$contentWrapper.height("100%");
         App.scrollApp = new IScroll('#page-wrapper', {scrollbars: false, click: false});
+        App.$articleWrapper.height("100%");
 
         // nao bugar o scroll quando tiver uma tela com input
         App.scrollApp.on('beforeScrollStart', function () {
@@ -264,6 +266,8 @@
         }
         App.$contentWrapper.css('top', '0px');
         App.$contentWrapper.height(window.innerHeight - defaultHeight);
+        App.$articleWrapper.css('top', '0px');
+        App.$articleWrapper.height(window.innerHeight - defaultHeight);
         App.$headerApp.fadeOut(400);
     };
 
@@ -276,6 +280,8 @@
         }
         App.$contentWrapper.css('top', App.$headerApp.height());
         App.$contentWrapper.height(window.innerHeight - (App.$headerApp.height() + defaultHeight));
+        App.$articleWrapper.css('top', App.$headerApp.height());
+        App.$articleWrapper.height(window.innerHeight - (App.$headerApp.height() + defaultHeight));
         App.$headerApp.fadeIn(1000);
     };
     
