@@ -114,7 +114,6 @@ body {
         z-index: 0;
         position: absolute;
         display: none;
-        left: 100%;
 }
 .scroller {
     position:relative; 

@@ -85,20 +85,12 @@ ArticleUtils.openArticle = function () {
   
     $.get('pages/abstract.html', function(data) {
         App.$articleWrapper.html(data);
-    });
-    
-    $("#page-wrapper").animate({
-        left: '100%'
-    });
-    
+    });    
+   
     setTimeout(function () {
         App.$contentWrapper.hide();
         
-        App.$articleWrapper.show();
-        
-        $("#page-wrapper-article").animate({
-            left: '0%'
-        });
+        App.$articleWrapper.show();        
         
         App.$page.addClass("abstract-bg");
         AbstractController.initListeners();
@@ -114,9 +106,6 @@ ArticleUtils.openArticle = function () {
     }, 500);
     
     ArticleUtils.backEvent = function(){
-        $("#page-wrapper-article").animate({
-            left: '100%'
-        });
             
         setTimeout(function () {
             App.$page.removeClass("abstract-bg");
@@ -127,9 +116,6 @@ ArticleUtils.openArticle = function () {
             App.$articleWrapper.hide();
             App.$contentWrapper.show();    
             
-            $("#page-wrapper").animate({
-                left: '0%'
-            });
         }, 500);        
     };    
     
