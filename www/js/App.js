@@ -100,9 +100,10 @@
         //fastclick, performance library of mouse events to touch events
         FastClick.attach(document.body);
         //block drag "navegator box"
-        $(document).on('touchmove', function (event) {
-            event.preventDefault();
-        });
+//        $(document).on('touchmove', function (event) {
+//            event.preventDefault();
+//        });
+        window.addEventListener("touchmove", function (event) {event.preventDefault();}, {passive: false} );
         
         if (typeof device !== 'undefined') {
             if (device.platform === "iOS") {
