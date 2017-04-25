@@ -1,0 +1,11 @@
+#!/bin/bash
+
+## Replace the password  with something
+
+cordova build android --release
+
+# keytool -genkey -alias pulsemob -keyalg RSA -keystore SciELO.keystore -validity 3275 -keypass qwpovb56 -storepass qwpovb56
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore SciELO.keystore platforms/android/build/outputs/apk/android-release-unsigned.apk pulsemob -storepass password -keypass password -tsa http://timestamp.digicert.com
+
+zipalign -f -v 4 platforms/android/build/outputs/apk/android-release-unsigned.apk platforms/android/build/outputs/apk/android-release-unsigned_zipaligned.apk
