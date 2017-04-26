@@ -110,6 +110,11 @@ body {
         height: 100%;
 	overflow: hidden;
 }
+#page-wrapper-article.wrapper {
+        z-index: 0;
+        position: absolute;
+        display: none;
+}
 .scroller {
     position:relative; 
     min-height: 100%;

@@ -32,6 +32,8 @@
                 Transition.start();
                 App.hideLoadingScreen();
             }
+        }else if(ArticleUtils.articleOpen){
+            ArticleUtils.closeArticle();
         }else{ // sai do app
             Navigator.currentModal = new BootstrapDialog({
                 message: Localization.getAppValue("exit-ask"),
@@ -79,7 +81,13 @@
             Navigator.fullpage = false;
         }
         
-        Navigator.load(newPage);
+        Navigator.load(newPage).done(function () {
+            console.log('Request completed');
+            setTimeout(function () {
+                ArticleUtils.closeArticle();
+            }, 10);    
+        });
+;
     };
     
     
